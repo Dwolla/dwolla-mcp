@@ -1,0 +1,12 @@
+workflowVersion: 1.0.0
+speakeasyVersion: latest
+sources:
+    Dwolla API:
+        inputs:
+            - location: ./openapi.yml
+        registry:
+            location: registry.speakeasyapi.dev/dwolla-vc3/dwolla/dwolla-api
+targets:
+    dwolla-mcp:
+        target: mcp-typescript
+        source: Dwolla API
