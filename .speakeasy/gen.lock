@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: dbccbcaa-cdde-434b-b972-38fb6d1127e5
 management:
-  docChecksum: 05946fe778ada2332ddad91587af6783
+  docChecksum: 589d00407a17cf577baa2f3eeca00a75
   docVersion: "2.0"
-  speakeasyVersion: 1.561.0
-  generationVersion: 2.628.0
-  releaseVersion: 0.0.2
-  configChecksum: f768ecbbc7c9536e4722c829baaa12a5
+  speakeasyVersion: 1.563.0
+  generationVersion: 2.629.1
+  releaseVersion: 0.1.1
+  configChecksum: c1108c964dba40b769c1dbca11a25547
 features:
   mcp-typescript:
     acceptHeaders: 0.1.0
@@ -20,7 +20,6 @@ features:
     globalServerURLs: 0.1.0
     nameOverrides: 0.1.0
     nullables: 0.1.0
-    oauth2ClientCredentials: 0.1.0
     responseFormat: 0.1.0
     retries: 0.1.0
     sdkHooks: 0.1.0
@@ -112,7 +111,6 @@ generatedFiles:
   - src/funcs/webhooks_get.ts
   - src/funcs/webhooks_listRetries.ts
   - src/funcs/webhooks_retry.ts
-  - src/hooks/clientcredentials.ts
   - src/hooks/hooks.ts
   - src/hooks/types.ts
   - src/lib/base64.ts
@@ -346,7 +344,6 @@ generatedFiles:
   - src/models/components/rtpfacilitatorfeenotsupportederror.ts
   - src/models/components/rtppersonaltopersonalnotsupportederror.ts
   - src/models/components/rtpunverifiedsendernotsupportederror.ts
-  - src/models/components/schemeclientcredentials.ts
   - src/models/components/secrettoolongerror.ts
   - src/models/components/security.ts
   - src/models/components/senderrestrictederror.ts

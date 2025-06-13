@@ -6,8 +6,8 @@ import { Security } from "../models/components/security.js";
 
 type OAuth2PasswordFlow = {
   username: string;
-  password?: string | undefined;
-  clientID: string;
+  password: string;
+  clientID?: string | undefined;
   clientSecret?: string | undefined;
   tokenURL: string;
 };
@@ -238,15 +238,6 @@ export function resolveGlobalSecurity(
   security: Partial<Security> | null | undefined,
 ): SecurityState | null {
   return resolveSecurity(
-    [
-      {
-        type: "oauth2:client_credentials",
-        value: {
-          clientID: security?.clientCredentials?.clientID,
-          clientSecret: security?.clientCredentials?.clientSecret,
-        },
-      },
-    ],
     [
       {
         fieldName: "Authorization",

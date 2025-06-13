@@ -18,7 +18,6 @@ servers:
   - url: https://api-sandbox.dwolla.com
     description: Sandbox server
 security:
-  - clientCredentials: []
   - bearerAuth: []
 tags:
   - name: tokens
@@ -4857,13 +4856,6 @@ paths:
                 $ref: '#/components/schemas/ForbiddenError'
 components:
   securitySchemes:
-    clientCredentials:
-      type: oauth2
-      flows:
-        clientCredentials:
-          tokenUrl: /token
-          x-speakeasy-token-endpoint-authentication: client_secret_basic
-          scopes: {}
     bearerAuth:
       type: http
       scheme: bearer

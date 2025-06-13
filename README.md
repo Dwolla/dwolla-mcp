@@ -16,32 +16,26 @@ Model Context Protocol (MCP) Server for the _dwolla-mcp_ API.
 > this notice before publishing to a package manager.
 
 <!-- Start Summary [summary] -->
-
 ## Summary
 
 Dwolla API: Dwolla API Documentation
-
 <!-- End Summary [summary] -->
 
 <!-- Start Table of Contents [toc] -->
-
 ## Table of Contents
-
 <!-- $toc-max-depth=2 -->
-
-- [dwolla-mcp](#dwolla-mcp)
-  - [Installation](#installation)
-- [Development](#development)
-  - [Contributions](#contributions)
+* [dwolla-mcp](#dwolla-mcp)
+  * [Installation](#installation)
+* [Development](#development)
+  * [Contributions](#contributions)
 
 <!-- End Table of Contents [toc] -->
 
 <!-- Start Installation [installation] -->
-
 ## Installation
 
-> [!TIP] To finish publishing your MCP Server to npm and others you must
-> [run your first generation action](https://www.speakeasy.com/docs/github-setup#step-by-step-guide).
+> [!TIP]
+> To finish publishing your MCP Server to npm and others you must [run your first generation action](https://www.speakeasy.com/docs/github-setup#step-by-step-guide).
 
 ### Claude
 
@@ -53,20 +47,10 @@ Add the following server definition to your `claude_desktop_config.json` file:
     "DwollaMcp": {
       "command": "npx",
       "args": [
-        "-y",
-        "--package",
-        "dwolla-mcp",
+        "-y", "--package", "dwolla-mcp",
         "--",
-        "mcp",
-        "start",
-        "--client-id",
-        "...",
-        "--client-secret",
-        "...",
-        "--token-url",
-        "...",
-        "--bearer-auth",
-        "..."
+        "mcp", "start",
+        "--bearer-auth", "..."
       ]
     }
   }
@@ -83,40 +67,10 @@ Create a `.cursor/mcp.json` file in your project root with the following content
     "DwollaMcp": {
       "command": "npx",
       "args": [
-        "-y",
-        "--package",
-        "dwolla-mcp",
+        "-y", "--package", "dwolla-mcp",
         "--",
-        "mcp",
-        "start",
-        "--client-id",
-        "...",
-        "--client-secret",
-        "...",
-        "--token-url",
-        "...",
-        "--bearer-auth",
-        "..."
-      ]
-    }
-  }
-}
-```
-
-#### Local MCP server with Cursor
-
-```json
-{
-  "mcpServers": {
-    "Dwolla": {
-      "command": "node",
-      "args": [
-        "./bin/mcp-server.js",
-        "start",
-        "--bearer-auth",
-        "...",
-        "--server-url",
-        "https://api-sandbox.dwolla.com"
+        "mcp", "start",
+        "--bearer-auth", "..."
       ]
     }
   }
@@ -125,8 +79,7 @@ Create a `.cursor/mcp.json` file in your project root with the following content
 
 ### Standalone Binary
 
-Run the MCP server as a standalone binary with no additional dependencies. Pull these binaries from
-available Github releases:
+Run the MCP server as a standalone binary with no additional dependencies. Pull these binaries from available Github releases:
 
 ```bash
 curl -L -o mcp-server \
@@ -134,15 +87,16 @@ curl -L -o mcp-server \
 chmod +x mcp-server
 ```
 
-If the repo is a private repo you must add your Github PAT to download a release
-`-H "Authorization: Bearer {GITHUB_PAT}"`.
+If the repo is a private repo you must add your Github PAT to download a release `-H "Authorization: Bearer {GITHUB_PAT}"`.
 
 ```json
 {
   "mcpServers": {
     "Todos": {
       "command": "./DOWNLOAD/PATH/mcp-server",
-      "args": ["start"]
+      "args": [
+        "start"
+      ]
     }
   }
 }
@@ -156,8 +110,7 @@ npx -y --package dwolla-mcp -- mcp start --help
 
 ### Package Managers
 
-The MCP Server can be installed with either [npm](https://www.npmjs.com/), [pnpm](https://pnpm.io/),
-[bun](https://bun.sh/) or [yarn](https://classic.yarnpkg.com/en/) package managers.
+The MCP Server can be installed with either [npm](https://www.npmjs.com/), [pnpm](https://pnpm.io/), [bun](https://bun.sh/) or [yarn](https://classic.yarnpkg.com/en/) package managers.
 
 #### NPM
 
@@ -182,7 +135,6 @@ bun add <UNSET>
 ```bash
 yarn add <UNSET>
 ```
-
 <!-- End Installation [installation] -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->

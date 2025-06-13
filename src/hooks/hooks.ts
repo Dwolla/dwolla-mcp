@@ -19,7 +19,6 @@ import {
 } from "./types.js";
 
 import { RequestInput } from "../lib/http.js";
-import { ClientCredentialsHook } from "./clientcredentials.js";
 
 export class SDKHooks implements Hooks {
   sdkInitHooks: SDKInitHook[] = [];
@@ -29,9 +28,7 @@ export class SDKHooks implements Hooks {
   afterErrorHooks: AfterErrorHook[] = [];
 
   constructor() {
-    const presetHooks: Array<Hook> = [
-      new ClientCredentialsHook(),
-    ];
+    const presetHooks: Array<Hook> = [];
 
     for (const hook of presetHooks) {
       if ("sdkInit" in hook) {

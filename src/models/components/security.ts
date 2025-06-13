@@ -3,18 +3,10 @@
  */
 
 import * as z from "zod";
-import {
-  SchemeClientCredentials,
-  SchemeClientCredentials$zodSchema,
-} from "./schemeclientcredentials.js";
 
-export type Security = {
-  clientCredentials?: SchemeClientCredentials | undefined;
-  bearerAuth?: string | undefined;
-};
+export type Security = { bearerAuth: string };
 
 export const Security$zodSchema: z.ZodType<Security, z.ZodTypeDef, unknown> = z
   .object({
-    bearerAuth: z.string().optional(),
-    clientCredentials: SchemeClientCredentials$zodSchema.optional(),
+    bearerAuth: z.string(),
   });
