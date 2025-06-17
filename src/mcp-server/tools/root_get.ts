@@ -11,20 +11,58 @@ export const tool$root_get: ToolDefinition = {
 
 The entry point that clients can use to discover and explore the entire API.`,
   tool: async (client, ctx) => {
+    console.log("🔧 [root-get] Starting request");
+    
     const [result, apiCall] = await root_get(
       client,
       { fetchOptions: { signal: ctx.signal } },
     ).$inspect();
 
+    console.log("🔧 [root-get] API call details:", {
+      url: apiCall?.request?.url,
+      method: apiCall?.request?.method,
+      headers: apiCall?.request?.headers,
+    });
+
+    console.log("🔧 [root-get] Result details:", {
+      ok: result.ok,
+      resultType: typeof result,
+      resultKeys: result.ok ? Object.keys(result.value) : ['ok', 'error']
+    });
+
+    console.log("🔧 [root-get] ApiCall details:", {
+      apiCallType: typeof apiCall,
+      apiCallKeys: apiCall && typeof apiCall === 'object' ? Object.keys(apiCall) : [],
+      response: apiCall && 'response' in apiCall ? {
+        status: apiCall.response?.status,
+        statusText: apiCall.response?.statusText,
+        headers: Object.fromEntries(apiCall.response?.headers?.entries() || []),
+        type: typeof apiCall.response,
+        constructor: apiCall.response?.constructor?.name
+      } : 'No response'
+    });
+
     if (!result.ok) {
-      return {
-        content: [{ type: "text", text: result.error.message }],
-        isError: true,
-      };
+      console.log("🔧 [root-get] Error details:", {
+        error: result.error,
+        message: result.error.message,
+        stack: result.error.stack,
+        response: 'response' in result.error ? result.error.response : 'No response available'
+      });
+
+      // Check if this is an SDK validation error with actual data
+      if (result.error.name === 'SDKValidationError' && 'rawValue' in result.error) {
+        const rawValue = result.error.rawValue as any;
+        console.log("🔧 [root-get] Raw value from validation error:", rawValue);
+        
+        // If we have the actual Root data, return it despite the validation error
+        if (rawValue && rawValue.Root) {
+          console.log("🔧 [root-get] Extracting Root data from validation error");
+          return formatResult(rawValue.Root, { response: apiCall?.response });
+        }
+      }
     }
 
-    const value = result.value;
-
-    return formatResult(value, apiCall);
+    return formatResult(result, { response: apiCall?.response });
   },
 };

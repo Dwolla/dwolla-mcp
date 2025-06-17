@@ -17,21 +17,48 @@ export const tool$accounts_get: ToolDefinition<typeof args> = {
 Retrieve basic account details belonging to the authorized Dwolla account.`,
   args,
   tool: async (client, args, ctx) => {
+    console.log("🔧 [accounts-get] Starting request with args:", args);
+    
     const [result, apiCall] = await accounts_get(
       client,
       args.request,
       { fetchOptions: { signal: ctx.signal } },
     ).$inspect();
 
+    console.log("🔧 [accounts-get] API call details:", {
+      url: apiCall?.request?.url,
+      method: apiCall?.request?.method,
+      headers: apiCall?.request?.headers,
+    });
+
     if (!result.ok) {
+      console.log("🔧 [accounts-get] Error details:", {
+        error: result.error,
+        message: result.error.message,
+        stack: result.error.stack,
+      });
+
+      // Check if this is an SDK validation error with actual data
+      if (result.error.name === 'SDKValidationError' && 'rawValue' in result.error) {
+        const rawValue = result.error.rawValue as any;
+        console.log("🔧 [accounts-get] Raw value from validation error:", rawValue);
+        
+        // If we have the actual Account data, return it despite the validation error
+        if (rawValue && rawValue.Account) {
+          console.log("🔧 [accounts-get] Extracting Account data from validation error");
+          return formatResult(rawValue.Account, { response: apiCall?.response });
+        }
+      }
+
       return {
         content: [{ type: "text", text: result.error.message }],
         isError: true,
       };
     }
 
+    console.log("🔧 [accounts-get] Success! Response value:", result.value);
     const value = result.value;
 
-    return formatResult(value, apiCall);
+    return formatResult(value, { response: apiCall?.response });
   },
 };

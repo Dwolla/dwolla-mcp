@@ -19,19 +19,45 @@ export const tool$tokens_createApplicationAccessToken: ToolDefinition<
 Generates an access token that contains permissions scoped to the application owner's Dwolla Client Account.`,
   args,
   tool: async (client, args, ctx) => {
+    console.log("🔧 [tokens-create-application-access-token] Starting request with args:", JSON.stringify(args, null, 2));
+    
     const [result, apiCall] = await tokens_createApplicationAccessToken(
       client,
       args.request,
       { fetchOptions: { signal: ctx.signal } },
     ).$inspect();
 
+    console.log("🔧 [tokens-create-application-access-token] API call details:", {
+      url: apiCall?.request?.url,
+      method: apiCall?.request?.method,
+      headers: apiCall?.request?.headers,
+      body: apiCall?.request?.body,
+    });
+
     if (!result.ok) {
+      console.error("🔧 [tokens-create-application-access-token] Error details:", {
+        error: result.error,
+        message: result.error.message,
+        stack: result.error.stack,
+        response: apiCall?.response ? {
+          status: apiCall.response.status,
+          statusText: apiCall.response.statusText,
+          headers: Object.fromEntries(apiCall.response.headers.entries()),
+          // Try to get response body if available
+          body: apiCall.response.body,
+        } : 'No response available'
+      });
+      
       return {
-        content: [{ type: "text", text: result.error.message }],
+        content: [{ 
+          type: "text", 
+          text: `Detailed error: ${result.error.message}\nStatus: ${apiCall?.response?.status || 'unknown'}\nURL: ${apiCall?.request?.url || 'unknown'}` 
+        }],
         isError: true,
       };
     }
 
+    console.log("🔧 [tokens-create-application-access-token] Success! Response:", result.value);
     const value = result.value;
 
     return formatResult(value, apiCall);

@@ -14,6 +14,7 @@ import { DwollaMcpCore } from "../core.js";
 import { ConsoleLogger } from "./console-logger.js";
 import { MCPScope } from "./scopes.js";
 import { isAsyncIterable, isBinaryData, valueToBase64 } from "./shared.js";
+import { createDwollaClient } from "./client-factory.js";
 
 export type ToolDefinition<Args extends undefined | ZodRawShape = undefined> =
   Args extends ZodRawShape ? {
@@ -94,12 +95,23 @@ async function consumeSSE(
   return content;
 }
 
+function createAuthRequiredError() {
+  return {
+    isError: true,
+    content: [{
+      type: "text" as const,
+      text: "Authentication required. Please provide Authorization: Bearer <token> header."
+    }]
+  };
+}
+
 export function createRegisterTool(
   logger: ConsoleLogger,
   server: McpServer,
-  sdk: DwollaMcpCore,
   allowedScopes: Set<MCPScope>,
   allowedTools?: Set<string>,
+  serverURL?: string,
+  authToken?: string,
 ): <A extends ZodRawShape | undefined>(tool: ToolDefinition<A>) => void {
   return <A extends ZodRawShape | undefined>(tool: ToolDefinition<A>): void => {
     if (allowedTools && !allowedTools.has(tool.name)) {
@@ -120,11 +132,51 @@ export function createRegisterTool(
 
     if (tool.args) {
       server.tool(tool.name, tool.description, tool.args, async (args, ctx) => {
-        return tool.tool(sdk, args, ctx);
+        // Use the pre-validated authToken instead of extracting from context
+        if (!authToken) {
+          return createAuthRequiredError();
+        }
+        
+        try {
+          // Create authenticated client per request
+          const client = createDwollaClient(authToken, serverURL);
+          
+          // Call original tool with authenticated client
+          return await tool.tool(client, args, ctx);
+        } catch (error) {
+          logger.error("Tool execution failed", { tool: tool.name, error });
+          return {
+            isError: true,
+            content: [{
+              type: "text",
+              text: `Tool execution failed: ${error instanceof Error ? error.message : 'Unknown error'}`
+            }]
+          };
+        }
       });
     } else {
       server.tool(tool.name, tool.description, async (ctx) => {
-        return tool.tool(sdk, ctx);
+        // Use the pre-validated authToken instead of extracting from context
+        if (!authToken) {
+          return createAuthRequiredError();
+        }
+        
+        try {
+          // Create authenticated client per request
+          const client = createDwollaClient(authToken, serverURL);
+          
+          // Call original tool with authenticated client
+          return await tool.tool(client, ctx);
+        } catch (error) {
+          logger.error("Tool execution failed", { tool: tool.name, error });
+          return {
+            isError: true,
+            content: [{
+              type: "text",
+              text: `Tool execution failed: ${error instanceof Error ? error.message : 'Unknown error'}`
+            }]
+          };
+        }
       });
     }
 

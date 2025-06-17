@@ -19,11 +19,11 @@ export const startCommand = buildCommand({
         kind: "enum",
         brief: "The transport to use for communicating with the server",
         default: "stdio",
-        values: ["stdio", "sse"],
+        values: ["stdio", "http"],
       },
       port: {
         kind: "parsed",
-        brief: "The port to use when the SSE transport is enabled",
+        brief: "The port to use when the HTTP transport is enabled",
         default: "2718",
         parse: (val: string) =>
           z.coerce.number().int().gte(0).lt(65536).parse(val),
@@ -49,38 +49,6 @@ export const startCommand = buildCommand({
           },
         }
         : {}),
-      "client-id": {
-        kind: "parsed",
-        brief: "Sets the ClientID auth field for the API",
-        optional: false,
-        parse: (value) => {
-          return z.string().parse(value);
-        },
-      },
-      "client-secret": {
-        kind: "parsed",
-        brief: "Sets the ClientSecret auth field for the API",
-        optional: false,
-        parse: (value) => {
-          return z.string().parse(value);
-        },
-      },
-      "token-url": {
-        kind: "parsed",
-        brief: "Sets the TokenURL auth field for the API",
-        optional: true,
-        parse: (value) => {
-          return z.string().default("/token").parse(value);
-        },
-      },
-      "bearer-auth": {
-        kind: "parsed",
-        brief: "Sets the bearerAuth auth field for the API",
-        optional: true,
-        parse: (value) => {
-          return z.string().parse(value);
-        },
-      },
       "server-url": {
         kind: "parsed",
         brief: "Overrides the default server URL used by the SDK",
@@ -126,6 +94,6 @@ export const startCommand = buildCommand({
     },
   },
   docs: {
-    brief: "Run the Model Context Protocol server",
+    brief: "Run the stateless Model Context Protocol server (requires Authorization header)",
   },
 });

@@ -3,7 +3,6 @@
  */
 
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { DwollaMcpCore } from "../core.js";
 import { SDKOptions } from "../lib/config.js";
 import type { ConsoleLogger } from "./console-logger.js";
 import { createRegisterPrompt } from "./prompts.js";
@@ -100,19 +99,15 @@ export function createMCPServer(deps: {
   allowedTools?: string[] | undefined;
   scopes?: MCPScope[] | undefined;
   serverURL?: string | undefined;
-  security?: SDKOptions["security"] | undefined;
   serverIdx?: SDKOptions["serverIdx"] | undefined;
+  authToken?: string | undefined;
 }) {
   const server = new McpServer({
     name: "DwollaMcp",
     version: "0.0.2",
   });
 
-  const client = new DwollaMcpCore({
-    security: deps.security,
-    serverURL: deps.serverURL,
-    serverIdx: deps.serverIdx,
-  });
+  // Client creation moved to per-request in tools
 
   const scopes = new Set(deps.scopes);
 
@@ -120,18 +115,19 @@ export function createMCPServer(deps: {
   const tool = createRegisterTool(
     deps.logger,
     server,
-    client,
     scopes,
     allowedTools,
+    deps.serverURL,
+    deps.authToken,
   );
-  const resource = createRegisterResource(deps.logger, server, client, scopes);
+  const resource = createRegisterResource(deps.logger, server, null as any, scopes);
   const resourceTemplate = createRegisterResourceTemplate(
     deps.logger,
     server,
-    client,
+    null as any,
     scopes,
   );
-  const prompt = createRegisterPrompt(deps.logger, server, client, scopes);
+  const prompt = createRegisterPrompt(deps.logger, server, null as any, scopes);
   const register = { tool, resource, resourceTemplate, prompt };
   void register; // suppress unused warnings
 
