@@ -3,16 +3,16 @@ id: dbccbcaa-cdde-434b-b972-38fb6d1127e5
 management:
   docChecksum: 05946fe778ada2332ddad91587af6783
   docVersion: "2.0"
-  speakeasyVersion: 1.561.0
-  generationVersion: 2.628.0
-  releaseVersion: 0.0.2
-  configChecksum: f768ecbbc7c9536e4722c829baaa12a5
+  speakeasyVersion: 1.564.0
+  generationVersion: 2.630.8
+  releaseVersion: 0.0.3
+  configChecksum: cdff355e5623e53a73bb9a1b5f464ad1
 features:
   mcp-typescript:
     acceptHeaders: 0.1.0
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.0
-    core: 0.1.0
+    core: 0.1.1
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     globalSecurity: 0.1.0

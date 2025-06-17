@@ -62,7 +62,7 @@ async function startStdio(flags: StartCommandFlags) {
             tokenURL: flags["token-url"],
           }
           : void 0,
-      bearerAuth: flags["bearer-auth"],
+      bearerAuth: flags["bearer-auth"] ?? "",
     },
     serverURL: flags["server-url"],
     serverIdx: flags["server-index"],
@@ -93,7 +93,7 @@ async function startSSE(flags: StartCommandFlags) {
             tokenURL: flags["token-url"],
           }
           : void 0,
-      bearerAuth: flags["bearer-auth"],
+      bearerAuth: flags["bearer-auth"] ?? "",
     },
     serverURL: flags["server-url"],
     serverIdx: flags["server-index"],
