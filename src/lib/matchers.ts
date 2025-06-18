@@ -263,17 +263,26 @@ export function match<T, E>(
         ...options?.extraFields,
         ...(matcher.hdrs ? { Headers: unpackHeaders(response.headers) } : null),
         ...(isPlainObject(raw) ? raw : null),
+        ContentType: response.headers.get("content-type") || "",
+        StatusCode: response.status,
+        RawResponse: response,
       };
     } else if (resultKey) {
       data = {
         ...options?.extraFields,
         ...(matcher.hdrs ? { Headers: unpackHeaders(response.headers) } : null),
         [resultKey]: raw,
+        ContentType: response.headers.get("content-type") || "",
+        StatusCode: response.status,
+        RawResponse: response,
       };
     } else {
       data = {
         ...options?.extraFields,
         ...(matcher.hdrs ? { Headers: unpackHeaders(response.headers) } : null),
+        ContentType: response.headers.get("content-type") || "",
+        StatusCode: response.status,
+        RawResponse: response,
       };
     }
 
