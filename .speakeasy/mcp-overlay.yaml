@@ -1,0 +1,36 @@
+overlay: 1.0.0
+info:
+  title: MCP Read-Only Overlay
+  version: 0.0.1
+extends: https://raw.githubusercontent.com/Dwolla/dwolla-openapi/refs/heads/main/openapi.yml
+actions:
+  # Remove all non-GET methods from all paths
+  - target: $.paths.*.post
+    remove: true
+  - target: $.paths.*.put
+    remove: true
+  - target: $.paths.*.patch
+    remove: true
+  - target: $.paths.*.delete
+    remove: true
+  - target: $.paths.*.options
+    remove: true
+  - target: $.paths.*.head
+    remove: true
+  - target: $.paths.*.trace
+    remove: true
+
+  # Apply 'read' scope to all GET endpoints
+  - target: $.paths.*.get
+    update:
+      x-speakeasy-mcp:
+        scopes:
+          - read 
+
+  # Remove all clientCredentials entries from the security array
+  - target: $.security[?(@.clientCredentials)]
+    remove: true
+
+  # Remove the clientCredentials security scheme
+  - target: $.components.securitySchemes.clientCredentials
+    remove: true 

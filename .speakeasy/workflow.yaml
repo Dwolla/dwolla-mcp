@@ -3,7 +3,7 @@ speakeasyVersion: latest
 sources:
     Dwolla API:
         inputs:
-            - location: ./openapi.yml
+            - location: ./.speakeasy/openapi-mcp.yaml
         registry:
             location: registry.speakeasyapi.dev/dwolla-vc3/dwolla/dwolla-api
 targets:

@@ -37,41 +37,12 @@ export const startCommand = buildCommand({
           return z.string().parse(value);
         },
       },
-      ...(mcpScopes.length
-        ? {
-          scope: {
-            kind: "enum",
-            brief:
-              "Mount tools/resources that match given scope (repeatable flag)",
-            values: mcpScopes,
-            variadic: true,
-            optional: true,
-          },
-        }
-        : {}),
-      "client-id": {
-        kind: "parsed",
-        brief: "Sets the ClientID auth field for the API",
-        optional: false,
-        parse: (value) => {
-          return z.string().parse(value);
-        },
-      },
-      "client-secret": {
-        kind: "parsed",
-        brief: "Sets the ClientSecret auth field for the API",
-        optional: false,
-        parse: (value) => {
-          return z.string().parse(value);
-        },
-      },
-      "token-url": {
-        kind: "parsed",
-        brief: "Sets the TokenURL auth field for the API",
+      scope: {
+        kind: "enum",
+        brief: "Mount tools/resources that match given scope (repeatable flag)",
+        values: mcpScopes,
+        variadic: true,
         optional: true,
-        parse: (value) => {
-          return z.string().default("/token").parse(value);
-        },
       },
       "bearer-auth": {
         kind: "parsed",
