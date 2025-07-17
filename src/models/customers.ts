@@ -3,17 +3,68 @@
  */
 
 import * as z from "zod";
-import { Customer, Customer$zodSchema } from "./customer.js";
 import { HalLink, HalLink$zodSchema } from "./hallink.js";
+import {
+  UnverifiedBusinessCustomer,
+  UnverifiedBusinessCustomer$zodSchema,
+} from "./unverifiedbusinesscustomer.js";
+import {
+  UnverifiedCustomer,
+  UnverifiedCustomer$zodSchema,
+} from "./unverifiedcustomer.js";
+import {
+  VerifiedBusinessCustomer,
+  VerifiedBusinessCustomer$zodSchema,
+} from "./verifiedbusinesscustomer.js";
+import {
+  VerifiedPersonalCustomer,
+  VerifiedPersonalCustomer$zodSchema,
+} from "./verifiedpersonalcustomer.js";
+import {
+  VerifiedSolePropCustomer,
+  VerifiedSolePropCustomer$zodSchema,
+} from "./verifiedsolepropcustomer.js";
 
-export type CustomersEmbedded = { customers?: Array<Customer> | undefined };
+export type Customer =
+  | UnverifiedCustomer
+  | UnverifiedBusinessCustomer
+  | VerifiedPersonalCustomer
+  | VerifiedSolePropCustomer
+  | VerifiedBusinessCustomer;
+
+export const Customer$zodSchema: z.ZodType<Customer, z.ZodTypeDef, unknown> = z
+  .union([
+    UnverifiedCustomer$zodSchema,
+    UnverifiedBusinessCustomer$zodSchema,
+    VerifiedPersonalCustomer$zodSchema,
+    VerifiedSolePropCustomer$zodSchema,
+    VerifiedBusinessCustomer$zodSchema,
+  ]);
+
+export type CustomersEmbedded = {
+  customers?:
+    | Array<
+      | UnverifiedCustomer
+      | UnverifiedBusinessCustomer
+      | VerifiedPersonalCustomer
+      | VerifiedSolePropCustomer
+      | VerifiedBusinessCustomer
+    >
+    | undefined;
+};
 
 export const CustomersEmbedded$zodSchema: z.ZodType<
   CustomersEmbedded,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  customers: z.array(Customer$zodSchema).optional(),
+  customers: z.array(z.union([
+    UnverifiedCustomer$zodSchema,
+    UnverifiedBusinessCustomer$zodSchema,
+    VerifiedPersonalCustomer$zodSchema,
+    VerifiedSolePropCustomer$zodSchema,
+    VerifiedBusinessCustomer$zodSchema,
+  ])).optional(),
 });
 
 export type Customers = {

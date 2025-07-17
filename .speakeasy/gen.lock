@@ -1,19 +1,18 @@
 lockVersion: 2.0.0
 id: dbccbcaa-cdde-434b-b972-38fb6d1127e5
 management:
-  docChecksum: 0102e931ab2367cdfc2afa5571084111
+  docChecksum: 742c3295a4e642a86afda93b41db51de
   docVersion: "2.0"
   speakeasyVersion: 1.582.0
   generationVersion: 2.657.1
-  releaseVersion: 0.4.0
-  configChecksum: 9b4c8f7fc923dc6ab1e21637a7d449f7
+  releaseVersion: 0.5.0
+  configChecksum: 18598a8fe20e29afadd004120fd8d76c
 features:
   mcp-typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.0
     core: 0.1.4
     defaultEnabledRetries: 0.1.0
-    globalSecurity: 0.1.0
     globalSecurityCallbacks: 0.0.0
     globalServerURLs: 0.1.0
     nameOverrides: 0.1.0
@@ -44,6 +43,8 @@ generatedFiles:
   - src/funcs/customersGet.ts
   - src/funcs/customersList.ts
   - src/funcs/customersListAvailableConnections.ts
+  - src/funcs/customersMassPaymentsList.ts
+  - src/funcs/customersTransfersList.ts
   - src/funcs/documentsGet.ts
   - src/funcs/eventsGet.ts
   - src/funcs/eventsList.ts
@@ -63,13 +64,11 @@ generatedFiles:
   - src/funcs/labelsListLedgerEntries.ts
   - src/funcs/massPaymentsGet.ts
   - src/funcs/massPaymentsGetItem.ts
-  - src/funcs/massPaymentsListForCustomer.ts
   - src/funcs/massPaymentsListItems.ts
   - src/funcs/rootGet.ts
   - src/funcs/transfersGet.ts
   - src/funcs/transfersGetFailureReason.ts
   - src/funcs/transfersListFees.ts
-  - src/funcs/transfersListForCustomer.ts
   - src/funcs/webhookSubscriptionsGet.ts
   - src/funcs/webhookSubscriptionsList.ts
   - src/funcs/webhookSubscriptionsListWebhooks.ts
@@ -123,6 +122,8 @@ generatedFiles:
   - src/mcp-server/tools/customersGet.ts
   - src/mcp-server/tools/customersList.ts
   - src/mcp-server/tools/customersListAvailableConnections.ts
+  - src/mcp-server/tools/customersMassPaymentsList.ts
+  - src/mcp-server/tools/customersTransfersList.ts
   - src/mcp-server/tools/documentsGet.ts
   - src/mcp-server/tools/eventsGet.ts
   - src/mcp-server/tools/eventsList.ts
@@ -142,13 +143,11 @@ generatedFiles:
   - src/mcp-server/tools/labelsListLedgerEntries.ts
   - src/mcp-server/tools/massPaymentsGet.ts
   - src/mcp-server/tools/massPaymentsGetItem.ts
-  - src/mcp-server/tools/massPaymentsListForCustomer.ts
   - src/mcp-server/tools/massPaymentsListItems.ts
   - src/mcp-server/tools/rootGet.ts
   - src/mcp-server/tools/transfersGet.ts
   - src/mcp-server/tools/transfersGetFailureReason.ts
   - src/mcp-server/tools/transfersListFees.ts
-  - src/mcp-server/tools/transfersListForCustomer.ts
   - src/mcp-server/tools/webhookSubscriptionsGet.ts
   - src/mcp-server/tools/webhookSubscriptionsList.ts
   - src/mcp-server/tools/webhookSubscriptionsListWebhooks.ts
@@ -163,8 +162,6 @@ generatedFiles:
   - src/models/beneficialownership.ts
   - src/models/businessclassification.ts
   - src/models/businessclassifications.ts
-  - src/models/controller.ts
-  - src/models/customer.ts
   - src/models/customers.ts
   - src/models/document.ts
   - src/models/documents.ts
@@ -184,7 +181,6 @@ generatedFiles:
   - src/models/getaccountop.ts
   - src/models/getbeneficialownershipstatusforcustomerop.ts
   - src/models/getcustomerop.ts
-  - src/models/getdocumentop.ts
   - src/models/geteventop.ts
   - src/models/getexchangeop.ts
   - src/models/getexchangepartnerop.ts
@@ -238,9 +234,9 @@ generatedFiles:
   - src/models/retrievebeneficialownerop.ts
   - src/models/retrievebusinessclassificationop.ts
   - src/models/retrievecustomerexchangesessionop.ts
+  - src/models/retrievedocumentop.ts
   - src/models/retrievelabelreallocationop.ts
   - src/models/root.ts
-  - src/models/security.ts
   - src/models/transfer.ts
   - src/models/transferamount.ts
   - src/models/transfers.ts

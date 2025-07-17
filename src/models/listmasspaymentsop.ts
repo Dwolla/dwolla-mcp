@@ -18,8 +18,10 @@ export const ListMassPaymentsRequest$zodSchema: z.ZodType<
   unknown
 > = z.object({
   correlationId: z.string().describe("Correlation ID to search by.").optional(),
-  id: z.string().describe("Account ID"),
-  limit: z.number().int().default(25).describe("How many results to return."),
+  id: z.string().describe("Account's unique identifier"),
+  limit: z.number().int().default(25).describe(
+    "Maximum number of results to return",
+  ),
   offset: z.number().int().default(0).describe("How many results to skip."),
 });
 

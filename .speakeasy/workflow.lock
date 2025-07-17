@@ -2,8 +2,8 @@ speakeasyVersion: 1.582.0
 sources:
     Dwolla API:
         sourceNamespace: dwolla-api
-        sourceRevisionDigest: sha256:24b2fb6f9db3fb706c6b8abeb2a913b3fe2dc7978feda98691748fad4431d3cc
-        sourceBlobDigest: sha256:599d4f12290e88dbf9d19c8a14f6493970fc4fad7d9870bf1a55231b3032d301
+        sourceRevisionDigest: sha256:afef2a54df19799c98e9e4b8fdf2467f25fef4d6fc24c4fa176d2c15fb044e1c
+        sourceBlobDigest: sha256:0f5f95648fa72903ee0beb8e8ff9a4a3c01a9b3c86729a3be33ab33faaa23710
         tags:
             - latest
             - "2.0"
@@ -11,15 +11,18 @@ targets:
     dwolla-mcp:
         source: Dwolla API
         sourceNamespace: dwolla-api
-        sourceRevisionDigest: sha256:24b2fb6f9db3fb706c6b8abeb2a913b3fe2dc7978feda98691748fad4431d3cc
-        sourceBlobDigest: sha256:599d4f12290e88dbf9d19c8a14f6493970fc4fad7d9870bf1a55231b3032d301
+        sourceRevisionDigest: sha256:afef2a54df19799c98e9e4b8fdf2467f25fef4d6fc24c4fa176d2c15fb044e1c
+        sourceBlobDigest: sha256:0f5f95648fa72903ee0beb8e8ff9a4a3c01a9b3c86729a3be33ab33faaa23710
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
     sources:
         Dwolla API:
             inputs:
-                - location: ./.speakeasy/openapi-mcp.yaml
+                - location: https://raw.githubusercontent.com/Dwolla/dwolla-openapi/refs/heads/main/openapi.yml
+            overlays:
+                - location: ./.speakeasy/mcp-overlay.yaml
+            output: ./generated/openapi/openapi-mcp.yaml
             registry:
                 location: registry.speakeasyapi.dev/dwolla-vc3/dwolla/dwolla-api
     targets:

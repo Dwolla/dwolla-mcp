@@ -14,7 +14,7 @@ export const tool$customersExchangesList: ToolDefinition<typeof args> = {
   name: "customers-exchanges-list",
   description: `List exchanges for a customer
 
-List exchanges for a customer`,
+Retrieve the list of exchanges associated with a Customer resource.`,
   scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {

@@ -12,7 +12,7 @@ export const ListCustomerFundingSourcesRequest$zodSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().describe("Customer funding sources"),
+  id: z.string().describe("Customer's unique identifier"),
 });
 
 /**

@@ -14,7 +14,7 @@ export const tool$exchangesGet: ToolDefinition<typeof args> = {
   name: "exchanges-get",
   description: `Retrieve exchange resource
 
-Retrieve exchange resource`,
+Retrieve an exchange resource by its ID.`,
   scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {

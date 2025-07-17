@@ -7,17 +7,17 @@ import { Document, Document$zodSchema } from "./document.js";
 import { ForbiddenError, ForbiddenError$zodSchema } from "./forbiddenerror.js";
 import { NotFoundError, NotFoundError$zodSchema } from "./notfounderror.js";
 
-export type GetDocumentRequest = { id: string };
+export type RetrieveDocumentRequest = { id: string };
 
-export const GetDocumentRequest$zodSchema: z.ZodType<
-  GetDocumentRequest,
+export const RetrieveDocumentRequest$zodSchema: z.ZodType<
+  RetrieveDocumentRequest,
   z.ZodTypeDef,
   unknown
 > = z.object({
   id: z.string().describe("Document unique identifier"),
 });
 
-export type GetDocumentResponse = {
+export type RetrieveDocumentResponse = {
   ContentType: string;
   StatusCode: number;
   RawResponse: Response;
@@ -26,8 +26,8 @@ export type GetDocumentResponse = {
   NotFoundError?: NotFoundError | undefined;
 };
 
-export const GetDocumentResponse$zodSchema: z.ZodType<
-  GetDocumentResponse,
+export const RetrieveDocumentResponse$zodSchema: z.ZodType<
+  RetrieveDocumentResponse,
   z.ZodTypeDef,
   unknown
 > = z.object({

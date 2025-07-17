@@ -8,7 +8,6 @@ import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
 import { APIError } from "../models/errors/apierror.js";
 import {
@@ -20,11 +19,11 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
-  GetDocumentRequest,
-  GetDocumentRequest$zodSchema,
-  GetDocumentResponse,
-  GetDocumentResponse$zodSchema,
-} from "../models/getdocumentop.js";
+  RetrieveDocumentRequest,
+  RetrieveDocumentRequest$zodSchema,
+  RetrieveDocumentResponse,
+  RetrieveDocumentResponse$zodSchema,
+} from "../models/retrievedocumentop.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -36,11 +35,11 @@ import { Result } from "../types/fp.js";
  */
 export function documentsGet(
   client$: DwollaMcpCore,
-  request: GetDocumentRequest,
+  request: RetrieveDocumentRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    GetDocumentResponse,
+    RetrieveDocumentResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -59,12 +58,12 @@ export function documentsGet(
 
 async function $do(
   client$: DwollaMcpCore,
-  request: GetDocumentRequest,
+  request: RetrieveDocumentRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      GetDocumentResponse,
+      RetrieveDocumentResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -78,7 +77,7 @@ async function $do(
 > {
   const parsed$ = safeParse(
     request,
-    (value$) => GetDocumentRequest$zodSchema.parse(value$),
+    (value$) => RetrieveDocumentRequest$zodSchema.parse(value$),
     "Input validation failed",
   );
   if (!parsed$.ok) {
@@ -100,15 +99,13 @@ async function $do(
   const headers$ = new Headers(compactMap({
     Accept: "application/vnd.dwolla.v1.hal+json",
   }));
-  const securityInput = await extractSecurity(client$._options.security);
-  const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
     baseURL: options?.serverURL ?? client$._baseURL ?? "",
-    operationID: "getDocument",
+    operationID: "retrieveDocument",
     oAuth2Scopes: [],
-    resolvedSecurity: requestSecurity,
-    securitySource: client$._options.security,
+    resolvedSecurity: null,
+    securitySource: null,
     retryConfig: options?.retries
       || client$._options.retryConfig
       || { strategy: "none" },
@@ -122,7 +119,6 @@ async function $do(
   };
 
   const requestRes = client$._createRequest(context, {
-    security: requestSecurity,
     method: "GET",
     baseURL: options?.serverURL,
     path: path$,
@@ -151,7 +147,7 @@ async function $do(
   };
 
   const [result$] = await M.match<
-    GetDocumentResponse,
+    RetrieveDocumentResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -160,15 +156,15 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, GetDocumentResponse$zodSchema, {
+    M.json(200, RetrieveDocumentResponse$zodSchema, {
       ctype: "application/vnd.dwolla.v1.hal+json",
       key: "Document",
     }),
-    M.json(403, GetDocumentResponse$zodSchema, {
+    M.json(403, RetrieveDocumentResponse$zodSchema, {
       ctype: "application/vnd.dwolla.v1.hal+json",
       key: "ForbiddenError",
     }),
-    M.json(404, GetDocumentResponse$zodSchema, {
+    M.json(404, RetrieveDocumentResponse$zodSchema, {
       ctype: "application/vnd.dwolla.v1.hal+json",
       key: "NotFoundError",
     }),

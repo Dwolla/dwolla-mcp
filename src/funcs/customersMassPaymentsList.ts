@@ -8,7 +8,6 @@ import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
 import { APIError } from "../models/errors/apierror.js";
 import {
@@ -20,27 +19,27 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
-  ListCustomerTransfersRequest,
-  ListCustomerTransfersRequest$zodSchema,
-  ListCustomerTransfersResponse,
-  ListCustomerTransfersResponse$zodSchema,
-} from "../models/listcustomertransfersop.js";
+  ListCustomerMassPaymentsRequest,
+  ListCustomerMassPaymentsRequest$zodSchema,
+  ListCustomerMassPaymentsResponse,
+  ListCustomerMassPaymentsResponse$zodSchema,
+} from "../models/listcustomermasspaymentsop.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * List and search transfers for a customer
+ * List mass payments for customer
  *
  * @remarks
- * List and search transfers for a customer
+ * List mass payments for customer
  */
-export function transfersListForCustomer(
+export function customersMassPaymentsList(
   client$: DwollaMcpCore,
-  request: ListCustomerTransfersRequest,
+  request: ListCustomerMassPaymentsRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    ListCustomerTransfersResponse,
+    ListCustomerMassPaymentsResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -59,12 +58,12 @@ export function transfersListForCustomer(
 
 async function $do(
   client$: DwollaMcpCore,
-  request: ListCustomerTransfersRequest,
+  request: ListCustomerMassPaymentsRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      ListCustomerTransfersResponse,
+      ListCustomerMassPaymentsResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -78,7 +77,7 @@ async function $do(
 > {
   const parsed$ = safeParse(
     request,
-    (value$) => ListCustomerTransfersRequest$zodSchema.parse(value$),
+    (value$) => ListCustomerMassPaymentsRequest$zodSchema.parse(value$),
     "Input validation failed",
   );
   if (!parsed$.ok) {
@@ -93,33 +92,25 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-  const path$ = pathToFunc("/customers/{id}/transfers")(
+  const path$ = pathToFunc("/customers/{id}/mass-payments")(
     pathParams$,
   );
   const query$ = encodeFormQuery({
     "correlationId": payload$.correlationId,
-    "endAmount": payload$.endAmount,
-    "endDate": payload$.endDate,
     "limit": payload$.limit,
     "offset": payload$.offset,
-    "search": payload$.search,
-    "startAmount": payload$.startAmount,
-    "startDate": payload$.startDate,
-    "status": payload$.status,
   });
 
   const headers$ = new Headers(compactMap({
     Accept: "application/vnd.dwolla.v1.hal+json",
   }));
-  const securityInput = await extractSecurity(client$._options.security);
-  const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
     baseURL: options?.serverURL ?? client$._baseURL ?? "",
-    operationID: "listCustomerTransfers",
+    operationID: "listCustomerMassPayments",
     oAuth2Scopes: [],
-    resolvedSecurity: requestSecurity,
-    securitySource: client$._options.security,
+    resolvedSecurity: null,
+    securitySource: null,
     retryConfig: options?.retries
       || client$._options.retryConfig
       || { strategy: "none" },
@@ -133,7 +124,6 @@ async function $do(
   };
 
   const requestRes = client$._createRequest(context, {
-    security: requestSecurity,
     method: "GET",
     baseURL: options?.serverURL,
     path: path$,
@@ -163,7 +153,7 @@ async function $do(
   };
 
   const [result$] = await M.match<
-    ListCustomerTransfersResponse,
+    ListCustomerMassPaymentsResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -172,13 +162,17 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, ListCustomerTransfersResponse$zodSchema, {
+    M.json(200, ListCustomerMassPaymentsResponse$zodSchema, {
       ctype: "application/vnd.dwolla.v1.hal+json",
-      key: "Transfers",
+      key: "MassPayments",
     }),
-    M.json(404, ListCustomerTransfersResponse$zodSchema, {
+    M.json(403, ListCustomerMassPaymentsResponse$zodSchema, {
       ctype: "application/vnd.dwolla.v1.hal+json",
-      key: "NotFoundError",
+      key: "403_application/vnd.dwolla.v1.hal+json_object",
+    }),
+    M.json(404, ListCustomerMassPaymentsResponse$zodSchema, {
+      ctype: "application/vnd.dwolla.v1.hal+json",
+      key: "404_application/vnd.dwolla.v1.hal+json_object",
     }),
   )(response, req$, { extraFields: responseFields$ });
 

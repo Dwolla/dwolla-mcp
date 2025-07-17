@@ -14,7 +14,7 @@ export const tool$businessClassificationsGet: ToolDefinition<typeof args> = {
   name: "business-classifications-get",
   description: `Retrieve a business classification
 
-Retrieve a business classification`,
+Retrieve a business classification by id.`,
   scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {

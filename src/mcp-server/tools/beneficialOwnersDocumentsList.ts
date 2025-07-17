@@ -12,9 +12,9 @@ const args = {
 
 export const tool$beneficialOwnersDocumentsList: ToolDefinition<typeof args> = {
   name: "beneficial-owners-documents-list",
-  description: `List document for beneficial owner
+  description: `List documents for beneficial owner
 
-List document for beneficial owner`,
+List documents for beneficial owner`,
   scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {

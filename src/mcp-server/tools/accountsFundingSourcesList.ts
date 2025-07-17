@@ -14,7 +14,7 @@ export const tool$accountsFundingSourcesList: ToolDefinition<typeof args> = {
   name: "accounts-funding-sources-list",
   description: `List funding sources for an account
 
-List funding source for an account`,
+List funding sources for an account`,
   scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {

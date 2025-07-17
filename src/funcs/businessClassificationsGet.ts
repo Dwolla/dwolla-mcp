@@ -8,7 +8,6 @@ import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
 import { APIError } from "../models/errors/apierror.js";
 import {
@@ -32,7 +31,7 @@ import { Result } from "../types/fp.js";
  * Retrieve a business classification
  *
  * @remarks
- * Retrieve a business classification
+ * Retrieve a business classification by id.
  */
 export function businessClassificationsGet(
   client$: DwollaMcpCore,
@@ -100,15 +99,13 @@ async function $do(
   const headers$ = new Headers(compactMap({
     Accept: "application/vnd.dwolla.v1.hal+json",
   }));
-  const securityInput = await extractSecurity(client$._options.security);
-  const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
     baseURL: options?.serverURL ?? client$._baseURL ?? "",
     operationID: "retrieveBusinessClassification",
     oAuth2Scopes: [],
-    resolvedSecurity: requestSecurity,
-    securitySource: client$._options.security,
+    resolvedSecurity: null,
+    securitySource: null,
     retryConfig: options?.retries
       || client$._options.retryConfig
       || { strategy: "none" },
@@ -122,7 +119,6 @@ async function $do(
   };
 
   const requestRes = client$._createRequest(context, {
-    security: requestSecurity,
     method: "GET",
     baseURL: options?.serverURL,
     path: path$,

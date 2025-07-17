@@ -3,11 +3,11 @@
  */
 
 import { documentsGet } from "../../funcs/documentsGet.js";
-import { GetDocumentRequest$zodSchema } from "../../models/getdocumentop.js";
+import { RetrieveDocumentRequest$zodSchema } from "../../models/retrievedocumentop.js";
 import { formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
-  request: GetDocumentRequest$zodSchema,
+  request: RetrieveDocumentRequest$zodSchema,
 };
 
 export const tool$documentsGet: ToolDefinition<typeof args> = {

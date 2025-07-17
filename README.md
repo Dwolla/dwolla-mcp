@@ -49,8 +49,7 @@ Add the following server definition to your `claude_desktop_config.json` file:
       "args": [
         "-y", "--package", "dwolla-mcp",
         "--",
-        "mcp", "start",
-        "--bearer-auth", "..."
+        "mcp", "start"
       ]
     }
   }
@@ -69,8 +68,7 @@ Create a `.cursor/mcp.json` file in your project root with the following content
       "args": [
         "-y", "--package", "dwolla-mcp",
         "--",
-        "mcp", "start",
-        "--bearer-auth", "..."
+        "mcp", "start"
       ]
     }
   }

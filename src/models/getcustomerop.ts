@@ -3,7 +3,26 @@
  */
 
 import * as z from "zod";
-import { Customer, Customer$zodSchema } from "./customer.js";
+import {
+  UnverifiedBusinessCustomer,
+  UnverifiedBusinessCustomer$zodSchema,
+} from "./unverifiedbusinesscustomer.js";
+import {
+  UnverifiedCustomer,
+  UnverifiedCustomer$zodSchema,
+} from "./unverifiedcustomer.js";
+import {
+  VerifiedBusinessCustomer,
+  VerifiedBusinessCustomer$zodSchema,
+} from "./verifiedbusinesscustomer.js";
+import {
+  VerifiedPersonalCustomer,
+  VerifiedPersonalCustomer$zodSchema,
+} from "./verifiedpersonalcustomer.js";
+import {
+  VerifiedSolePropCustomer,
+  VerifiedSolePropCustomer$zodSchema,
+} from "./verifiedsolepropcustomer.js";
 
 export type GetCustomerRequest = { id: string };
 
@@ -49,11 +68,39 @@ export const GetCustomerForbiddenResponseBody$zodSchema: z.ZodType<
   message: z.string().optional(),
 }).describe("forbidden");
 
+/**
+ * successful operation
+ */
+export type GetCustomerResponseBody =
+  | UnverifiedCustomer
+  | UnverifiedBusinessCustomer
+  | VerifiedPersonalCustomer
+  | VerifiedSolePropCustomer
+  | VerifiedBusinessCustomer;
+
+export const GetCustomerResponseBody$zodSchema: z.ZodType<
+  GetCustomerResponseBody,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  UnverifiedCustomer$zodSchema,
+  UnverifiedBusinessCustomer$zodSchema,
+  VerifiedPersonalCustomer$zodSchema,
+  VerifiedSolePropCustomer$zodSchema,
+  VerifiedBusinessCustomer$zodSchema,
+]).describe("successful operation");
+
 export type GetCustomerResponse = {
   ContentType: string;
   StatusCode: number;
   RawResponse: Response;
-  Customer?: Customer | undefined;
+  twoHundredApplicationVndDwollaV1HalPlusJsonOneOf?:
+    | UnverifiedCustomer
+    | UnverifiedBusinessCustomer
+    | VerifiedPersonalCustomer
+    | VerifiedSolePropCustomer
+    | VerifiedBusinessCustomer
+    | undefined;
   fourHundredAndThreeApplicationVndDwollaV1HalPlusJsonObject?:
     | GetCustomerForbiddenResponseBody
     | undefined;
@@ -68,7 +115,6 @@ export const GetCustomerResponse$zodSchema: z.ZodType<
   unknown
 > = z.object({
   ContentType: z.string(),
-  Customer: Customer$zodSchema.optional(),
   RawResponse: z.instanceof(Response),
   StatusCode: z.number().int(),
   fourHundredAndFourApplicationVndDwollaV1HalPlusJsonObject: z.lazy(() =>
@@ -77,4 +123,11 @@ export const GetCustomerResponse$zodSchema: z.ZodType<
   fourHundredAndThreeApplicationVndDwollaV1HalPlusJsonObject: z.lazy(() =>
     GetCustomerForbiddenResponseBody$zodSchema
   ).optional(),
+  twoHundredApplicationVndDwollaV1HalPlusJsonOneOf: z.union([
+    UnverifiedCustomer$zodSchema,
+    UnverifiedBusinessCustomer$zodSchema,
+    VerifiedPersonalCustomer$zodSchema,
+    VerifiedSolePropCustomer$zodSchema,
+    VerifiedBusinessCustomer$zodSchema,
+  ]).optional(),
 });

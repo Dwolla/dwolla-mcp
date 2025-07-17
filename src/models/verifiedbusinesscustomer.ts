@@ -3,8 +3,49 @@
  */
 
 import * as z from "zod";
-import { Controller, Controller$zodSchema } from "./controller.js";
 import { HalLink, HalLink$zodSchema } from "./hallink.js";
+
+export type VerifiedBusinessCustomerAddress = {
+  address1?: string | undefined;
+  address2?: string | undefined;
+  address3?: string | undefined;
+  city?: string | undefined;
+  postalCode?: string | undefined;
+  country?: string | undefined;
+  stateProvinceRegion?: string | undefined;
+};
+
+export const VerifiedBusinessCustomerAddress$zodSchema: z.ZodType<
+  VerifiedBusinessCustomerAddress,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  address1: z.string().optional(),
+  address2: z.string().optional(),
+  address3: z.string().optional(),
+  city: z.string().optional(),
+  country: z.string().optional(),
+  postalCode: z.string().optional(),
+  stateProvinceRegion: z.string().optional(),
+});
+
+export type Controller = {
+  firstName?: string | undefined;
+  lastName?: string | undefined;
+  title?: string | undefined;
+  address?: VerifiedBusinessCustomerAddress | undefined;
+};
+
+export const Controller$zodSchema: z.ZodType<
+  Controller,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  address: z.lazy(() => VerifiedBusinessCustomerAddress$zodSchema).optional(),
+  firstName: z.string().optional(),
+  lastName: z.string().optional(),
+  title: z.string().optional(),
+});
 
 /**
  * Shared models between all Customer types
@@ -45,7 +86,7 @@ export const VerifiedBusinessCustomer$zodSchema: z.ZodType<
   businessName: z.string().optional(),
   businessType: z.string().optional(),
   city: z.string().optional(),
-  controller: Controller$zodSchema.optional(),
+  controller: z.lazy(() => Controller$zodSchema).optional(),
   correlationId: z.string().optional(),
   created: z.string().datetime({ offset: true }).optional(),
   doingBusinessAs: z.string().optional(),

@@ -30,6 +30,8 @@ import { tool$customersFundingSourcesList } from "./tools/customersFundingSource
 import { tool$customersGet } from "./tools/customersGet.js";
 import { tool$customersList } from "./tools/customersList.js";
 import { tool$customersListAvailableConnections } from "./tools/customersListAvailableConnections.js";
+import { tool$customersMassPaymentsList } from "./tools/customersMassPaymentsList.js";
+import { tool$customersTransfersList } from "./tools/customersTransfersList.js";
 import { tool$documentsGet } from "./tools/documentsGet.js";
 import { tool$eventsGet } from "./tools/eventsGet.js";
 import { tool$eventsList } from "./tools/eventsList.js";
@@ -49,13 +51,11 @@ import { tool$labelsListForCustomer } from "./tools/labelsListForCustomer.js";
 import { tool$labelsListLedgerEntries } from "./tools/labelsListLedgerEntries.js";
 import { tool$massPaymentsGet } from "./tools/massPaymentsGet.js";
 import { tool$massPaymentsGetItem } from "./tools/massPaymentsGetItem.js";
-import { tool$massPaymentsListForCustomer } from "./tools/massPaymentsListForCustomer.js";
 import { tool$massPaymentsListItems } from "./tools/massPaymentsListItems.js";
 import { tool$rootGet } from "./tools/rootGet.js";
 import { tool$transfersGet } from "./tools/transfersGet.js";
 import { tool$transfersGetFailureReason } from "./tools/transfersGetFailureReason.js";
 import { tool$transfersListFees } from "./tools/transfersListFees.js";
-import { tool$transfersListForCustomer } from "./tools/transfersListForCustomer.js";
 import { tool$webhooksGet } from "./tools/webhooksGet.js";
 import { tool$webhooksListRetries } from "./tools/webhooksListRetries.js";
 import { tool$webhookSubscriptionsGet } from "./tools/webhookSubscriptionsGet.js";
@@ -67,16 +67,14 @@ export function createMCPServer(deps: {
   allowedTools?: string[] | undefined;
   scopes?: MCPScope[] | undefined;
   serverURL?: string | undefined;
-  security?: SDKOptions["security"] | undefined;
   serverIdx?: SDKOptions["serverIdx"] | undefined;
 }) {
   const server = new McpServer({
     name: "DwollaMcp",
-    version: "0.4.0",
+    version: "0.5.0",
   });
 
   const client = new DwollaMcpCore({
-    security: deps.security,
     serverURL: deps.serverURL,
     serverIdx: deps.serverIdx,
   });
@@ -125,13 +123,13 @@ export function createMCPServer(deps: {
   tool(tool$fundingSourcesGetBalance);
   tool(tool$fundingSourcesGetVanRouting);
   tool(tool$transfersGet);
-  tool(tool$transfersListForCustomer);
   tool(tool$transfersListFees);
   tool(tool$transfersGetFailureReason);
+  tool(tool$customersTransfersList);
   tool(tool$massPaymentsGet);
   tool(tool$massPaymentsListItems);
   tool(tool$massPaymentsGetItem);
-  tool(tool$massPaymentsListForCustomer);
+  tool(tool$customersMassPaymentsList);
   tool(tool$labelsGet);
   tool(tool$labelsListForCustomer);
   tool(tool$labelsListLedgerEntries);

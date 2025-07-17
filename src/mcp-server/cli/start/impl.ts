@@ -19,7 +19,6 @@ interface StartCommandFlags {
   readonly port: number;
   readonly tool?: string[];
   readonly scope?: MCPScope[];
-  readonly "bearer-auth"?: string;
   readonly "server-url"?: string;
   readonly "server-index"?: SDKOptions["serverIdx"];
   readonly "log-level": ConsoleLoggerLevel;
@@ -50,7 +49,6 @@ async function startStdio(flags: StartCommandFlags) {
     logger,
     allowedTools: flags.tool,
     scopes: flags.scope,
-    security: { bearerAuth: flags["bearer-auth"] ?? "" },
     serverURL: flags["server-url"],
     serverIdx: flags["server-index"],
   });
@@ -71,7 +69,6 @@ async function startSSE(flags: StartCommandFlags) {
     logger,
     allowedTools: flags.tool,
     scopes: flags.scope,
-    security: { bearerAuth: flags["bearer-auth"] ?? "" },
     serverURL: flags["server-url"],
     serverIdx: flags["server-index"],
   });
