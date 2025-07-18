@@ -67,14 +67,16 @@ export function createMCPServer(deps: {
   allowedTools?: string[] | undefined;
   scopes?: MCPScope[] | undefined;
   serverURL?: string | undefined;
+  security?: SDKOptions["security"] | undefined;
   serverIdx?: SDKOptions["serverIdx"] | undefined;
 }) {
   const server = new McpServer({
     name: "DwollaMcp",
-    version: "0.5.0",
+    version: "0.6.0",
   });
 
   const client = new DwollaMcpCore({
+    security: deps.security,
     serverURL: deps.serverURL,
     serverIdx: deps.serverIdx,
   });

@@ -1,18 +1,19 @@
 lockVersion: 2.0.0
 id: dbccbcaa-cdde-434b-b972-38fb6d1127e5
 management:
-  docChecksum: 742c3295a4e642a86afda93b41db51de
+  docChecksum: b9fcc18690c43b1640c9d8a5be488f32
   docVersion: "2.0"
   speakeasyVersion: 1.582.0
   generationVersion: 2.657.1
-  releaseVersion: 0.5.0
-  configChecksum: 18598a8fe20e29afadd004120fd8d76c
+  releaseVersion: 0.6.0
+  configChecksum: 0e1528cb690c3188fdeb8356d7a65e54
 features:
   mcp-typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.0
     core: 0.1.4
     defaultEnabledRetries: 0.1.0
+    globalSecurity: 0.1.0
     globalSecurityCallbacks: 0.0.0
     globalServerURLs: 0.1.0
     nameOverrides: 0.1.0
@@ -237,6 +238,7 @@ generatedFiles:
   - src/models/retrievedocumentop.ts
   - src/models/retrievelabelreallocationop.ts
   - src/models/root.ts
+  - src/models/security.ts
   - src/models/transfer.ts
   - src/models/transferamount.ts
   - src/models/transfers.ts

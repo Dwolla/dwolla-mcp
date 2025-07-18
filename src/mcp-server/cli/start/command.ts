@@ -44,6 +44,14 @@ export const startCommand = buildCommand({
         variadic: true,
         optional: true,
       },
+      "bearer-auth": {
+        kind: "parsed",
+        brief: "Sets the bearerAuth auth field for the API",
+        optional: true,
+        parse: (value) => {
+          return z.string().parse(value);
+        },
+      },
       "server-url": {
         kind: "parsed",
         brief: "Overrides the default server URL used by the SDK",

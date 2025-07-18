@@ -31,6 +31,18 @@ actions:
   - target: $.security[?(@.clientCredentials)]
     remove: true
 
-  # Remove the clientCredentials security scheme
+  # Remove the dedicated clientCredentials security scheme
   - target: $.components.securitySchemes.clientCredentials
-    remove: true 
+    remove: true
+
+  # Add bearerAuth to global security
+  - target: $.security
+    update:
+      - bearerAuth: []
+
+  # Add a dedicated bearerAuth security scheme
+  - target: $.components.securitySchemes
+    update:
+      bearerAuth:
+        type: http
+        scheme: bearer

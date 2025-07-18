@@ -17,7 +17,8 @@ servers:
     description: Production server
   - url: https://api-sandbox.dwolla.com
     description: Sandbox server
-security: []
+security:
+  - bearerAuth: []
 tags:
   - name: tokens
     description: Operations related to Application Access Tokens
@@ -4734,7 +4735,10 @@ paths:
           - read
   /client-tokens: {}
 components:
-  securitySchemes: {}
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
   parameters:
     Accept:
       name: Accept
