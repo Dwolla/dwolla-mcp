@@ -19,10 +19,7 @@ interface StartCommandFlags {
   readonly port: number;
   readonly tool?: string[];
   readonly scope?: MCPScope[];
-  readonly "client-id": string;
-  readonly "client-secret": string;
-  readonly "token-url"?: string | undefined;
-  readonly "bearer-auth"?: string | undefined;
+  readonly "bearer-auth"?: string;
   readonly "server-url"?: string;
   readonly "server-index"?: SDKOptions["serverIdx"];
   readonly "log-level": ConsoleLoggerLevel;
@@ -53,17 +50,7 @@ async function startStdio(flags: StartCommandFlags) {
     logger,
     allowedTools: flags.tool,
     scopes: flags.scope,
-    security: {
-      clientCredentials:
-        flags["client-id"] != null && flags["client-secret"] != null
-          ? {
-            clientID: flags["client-id"],
-            clientSecret: flags["client-secret"],
-            tokenURL: flags["token-url"],
-          }
-          : void 0,
-      bearerAuth: flags["bearer-auth"] ?? "",
-    },
+    security: { bearerAuth: flags["bearer-auth"] ?? "" },
     serverURL: flags["server-url"],
     serverIdx: flags["server-index"],
   });
@@ -84,17 +71,7 @@ async function startSSE(flags: StartCommandFlags) {
     logger,
     allowedTools: flags.tool,
     scopes: flags.scope,
-    security: {
-      clientCredentials:
-        flags["client-id"] != null && flags["client-secret"] != null
-          ? {
-            clientID: flags["client-id"],
-            clientSecret: flags["client-secret"],
-            tokenURL: flags["token-url"],
-          }
-          : void 0,
-      bearerAuth: flags["bearer-auth"] ?? "",
-    },
+    security: { bearerAuth: flags["bearer-auth"] ?? "" },
     serverURL: flags["server-url"],
     serverIdx: flags["server-index"],
   });

@@ -9,6 +9,10 @@ class InvariantError extends Error {
   }
 }
 
+export type ExactPartial<T> = {
+  [P in keyof T]?: T[P] | undefined;
+};
+
 export function abortSignalAny(signals: AbortSignal[]): AbortSignal {
   const controller = new AbortController();
   const result = controller.signal;
