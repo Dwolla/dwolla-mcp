@@ -1,9 +1,13 @@
 {
   "name": "dwolla-mcp",
-  "version": "0.6.0",
+  "version": "0.0.1-beta.1",
   "author": "Speakeasy",
   "type": "module",
   "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Dwolla/dwolla-mcp.git"
+  },
   "bin": {
     "mcp": "bin/mcp-server.js"
   },

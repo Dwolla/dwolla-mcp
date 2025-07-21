@@ -27,11 +27,12 @@ mcp-typescript:
     dependencies: {}
     devDependencies: {}
     peerDependencies: {}
+  additionalPackageJSON:
+    description: Dwolla MCP (Beta). Breaking changes may occur between beta versions.
   author: Speakeasy
   baseErrorName: DwollaMcpError
+  cloudflareEnabled: false
   defaultErrorName: DwollaMcpDefaultError
   inputModelSuffix: input
   outputModelSuffix: output
   packageName: dwolla-mcp
-  additionalPackageJSON:
-    description: Dwolla MCP (Beta). Breaking changes may occur between beta versions.
