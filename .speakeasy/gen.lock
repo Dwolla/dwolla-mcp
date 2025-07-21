@@ -3,15 +3,16 @@ id: dbccbcaa-cdde-434b-b972-38fb6d1127e5
 management:
   docChecksum: b9fcc18690c43b1640c9d8a5be488f32
   docVersion: "2.0"
-  speakeasyVersion: 1.582.0
-  generationVersion: 2.657.1
-  releaseVersion: 0.6.0
-  configChecksum: 0e1528cb690c3188fdeb8356d7a65e54
+  speakeasyVersion: 1.583.1
+  generationVersion: 2.658.3
+  releaseVersion: 0.0.1-beta.1
+  configChecksum: ff4acec28385d87a383c17b92ffa6a69
+  repoURL: https://github.com/Dwolla/dwolla-mcp.git
 features:
   mcp-typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.0
-    core: 0.1.4
+    core: 0.2.1
     defaultEnabledRetries: 0.1.0
     globalSecurity: 0.1.0
     globalSecurityCallbacks: 0.0.0

@@ -36,7 +36,8 @@ Dwolla API: Dwolla API Documentation
 > [!TIP]
 > To finish publishing your MCP Server to npm and others you must [run your first generation action](https://www.speakeasy.com/docs/github-setup#step-by-step-guide).
 
-### Claude
+<details>
+<summary>Claude</summary>
 
 Add the following server definition to your `claude_desktop_config.json` file:
 
@@ -46,19 +47,33 @@ Add the following server definition to your `claude_desktop_config.json` file:
     "DwollaMcp": {
       "command": "npx",
       "args": [
-        "-y", "--package", "dwolla-mcp",
+        "-y",
+        "--package",
+        "dwolla-mcp",
         "--",
-        "mcp", "start",
-        "--bearer-auth", "..."
+        "mcp",
+        "start",
+        "--bearer-auth",
+        "..."
       ]
     }
   }
 }
 ```
 
-### Cursor
+</details>
 
-Create a `.cursor/mcp.json` file in your project root with the following content:
+<details>
+<summary>Cursor</summary>
+
+[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=DwollaMcp&config=eyJtY3BTZXJ2ZXJzIjp7IkR3b2xsYU1jcCI6eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIi0tcGFja2FnZSIsImR3b2xsYS1tY3AiLCItLSIsIm1jcCIsInN0YXJ0IiwiLS1iZWFyZXItYXV0aCIsIi4uLiJdfX19)
+
+Or manually:
+
+1. Open Cursor Settings
+2. Select Tools and Integrations
+3. Select New MCP Server
+4. Paste the following JSON into the MCP Server Configuration field:
 
 ```json
 {
@@ -66,39 +81,41 @@ Create a `.cursor/mcp.json` file in your project root with the following content
     "DwollaMcp": {
       "command": "npx",
       "args": [
-        "-y", "--package", "dwolla-mcp",
+        "-y",
+        "--package",
+        "dwolla-mcp",
         "--",
-        "mcp", "start",
-        "--bearer-auth", "..."
+        "mcp",
+        "start",
+        "--bearer-auth",
+        "..."
       ]
     }
   }
 }
 ```
 
-### Standalone Binary
+</details>
 
-Run the MCP server as a standalone binary with no additional dependencies. Pull these binaries from available Github releases:
+<details>
+<summary>Claude Code CLI</summary>
 
 ```bash
-curl -L -o mcp-server \
-    https://github.com/{org}/{repo}/releases/download/{tag}/mcp-server-bun-darwin-arm64 && \
-chmod +x mcp-server
+npx -y --package dwolla-mcp -- mcp start --bearer-auth ...
 ```
 
-If the repo is a private repo you must add your Github PAT to download a release `-H "Authorization: Bearer {GITHUB_PAT}"`.
+</details>
 
-```json
-{
-  "mcpServers": {
-    "Todos": {
-      "command": "./DOWNLOAD/PATH/mcp-server",
-      "args": [
-        "start"
-      ]
-    }
-  }
-}
+<details>
+<summary>Manual installation</summary>
+
+
+
+
+To start the MCP server, run:
+
+```bash
+npx -y --package dwolla-mcp -- mcp start --bearer-auth ...
 ```
 
 For a full list of server arguments, run:
@@ -107,33 +124,7 @@ For a full list of server arguments, run:
 npx -y --package dwolla-mcp -- mcp start --help
 ```
 
-### Package Managers
-
-The MCP Server can be installed with either [npm](https://www.npmjs.com/), [pnpm](https://pnpm.io/), [bun](https://bun.sh/) or [yarn](https://classic.yarnpkg.com/en/) package managers.
-
-#### NPM
-
-```bash
-npm add <UNSET>
-```
-
-#### PNPM
-
-```bash
-pnpm add <UNSET>
-```
-
-#### Bun
-
-```bash
-bun add <UNSET>
-```
-
-#### Yarn
-
-```bash
-yarn add <UNSET>
-```
+</details>
 <!-- End Installation [installation] -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
