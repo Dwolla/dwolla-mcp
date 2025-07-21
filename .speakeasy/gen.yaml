@@ -22,7 +22,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 mcp-typescript:
-  version: 0.6.0
+  version: 0.0.1-beta.1
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
@@ -33,3 +33,5 @@ mcp-typescript:
   inputModelSuffix: input
   outputModelSuffix: output
   packageName: dwolla-mcp
+  additionalPackageJSON:
+    description: Dwolla MCP (Beta). Breaking changes may occur between beta versions.
