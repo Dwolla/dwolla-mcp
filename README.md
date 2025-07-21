@@ -11,9 +11,8 @@ Model Context Protocol (MCP) Server for the _dwolla-mcp_ API.
 
 <br /><br />
 
-> [!IMPORTANT] This MCP Server is not yet ready for production use. To complete setup please follow
-> the steps outlined in your [workspace](https://app.speakeasy.com/org/dwolla-vc3/dwolla). Delete
-> this notice before publishing to a package manager.
+> [!IMPORTANT]
+> **Beta Release** - This MCP is currently in beta. Core operations including customer creation, funding sources, transfers, and beneficial ownership have been tested and are functional. We are conducting thorough internal testing of all operations before general availability. Please note that breaking changes may occur as we continue to make improvements. While suitable for development and testing, please use with appropriate caution in production environments.
 
 <!-- Start Summary [summary] -->
 ## Summary
@@ -147,5 +146,3 @@ While we value contributions to this MCP Server, the code is generated programma
 changes added to internal files will be overwritten on the next generation. We look forward to
 hearing your feedback. Feel free to open a PR or an issue with a proof of concept and we'll do our
 best to include it in a future release.
-
-### MCP Server Created by [Speakeasy](https://www.speakeasy.com/?utm_source=dwolla-mcp&utm_campaign=mcp-typescript)
