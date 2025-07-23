@@ -310,121 +310,92 @@ node bin/mcp-server.js start --bearer-auth "your_token_here" --server-url https:
 ```
 </details>
 
-## 💬 Usage Examples & Workflows
+## 💬 Usage Examples & Business Applications
 
-Once configured, you can interact with your Dwolla data using natural language. Here are common scenarios and example queries:
+### 🎧 Customer Support & Operations
+**Business Problem**: Support teams need to quickly investigate customer issues and transfer failures.
 
-### 🏢 Account Overview & Monitoring
+**Solutions with AI**:
+- *"Find all failed transfers for customer john.doe@company.com and explain why they failed"*
+- *"Show me customer details for customer ID {id}"*
+- *"List transfers for customer {id} in the last month"*
 
-**Get account information:**
-- "Show me my Dwolla account details and current status"
-- "What funding sources are connected to my account?"
-- "List all transfers associated with my account from the last 30 days"
-- "Show me recent mass payments I've processed"
+### 📊 Financial Reconciliation & Reporting  
+**Business Problem**: Finance teams need automated reconciliation and reporting.
 
-**Account balance monitoring:**
-- "What's the current balance of my Dwolla Balance funding source?"
+**Solutions with AI**:
+- *"Calculate total transfer volume for Q1 2024 and compare to Q4 2023"*
+- *"Show me all pending transfers over $10,000"*
+- *"What's the current balance of my Dwolla Balance funding source?"*
 
-### 👥 Customer Management & Analytics
+### ⚖️ Compliance & Risk Management
 
-**Customer insights:**
-- "List all customers with status 'verified'"
-- "Find customers by business name containing 'Tech'"
-- "Show me customer details for customer ID {id}"
-- "How many customers have been added in the last 30 days?"
+**Problem**: Compliance teams need to monitor suspicious activity, verify customer information, and ensure regulatory compliance.
 
-**Customer compliance:**
-- "List beneficial owners for customer {id}"
-- "Check beneficial ownership status for customer {id}"
+**Solutions with AI**:
+- *"List all customers missing required beneficial ownership information"*
+- *"Find transfers over $50,000 in the last 30 days for regulatory reporting"*
+- *"Which customers need additional identity documents to maintain compliance?"*
+- *"Identify customers with multiple failed transfer attempts this month"*
 
-### 💸 Transfer Analysis & Reporting
+### 📈 Business Intelligence & Analytics
 
-**Transfer monitoring:**
-- "Show me all failed transfers in the past week and their failure reasons"
-- "List transfers for customer {id} in the last month"
-- "Get details for transfer {id} including any fees"
-- "Find transfers with correlation ID 'payment_batch_001'"
+**Problem**: Business teams need insights into payment patterns, customer behavior, and platform performance.
 
-**Transfer analytics:**
-- "Analyze transfer patterns between $1000 and $5000"
-- "Show me transfers that occurred yesterday"
-- "List all pending transfers across my platform"
+**Solutions with AI**:
+- *"What's the average transfer amount by customer segment and how has it changed?"*
+- *"How many new verified customers were added this quarter vs last quarter?"*
+- *"Which funding source types have the highest failure rates and why?"*
+- *"Show me customers with increasing transfer volumes who might need premium features"*
 
-### 📦 Mass Payment Operations
+### 👩‍💻 Developer Tools & Integration Support
 
-**Mass payment insights:**
-- "Show me all mass payment batches from this quarter"
-- "List items in mass payment {id}"
-- "Get details for mass payment item {id}"
-- "Find mass payments by correlation ID for customer analysis"
+**Problem**: Development teams need to debug integrations, test scenarios, and understand API behavior.
 
-### 🏦 Funding Source Management
+**Solutions with AI**:
+- *"Show me the exact webhook events and timeline for transfer {id}"*
+- *"What are the most common transfer failure reasons this week and their causes?"*
+- *"Find examples of customers using each funding source type for testing"*
+- *"Analyze the verification process for business customers who got stuck"*
 
-**Funding source analysis:**
-- "List all funding sources for customer {id}"
-- "Get micro-deposit details for funding source {id}"
-- "Show me VAN routing information for funding source {id}"
-- "Check if any funding sources are unverified or removed"
+### 🚨 Automated Monitoring & Alerting
 
-### 🔄 Exchange & Connection Data
+**Problem**: Operations teams need proactive monitoring of system health and business metrics.
 
-**Exchange monitoring:**
-- "List all available exchange connections for customer {id}"
-- "Show me exchange partners and their details"
-- "Get exchange session information for session {id}"
-- "List all exchanges associated with customer {id}"
+**Solutions with AI**:
+- *"Has our daily failed transfer rate exceeded 5% and what's causing the failures?"*
+- *"Show me any unusual spikes in transfer volumes or patterns today"*
+- *"Which customers have been stuck in verification states for over 30 days?"*
+- *"Are there any funding sources experiencing higher than normal failure rates?"*
 
-### 📊 Business Intelligence & Reporting
+### 💡 Real-World Workflow Example
 
-**System events:**
-- "Show me recent webhook events and their status"
-- "List webhook subscriptions and their configurations"
-- "Get event details for event {id}"
+**Scenario**: Support receives an escalation about failed payments
 
-**Reference data:**
-- "List all business classifications available"
-- "Show me industry classifications for business type 'Technology'"
-- "Get details for business classification {id}"
+**Traditional Process** (45+ minutes):
+1. Log into multiple dashboards
+2. Look up customers across different systems  
+3. Check transfer history manually
+4. Research failure codes in documentation
+5. Escalate to engineering for analysis
 
-**Label & ledger analysis:**
-- "List all labels associated with customer {id}"
-- "Show me ledger entries for label {id}"
-- "Get reallocation details for label reallocation {id}"
+**With Dwolla MCP** (5 minutes):
+```
+User: "We're seeing more transfer failures lately. Can you investigate?"
 
-### 🔍 Compliance & Document Review
+AI: "I'll analyze recent transfer failures for you."
+→ Pulls transfer data with failed status
+→ Groups by failure reasons
+→ Identifies top failure patterns
+→ Suggests specific customers to investigate
+→ Recommends remediation steps
 
-**Document management:**
-- "List all documents for customer {id}"
-- "Get document details for document {id}"
-- "Show me beneficial owner documents for owner {id}"
+Result: "I found a 15% increase in 'insufficient funds' failures, 
+primarily from 3 specific customers. Here are the details and 
+recommended actions..."
+```
 
-**Compliance monitoring:**
-- "Check beneficial ownership compliance for customer {id}"
-- "List customers requiring additional documentation"
-- "Show me recent compliance events and their resolutions"
-
-### 📈 Advanced Analytics Queries
-
-**Cross-entity analysis:**
-- "Compare transfer volumes between customers {id-A} and {id-B}"
-- "Show me the relationship between funding source types and transfer success rates"
-- "Analyze mass payment completion patterns across different customer segments"
-
-**Time-based reporting:**
-- "Generate a summary of all payment activity from last week"
-- "Show me month-over-month growth in customer onboarding"
-- "List all transfers that occurred during business hours vs after hours"
-
-### 🚨 Troubleshooting & Monitoring
-
-**Issue investigation:**
-- "Find all failed transfers and categorize them by failure reason"
-- "Show me customers with incomplete verification status"
-- "List webhook retries and their success/failure rates"
-
-**System health:**
-- "Check the status of recent webhook deliveries"
-- "Show me any exchange connections that need attention"
+**Result**: Issue identified and resolved in 5 minutes instead of 45+ minutes, with complete context for the support agent.
 
 ## 🛠️ Available Operations
 
