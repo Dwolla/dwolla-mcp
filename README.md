@@ -46,7 +46,13 @@ This MCP server enables AI agents to **retrieve and analyze** data from Dwolla's
 ## Table of Contents
 <!-- $toc-max-depth=2 -->
 * [dwolla-mcp](#dwolla-mcp)
+  * [🏦 About Dwolla & This MCP Server](#about-dwolla-this-mcp-server)
   * [Installation](#installation)
+  * [🔑 Environment Setup & Authentication](#environment-setup-authentication)
+  * [💬 Usage Examples & Workflows](#usage-examples-workflows)
+  * [🛠️ Available Operations](#available-operations)
+  * [❓ Troubleshooting](#troubleshooting)
+  * [🔒 Security Considerations](#security-considerations)
 * [Development](#development)
   * [Contributions](#contributions)
 
