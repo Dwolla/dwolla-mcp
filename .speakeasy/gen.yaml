@@ -35,4 +35,4 @@ mcp-typescript:
   defaultErrorName: DwollaMcpDefaultError
   inputModelSuffix: input
   outputModelSuffix: output
-  packageName: dwolla-mcp
+  packageName: '@dwolla/mcp-server'

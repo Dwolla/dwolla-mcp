@@ -3,10 +3,10 @@ id: dbccbcaa-cdde-434b-b972-38fb6d1127e5
 management:
   docChecksum: b9fcc18690c43b1640c9d8a5be488f32
   docVersion: "2.0"
-  speakeasyVersion: 1.583.1
-  generationVersion: 2.658.3
+  speakeasyVersion: 1.587.1
+  generationVersion: 2.662.0
   releaseVersion: 0.0.1-beta.1
-  configChecksum: ff4acec28385d87a383c17b92ffa6a69
+  configChecksum: c072fb06dce0f4da9168a9ad51af7bca
   repoURL: https://github.com/Dwolla/dwolla-mcp.git
 features:
   mcp-typescript:
