@@ -17,7 +17,7 @@ Model Context Protocol (MCP) Server for the _Dwolla_ API.
 <!-- Start Summary [summary] -->
 ## Summary
 
-Dwolla API: [Dwolla API Documentation](https://developers.dwolla.com/docs/api-reference)
+Dwolla API: Dwolla API Documentation
 <!-- End Summary [summary] -->
 
 ## 🏦 About Dwolla & This MCP Server
@@ -49,7 +49,7 @@ This MCP server enables AI agents to **retrieve and analyze** data from Dwolla's
   * [🏦 About Dwolla & This MCP Server](#about-dwolla-this-mcp-server)
   * [Installation](#installation)
   * [🔑 Environment Setup & Authentication](#environment-setup-authentication)
-  * [💬 Usage Examples & Workflows](#usage-examples-workflows)
+  * [💬 Usage Examples & Business Applications](#usage-examples-business-applications)
   * [🛠️ Available Operations](#available-operations)
   * [❓ Troubleshooting](#troubleshooting)
   * [🔒 Security Considerations](#security-considerations)
