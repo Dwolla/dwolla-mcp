@@ -17,7 +17,7 @@ Model Context Protocol (MCP) Server for the _Dwolla_ API.
 <!-- Start Summary [summary] -->
 ## Summary
 
-Dwolla API: Dwolla API Documentation
+Dwolla API: [Dwolla API Documentation](https://developers.dwolla.com/docs/api-reference)
 <!-- End Summary [summary] -->
 
 ## 🏦 About Dwolla & This MCP Server
@@ -60,9 +60,6 @@ This MCP server enables AI agents to **retrieve and analyze** data from Dwolla's
 
 <!-- Start Installation [installation] -->
 ## Installation
-
-> [!TIP]
-> To finish publishing your MCP Server to npm and others you must [run your first generation action](https://www.speakeasy.com/docs/github-setup#step-by-step-guide).
 
 <details>
 <summary>Claude</summary>
@@ -162,7 +159,7 @@ npx -y --package @dwolla/mcp-server -- mcp start --help
 Before using the Dwolla MCP server, you'll need:
 
 - **Node.js** 18+ and npm
-- **Dwolla Account** ([Sign up](https://accounts-sandbox.dwolla.com/sign-up))
+- **Dwolla Account** ([Sandbox Account Sign-up](https://accounts-sandbox.dwolla.com/sign-up))
 - **Bearer Token** generated using your API client credential sfrom your Dwolla application
 
 ### Getting Your Bearer Token
@@ -541,14 +538,14 @@ curl -H "Authorization: Bearer your_token_here" \
 ### 🆘 Getting Help
 
 - **Documentation**: [Dwolla API Docs](https://developers.dwolla.com/)
-- **Community Support**: [Developer Forum](https://support.dwolla.com/s/)
+- **Community Support**: [Developer Forum](https://discuss.dwolla.com/)
 - **Dwolla Support**: [Dwolla Developer Support](https://support.dwolla.com/s/)
 - **MCP Protocol**: [Model Context Protocol Docs](https://modelcontextprotocol.io)
 - **GitHub Issues**: Report bugs or request features in this repository
 
 ## 🔒 Security Considerations
 
-> **Important**: The Dwolla MCP server provides access to sensitive financial data. Follow these security best practices to protect your information and comply with financial regulations.
+> **Important**: This MCP server can provide access to sensitive financial data and systems. Following these security best practices is essential to protect your information, maintain data integrity and ensure compliance.
 
 ### 🛡️ Authentication Security
 
