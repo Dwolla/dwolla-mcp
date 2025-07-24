@@ -13,3 +13,6 @@ targets:
     dwolla-mcp:
         target: mcp-typescript
         source: Dwolla API
+        publish:
+            npm:
+                token: $npm_token

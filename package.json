@@ -1,5 +1,5 @@
 {
-  "name": "dwolla-mcp",
+  "name": "@dwolla/mcp-server",
   "version": "0.0.1-beta.1",
   "author": "Speakeasy",
   "type": "module",

@@ -1,4 +1,4 @@
-speakeasyVersion: 1.583.1
+speakeasyVersion: 1.589.0
 sources:
     Dwolla API:
         sourceNamespace: dwolla-api
@@ -30,3 +30,6 @@ workflow:
         dwolla-mcp:
             target: mcp-typescript
             source: Dwolla API
+            publish:
+                npm:
+                    token: $npm_token
