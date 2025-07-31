@@ -1,0 +1,235 @@
+{
+  "dxt_version": "0.1",
+  "name": "@dwolla/mcp-server",
+  "version": "0.0.1-beta.2",
+  "description": "",
+  "long_description": "Dwolla API: Dwolla API Documentation",
+  "author": {
+    "name": "Speakeasy"
+  },
+  "server": {
+    "type": "node",
+    "entry_point": "./bin/mcp-server.js",
+    "mcp_config": {
+      "command": "node",
+      "args": [
+        "${__dirname}/bin/mcp-server.js",
+        "start",
+        "--bearer-auth",
+        "${user_config.bearer_auth}"
+      ]
+    }
+  },
+  "display_name": "@dwolla/mcp Server",
+  "tools": [
+    {
+      "name": "root-get",
+      "description": "root\n\nThe entry point that clients can use to discover and explore the entire API."
+    },
+    {
+      "name": "accounts-get",
+      "description": "Retrieve Account Details\n\nRetrieve basic account details belonging to the authorized Dwolla account."
+    },
+    {
+      "name": "accounts-funding-sources-list",
+      "description": "List funding sources for an account\n\nList funding sources for an account"
+    },
+    {
+      "name": "accounts-transfers-list",
+      "description": "List and search transfers for an account\n\nList and search transfers for an account"
+    },
+    {
+      "name": "accounts-mass-payments-list",
+      "description": "List mass payments for an account\n\nList mass payments for an account"
+    },
+    {
+      "name": "customers-list",
+      "description": "List and search customers\n\nList and search customers allowing you to filter by email and status, as well as search on key fields such as firstName, lastName, and businessName."
+    },
+    {
+      "name": "customers-get",
+      "description": "Retrieve a customer\n\nRetrieve details for a single customer"
+    },
+    {
+      "name": "customers-list-available-connections",
+      "description": "List available exchange connections\n\nRetrieve a list of a customer's external bank accounts that have been authorized through MX Connect.\nEach account is represented as an \"available exchange connection\" with details like the account name and associated availableConnectionToken.\nThis information is essential for creating an exchange and corresponding funding source within Dwolla.\n"
+    },
+    {
+      "name": "business-classifications-list",
+      "description": "List business classifications\n\nRetrieve an _embedded list of business classifications that contains an _embedded list of industry classifications."
+    },
+    {
+      "name": "business-classifications-get",
+      "description": "Retrieve a business classification\n\nRetrieve a business classification by id."
+    },
+    {
+      "name": "customers-beneficial-owners-list",
+      "description": "List beneficial owners\n\nRetrieve a list of beneficial owners that belong to a Customer"
+    },
+    {
+      "name": "beneficial-owners-get",
+      "description": "Retrieve beneficial owner\n\nRetrieve details for a single beneficial owner"
+    },
+    {
+      "name": "beneficial-owners-get-ownership-status",
+      "description": "Retrieve beneficial ownership status\n\nRetrieve beneficial ownership status"
+    },
+    {
+      "name": "customers-documents-list",
+      "description": "List documents for customer\n\nList documents for customer"
+    },
+    {
+      "name": "beneficial-owners-documents-list",
+      "description": "List documents for beneficial owner\n\nList documents for beneficial owner"
+    },
+    {
+      "name": "documents-get",
+      "description": "Retrieve a document\n\nRetrieve a document for a customer or beneficial owner"
+    },
+    {
+      "name": "kba-get-questions",
+      "description": "Retrieve KBA Questions\n\nRetrieve KBA Questions"
+    },
+    {
+      "name": "customers-funding-sources-list",
+      "description": "List customer funding sources\n\nList customer funding sources"
+    },
+    {
+      "name": "funding-sources-get",
+      "description": "Retrieve a funding source\n\nRetrieve a funding source"
+    },
+    {
+      "name": "funding-sources-get-micro-deposits",
+      "description": "Retrieve micro-deposits details\n\nRetrieve micro-deposits details"
+    },
+    {
+      "name": "funding-sources-get-balance",
+      "description": "Retrieve funding source balance\n\nRetrieve funding source balance"
+    },
+    {
+      "name": "funding-sources-get-van-routing",
+      "description": "Retrieve VAN account and routing numbers\n\nRetrieve account and routing numbers for a VAN (Virtual Account Number)"
+    },
+    {
+      "name": "transfers-get",
+      "description": "Retrieve a transfer\n\nRetrieve a transfer"
+    },
+    {
+      "name": "transfers-list-fees",
+      "description": "List fees for a transfer\n\nList fees for a transfer"
+    },
+    {
+      "name": "transfers-get-failure-reason",
+      "description": "Retrieve a transfer failure reason\n\nRetrieve a transfer failure reason"
+    },
+    {
+      "name": "customers-transfers-list",
+      "description": "List and search transfers for a customer\n\nList and search transfers for a customer"
+    },
+    {
+      "name": "mass-payments-get",
+      "description": "Retrieve a mass payment\n\nRetrieve a mass payment"
+    },
+    {
+      "name": "mass-payments-list-items",
+      "description": "List items for a mass payment\n\nList items for a mass payment"
+    },
+    {
+      "name": "mass-payments-get-item",
+      "description": "Retrieve mass payment item\n\nRetrieve mass payment item"
+    },
+    {
+      "name": "customers-mass-payments-list",
+      "description": "List mass payments for customer\n\nList mass payments for customer"
+    },
+    {
+      "name": "labels-get",
+      "description": "Retrieve a label\n\nRetrieve a label"
+    },
+    {
+      "name": "labels-list-for-customer",
+      "description": "List labels for a customer\n\nList labels for a customer"
+    },
+    {
+      "name": "labels-list-ledger-entries",
+      "description": "List label ledger entries\n\nList label ledger entries"
+    },
+    {
+      "name": "labels-get-ledger-entry",
+      "description": "Retrieve a label ledger entry\n\nRetrieve a label ledger entry"
+    },
+    {
+      "name": "labels-get-reallocation",
+      "description": "Retrieve a label reallocation\n\nRetrieve a label reallocation"
+    },
+    {
+      "name": "events-list",
+      "description": "List events\n\nList events"
+    },
+    {
+      "name": "events-get",
+      "description": "Retrieve event\n\nRetrieve event"
+    },
+    {
+      "name": "webhook-subscriptions-list",
+      "description": "List webhook subscriptions\n\nList webhook subscriptions"
+    },
+    {
+      "name": "webhook-subscriptions-get",
+      "description": "Retrieve a webhook subscription\n\nRetrieve a webhook subscription"
+    },
+    {
+      "name": "webhook-subscriptions-list-webhooks",
+      "description": "List webhooks for a webhook subscription\n\nList webhooks for a webhook subscription"
+    },
+    {
+      "name": "webhooks-get",
+      "description": "Retrieve a webhook\n\nRetrieve a webhook"
+    },
+    {
+      "name": "webhooks-list-retries",
+      "description": "List retries for a webhook\n\nList retries for a webhook"
+    },
+    {
+      "name": "exchange-partners-list",
+      "description": "List exchange partners\n\nList exchange partners"
+    },
+    {
+      "name": "exchange-partners-get",
+      "description": "Retrieve exchange partner\n\nRetrieve exchange partner"
+    },
+    {
+      "name": "accounts-exchanges-list",
+      "description": "List exchanges for an account\n\nList exchanges for an account"
+    },
+    {
+      "name": "exchanges-get",
+      "description": "Retrieve exchange resource\n\nRetrieve an exchange resource by its ID."
+    },
+    {
+      "name": "customers-exchanges-list",
+      "description": "List exchanges for a customer\n\nRetrieve the list of exchanges associated with a Customer resource."
+    },
+    {
+      "name": "exchange-sessions-get",
+      "description": "Retrieve exchange session\n\nRetrieve details of an exchange session"
+    }
+  ],
+  "prompts": [],
+  "keywords": [
+      "@dwolla/mcp",
+      "server",
+      "dwolla",
+      "api",
+      "documentation"
+    ],
+  "user_config": {
+      "bearer_auth": {
+        "type": "string",
+        "title": "bearerAuth",
+        "description": "The bearerAuth to use for the request",
+        "required": true,
+        "sensitive": true
+      }
+    }
+}

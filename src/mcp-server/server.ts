@@ -73,7 +73,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "DwollaMcp",
-    version: "0.0.1-beta.1",
+    version: "0.0.1-beta.2",
   });
 
   const getClient = deps.getSDK || (() =>
@@ -81,6 +81,13 @@ export function createMCPServer(deps: {
       security: deps.security,
       serverURL: deps.serverURL,
       serverIdx: deps.serverIdx,
+      debugLogger: deps.logger.level === "debug"
+        ? {
+          log: (...args) => console.log(...args),
+          group: (...args) => console.group(...args),
+          groupEnd: (...args) => console.groupEnd(...args),
+        }
+        : undefined,
     }));
 
   const scopes = new Set(deps.scopes);

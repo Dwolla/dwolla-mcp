@@ -97,16 +97,28 @@ export const AchDetails$zodSchema: z.ZodType<
   source: z.lazy(() => Source$zodSchema).optional(),
 });
 
-export type RtpDetailsDestination = { remittanceData?: string | undefined };
+/**
+ * RTP destination details with network identifiers
+ */
+export type RtpDetailsDestination = {
+  remittanceData?: string | undefined;
+  networkId?: string | undefined;
+  endToEndReferenceId?: string | undefined;
+};
 
 export const RtpDetailsDestination$zodSchema: z.ZodType<
   RtpDetailsDestination,
   z.ZodTypeDef,
   unknown
 > = z.object({
+  endToEndReferenceId: z.string().optional(),
+  networkId: z.string().optional(),
   remittanceData: z.string().optional(),
-});
+}).describe("RTP destination details with network identifiers");
 
+/**
+ * Real-Time Payments (RTP) network specific details. Present when transfer was processed via RTP network.
+ */
 export type RtpDetails = { destination?: RtpDetailsDestination | undefined };
 
 export const RtpDetails$zodSchema: z.ZodType<
@@ -115,7 +127,45 @@ export const RtpDetails$zodSchema: z.ZodType<
   unknown
 > = z.object({
   destination: z.lazy(() => RtpDetailsDestination$zodSchema).optional(),
-});
+}).describe(
+  "Real-Time Payments (RTP) network specific details. Present when transfer was processed via RTP network.",
+);
+
+/**
+ * FedNow destination details with network identifiers
+ */
+export type FedNowDetailsDestination = {
+  remittanceData?: string | undefined;
+  networkId?: string | undefined;
+  endToEndReferenceId?: string | undefined;
+};
+
+export const FedNowDetailsDestination$zodSchema: z.ZodType<
+  FedNowDetailsDestination,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  endToEndReferenceId: z.string().optional(),
+  networkId: z.string().optional(),
+  remittanceData: z.string().optional(),
+}).describe("FedNow destination details with network identifiers");
+
+/**
+ * FedNow Service network specific details. Present when transfer was processed via FedNow network.
+ */
+export type FedNowDetails = {
+  destination?: FedNowDetailsDestination | undefined;
+};
+
+export const FedNowDetails$zodSchema: z.ZodType<
+  FedNowDetails,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  destination: z.lazy(() => FedNowDetailsDestination$zodSchema).optional(),
+}).describe(
+  "FedNow Service network specific details. Present when transfer was processed via FedNow network.",
+);
 
 export type TransferProcessingChannel = { destination?: string | undefined };
 
@@ -137,6 +187,7 @@ export type Transfer = {
   metadata?: TransferMetadata | undefined;
   achDetails?: AchDetails | undefined;
   rtpDetails?: RtpDetails | undefined;
+  fedNowDetails?: FedNowDetails | undefined;
   correlationId?: string | undefined;
   processingChannel?: TransferProcessingChannel | undefined;
 };
@@ -149,6 +200,7 @@ export const Transfer$zodSchema: z.ZodType<Transfer, z.ZodTypeDef, unknown> = z
     clearing: z.lazy(() => Clearing$zodSchema).optional(),
     correlationId: z.string().optional(),
     created: z.string().datetime({ offset: true }).optional(),
+    fedNowDetails: z.lazy(() => FedNowDetails$zodSchema).optional(),
     id: z.string().optional(),
     metadata: z.lazy(() => TransferMetadata$zodSchema).optional(),
     processingChannel: z.lazy(() => TransferProcessingChannel$zodSchema)
