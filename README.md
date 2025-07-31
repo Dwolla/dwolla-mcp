@@ -62,43 +62,30 @@ This MCP server enables AI agents to **retrieve and analyze** data from Dwolla's
 ## Installation
 
 <details>
-<summary>Claude</summary>
+<summary>DXT (Desktop Extension)</summary>
 
-Add the following server definition to your `claude_desktop_config.json` file:
+Install the MCP server as a Desktop Extension using the pre-built [`mcp-server.dxt`](./mcp-server.dxt) file:
 
-```json
-{
-  "mcpServers": {
-    "DwollaMcp": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "--package",
-        "@dwolla/mcp-server",
-        "--",
-        "mcp",
-        "start",
-        "--bearer-auth",
-        "..."
-      ]
-    }
-  }
-}
-```
+Simply drag and drop the [`mcp-server.dxt`](./mcp-server.dxt) file onto Claude Desktop to install the extension.
+
+The DXT package includes the MCP server and all necessary configuration. Once installed, the server will be available without additional setup.
+
+> [!NOTE]
+> DXT (Desktop Extensions) provide a streamlined way to package and distribute MCP servers. Learn more about [Desktop Extensions](https://www.anthropic.com/engineering/desktop-extensions).
 
 </details>
 
 <details>
 <summary>Cursor</summary>
 
-[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=DwollaMcp&config=eyJtY3BTZXJ2ZXJzIjp7IkR3b2xsYU1jcCI6eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIi0tcGFja2FnZSIsIkBkd29sbGEvbWNwLXNlcnZlciIsIi0tIiwibWNwIiwic3RhcnQiLCItLWJlYXJlci1hdXRoIiwiLi4uIl19fX0=)
+[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=DwollaMcp&config=eyJtY3BTZXJ2ZXJzIjp7IkR3b2xsYU1jcCI6eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyJAZHdvbGxhL21jcC1zZXJ2ZXIiLCJzdGFydCIsIi0tYmVhcmVyLWF1dGgiLCIuLi4iXX19fQ==)
 
 Or manually:
 
 1. Open Cursor Settings
 2. Select Tools and Integrations
 3. Select New MCP Server
-4. Paste the following JSON into the MCP Server Configuration field:
+4. If the configuration file is empty paste the following JSON into the MCP Server Configuration:
 
 ```json
 {
@@ -106,11 +93,7 @@ Or manually:
     "DwollaMcp": {
       "command": "npx",
       "args": [
-        "-y",
-        "--package",
         "@dwolla/mcp-server",
-        "--",
-        "mcp",
         "start",
         "--bearer-auth",
         "..."
@@ -126,27 +109,32 @@ Or manually:
 <summary>Claude Code CLI</summary>
 
 ```bash
-npx -y --package @dwolla/mcp-server -- mcp start --bearer-auth ...
+npx @dwolla/mcp-server start --bearer-auth ...
 ```
 
 </details>
-
 <details>
-<summary>Manual installation</summary>
+<summary>Claude Desktop</summary>
+Claude Desktop doesn't yet support SSE/remote MCP servers.
 
+However, you can run the MCP server locally by cloning this repository. Once cloned, you'll need to install dependencies (`npm install`) and build the server (`npm run build`).
 
+Then, configure your server definition to reference your local clone. For example:
 
-
-To start the MCP server, run:
-
-```bash
-npx -y --package @dwolla/mcp-server -- mcp start --bearer-auth ...
-```
-
-For a full list of server arguments, run:
-
-```bash
-npx -y --package @dwolla/mcp-server -- mcp start --help
+```json
+{
+  "mcpServers": {
+    "DwollaMcp": {
+      "command": "node",
+      "args": [
+        "./bin/mcp-server.js",
+        "start",
+        "--bearer-auth",
+        "..."
+      ]
+    }
+  }
+}
 ```
 
 </details>

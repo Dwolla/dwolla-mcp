@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: dbccbcaa-cdde-434b-b972-38fb6d1127e5
 management:
-  docChecksum: b9fcc18690c43b1640c9d8a5be488f32
+  docChecksum: 48aa22c5e523db5006f688e3012020af
   docVersion: "2.0"
-  speakeasyVersion: 1.589.0
-  generationVersion: 2.664.0
-  releaseVersion: 0.0.1-beta.1
-  configChecksum: c072fb06dce0f4da9168a9ad51af7bca
+  speakeasyVersion: 1.592.2
+  generationVersion: 2.668.4
+  releaseVersion: 0.0.1-beta.2
+  configChecksum: 50ebcc50ae9f3c15572a13d45a9b916f
   repoURL: https://github.com/Dwolla/dwolla-mcp.git
   published: true
 features:
   mcp-typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.0
-    core: 0.2.1
+    core: 0.3.1
     defaultEnabledRetries: 0.1.0
     globalSecurity: 0.1.0
     globalSecurityCallbacks: 0.0.0
@@ -24,9 +24,11 @@ features:
     sdkHooks: 0.1.0
     unions: 0.1.0
 generatedFiles:
+  - .dxtignore
   - .gitattributes
   - .npmignore
   - eslint.config.mjs
+  - manifest.json
   - package.json
   - src/core.ts
   - src/funcs/accountsExchangesList.ts

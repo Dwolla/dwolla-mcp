@@ -42,7 +42,7 @@ export type SDKOptions = {
    */
   retryConfig?: RetryConfig;
   timeoutMs?: number;
-  debugLogger?: Logger;
+  debugLogger?: Logger | undefined;
 };
 
 export function serverURLFromOptions(options: SDKOptions): URL | null {
@@ -65,8 +65,8 @@ export function serverURLFromOptions(options: SDKOptions): URL | null {
 export const SDK_METADATA = {
   language: "typescript",
   openapiDocVersion: "2.0",
-  sdkVersion: "0.0.1-beta.1",
-  genVersion: "2.664.0",
+  sdkVersion: "0.0.1-beta.2",
+  genVersion: "2.668.4",
   userAgent:
-    "speakeasy-sdk/mcp-typescript 0.0.1-beta.1 2.664.0 2.0 @dwolla/mcp-server",
+    "speakeasy-sdk/mcp-typescript 0.0.1-beta.2 2.668.4 2.0 @dwolla/mcp-server",
 } as const;
