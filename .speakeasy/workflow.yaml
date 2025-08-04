@@ -8,7 +8,7 @@ sources:
             - location: ./.speakeasy/mcp-overlay.yaml
         output: ./generated/openapi/openapi-mcp.yaml
         registry:
-            location: registry.speakeasyapi.dev/dwolla-vc3/dwolla/dwolla-api
+            location: registry.speakeasyapi.dev/dwolla/dwolla/dwolla-api
 targets:
     dwolla-mcp:
         target: mcp-typescript
