@@ -46,3 +46,173 @@ actions:
       bearerAuth:
         type: http
         scheme: bearer
+
+  # Remove overly granular/unnecessary endpoints to streamline MCP tools
+
+  # Remove granular label ledger operations
+  - target: $.paths["/ledger-entries/{ledgerEntryId}"]
+    remove: true
+  - target: $.paths["/labels/{id}/ledger-entries"]
+    remove: true
+  - target: $.paths["/label-reallocations/{reallocationId}"]
+    remove: true
+
+  # Remove redundant get endpoints where list is sufficient
+  - target: $.paths["/beneficial-owners/{id}"]
+    remove: true
+  - target: $.paths["/business-classifications/{id}"]
+    remove: true
+  - target: $.paths["/customers/{id}"]
+    remove: true
+  - target: $.paths["/documents/{id}"]
+    remove: true
+  - target: $.paths["/events/{id}"]
+    remove: true
+  - target: $.paths["/exchange-partners/{id}"]
+    remove: true
+  - target: $.paths["/labels/{id}"]
+    remove: true
+  - target: $.paths["/mass-payment-items/{itemId}"]
+    remove: true
+  - target: $.paths["/mass-payments/{id}"]
+    remove: true
+  - target: $.paths["/transfers/{id}"]
+    remove: true
+  - target: $.paths["/webhook-subscriptions/{id}"]
+    remove: true
+  - target: $.paths["/webhooks/{id}"]
+    remove: true
+  - target: $.paths["/webhooks/{id}/retries"]
+    remove: true
+
+  # Remove specialized/low-value endpoints
+  - target: $.paths["/kba/{id}"]
+    remove: true
+  - target: $.paths["/exchanges/{id}"]
+    remove: true
+  - target: $.paths["/exchange-sessions/{id}"]
+    remove: true
+  - target: $.paths["/customers/{id}/available-connections"]
+    remove: true
+  - target: $.paths["/"]
+    remove: true
+  - target: $.paths["/token"]
+    remove: true
+
+
+
+  # Remove PII and sensitive data from resources
+
+  # Remove VAN routing endpoint - exposes sensitive VAN banking credentials
+  - target: $.paths["/funding-sources/{id}/ach-routing"]
+    remove: true
+
+  # Remove firstName from all customer types
+  - target: $.components.schemas.UnverifiedCustomer.properties.firstName
+    remove: true
+  - target: $.components.schemas.UnverifiedBusinessCustomer.properties.firstName
+    remove: true
+  - target: $.components.schemas.ReceiveOnlyCustomer.properties.firstName
+    remove: true
+  - target: $.components.schemas.ReceiveOnlyBusinessCustomer.properties.firstName
+    remove: true
+  - target: $.components.schemas.VerifiedPersonalCustomer.properties.firstName
+    remove: true
+  - target: $.components.schemas.VerifiedSolePropCustomer.properties.firstName
+    remove: true
+  - target: $.components.schemas.VerifiedBusinessCustomer.properties.firstName
+    remove: true
+
+  # Remove lastName from all customer types
+  - target: $.components.schemas.UnverifiedCustomer.properties.lastName
+    remove: true
+  - target: $.components.schemas.UnverifiedBusinessCustomer.properties.lastName
+    remove: true
+  - target: $.components.schemas.ReceiveOnlyCustomer.properties.lastName
+    remove: true
+  - target: $.components.schemas.ReceiveOnlyBusinessCustomer.properties.lastName
+    remove: true
+  - target: $.components.schemas.VerifiedPersonalCustomer.properties.lastName
+    remove: true
+  - target: $.components.schemas.VerifiedSolePropCustomer.properties.lastName
+    remove: true
+  - target: $.components.schemas.VerifiedBusinessCustomer.properties.lastName
+    remove: true
+
+  # Remove email from all customer types
+  - target: $.components.schemas.UnverifiedCustomer.properties.email
+    remove: true
+  - target: $.components.schemas.UnverifiedBusinessCustomer.properties.email
+    remove: true
+  - target: $.components.schemas.ReceiveOnlyCustomer.properties.email
+    remove: true
+  - target: $.components.schemas.ReceiveOnlyBusinessCustomer.properties.email
+    remove: true
+  - target: $.components.schemas.VerifiedPersonalCustomer.properties.email
+    remove: true
+  - target: $.components.schemas.VerifiedSolePropCustomer.properties.email
+    remove: true
+  - target: $.components.schemas.VerifiedBusinessCustomer.properties.email
+    remove: true
+
+  # Remove address fields from verified customer types
+  - target: $.components.schemas.VerifiedPersonalCustomer.properties.address1
+    remove: true
+  - target: $.components.schemas.VerifiedPersonalCustomer.properties.address2
+    remove: true
+  - target: $.components.schemas.VerifiedPersonalCustomer.properties.city
+    remove: true
+  - target: $.components.schemas.VerifiedPersonalCustomer.properties.state
+    remove: true
+  - target: $.components.schemas.VerifiedPersonalCustomer.properties.postalCode
+    remove: true
+
+  - target: $.components.schemas.VerifiedSolePropCustomer.properties.address1
+    remove: true
+  - target: $.components.schemas.VerifiedSolePropCustomer.properties.address2
+    remove: true
+  - target: $.components.schemas.VerifiedSolePropCustomer.properties.city
+    remove: true
+  - target: $.components.schemas.VerifiedSolePropCustomer.properties.state
+    remove: true
+  - target: $.components.schemas.VerifiedSolePropCustomer.properties.postalCode
+    remove: true
+
+  - target: $.components.schemas.VerifiedBusinessCustomer.properties.address1
+    remove: true
+  - target: $.components.schemas.VerifiedBusinessCustomer.properties.address2
+    remove: true
+  - target: $.components.schemas.VerifiedBusinessCustomer.properties.city
+    remove: true
+  - target: $.components.schemas.VerifiedBusinessCustomer.properties.state
+    remove: true
+  - target: $.components.schemas.VerifiedBusinessCustomer.properties.postalCode
+    remove: true
+
+  # Remove business name from business customer types (also PII)
+  - target: $.components.schemas.UnverifiedBusinessCustomer.properties.businessName
+    remove: true
+  - target: $.components.schemas.ReceiveOnlyBusinessCustomer.properties.businessName
+    remove: true
+  - target: $.components.schemas.VerifiedBusinessCustomer.properties.businessName
+    remove: true
+  - target: $.components.schemas.VerifiedSolePropCustomer.properties.businessName
+    remove: true
+
+  # Remove additional PII fields from business customers
+  - target: $.components.schemas.VerifiedBusinessCustomer.properties.phone
+    remove: true
+  - target: $.components.schemas.VerifiedBusinessCustomer.properties.website
+    remove: true
+  - target: $.components.schemas.VerifiedBusinessCustomer.properties.doingBusinessAs
+    remove: true
+  - target: $.components.schemas.VerifiedBusinessCustomer.properties.controller
+    remove: true
+
+  # Remove PII from BeneficialOwners
+  - target: $.components.schemas.BeneficialOwner.properties.firstName
+    remove: true
+  - target: $.components.schemas.BeneficialOwner.properties.lastName
+    remove: true
+  - target: $.components.schemas.BeneficialOwner.properties.address
+    remove: true
