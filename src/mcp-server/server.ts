@@ -19,46 +19,25 @@ import { tool$accountsGet } from "./tools/accountsGet.js";
 import { tool$accountsMassPaymentsList } from "./tools/accountsMassPaymentsList.js";
 import { tool$accountsTransfersList } from "./tools/accountsTransfersList.js";
 import { tool$beneficialOwnersDocumentsList } from "./tools/beneficialOwnersDocumentsList.js";
-import { tool$beneficialOwnersGet } from "./tools/beneficialOwnersGet.js";
-import { tool$businessClassificationsGet } from "./tools/businessClassificationsGet.js";
 import { tool$businessClassificationsList } from "./tools/businessClassificationsList.js";
 import { tool$customersBeneficialOwnershipGet } from "./tools/customersBeneficialOwnershipGet.js";
 import { tool$customersBeneficialOwnersList } from "./tools/customersBeneficialOwnersList.js";
 import { tool$customersDocumentsList } from "./tools/customersDocumentsList.js";
 import { tool$customersExchangesList } from "./tools/customersExchangesList.js";
 import { tool$customersFundingSourcesList } from "./tools/customersFundingSourcesList.js";
-import { tool$customersGet } from "./tools/customersGet.js";
 import { tool$customersLabelsList } from "./tools/customersLabelsList.js";
 import { tool$customersList } from "./tools/customersList.js";
 import { tool$customersListAvailableConnections } from "./tools/customersListAvailableConnections.js";
 import { tool$customersMassPaymentsList } from "./tools/customersMassPaymentsList.js";
 import { tool$customersTransfersList } from "./tools/customersTransfersList.js";
-import { tool$documentsGet } from "./tools/documentsGet.js";
-import { tool$eventsGet } from "./tools/eventsGet.js";
 import { tool$eventsList } from "./tools/eventsList.js";
-import { tool$exchangePartnersGet } from "./tools/exchangePartnersGet.js";
 import { tool$exchangePartnersList } from "./tools/exchangePartnersList.js";
-import { tool$exchangeSessionsGet } from "./tools/exchangeSessionsGet.js";
-import { tool$exchangesGet } from "./tools/exchangesGet.js";
 import { tool$fundingSourcesBalanceGet } from "./tools/fundingSourcesBalanceGet.js";
 import { tool$fundingSourcesGet } from "./tools/fundingSourcesGet.js";
-import { tool$fundingSourcesGetVanRouting } from "./tools/fundingSourcesGetVanRouting.js";
 import { tool$fundingSourcesMicroDepositsGetMicroDeposits } from "./tools/fundingSourcesMicroDepositsGetMicroDeposits.js";
-import { tool$kbaGetQuestions } from "./tools/kbaGetQuestions.js";
-import { tool$labelLedgerEntriesGet } from "./tools/labelLedgerEntriesGet.js";
-import { tool$labelsGet } from "./tools/labelsGet.js";
-import { tool$labelsLedgerEntriesList } from "./tools/labelsLedgerEntriesList.js";
-import { tool$labelsReallocationsGet } from "./tools/labelsReallocationsGet.js";
-import { tool$massPaymentsGet } from "./tools/massPaymentsGet.js";
-import { tool$massPaymentsItemsGet } from "./tools/massPaymentsItemsGet.js";
 import { tool$massPaymentsItemsList } from "./tools/massPaymentsItemsList.js";
-import { tool$rootGet } from "./tools/rootGet.js";
 import { tool$transfersFailureGet } from "./tools/transfersFailureGet.js";
 import { tool$transfersFeesList } from "./tools/transfersFeesList.js";
-import { tool$transfersGet } from "./tools/transfersGet.js";
-import { tool$webhooksGet } from "./tools/webhooksGet.js";
-import { tool$webhooksRetriesList } from "./tools/webhooksRetriesList.js";
-import { tool$webhookSubscriptionsGet } from "./tools/webhookSubscriptionsGet.js";
 import { tool$webhookSubscriptionsList } from "./tools/webhookSubscriptionsList.js";
 import { tool$webhookSubscriptionsWebhooksList } from "./tools/webhookSubscriptionsWebhooksList.js";
 
@@ -73,7 +52,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "DwollaMcp",
-    version: "0.0.1-beta.3",
+    version: "0.0.1-beta.4",
   });
 
   const getClient = deps.getSDK || (() =>
@@ -116,54 +95,33 @@ export function createMCPServer(deps: {
   const register = { tool, resource, resourceTemplate, prompt };
   void register; // suppress unused warnings
 
-  tool(tool$rootGet);
   tool(tool$accountsGet);
   tool(tool$accountsFundingSourcesList);
   tool(tool$accountsTransfersList);
   tool(tool$accountsMassPaymentsList);
   tool(tool$customersList);
-  tool(tool$customersGet);
   tool(tool$customersListAvailableConnections);
   tool(tool$businessClassificationsList);
-  tool(tool$businessClassificationsGet);
   tool(tool$customersBeneficialOwnersList);
-  tool(tool$beneficialOwnersGet);
   tool(tool$customersBeneficialOwnershipGet);
   tool(tool$customersDocumentsList);
   tool(tool$beneficialOwnersDocumentsList);
-  tool(tool$documentsGet);
-  tool(tool$kbaGetQuestions);
   tool(tool$customersFundingSourcesList);
   tool(tool$fundingSourcesGet);
-  tool(tool$fundingSourcesGetVanRouting);
   tool(tool$fundingSourcesMicroDepositsGetMicroDeposits);
   tool(tool$fundingSourcesBalanceGet);
-  tool(tool$transfersGet);
   tool(tool$customersTransfersList);
   tool(tool$transfersFeesList);
   tool(tool$transfersFailureGet);
-  tool(tool$massPaymentsGet);
   tool(tool$massPaymentsItemsList);
-  tool(tool$massPaymentsItemsGet);
   tool(tool$customersMassPaymentsList);
-  tool(tool$labelsGet);
   tool(tool$customersLabelsList);
-  tool(tool$labelsLedgerEntriesList);
-  tool(tool$labelLedgerEntriesGet);
-  tool(tool$labelsReallocationsGet);
   tool(tool$eventsList);
-  tool(tool$eventsGet);
   tool(tool$webhookSubscriptionsList);
-  tool(tool$webhookSubscriptionsGet);
   tool(tool$webhookSubscriptionsWebhooksList);
-  tool(tool$webhooksGet);
-  tool(tool$webhooksRetriesList);
   tool(tool$exchangePartnersList);
-  tool(tool$exchangePartnersGet);
   tool(tool$accountsExchangesList);
-  tool(tool$exchangesGet);
   tool(tool$customersExchangesList);
-  tool(tool$exchangeSessionsGet);
 
   return server;
 }
