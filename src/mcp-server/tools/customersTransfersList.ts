@@ -14,7 +14,7 @@ export const tool$customersTransfersList: ToolDefinition<typeof args> = {
   name: "customers-transfers-list",
   description: `List and search transfers for a customer
 
-List and search transfers for a customer`,
+Retrieve and search transfers for a specific Customer with comprehensive filtering and pagination support. Supports searching by customer details (name, email, business name), amount ranges, date ranges, transfer status, and correlation IDs for enhanced transaction discovery. Returns paginated transfer results including status, amounts, metadata, and links to source and destination funding sources. Use this endpoint for transaction history analysis and reconciliation purposes.`,
   scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {

@@ -12,9 +12,9 @@ const args = {
 
 export const tool$customersBeneficialOwnersList: ToolDefinition<typeof args> = {
   name: "customers-beneficial-owners-list",
-  description: `List beneficial owners
+  description: `List customer beneficial owners
 
-Retrieve a list of beneficial owners that belong to a Customer`,
+Returns all beneficial owners associated with a business verified customer. Beneficial owners are individuals who directly or indirectly own 25% or more of the company's equity. Includes personal information, verification status, and address details for each owner.`,
   scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {

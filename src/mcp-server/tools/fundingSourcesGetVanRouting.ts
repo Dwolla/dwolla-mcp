@@ -14,7 +14,7 @@ export const tool$fundingSourcesGetVanRouting: ToolDefinition<typeof args> = {
   name: "funding-sources-get-van-routing",
   description: `Retrieve VAN account and routing numbers
 
-Retrieve account and routing numbers for a VAN (Virtual Account Number)`,
+Returns the unique account and routing numbers for a Virtual Account Number (VAN) funding source. These numbers can be used by external systems to initiate ACH transactions that pull funds from or push funds to the associated Dwolla balance.`,
   scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {

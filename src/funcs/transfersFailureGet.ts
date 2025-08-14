@@ -3,7 +3,7 @@
  */
 
 import { DwollaMcpCore } from "../core.js";
-import { encodeFormQuery, encodeSimple } from "../lib/encodings.js";
+import { encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -20,27 +20,27 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
-  ListMassPaymentItemsRequest,
-  ListMassPaymentItemsRequest$zodSchema,
-  ListMassPaymentItemsResponse,
-  ListMassPaymentItemsResponse$zodSchema,
-} from "../models/listmasspaymentitemsop.js";
+  GetTransferFailureReasonRequest,
+  GetTransferFailureReasonRequest$zodSchema,
+  GetTransferFailureReasonResponse,
+  GetTransferFailureReasonResponse$zodSchema,
+} from "../models/gettransferfailurereasonop.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * List items for a mass payment
+ * Retrieve a transfer failure reason
  *
  * @remarks
- * List items for a mass payment
+ * Retrieve detailed failure information for a failed bank or VAN transfer including the ACH return code, description, and explanation. Returns failure details with links to the failed funding source and associated Customer for comprehensive error analysis. Available only for transfers with failure status and accessed through the failure link from transfer retrieval. Critical for troubleshooting payment failures and understanding ACH return reasons.
  */
-export function massPaymentsListItems(
+export function transfersFailureGet(
   client$: DwollaMcpCore,
-  request: ListMassPaymentItemsRequest,
+  request: GetTransferFailureReasonRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    ListMassPaymentItemsResponse,
+    GetTransferFailureReasonResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -59,12 +59,12 @@ export function massPaymentsListItems(
 
 async function $do(
   client$: DwollaMcpCore,
-  request: ListMassPaymentItemsRequest,
+  request: GetTransferFailureReasonRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      ListMassPaymentItemsResponse,
+      GetTransferFailureReasonResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -78,7 +78,7 @@ async function $do(
 > {
   const parsed$ = safeParse(
     request,
-    (value$) => ListMassPaymentItemsRequest$zodSchema.parse(value$),
+    (value$) => GetTransferFailureReasonRequest$zodSchema.parse(value$),
     "Input validation failed",
   );
   if (!parsed$.ok) {
@@ -93,14 +93,9 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-  const path$ = pathToFunc("/mass-payments/{id}/items")(
+  const path$ = pathToFunc("/transfers/{id}/failure")(
     pathParams$,
   );
-  const query$ = encodeFormQuery({
-    "limit": payload$.limit,
-    "offset": payload$.offset,
-    "status": payload$.status,
-  });
 
   const headers$ = new Headers(compactMap({
     Accept: "application/vnd.dwolla.v1.hal+json",
@@ -110,7 +105,7 @@ async function $do(
 
   const context = {
     baseURL: options?.serverURL ?? client$._baseURL ?? "",
-    operationID: "listMassPaymentItems",
+    operationID: "getTransferFailureReason",
     oAuth2Scopes: [],
     resolvedSecurity: requestSecurity,
     securitySource: client$._options.security,
@@ -132,7 +127,6 @@ async function $do(
     baseURL: options?.serverURL,
     path: path$,
     headers: headers$,
-    query: query$,
     body: body$,
     timeoutMs: options?.timeoutMs || client$._options.timeoutMs
       || -1,
@@ -157,7 +151,7 @@ async function $do(
   };
 
   const [result$] = await M.match<
-    ListMassPaymentItemsResponse,
+    GetTransferFailureReasonResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -166,17 +160,17 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, ListMassPaymentItemsResponse$zodSchema, {
+    M.json(200, GetTransferFailureReasonResponse$zodSchema, {
       ctype: "application/vnd.dwolla.v1.hal+json",
-      key: "200_application/vnd.dwolla.v1.hal+json_object",
+      key: "object",
     }),
-    M.json(403, ListMassPaymentItemsResponse$zodSchema, {
+    M.json(403, GetTransferFailureReasonResponse$zodSchema, {
       ctype: "application/vnd.dwolla.v1.hal+json",
-      key: "403_application/vnd.dwolla.v1.hal+json_object",
+      key: "ForbiddenError",
     }),
-    M.json(404, ListMassPaymentItemsResponse$zodSchema, {
+    M.json(404, GetTransferFailureReasonResponse$zodSchema, {
       ctype: "application/vnd.dwolla.v1.hal+json",
-      key: "404_application/vnd.dwolla.v1.hal+json_object",
+      key: "NotFoundError",
     }),
   )(response, req$, { extraFields: responseFields$ });
 

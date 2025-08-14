@@ -3,7 +3,7 @@
  */
 
 import { DwollaMcpCore } from "../core.js";
-import { encodeSimple } from "../lib/encodings.js";
+import { encodeFormQuery, encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -20,27 +20,27 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
-  GetMassPaymentItemRequest,
-  GetMassPaymentItemRequest$zodSchema,
-  GetMassPaymentItemResponse,
-  GetMassPaymentItemResponse$zodSchema,
-} from "../models/getmasspaymentitemop.js";
+  ListWebhooksRequest,
+  ListWebhooksRequest$zodSchema,
+  ListWebhooksResponse,
+  ListWebhooksResponse$zodSchema,
+} from "../models/listwebhooksop.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Retrieve mass payment item
+ * List webhooks for a webhook subscription
  *
  * @remarks
- * Retrieve mass payment item
+ * Retrieve all fired webhooks for a specific webhook subscription with comprehensive filtering and pagination support. Returns webhook delivery history including topics, attempts, request/response details, and delivery status over a rolling 30-day period. Supports filtering by resource ID, date ranges, and pagination parameters for detailed webhook delivery analysis. Critical for debugging webhook delivery issues and monitoring event notification success rates.
  */
-export function massPaymentsGetItem(
+export function webhookSubscriptionsWebhooksList(
   client$: DwollaMcpCore,
-  request: GetMassPaymentItemRequest,
+  request: ListWebhooksRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    GetMassPaymentItemResponse,
+    ListWebhooksResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -59,12 +59,12 @@ export function massPaymentsGetItem(
 
 async function $do(
   client$: DwollaMcpCore,
-  request: GetMassPaymentItemRequest,
+  request: ListWebhooksRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      GetMassPaymentItemResponse,
+      ListWebhooksResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -78,7 +78,7 @@ async function $do(
 > {
   const parsed$ = safeParse(
     request,
-    (value$) => GetMassPaymentItemRequest$zodSchema.parse(value$),
+    (value$) => ListWebhooksRequest$zodSchema.parse(value$),
     "Input validation failed",
   );
   if (!parsed$.ok) {
@@ -93,9 +93,15 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-  const path$ = pathToFunc("/mass-payment-items/{id}")(
+  const path$ = pathToFunc("/webhook-subscriptions/{id}/webhooks")(
     pathParams$,
   );
+  const query$ = encodeFormQuery({
+    "endDate": payload$.endDate,
+    "limit": payload$.limit,
+    "offset": payload$.offset,
+    "startDate": payload$.startDate,
+  });
 
   const headers$ = new Headers(compactMap({
     Accept: "application/vnd.dwolla.v1.hal+json",
@@ -105,7 +111,7 @@ async function $do(
 
   const context = {
     baseURL: options?.serverURL ?? client$._baseURL ?? "",
-    operationID: "getMassPaymentItem",
+    operationID: "listWebhooks",
     oAuth2Scopes: [],
     resolvedSecurity: requestSecurity,
     securitySource: client$._options.security,
@@ -127,6 +133,7 @@ async function $do(
     baseURL: options?.serverURL,
     path: path$,
     headers: headers$,
+    query: query$,
     body: body$,
     timeoutMs: options?.timeoutMs || client$._options.timeoutMs
       || -1,
@@ -151,7 +158,7 @@ async function $do(
   };
 
   const [result$] = await M.match<
-    GetMassPaymentItemResponse,
+    ListWebhooksResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -160,17 +167,17 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, GetMassPaymentItemResponse$zodSchema, {
+    M.json(200, ListWebhooksResponse$zodSchema, {
       ctype: "application/vnd.dwolla.v1.hal+json",
-      key: "MassPaymentItem",
+      key: "object",
     }),
-    M.json(403, GetMassPaymentItemResponse$zodSchema, {
+    M.json(403, ListWebhooksResponse$zodSchema, {
       ctype: "application/vnd.dwolla.v1.hal+json",
-      key: "403_application/vnd.dwolla.v1.hal+json_object",
+      key: "ForbiddenError",
     }),
-    M.json(404, GetMassPaymentItemResponse$zodSchema, {
+    M.json(404, ListWebhooksResponse$zodSchema, {
       ctype: "application/vnd.dwolla.v1.hal+json",
-      key: "404_application/vnd.dwolla.v1.hal+json_object",
+      key: "NotFoundError",
     }),
   )(response, req$, { extraFields: responseFields$ });
 

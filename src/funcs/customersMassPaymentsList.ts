@@ -32,7 +32,7 @@ import { Result } from "../types/fp.js";
  * List mass payments for customer
  *
  * @remarks
- * List mass payments for customer
+ * Retrieve all previously created mass payments for a Verified Customer account with optional correlation ID filtering and pagination support. Mass payments are returned ordered by date created with most recent appearing first. Returns paginated results including mass payment status, metadata, source funding information, and item links. Supports standard pagination parameters and correlation ID search for enhanced traceability.
  */
 export function customersMassPaymentsList(
   client$: DwollaMcpCore,

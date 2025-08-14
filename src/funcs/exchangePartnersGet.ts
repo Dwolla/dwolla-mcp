@@ -32,7 +32,7 @@ import { Result } from "../types/fp.js";
  * Retrieve exchange partner
  *
  * @remarks
- * Retrieve exchange partner
+ * Returns details for a specific open banking provider that integrates with Dwolla. Includes partner name, status, and creation date. Use this to verify partner availability before creating exchanges and funding sources.
  */
 export function exchangePartnersGet(
   client$: DwollaMcpCore,

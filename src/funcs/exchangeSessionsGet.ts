@@ -32,7 +32,7 @@ import { Result } from "../types/fp.js";
  * Retrieve exchange session
  *
  * @remarks
- * Retrieve details of an exchange session
+ * Returns details of a previously created exchange session, including URLs and tokens needed to continue the instant account verification flow. Response varies by partner - Visa/MX provide redirect URLs while Plaid provides session tokens for Link initialization.
  */
 export function exchangeSessionsGet(
   client$: DwollaMcpCore,

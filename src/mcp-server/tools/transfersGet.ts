@@ -14,7 +14,7 @@ export const tool$transfersGet: ToolDefinition<typeof args> = {
   name: "transfers-get",
   description: `Retrieve a transfer
 
-Retrieve a transfer`,
+Retrieve detailed information for a specific transfer by its unique identifier belonging to an Account or Customer. Returns transfer status, amount, creation date, clearing details, and links to source and destination funding sources for complete transaction tracking. Includes cancellation links when applicable and references to related funding transfers. Essential for monitoring transfer lifecycle and transaction reconciliation.`,
   scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {

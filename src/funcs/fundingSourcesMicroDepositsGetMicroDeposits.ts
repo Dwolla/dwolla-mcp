@@ -3,7 +3,7 @@
  */
 
 import { DwollaMcpCore } from "../core.js";
-import { encodeFormQuery, encodeSimple } from "../lib/encodings.js";
+import { encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -20,27 +20,27 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
-  ListCustomerLabelsRequest,
-  ListCustomerLabelsRequest$zodSchema,
-  ListCustomerLabelsResponse,
-  ListCustomerLabelsResponse$zodSchema,
-} from "../models/listcustomerlabelsop.js";
+  GetMicroDepositsRequest,
+  GetMicroDepositsRequest$zodSchema,
+  GetMicroDepositsResponse,
+  GetMicroDepositsResponse$zodSchema,
+} from "../models/getmicrodepositsop.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * List labels for a customer
+ * Retrieve micro-deposits details
  *
  * @remarks
- * List labels for a customer
+ * Returns the status and details of micro-deposits for a funding source to check verification eligibility. Includes deposit status (pending, processed, failed), creation timestamp, and failure details with ACH return codes if deposits failed. Use this endpoint to determine when micro-deposits are ready for verification.
  */
-export function labelsListForCustomer(
+export function fundingSourcesMicroDepositsGetMicroDeposits(
   client$: DwollaMcpCore,
-  request: ListCustomerLabelsRequest,
+  request: GetMicroDepositsRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    ListCustomerLabelsResponse,
+    GetMicroDepositsResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -59,12 +59,12 @@ export function labelsListForCustomer(
 
 async function $do(
   client$: DwollaMcpCore,
-  request: ListCustomerLabelsRequest,
+  request: GetMicroDepositsRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      ListCustomerLabelsResponse,
+      GetMicroDepositsResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -78,7 +78,7 @@ async function $do(
 > {
   const parsed$ = safeParse(
     request,
-    (value$) => ListCustomerLabelsRequest$zodSchema.parse(value$),
+    (value$) => GetMicroDepositsRequest$zodSchema.parse(value$),
     "Input validation failed",
   );
   if (!parsed$.ok) {
@@ -93,13 +93,9 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-  const path$ = pathToFunc("/customers/{id}/labels")(
+  const path$ = pathToFunc("/funding-sources/{id}/micro-deposits")(
     pathParams$,
   );
-  const query$ = encodeFormQuery({
-    "limit": payload$.limit,
-    "offset": payload$.offset,
-  });
 
   const headers$ = new Headers(compactMap({
     Accept: "application/vnd.dwolla.v1.hal+json",
@@ -109,7 +105,7 @@ async function $do(
 
   const context = {
     baseURL: options?.serverURL ?? client$._baseURL ?? "",
-    operationID: "listCustomerLabels",
+    operationID: "getMicroDeposits",
     oAuth2Scopes: [],
     resolvedSecurity: requestSecurity,
     securitySource: client$._options.security,
@@ -131,7 +127,6 @@ async function $do(
     baseURL: options?.serverURL,
     path: path$,
     headers: headers$,
-    query: query$,
     body: body$,
     timeoutMs: options?.timeoutMs || client$._options.timeoutMs
       || -1,
@@ -156,7 +151,7 @@ async function $do(
   };
 
   const [result$] = await M.match<
-    ListCustomerLabelsResponse,
+    GetMicroDepositsResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -165,17 +160,13 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, ListCustomerLabelsResponse$zodSchema, {
+    M.json(200, GetMicroDepositsResponse$zodSchema, {
       ctype: "application/vnd.dwolla.v1.hal+json",
-      key: "Labels",
+      key: "object",
     }),
-    M.json(403, ListCustomerLabelsResponse$zodSchema, {
+    M.json(404, GetMicroDepositsResponse$zodSchema, {
       ctype: "application/vnd.dwolla.v1.hal+json",
-      key: "403_application/vnd.dwolla.v1.hal+json_object",
-    }),
-    M.json(404, ListCustomerLabelsResponse$zodSchema, {
-      ctype: "application/vnd.dwolla.v1.hal+json",
-      key: "404_application/vnd.dwolla.v1.hal+json_object",
+      key: "NotFoundError",
     }),
   )(response, req$, { extraFields: responseFields$ });
 

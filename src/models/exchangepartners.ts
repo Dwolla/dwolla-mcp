@@ -3,10 +3,14 @@
  */
 
 import * as z from "zod";
+import {
+  ExchangePartner,
+  ExchangePartner$zodSchema,
+} from "./exchangepartner.js";
 import { HalLink, HalLink$zodSchema } from "./hallink.js";
 
 export type ExchangePartnersEmbedded = {
-  exchangePartners?: Array<ExchangePartners> | undefined;
+  exchangePartners?: Array<ExchangePartner> | undefined;
 };
 
 export const ExchangePartnersEmbedded$zodSchema: z.ZodType<
@@ -14,8 +18,7 @@ export const ExchangePartnersEmbedded$zodSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  exchangePartners: z.array(z.lazy(() => ExchangePartners$zodSchema))
-    .optional(),
+  exchangePartners: z.array(ExchangePartner$zodSchema).optional(),
 });
 
 export type ExchangePartners = {

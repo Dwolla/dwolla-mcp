@@ -28,7 +28,7 @@ import { Result } from "../types/fp.js";
  * List exchange partners
  *
  * @remarks
- * List exchange partners
+ * Returns a list of all supported exchange partners. Each partner includes a unique ID, name, and status indicating whether they are active or inactive.
  */
 export function exchangePartnersList(
   client$: DwollaMcpCore,

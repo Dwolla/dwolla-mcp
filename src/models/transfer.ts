@@ -167,14 +167,26 @@ export const FedNowDetails$zodSchema: z.ZodType<
   "FedNow Service network specific details. Present when transfer was processed via FedNow network.",
 );
 
-export type TransferProcessingChannel = { destination?: string | undefined };
+/**
+ * The payment network used to process the transfer
+ */
+export const DestinationEnum$zodSchema = z.enum([
+  "real-time-payments",
+  "fed-now",
+]).describe("The payment network used to process the transfer");
+
+export type DestinationEnum = z.infer<typeof DestinationEnum$zodSchema>;
+
+export type TransferProcessingChannel = {
+  destination?: DestinationEnum | undefined;
+};
 
 export const TransferProcessingChannel$zodSchema: z.ZodType<
   TransferProcessingChannel,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  destination: z.string().optional(),
+  destination: DestinationEnum$zodSchema.optional(),
 });
 
 export type Transfer = {

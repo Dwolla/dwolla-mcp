@@ -29,10 +29,10 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Retrieve Account Details
+ * Retrieve account details
  *
  * @remarks
- * Retrieve basic account details belonging to the authorized Dwolla account.
+ * Returns basic account information for your authorized Main Dwolla Account, including account ID, name, and links to related resources such as funding sources, transfers, and customers.
  */
 export function accountsGet(
   client$: DwollaMcpCore,

@@ -14,7 +14,7 @@ export const tool$businessClassificationsGet: ToolDefinition<typeof args> = {
   name: "business-classifications-get",
   description: `Retrieve a business classification
 
-Retrieve a business classification by id.`,
+Returns a specific business classification with its embedded industry classifications. Use this endpoint to browse available industry options within a business category and obtain the industry classification ID required for the businessClassification parameter when creating business verified customers.`,
   scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {

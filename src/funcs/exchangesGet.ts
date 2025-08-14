@@ -32,7 +32,7 @@ import { Result } from "../types/fp.js";
  * Retrieve exchange resource
  *
  * @remarks
- * Retrieve an exchange resource by its ID.
+ * Returns details for a specific exchange connection between Dwolla and an open banking partner for a customer's bank account. Includes exchange status, creation date, and links to the associated customer and exchange partner.
  */
 export function exchangesGet(
   client$: DwollaMcpCore,

@@ -14,7 +14,7 @@ export const tool$beneficialOwnersDocumentsList: ToolDefinition<typeof args> = {
   name: "beneficial-owners-documents-list",
   description: `List documents for beneficial owner
 
-List documents for beneficial owner`,
+Returns all identity verification documents submitted for a beneficial owner. Includes document status, verification results, document type (passport, driver's license, etc.), and failure reasons if verification was rejected. Used to track document submission and verification progress during the business verification process.`,
   scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {

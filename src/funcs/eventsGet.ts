@@ -32,7 +32,7 @@ import { Result } from "../types/fp.js";
  * Retrieve event
  *
  * @remarks
- * Retrieve event
+ * Returns detailed information for a specific event representing a state change that occurred on a resource in your Dwolla application. Includes the event topic, timestamp, resource links, and correlation ID if applicable.
  */
 export function eventsGet(
   client$: DwollaMcpCore,

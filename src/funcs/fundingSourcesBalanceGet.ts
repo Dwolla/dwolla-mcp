@@ -20,27 +20,27 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
-  ListTransferFeesRequest,
-  ListTransferFeesRequest$zodSchema,
-  ListTransferFeesResponse,
-  ListTransferFeesResponse$zodSchema,
-} from "../models/listtransferfeesop.js";
+  GetFundingSourceBalanceRequest,
+  GetFundingSourceBalanceRequest$zodSchema,
+  GetFundingSourceBalanceResponse,
+  GetFundingSourceBalanceResponse$zodSchema,
+} from "../models/getfundingsourcebalanceop.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * List fees for a transfer
+ * Retrieve funding source balance
  *
  * @remarks
- * List fees for a transfer
+ * Returns the current balance for a specific funding source. For bank accounts, includes available and closing balances; for Dwolla balance, includes balance and total amounts. All responses include currency and last updated timestamp. Supports bank accounts (via Open Banking) and Dwolla balance (verified customers only).
  */
-export function transfersListFees(
+export function fundingSourcesBalanceGet(
   client$: DwollaMcpCore,
-  request: ListTransferFeesRequest,
+  request: GetFundingSourceBalanceRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    ListTransferFeesResponse,
+    GetFundingSourceBalanceResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -59,12 +59,12 @@ export function transfersListFees(
 
 async function $do(
   client$: DwollaMcpCore,
-  request: ListTransferFeesRequest,
+  request: GetFundingSourceBalanceRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      ListTransferFeesResponse,
+      GetFundingSourceBalanceResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -78,7 +78,7 @@ async function $do(
 > {
   const parsed$ = safeParse(
     request,
-    (value$) => ListTransferFeesRequest$zodSchema.parse(value$),
+    (value$) => GetFundingSourceBalanceRequest$zodSchema.parse(value$),
     "Input validation failed",
   );
   if (!parsed$.ok) {
@@ -93,7 +93,7 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-  const path$ = pathToFunc("/transfers/{id}/fees")(
+  const path$ = pathToFunc("/funding-sources/{id}/balance")(
     pathParams$,
   );
 
@@ -105,7 +105,7 @@ async function $do(
 
   const context = {
     baseURL: options?.serverURL ?? client$._baseURL ?? "",
-    operationID: "listTransferFees",
+    operationID: "getFundingSourceBalance",
     oAuth2Scopes: [],
     resolvedSecurity: requestSecurity,
     securitySource: client$._options.security,
@@ -151,7 +151,7 @@ async function $do(
   };
 
   const [result$] = await M.match<
-    ListTransferFeesResponse,
+    GetFundingSourceBalanceResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -160,13 +160,13 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, ListTransferFeesResponse$zodSchema, {
+    M.json(200, GetFundingSourceBalanceResponse$zodSchema, {
+      ctype: "application/vnd.dwolla.v1.hal+json",
+      key: "oneOf",
+    }),
+    M.json(404, GetFundingSourceBalanceResponse$zodSchema, {
       ctype: "application/vnd.dwolla.v1.hal+json",
       key: "object",
-    }),
-    M.json(404, ListTransferFeesResponse$zodSchema, {
-      ctype: "application/vnd.dwolla.v1.hal+json",
-      key: "NotFoundError",
     }),
   )(response, req$, { extraFields: responseFields$ });
 

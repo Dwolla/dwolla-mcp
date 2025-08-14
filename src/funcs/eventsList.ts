@@ -32,7 +32,7 @@ import { Result } from "../types/fp.js";
  * List events
  *
  * @remarks
- * List events
+ * Returns a paginated list of events representing state changes to resources in your Dwolla application. Events track actions on customers, transfers, funding sources, and other resources, sorted by creation date (newest first). Events are retained for 30 days and are essential for webhook notifications and system activity monitoring.
  */
 export function eventsList(
   client$: DwollaMcpCore,

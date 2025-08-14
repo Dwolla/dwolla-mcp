@@ -20,27 +20,27 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
-  RetrieveLabelReallocationRequest,
-  RetrieveLabelReallocationRequest$zodSchema,
-  RetrieveLabelReallocationResponse,
-  RetrieveLabelReallocationResponse$zodSchema,
-} from "../models/retrievelabelreallocationop.js";
+  GetBeneficialOwnershipStatusForCustomerRequest,
+  GetBeneficialOwnershipStatusForCustomerRequest$zodSchema,
+  GetBeneficialOwnershipStatusForCustomerResponse,
+  GetBeneficialOwnershipStatusForCustomerResponse$zodSchema,
+} from "../models/getbeneficialownershipstatusforcustomerop.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Retrieve a label reallocation
+ * Retrieve beneficial ownership status
  *
  * @remarks
- * Retrieve a label reallocation
+ * Returns the certification status of beneficial ownership for a business verified customer. Status indicates whether beneficial owner information has been certified and affects the customer's ability to send funds. Possible values include uncertified, certified, and recertify.
  */
-export function labelsGetReallocation(
+export function customersBeneficialOwnershipGet(
   client$: DwollaMcpCore,
-  request: RetrieveLabelReallocationRequest,
+  request: GetBeneficialOwnershipStatusForCustomerRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    RetrieveLabelReallocationResponse,
+    GetBeneficialOwnershipStatusForCustomerResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -59,12 +59,12 @@ export function labelsGetReallocation(
 
 async function $do(
   client$: DwollaMcpCore,
-  request: RetrieveLabelReallocationRequest,
+  request: GetBeneficialOwnershipStatusForCustomerRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      RetrieveLabelReallocationResponse,
+      GetBeneficialOwnershipStatusForCustomerResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -78,7 +78,8 @@ async function $do(
 > {
   const parsed$ = safeParse(
     request,
-    (value$) => RetrieveLabelReallocationRequest$zodSchema.parse(value$),
+    (value$) =>
+      GetBeneficialOwnershipStatusForCustomerRequest$zodSchema.parse(value$),
     "Input validation failed",
   );
   if (!parsed$.ok) {
@@ -93,7 +94,7 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-  const path$ = pathToFunc("/label-reallocations/{id}")(
+  const path$ = pathToFunc("/customers/{id}/beneficial-ownership")(
     pathParams$,
   );
 
@@ -105,7 +106,7 @@ async function $do(
 
   const context = {
     baseURL: options?.serverURL ?? client$._baseURL ?? "",
-    operationID: "retrieveLabelReallocation",
+    operationID: "getBeneficialOwnershipStatusForCustomer",
     oAuth2Scopes: [],
     resolvedSecurity: requestSecurity,
     securitySource: client$._options.security,
@@ -151,7 +152,7 @@ async function $do(
   };
 
   const [result$] = await M.match<
-    RetrieveLabelReallocationResponse,
+    GetBeneficialOwnershipStatusForCustomerResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -160,17 +161,17 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, RetrieveLabelReallocationResponse$zodSchema, {
+    M.json(200, GetBeneficialOwnershipStatusForCustomerResponse$zodSchema, {
       ctype: "application/vnd.dwolla.v1.hal+json",
-      key: "object",
+      key: "BeneficialOwnership",
     }),
-    M.json(403, RetrieveLabelReallocationResponse$zodSchema, {
+    M.json(403, GetBeneficialOwnershipStatusForCustomerResponse$zodSchema, {
       ctype: "application/vnd.dwolla.v1.hal+json",
-      key: "ForbiddenError",
+      key: "403_application/vnd.dwolla.v1.hal+json_object",
     }),
-    M.json(404, RetrieveLabelReallocationResponse$zodSchema, {
+    M.json(404, GetBeneficialOwnershipStatusForCustomerResponse$zodSchema, {
       ctype: "application/vnd.dwolla.v1.hal+json",
-      key: "NotFoundError",
+      key: "404_application/vnd.dwolla.v1.hal+json_object",
     }),
   )(response, req$, { extraFields: responseFields$ });
 

@@ -12,9 +12,9 @@ const args = {
 
 export const tool$accountsGet: ToolDefinition<typeof args> = {
   name: "accounts-get",
-  description: `Retrieve Account Details
+  description: `Retrieve account details
 
-Retrieve basic account details belonging to the authorized Dwolla account.`,
+Returns basic account information for your authorized Main Dwolla Account, including account ID, name, and links to related resources such as funding sources, transfers, and customers.`,
   scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {

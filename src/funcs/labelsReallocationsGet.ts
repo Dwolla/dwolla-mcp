@@ -20,27 +20,27 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
-  GetMicroDepositsRequest,
-  GetMicroDepositsRequest$zodSchema,
-  GetMicroDepositsResponse,
-  GetMicroDepositsResponse$zodSchema,
-} from "../models/getmicrodepositsop.js";
+  RetrieveLabelReallocationRequest,
+  RetrieveLabelReallocationRequest$zodSchema,
+  RetrieveLabelReallocationResponse,
+  RetrieveLabelReallocationResponse$zodSchema,
+} from "../models/retrievelabelreallocationop.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Retrieve micro-deposits details
+ * Retrieve a label reallocation
  *
  * @remarks
- * Retrieve micro-deposits details
+ * Retrieve details for a specific label reallocation that transfers funds between Labels. Returns reallocation information including source and destination Labels, amount transferred, status, and creation timestamp. Use this to track and audit fund movements between different Labels.
  */
-export function fundingSourcesGetMicroDeposits(
+export function labelsReallocationsGet(
   client$: DwollaMcpCore,
-  request: GetMicroDepositsRequest,
+  request: RetrieveLabelReallocationRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    GetMicroDepositsResponse,
+    RetrieveLabelReallocationResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -59,12 +59,12 @@ export function fundingSourcesGetMicroDeposits(
 
 async function $do(
   client$: DwollaMcpCore,
-  request: GetMicroDepositsRequest,
+  request: RetrieveLabelReallocationRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      GetMicroDepositsResponse,
+      RetrieveLabelReallocationResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -78,7 +78,7 @@ async function $do(
 > {
   const parsed$ = safeParse(
     request,
-    (value$) => GetMicroDepositsRequest$zodSchema.parse(value$),
+    (value$) => RetrieveLabelReallocationRequest$zodSchema.parse(value$),
     "Input validation failed",
   );
   if (!parsed$.ok) {
@@ -93,7 +93,7 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-  const path$ = pathToFunc("/funding-sources/{id}/micro-deposits")(
+  const path$ = pathToFunc("/label-reallocations/{id}")(
     pathParams$,
   );
 
@@ -105,7 +105,7 @@ async function $do(
 
   const context = {
     baseURL: options?.serverURL ?? client$._baseURL ?? "",
-    operationID: "getMicroDeposits",
+    operationID: "retrieveLabelReallocation",
     oAuth2Scopes: [],
     resolvedSecurity: requestSecurity,
     securitySource: client$._options.security,
@@ -151,7 +151,7 @@ async function $do(
   };
 
   const [result$] = await M.match<
-    GetMicroDepositsResponse,
+    RetrieveLabelReallocationResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -160,11 +160,15 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, GetMicroDepositsResponse$zodSchema, {
+    M.json(200, RetrieveLabelReallocationResponse$zodSchema, {
       ctype: "application/vnd.dwolla.v1.hal+json",
       key: "object",
     }),
-    M.json(404, GetMicroDepositsResponse$zodSchema, {
+    M.json(403, RetrieveLabelReallocationResponse$zodSchema, {
+      ctype: "application/vnd.dwolla.v1.hal+json",
+      key: "ForbiddenError",
+    }),
+    M.json(404, RetrieveLabelReallocationResponse$zodSchema, {
       ctype: "application/vnd.dwolla.v1.hal+json",
       key: "NotFoundError",
     }),

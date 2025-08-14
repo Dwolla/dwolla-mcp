@@ -20,27 +20,27 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
-  ListLabelLedgerEntriesRequest,
-  ListLabelLedgerEntriesRequest$zodSchema,
-  ListLabelLedgerEntriesResponse,
-  ListLabelLedgerEntriesResponse$zodSchema,
-} from "../models/listlabelledgerentriesop.js";
+  ListCustomerLabelsRequest,
+  ListCustomerLabelsRequest$zodSchema,
+  ListCustomerLabelsResponse,
+  ListCustomerLabelsResponse$zodSchema,
+} from "../models/listcustomerlabelsop.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * List label ledger entries
+ * List labels for a customer
  *
  * @remarks
- * List label ledger entries
+ * Returns all labels for a specified Verified Customer, sorted by creation date (most recent first). Supports pagination with limit and offset parameters. Each label includes its current amount and creation timestamp.
  */
-export function labelsListLedgerEntries(
+export function customersLabelsList(
   client$: DwollaMcpCore,
-  request: ListLabelLedgerEntriesRequest,
+  request: ListCustomerLabelsRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    ListLabelLedgerEntriesResponse,
+    ListCustomerLabelsResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -59,12 +59,12 @@ export function labelsListLedgerEntries(
 
 async function $do(
   client$: DwollaMcpCore,
-  request: ListLabelLedgerEntriesRequest,
+  request: ListCustomerLabelsRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      ListLabelLedgerEntriesResponse,
+      ListCustomerLabelsResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -78,7 +78,7 @@ async function $do(
 > {
   const parsed$ = safeParse(
     request,
-    (value$) => ListLabelLedgerEntriesRequest$zodSchema.parse(value$),
+    (value$) => ListCustomerLabelsRequest$zodSchema.parse(value$),
     "Input validation failed",
   );
   if (!parsed$.ok) {
@@ -93,7 +93,7 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-  const path$ = pathToFunc("/labels/{id}/ledger-entries")(
+  const path$ = pathToFunc("/customers/{id}/labels")(
     pathParams$,
   );
   const query$ = encodeFormQuery({
@@ -109,7 +109,7 @@ async function $do(
 
   const context = {
     baseURL: options?.serverURL ?? client$._baseURL ?? "",
-    operationID: "listLabelLedgerEntries",
+    operationID: "listCustomerLabels",
     oAuth2Scopes: [],
     resolvedSecurity: requestSecurity,
     securitySource: client$._options.security,
@@ -156,7 +156,7 @@ async function $do(
   };
 
   const [result$] = await M.match<
-    ListLabelLedgerEntriesResponse,
+    ListCustomerLabelsResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -165,21 +165,17 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, ListLabelLedgerEntriesResponse$zodSchema, {
+    M.json(200, ListCustomerLabelsResponse$zodSchema, {
       ctype: "application/vnd.dwolla.v1.hal+json",
-      key: "LabelLedgerEntries",
+      key: "Labels",
     }),
-    M.json(400, ListLabelLedgerEntriesResponse$zodSchema, {
+    M.json(403, ListCustomerLabelsResponse$zodSchema, {
       ctype: "application/vnd.dwolla.v1.hal+json",
-      key: "BadRequestError",
+      key: "403_application/vnd.dwolla.v1.hal+json_object",
     }),
-    M.json(403, ListLabelLedgerEntriesResponse$zodSchema, {
+    M.json(404, ListCustomerLabelsResponse$zodSchema, {
       ctype: "application/vnd.dwolla.v1.hal+json",
-      key: "ForbiddenError",
-    }),
-    M.json(404, ListLabelLedgerEntriesResponse$zodSchema, {
-      ctype: "application/vnd.dwolla.v1.hal+json",
-      key: "NotFoundError",
+      key: "404_application/vnd.dwolla.v1.hal+json_object",
     }),
   )(response, req$, { extraFields: responseFields$ });
 

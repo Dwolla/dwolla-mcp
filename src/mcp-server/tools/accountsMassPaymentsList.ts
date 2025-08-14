@@ -12,9 +12,9 @@ const args = {
 
 export const tool$accountsMassPaymentsList: ToolDefinition<typeof args> = {
   name: "accounts-mass-payments-list",
-  description: `List mass payments for an account
+  description: `List account mass payments
 
-List mass payments for an account`,
+Returns a paginated list of mass payments created by your Main Dwolla account. Results are sorted by creation date in descending order (newest first) and can be filtered by correlation ID.`,
   scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {

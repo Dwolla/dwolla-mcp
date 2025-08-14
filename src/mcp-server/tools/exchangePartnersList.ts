@@ -9,7 +9,7 @@ export const tool$exchangePartnersList: ToolDefinition = {
   name: "exchange-partners-list",
   description: `List exchange partners
 
-List exchange partners`,
+Returns a list of all supported exchange partners. Each partner includes a unique ID, name, and status indicating whether they are active or inactive.`,
   scopes: ["read"],
   tool: async (client, ctx) => {
     const [result, apiCall] = await exchangePartnersList(

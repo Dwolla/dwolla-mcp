@@ -28,7 +28,7 @@ import { Result } from "../types/fp.js";
  * List exchanges for an account
  *
  * @remarks
- * List exchanges for an account
+ * Returns all exchanges for your Dwolla account. Exchanges represent connections between external bank accounts and your account through open banking partners. Includes exchange status, creation date, and associated partner information.
  */
 export function accountsExchangesList(
   client$: DwollaMcpCore,

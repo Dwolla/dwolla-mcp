@@ -14,7 +14,7 @@ export const tool$massPaymentsGet: ToolDefinition<typeof args> = {
   name: "mass-payments-get",
   description: `Retrieve a mass payment
 
-Retrieve a mass payment`,
+Retrieve detailed information for a mass payment by its unique identifier. Returns the current processing status (pending, processing, or complete), creation date, metadata, and links to the source funding source and payment items. Use this endpoint to monitor mass payment processing progress and determine when to check individual item results.`,
   scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {

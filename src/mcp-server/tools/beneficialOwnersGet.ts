@@ -14,7 +14,7 @@ export const tool$beneficialOwnersGet: ToolDefinition<typeof args> = {
   name: "beneficial-owners-get",
   description: `Retrieve beneficial owner
 
-Retrieve details for a single beneficial owner`,
+Returns detailed information for a specific beneficial owner, including personal information, address, and verification status. The verification status indicates the owner's identity verification progress and affects the business customer's transaction capabilities.`,
   scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {
