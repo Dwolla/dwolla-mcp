@@ -14,7 +14,7 @@ export const tool$labelsGet: ToolDefinition<typeof args> = {
   name: "labels-get",
   description: `Retrieve a label
 
-Retrieve a label`,
+Retrieve details for a specific Label used to categorize and track funds within your account. Returns Label information including unique identifier, current amount with currency, and creation timestamp.`,
   scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {

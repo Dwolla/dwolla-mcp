@@ -9,7 +9,7 @@ export const tool$businessClassificationsList: ToolDefinition = {
   name: "business-classifications-list",
   description: `List business classifications
 
-Retrieve an _embedded list of business classifications that contains an _embedded list of industry classifications.`,
+Returns a directory of business and industry classifications required for creating business verified customers. Each business classification contains multiple industry classifications. The industry classification ID must be provided in the businessClassification parameter during business customer creation for verification.`,
   scopes: ["read"],
   tool: async (client, ctx) => {
     const [result, apiCall] = await businessClassificationsList(

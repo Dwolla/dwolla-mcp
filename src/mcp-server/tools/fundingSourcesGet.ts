@@ -14,7 +14,7 @@ export const tool$fundingSourcesGet: ToolDefinition<typeof args> = {
   name: "funding-sources-get",
   description: `Retrieve a funding source
 
-Retrieve a funding source`,
+Returns detailed information for a specific funding source, including its type, status, and verification details. Supports bank accounts (via Open Banking) and Dwolla balance (verified customers only).`,
   scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {

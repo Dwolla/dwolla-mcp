@@ -32,9 +32,9 @@ import { Result } from "../types/fp.js";
  * List retries for a webhook
  *
  * @remarks
- * List retries for a webhook
+ * Retrieve all retry attempts for a specific webhook including timestamps and delivery details. Returns a list of retry attempts with unique identifiers, timestamps, and links to the parent webhook with total count. Essential for tracking webhook delivery failures, analyzing retry patterns, and debugging webhook notification issues to ensure reliable event processing.
  */
-export function webhooksListRetries(
+export function webhooksRetriesList(
   client$: DwollaMcpCore,
   request: ListWebhookRetriesRequest,
   options?: RequestOptions,

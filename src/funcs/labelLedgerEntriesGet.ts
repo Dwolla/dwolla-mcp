@@ -32,9 +32,9 @@ import { Result } from "../types/fp.js";
  * Retrieve a label ledger entry
  *
  * @remarks
- * Retrieve a label ledger entry
+ * Returns detailed information for a specific ledger entry on a Label, including its amount, currency, and creation timestamp.
  */
-export function labelsGetLedgerEntry(
+export function labelLedgerEntriesGet(
   client$: DwollaMcpCore,
   request: GetLabelLedgerEntryRequest,
   options?: RequestOptions,

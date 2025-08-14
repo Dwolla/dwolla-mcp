@@ -3,7 +3,7 @@
  */
 
 import { DwollaMcpCore } from "../core.js";
-import { encodeSimple } from "../lib/encodings.js";
+import { encodeFormQuery, encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -20,27 +20,27 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
-  GetTransferFailureReasonRequest,
-  GetTransferFailureReasonRequest$zodSchema,
-  GetTransferFailureReasonResponse,
-  GetTransferFailureReasonResponse$zodSchema,
-} from "../models/gettransferfailurereasonop.js";
+  ListLabelLedgerEntriesRequest,
+  ListLabelLedgerEntriesRequest$zodSchema,
+  ListLabelLedgerEntriesResponse,
+  ListLabelLedgerEntriesResponse$zodSchema,
+} from "../models/listlabelledgerentriesop.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Retrieve a transfer failure reason
+ * List label ledger entries
  *
  * @remarks
- * Retrieve a transfer failure reason
+ * Returns all ledger entries for a specific Label, sorted by creation date (newest first). Supports pagination with limit and offset parameters. Each ledger entry includes its amount, currency, and creation timestamp.
  */
-export function transfersGetFailureReason(
+export function labelsLedgerEntriesList(
   client$: DwollaMcpCore,
-  request: GetTransferFailureReasonRequest,
+  request: ListLabelLedgerEntriesRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    GetTransferFailureReasonResponse,
+    ListLabelLedgerEntriesResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -59,12 +59,12 @@ export function transfersGetFailureReason(
 
 async function $do(
   client$: DwollaMcpCore,
-  request: GetTransferFailureReasonRequest,
+  request: ListLabelLedgerEntriesRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      GetTransferFailureReasonResponse,
+      ListLabelLedgerEntriesResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -78,7 +78,7 @@ async function $do(
 > {
   const parsed$ = safeParse(
     request,
-    (value$) => GetTransferFailureReasonRequest$zodSchema.parse(value$),
+    (value$) => ListLabelLedgerEntriesRequest$zodSchema.parse(value$),
     "Input validation failed",
   );
   if (!parsed$.ok) {
@@ -93,9 +93,13 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-  const path$ = pathToFunc("/transfers/{id}/failure")(
+  const path$ = pathToFunc("/labels/{id}/ledger-entries")(
     pathParams$,
   );
+  const query$ = encodeFormQuery({
+    "limit": payload$.limit,
+    "offset": payload$.offset,
+  });
 
   const headers$ = new Headers(compactMap({
     Accept: "application/vnd.dwolla.v1.hal+json",
@@ -105,7 +109,7 @@ async function $do(
 
   const context = {
     baseURL: options?.serverURL ?? client$._baseURL ?? "",
-    operationID: "getTransferFailureReason",
+    operationID: "listLabelLedgerEntries",
     oAuth2Scopes: [],
     resolvedSecurity: requestSecurity,
     securitySource: client$._options.security,
@@ -127,6 +131,7 @@ async function $do(
     baseURL: options?.serverURL,
     path: path$,
     headers: headers$,
+    query: query$,
     body: body$,
     timeoutMs: options?.timeoutMs || client$._options.timeoutMs
       || -1,
@@ -151,7 +156,7 @@ async function $do(
   };
 
   const [result$] = await M.match<
-    GetTransferFailureReasonResponse,
+    ListLabelLedgerEntriesResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -160,15 +165,19 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, GetTransferFailureReasonResponse$zodSchema, {
+    M.json(200, ListLabelLedgerEntriesResponse$zodSchema, {
       ctype: "application/vnd.dwolla.v1.hal+json",
-      key: "object",
+      key: "LabelLedgerEntries",
     }),
-    M.json(403, GetTransferFailureReasonResponse$zodSchema, {
+    M.json(400, ListLabelLedgerEntriesResponse$zodSchema, {
+      ctype: "application/vnd.dwolla.v1.hal+json",
+      key: "BadRequestError",
+    }),
+    M.json(403, ListLabelLedgerEntriesResponse$zodSchema, {
       ctype: "application/vnd.dwolla.v1.hal+json",
       key: "ForbiddenError",
     }),
-    M.json(404, GetTransferFailureReasonResponse$zodSchema, {
+    M.json(404, ListLabelLedgerEntriesResponse$zodSchema, {
       ctype: "application/vnd.dwolla.v1.hal+json",
       key: "NotFoundError",
     }),

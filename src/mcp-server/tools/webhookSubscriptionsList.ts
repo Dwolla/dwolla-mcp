@@ -9,7 +9,7 @@ export const tool$webhookSubscriptionsList: ToolDefinition = {
   name: "webhook-subscriptions-list",
   description: `List webhook subscriptions
 
-List webhook subscriptions`,
+Retrieve all webhook subscriptions that belong to an application including their configuration details and status. Returns subscription details including webhook endpoints, status, creation dates, and links to associated webhooks with total count. Essential for webhook management and monitoring subscription health.`,
   scopes: ["read"],
   tool: async (client, ctx) => {
     const [result, apiCall] = await webhookSubscriptionsList(

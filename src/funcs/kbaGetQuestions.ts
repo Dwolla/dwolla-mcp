@@ -32,7 +32,7 @@ import { Result } from "../types/fp.js";
  * Retrieve KBA Questions
  *
  * @remarks
- * Retrieve KBA Questions
+ * Returns the KBA questions for a specific KBA session. The questions are used to verify the customer's identity during the KBA process.
  */
 export function kbaGetQuestions(
   client$: DwollaMcpCore,

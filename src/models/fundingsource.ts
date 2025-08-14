@@ -5,6 +5,14 @@
 import * as z from "zod";
 import { HalLink, HalLink$zodSchema } from "./hallink.js";
 
+export const Channel$zodSchema = z.enum([
+  "ach",
+  "real-time-payments",
+  "wire",
+]);
+
+export type Channel = z.infer<typeof Channel$zodSchema>;
+
 export type FundingSource = {
   _links?: { [k: string]: HalLink } | undefined;
   id?: string | undefined;
@@ -14,7 +22,7 @@ export type FundingSource = {
   name?: string | undefined;
   created?: string | undefined;
   removed?: boolean | undefined;
-  channels?: Array<string> | undefined;
+  channels?: Array<Channel> | undefined;
   bankName?: string | undefined;
   fingerprint?: string | undefined;
 };
@@ -27,7 +35,7 @@ export const FundingSource$zodSchema: z.ZodType<
   _links: z.record(HalLink$zodSchema).optional(),
   bankAccountType: z.string().optional(),
   bankName: z.string().optional(),
-  channels: z.array(z.string()).optional(),
+  channels: z.array(Channel$zodSchema).optional(),
   created: z.string().datetime({ offset: true }).optional(),
   fingerprint: z.string().optional(),
   id: z.string().optional(),

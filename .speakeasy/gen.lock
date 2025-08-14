@@ -1,20 +1,21 @@
 lockVersion: 2.0.0
 id: dbccbcaa-cdde-434b-b972-38fb6d1127e5
 management:
-  docChecksum: 48aa22c5e523db5006f688e3012020af
+  docChecksum: d12d5605efed29f55b7d4aeedccf4ea0
   docVersion: "2.0"
-  speakeasyVersion: 1.592.2
-  generationVersion: 2.668.4
-  releaseVersion: 0.0.1-beta.2
-  configChecksum: 50ebcc50ae9f3c15572a13d45a9b916f
+  speakeasyVersion: 1.603.2
+  generationVersion: 2.681.8
+  releaseVersion: 0.0.1-beta.3
+  configChecksum: a3a0afb200bf6bb2d43c7e4e9f14bb92
   repoURL: https://github.com/Dwolla/dwolla-mcp.git
   published: true
 features:
   mcp-typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.0
-    core: 0.3.1
+    core: 0.3.4
     defaultEnabledRetries: 0.1.0
+    enumUnions: 0.1.0
     globalSecurity: 0.1.0
     globalSecurityCallbacks: 0.0.0
     globalServerURLs: 0.1.0
@@ -38,14 +39,15 @@ generatedFiles:
   - src/funcs/accountsTransfersList.ts
   - src/funcs/beneficialOwnersDocumentsList.ts
   - src/funcs/beneficialOwnersGet.ts
-  - src/funcs/beneficialOwnersGetOwnershipStatus.ts
   - src/funcs/businessClassificationsGet.ts
   - src/funcs/businessClassificationsList.ts
   - src/funcs/customersBeneficialOwnersList.ts
+  - src/funcs/customersBeneficialOwnershipGet.ts
   - src/funcs/customersDocumentsList.ts
   - src/funcs/customersExchangesList.ts
   - src/funcs/customersFundingSourcesList.ts
   - src/funcs/customersGet.ts
+  - src/funcs/customersLabelsList.ts
   - src/funcs/customersList.ts
   - src/funcs/customersListAvailableConnections.ts
   - src/funcs/customersMassPaymentsList.ts
@@ -57,28 +59,27 @@ generatedFiles:
   - src/funcs/exchangePartnersList.ts
   - src/funcs/exchangeSessionsGet.ts
   - src/funcs/exchangesGet.ts
+  - src/funcs/fundingSourcesBalanceGet.ts
   - src/funcs/fundingSourcesGet.ts
-  - src/funcs/fundingSourcesGetBalance.ts
-  - src/funcs/fundingSourcesGetMicroDeposits.ts
   - src/funcs/fundingSourcesGetVanRouting.ts
+  - src/funcs/fundingSourcesMicroDepositsGetMicroDeposits.ts
   - src/funcs/kbaGetQuestions.ts
+  - src/funcs/labelLedgerEntriesGet.ts
   - src/funcs/labelsGet.ts
-  - src/funcs/labelsGetLedgerEntry.ts
-  - src/funcs/labelsGetReallocation.ts
-  - src/funcs/labelsListForCustomer.ts
-  - src/funcs/labelsListLedgerEntries.ts
+  - src/funcs/labelsLedgerEntriesList.ts
+  - src/funcs/labelsReallocationsGet.ts
   - src/funcs/massPaymentsGet.ts
-  - src/funcs/massPaymentsGetItem.ts
-  - src/funcs/massPaymentsListItems.ts
+  - src/funcs/massPaymentsItemsGet.ts
+  - src/funcs/massPaymentsItemsList.ts
   - src/funcs/rootGet.ts
+  - src/funcs/transfersFailureGet.ts
+  - src/funcs/transfersFeesList.ts
   - src/funcs/transfersGet.ts
-  - src/funcs/transfersGetFailureReason.ts
-  - src/funcs/transfersListFees.ts
   - src/funcs/webhookSubscriptionsGet.ts
   - src/funcs/webhookSubscriptionsList.ts
-  - src/funcs/webhookSubscriptionsListWebhooks.ts
+  - src/funcs/webhookSubscriptionsWebhooksList.ts
   - src/funcs/webhooksGet.ts
-  - src/funcs/webhooksListRetries.ts
+  - src/funcs/webhooksRetriesList.ts
   - src/hooks/hooks.ts
   - src/hooks/types.ts
   - src/lib/base64.ts
@@ -117,14 +118,15 @@ generatedFiles:
   - src/mcp-server/tools/accountsTransfersList.ts
   - src/mcp-server/tools/beneficialOwnersDocumentsList.ts
   - src/mcp-server/tools/beneficialOwnersGet.ts
-  - src/mcp-server/tools/beneficialOwnersGetOwnershipStatus.ts
   - src/mcp-server/tools/businessClassificationsGet.ts
   - src/mcp-server/tools/businessClassificationsList.ts
   - src/mcp-server/tools/customersBeneficialOwnersList.ts
+  - src/mcp-server/tools/customersBeneficialOwnershipGet.ts
   - src/mcp-server/tools/customersDocumentsList.ts
   - src/mcp-server/tools/customersExchangesList.ts
   - src/mcp-server/tools/customersFundingSourcesList.ts
   - src/mcp-server/tools/customersGet.ts
+  - src/mcp-server/tools/customersLabelsList.ts
   - src/mcp-server/tools/customersList.ts
   - src/mcp-server/tools/customersListAvailableConnections.ts
   - src/mcp-server/tools/customersMassPaymentsList.ts
@@ -136,28 +138,27 @@ generatedFiles:
   - src/mcp-server/tools/exchangePartnersList.ts
   - src/mcp-server/tools/exchangeSessionsGet.ts
   - src/mcp-server/tools/exchangesGet.ts
+  - src/mcp-server/tools/fundingSourcesBalanceGet.ts
   - src/mcp-server/tools/fundingSourcesGet.ts
-  - src/mcp-server/tools/fundingSourcesGetBalance.ts
-  - src/mcp-server/tools/fundingSourcesGetMicroDeposits.ts
   - src/mcp-server/tools/fundingSourcesGetVanRouting.ts
+  - src/mcp-server/tools/fundingSourcesMicroDepositsGetMicroDeposits.ts
   - src/mcp-server/tools/kbaGetQuestions.ts
+  - src/mcp-server/tools/labelLedgerEntriesGet.ts
   - src/mcp-server/tools/labelsGet.ts
-  - src/mcp-server/tools/labelsGetLedgerEntry.ts
-  - src/mcp-server/tools/labelsGetReallocation.ts
-  - src/mcp-server/tools/labelsListForCustomer.ts
-  - src/mcp-server/tools/labelsListLedgerEntries.ts
+  - src/mcp-server/tools/labelsLedgerEntriesList.ts
+  - src/mcp-server/tools/labelsReallocationsGet.ts
   - src/mcp-server/tools/massPaymentsGet.ts
-  - src/mcp-server/tools/massPaymentsGetItem.ts
-  - src/mcp-server/tools/massPaymentsListItems.ts
+  - src/mcp-server/tools/massPaymentsItemsGet.ts
+  - src/mcp-server/tools/massPaymentsItemsList.ts
   - src/mcp-server/tools/rootGet.ts
+  - src/mcp-server/tools/transfersFailureGet.ts
+  - src/mcp-server/tools/transfersFeesList.ts
   - src/mcp-server/tools/transfersGet.ts
-  - src/mcp-server/tools/transfersGetFailureReason.ts
-  - src/mcp-server/tools/transfersListFees.ts
   - src/mcp-server/tools/webhookSubscriptionsGet.ts
   - src/mcp-server/tools/webhookSubscriptionsList.ts
-  - src/mcp-server/tools/webhookSubscriptionsListWebhooks.ts
+  - src/mcp-server/tools/webhookSubscriptionsWebhooksList.ts
   - src/mcp-server/tools/webhooksGet.ts
-  - src/mcp-server/tools/webhooksListRetries.ts
+  - src/mcp-server/tools/webhooksRetriesList.ts
   - src/models/account.ts
   - src/models/address.ts
   - src/models/availableexchangeconnections.ts

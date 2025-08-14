@@ -14,7 +14,7 @@ export const tool$kbaGetQuestions: ToolDefinition<typeof args> = {
   name: "kba-get-questions",
   description: `Retrieve KBA Questions
 
-Retrieve KBA Questions`,
+Returns the KBA questions for a specific KBA session. The questions are used to verify the customer's identity during the KBA process.`,
   scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {

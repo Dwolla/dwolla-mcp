@@ -32,7 +32,7 @@ import { Result } from "../types/fp.js";
  * List exchanges for a customer
  *
  * @remarks
- * Retrieve the list of exchanges associated with a Customer resource.
+ * Returns all exchanges for a specific customer. Exchanges represent connections between the customer's external bank accounts and open banking partners. Includes exchange status, creation date, and links to associated funding sources and partners.
  */
 export function customersExchangesList(
   client$: DwollaMcpCore,

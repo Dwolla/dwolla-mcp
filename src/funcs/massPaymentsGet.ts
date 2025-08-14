@@ -32,7 +32,7 @@ import { Result } from "../types/fp.js";
  * Retrieve a mass payment
  *
  * @remarks
- * Retrieve a mass payment
+ * Retrieve detailed information for a mass payment by its unique identifier. Returns the current processing status (pending, processing, or complete), creation date, metadata, and links to the source funding source and payment items. Use this endpoint to monitor mass payment processing progress and determine when to check individual item results.
  */
 export function massPaymentsGet(
   client$: DwollaMcpCore,

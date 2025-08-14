@@ -14,7 +14,7 @@ export const tool$customersGet: ToolDefinition<typeof args> = {
   name: "customers-get",
   description: `Retrieve a customer
 
-Retrieve details for a single customer`,
+Retrieve identifying information for a specific customer. The returned data varies by customer type - verified customers include contact details, address information, and verification status, while unverified customers and receive-only users contain basic contact information only.`,
   scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {

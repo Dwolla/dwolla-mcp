@@ -32,7 +32,7 @@ import { Result } from "../types/fp.js";
  * Retrieve a business classification
  *
  * @remarks
- * Retrieve a business classification by id.
+ * Returns a specific business classification with its embedded industry classifications. Use this endpoint to browse available industry options within a business category and obtain the industry classification ID required for the businessClassification parameter when creating business verified customers.
  */
 export function businessClassificationsGet(
   client$: DwollaMcpCore,

@@ -32,7 +32,7 @@ import { Result } from "../types/fp.js";
  * Retrieve a webhook
  *
  * @remarks
- * Retrieve a webhook
+ * Retrieve detailed information for a specific webhook by its unique identifier including delivery attempts and response data. Returns webhook details with topic, account information, delivery attempts containing request/response history, and links to subscription and retry resources. Essential for debugging webhook delivery issues, analyzing response data, and monitoring notification processing status.
  */
 export function webhooksGet(
   client$: DwollaMcpCore,

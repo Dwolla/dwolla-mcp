@@ -14,7 +14,7 @@ export const tool$customersFundingSourcesList: ToolDefinition<typeof args> = {
   name: "customers-funding-sources-list",
   description: `List customer funding sources
 
-List customer funding sources`,
+Returns all funding sources for a customer, including bank accounts and Dwolla balance (verified customers only). Shows verification status, limited account details, and creation dates. Supports filtering to exclude removed funding sources using the removed parameter.`,
   scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {

@@ -32,7 +32,7 @@ import { Result } from "../types/fp.js";
  * Retrieve a customer
  *
  * @remarks
- * Retrieve details for a single customer
+ * Retrieve identifying information for a specific customer. The returned data varies by customer type - verified customers include contact details, address information, and verification status, while unverified customers and receive-only users contain basic contact information only.
  */
 export function customersGet(
   client$: DwollaMcpCore,

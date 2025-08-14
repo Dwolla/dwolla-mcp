@@ -12,9 +12,9 @@ const args = {
 
 export const tool$accountsTransfersList: ToolDefinition<typeof args> = {
   name: "accounts-transfers-list",
-  description: `List and search transfers for an account
+  description: `List and search account transfers
 
-List and search transfers for an account`,
+Returns a paginated, searchable list of transfers associated with the specified Main Dwolla account. Supports advanced filtering by amount range, date range, transfer status, and correlation ID. Results are limited to 10,000 transfers per query; use date range filters for historical data beyond this limit.`,
   scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {

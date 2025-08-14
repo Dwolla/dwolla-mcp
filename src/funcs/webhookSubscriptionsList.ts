@@ -28,7 +28,7 @@ import { Result } from "../types/fp.js";
  * List webhook subscriptions
  *
  * @remarks
- * List webhook subscriptions
+ * Retrieve all webhook subscriptions that belong to an application including their configuration details and status. Returns subscription details including webhook endpoints, status, creation dates, and links to associated webhooks with total count. Essential for webhook management and monitoring subscription health.
  */
 export function webhookSubscriptionsList(
   client$: DwollaMcpCore,

@@ -32,7 +32,7 @@ import { Result } from "../types/fp.js";
  * List funding sources for an account
  *
  * @remarks
- * List funding sources for an account
+ * Get a list of all funding sources associated with a specific Main Dwolla Account. This endpoint returns both bank accounts and balance funding sources, with detailed information about each funding source's status, type, and available processing channels.
  */
 export function accountsFundingSourcesList(
   client$: DwollaMcpCore,

@@ -32,9 +32,7 @@ import { Result } from "../types/fp.js";
  * List available exchange connections
  *
  * @remarks
- * Retrieve a list of a customer's external bank accounts that have been authorized through MX Connect.
- * Each account is represented as an "available exchange connection" with details like the account name and associated availableConnectionToken.
- * This information is essential for creating an exchange and corresponding funding source within Dwolla.
+ * Returns available exchange connections for a customer's bank accounts authorized through MX Connect. Each connection includes an account name and availableConnectionToken required to create exchanges and funding sources for transfers.
  */
 export function customersListAvailableConnections(
   client$: DwollaMcpCore,

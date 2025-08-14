@@ -29,10 +29,10 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * List mass payments for an account
+ * List account mass payments
  *
  * @remarks
- * List mass payments for an account
+ * Returns a paginated list of mass payments created by your Main Dwolla account. Results are sorted by creation date in descending order (newest first) and can be filtered by correlation ID.
  */
 export function accountsMassPaymentsList(
   client$: DwollaMcpCore,

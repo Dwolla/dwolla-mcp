@@ -9,7 +9,7 @@ export const tool$rootGet: ToolDefinition = {
   name: "root-get",
   description: `root
 
-The entry point that clients can use to discover and explore the entire API.`,
+Retrieve the API root entry point to discover available resources and endpoints based on your OAuth access token permissions. Returns HAL+JSON with navigation links to accessible resources including accounts, customers, events, and webhook subscriptions depending on token scope. Essential for API exploration, dynamic resource discovery, and building adaptive client applications that respond to available permissions.`,
   scopes: ["read"],
   tool: async (client, ctx) => {
     const [result, apiCall] = await rootGet(

@@ -3,7 +3,7 @@
  */
 
 import { DwollaMcpCore } from "../core.js";
-import { encodeSimple } from "../lib/encodings.js";
+import { encodeFormQuery, encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -20,27 +20,27 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import {
-  GetBeneficialOwnershipStatusForCustomerRequest,
-  GetBeneficialOwnershipStatusForCustomerRequest$zodSchema,
-  GetBeneficialOwnershipStatusForCustomerResponse,
-  GetBeneficialOwnershipStatusForCustomerResponse$zodSchema,
-} from "../models/getbeneficialownershipstatusforcustomerop.js";
+  ListMassPaymentItemsRequest,
+  ListMassPaymentItemsRequest$zodSchema,
+  ListMassPaymentItemsResponse,
+  ListMassPaymentItemsResponse$zodSchema,
+} from "../models/listmasspaymentitemsop.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Retrieve beneficial ownership status
+ * List items for a mass payment
  *
  * @remarks
- * Retrieve beneficial ownership status
+ * Retrieve individual payment items within a mass payment with optional status filtering and pagination support. Each item represents a distinct payment with status indicators (failed, pending, success) showing whether a transfer was successfully created. Returns paginated item details including amount, destination, metadata, and error information for failed items. Supports filtering by status and standard pagination.
  */
-export function beneficialOwnersGetOwnershipStatus(
+export function massPaymentsItemsList(
   client$: DwollaMcpCore,
-  request: GetBeneficialOwnershipStatusForCustomerRequest,
+  request: ListMassPaymentItemsRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    GetBeneficialOwnershipStatusForCustomerResponse,
+    ListMassPaymentItemsResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -59,12 +59,12 @@ export function beneficialOwnersGetOwnershipStatus(
 
 async function $do(
   client$: DwollaMcpCore,
-  request: GetBeneficialOwnershipStatusForCustomerRequest,
+  request: ListMassPaymentItemsRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      GetBeneficialOwnershipStatusForCustomerResponse,
+      ListMassPaymentItemsResponse,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -78,8 +78,7 @@ async function $do(
 > {
   const parsed$ = safeParse(
     request,
-    (value$) =>
-      GetBeneficialOwnershipStatusForCustomerRequest$zodSchema.parse(value$),
+    (value$) => ListMassPaymentItemsRequest$zodSchema.parse(value$),
     "Input validation failed",
   );
   if (!parsed$.ok) {
@@ -94,9 +93,14 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-  const path$ = pathToFunc("/customers/{id}/beneficial-ownership")(
+  const path$ = pathToFunc("/mass-payments/{id}/items")(
     pathParams$,
   );
+  const query$ = encodeFormQuery({
+    "limit": payload$.limit,
+    "offset": payload$.offset,
+    "status": payload$.status,
+  });
 
   const headers$ = new Headers(compactMap({
     Accept: "application/vnd.dwolla.v1.hal+json",
@@ -106,7 +110,7 @@ async function $do(
 
   const context = {
     baseURL: options?.serverURL ?? client$._baseURL ?? "",
-    operationID: "getBeneficialOwnershipStatusForCustomer",
+    operationID: "listMassPaymentItems",
     oAuth2Scopes: [],
     resolvedSecurity: requestSecurity,
     securitySource: client$._options.security,
@@ -128,6 +132,7 @@ async function $do(
     baseURL: options?.serverURL,
     path: path$,
     headers: headers$,
+    query: query$,
     body: body$,
     timeoutMs: options?.timeoutMs || client$._options.timeoutMs
       || -1,
@@ -152,7 +157,7 @@ async function $do(
   };
 
   const [result$] = await M.match<
-    GetBeneficialOwnershipStatusForCustomerResponse,
+    ListMassPaymentItemsResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -161,15 +166,15 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, GetBeneficialOwnershipStatusForCustomerResponse$zodSchema, {
+    M.json(200, ListMassPaymentItemsResponse$zodSchema, {
       ctype: "application/vnd.dwolla.v1.hal+json",
-      key: "BeneficialOwnership",
+      key: "200_application/vnd.dwolla.v1.hal+json_object",
     }),
-    M.json(403, GetBeneficialOwnershipStatusForCustomerResponse$zodSchema, {
+    M.json(403, ListMassPaymentItemsResponse$zodSchema, {
       ctype: "application/vnd.dwolla.v1.hal+json",
       key: "403_application/vnd.dwolla.v1.hal+json_object",
     }),
-    M.json(404, GetBeneficialOwnershipStatusForCustomerResponse$zodSchema, {
+    M.json(404, ListMassPaymentItemsResponse$zodSchema, {
       ctype: "application/vnd.dwolla.v1.hal+json",
       key: "404_application/vnd.dwolla.v1.hal+json_object",
     }),

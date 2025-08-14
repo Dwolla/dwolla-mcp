@@ -14,7 +14,7 @@ export const tool$webhookSubscriptionsGet: ToolDefinition<typeof args> = {
   name: "webhook-subscriptions-get",
   description: `Retrieve a webhook subscription
 
-Retrieve a webhook subscription`,
+Retrieve detailed information for a specific webhook subscription by its unique identifier. Returns subscription configuration including URL endpoint, creation date, and links to associated webhooks for comprehensive subscription management. Essential for monitoring webhook subscription status and accessing webhook delivery history.`,
   scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {

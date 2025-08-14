@@ -14,7 +14,8 @@ export const tool$accountsFundingSourcesList: ToolDefinition<typeof args> = {
   name: "accounts-funding-sources-list",
   description: `List funding sources for an account
 
-List funding sources for an account`,
+Get a list of all funding sources associated with a specific Main Dwolla Account. This endpoint returns both bank accounts and balance funding sources, with detailed information about each funding source's status, type, and available processing channels.
+`,
   scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {

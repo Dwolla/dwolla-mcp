@@ -14,7 +14,7 @@ export const tool$exchangePartnersGet: ToolDefinition<typeof args> = {
   name: "exchange-partners-get",
   description: `Retrieve exchange partner
 
-Retrieve exchange partner`,
+Returns details for a specific open banking provider that integrates with Dwolla. Includes partner name, status, and creation date. Use this to verify partner availability before creating exchanges and funding sources.`,
   scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {

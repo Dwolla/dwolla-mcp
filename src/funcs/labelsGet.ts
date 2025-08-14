@@ -32,7 +32,7 @@ import { Result } from "../types/fp.js";
  * Retrieve a label
  *
  * @remarks
- * Retrieve a label
+ * Retrieve details for a specific Label used to categorize and track funds within your account. Returns Label information including unique identifier, current amount with currency, and creation timestamp.
  */
 export function labelsGet(
   client$: DwollaMcpCore,

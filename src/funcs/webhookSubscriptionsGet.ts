@@ -32,7 +32,7 @@ import { Result } from "../types/fp.js";
  * Retrieve a webhook subscription
  *
  * @remarks
- * Retrieve a webhook subscription
+ * Retrieve detailed information for a specific webhook subscription by its unique identifier. Returns subscription configuration including URL endpoint, creation date, and links to associated webhooks for comprehensive subscription management. Essential for monitoring webhook subscription status and accessing webhook delivery history.
  */
 export function webhookSubscriptionsGet(
   client$: DwollaMcpCore,

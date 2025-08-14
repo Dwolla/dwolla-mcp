@@ -32,7 +32,7 @@ import { Result } from "../types/fp.js";
  * Retrieve a document
  *
  * @remarks
- * Retrieve a document for a customer or beneficial owner
+ * Returns detailed information about a specific identity verification document, including its status, type, and verification results. Used to track document submission and verification progress during the business verification process.
  */
 export function documentsGet(
   client$: DwollaMcpCore,

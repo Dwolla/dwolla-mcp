@@ -14,7 +14,7 @@ export const tool$eventsGet: ToolDefinition<typeof args> = {
   name: "events-get",
   description: `Retrieve event
 
-Retrieve event`,
+Returns detailed information for a specific event representing a state change that occurred on a resource in your Dwolla application. Includes the event topic, timestamp, resource links, and correlation ID if applicable.`,
   scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {

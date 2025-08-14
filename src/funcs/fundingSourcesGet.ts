@@ -32,7 +32,7 @@ import { Result } from "../types/fp.js";
  * Retrieve a funding source
  *
  * @remarks
- * Retrieve a funding source
+ * Returns detailed information for a specific funding source, including its type, status, and verification details. Supports bank accounts (via Open Banking) and Dwolla balance (verified customers only).
  */
 export function fundingSourcesGet(
   client$: DwollaMcpCore,

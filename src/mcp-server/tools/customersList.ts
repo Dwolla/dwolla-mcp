@@ -14,7 +14,7 @@ export const tool$customersList: ToolDefinition<typeof args> = {
   name: "customers-list",
   description: `List and search customers
 
-List and search customers allowing you to filter by email and status, as well as search on key fields such as firstName, lastName, and businessName.`,
+Returns a paginated list of customers sorted by creation date. Supports fuzzy search across customer names, business names, and email addresses, plus exact filtering by email and verification status. Default limit is 25 customers per page, maximum 200.`,
   scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {

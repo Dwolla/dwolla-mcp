@@ -14,7 +14,7 @@ export const tool$documentsGet: ToolDefinition<typeof args> = {
   name: "documents-get",
   description: `Retrieve a document
 
-Retrieve a document for a customer or beneficial owner`,
+Returns detailed information about a specific identity verification document, including its status, type, and verification results. Used to track document submission and verification progress during the business verification process.`,
   scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {

@@ -28,7 +28,7 @@ import { Result } from "../types/fp.js";
  * List business classifications
  *
  * @remarks
- * Retrieve an _embedded list of business classifications that contains an _embedded list of industry classifications.
+ * Returns a directory of business and industry classifications required for creating business verified customers. Each business classification contains multiple industry classifications. The industry classification ID must be provided in the businessClassification parameter during business customer creation for verification.
  */
 export function businessClassificationsList(
   client$: DwollaMcpCore,

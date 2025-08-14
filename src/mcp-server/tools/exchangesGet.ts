@@ -14,7 +14,7 @@ export const tool$exchangesGet: ToolDefinition<typeof args> = {
   name: "exchanges-get",
   description: `Retrieve exchange resource
 
-Retrieve an exchange resource by its ID.`,
+Returns details for a specific exchange connection between Dwolla and an open banking partner for a customer's bank account. Includes exchange status, creation date, and links to the associated customer and exchange partner.`,
   scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {

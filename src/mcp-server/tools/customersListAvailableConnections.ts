@@ -16,10 +16,7 @@ export const tool$customersListAvailableConnections: ToolDefinition<
   name: "customers-list-available-connections",
   description: `List available exchange connections
 
-Retrieve a list of a customer's external bank accounts that have been authorized through MX Connect.
-Each account is represented as an "available exchange connection" with details like the account name and associated availableConnectionToken.
-This information is essential for creating an exchange and corresponding funding source within Dwolla.
-`,
+Returns available exchange connections for a customer's bank accounts authorized through MX Connect. Each connection includes an account name and availableConnectionToken required to create exchanges and funding sources for transfers.`,
   scopes: ["read"],
   args,
   tool: async (client, args, ctx) => {
