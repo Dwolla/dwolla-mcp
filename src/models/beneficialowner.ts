@@ -4,10 +4,6 @@
 
 import * as z from "zod";
 import { HalLink, HalLink$zodSchema } from "./hallink.js";
-import {
-  InternationalAddress,
-  InternationalAddress$zodSchema,
-} from "./internationaladdress.js";
 
 /**
  * Request body model for a Beneficial Owner
@@ -15,9 +11,6 @@ import {
 export type BeneficialOwner = {
   _links?: { [k: string]: HalLink } | undefined;
   id?: string | undefined;
-  firstName?: string | undefined;
-  lastName?: string | undefined;
-  address?: InternationalAddress | undefined;
   verificationStatus?: string | undefined;
   created?: string | undefined;
 };
@@ -28,10 +21,7 @@ export const BeneficialOwner$zodSchema: z.ZodType<
   unknown
 > = z.object({
   _links: z.record(HalLink$zodSchema).optional(),
-  address: InternationalAddress$zodSchema.optional(),
   created: z.string().datetime({ offset: true }).optional(),
-  firstName: z.string().optional(),
   id: z.string().optional(),
-  lastName: z.string().optional(),
   verificationStatus: z.string().optional(),
 }).describe("Request body model for a Beneficial Owner");

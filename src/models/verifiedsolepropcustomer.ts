@@ -11,9 +11,6 @@ import { HalLink, HalLink$zodSchema } from "./hallink.js";
 export type VerifiedSolePropCustomer = {
   _links?: { [k: string]: HalLink } | undefined;
   id?: string | undefined;
-  firstName?: string | undefined;
-  lastName?: string | undefined;
-  email?: string | undefined;
   type?: string | undefined;
   status?: string | undefined;
   correlationId?: string | undefined;
@@ -42,10 +39,7 @@ export const VerifiedSolePropCustomer$zodSchema: z.ZodType<
   city: z.string().optional(),
   correlationId: z.string().optional(),
   created: z.string().datetime({ offset: true }).optional(),
-  email: z.string().optional(),
-  firstName: z.string().optional(),
   id: z.string().optional(),
-  lastName: z.string().optional(),
   postalCode: z.string().optional(),
   state: z.string().optional(),
   status: z.string().optional(),

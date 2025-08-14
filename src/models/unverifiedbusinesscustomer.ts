@@ -11,9 +11,6 @@ import { HalLink, HalLink$zodSchema } from "./hallink.js";
 export type UnverifiedBusinessCustomer = {
   _links?: { [k: string]: HalLink } | undefined;
   id?: string | undefined;
-  firstName?: string | undefined;
-  lastName?: string | undefined;
-  email?: string | undefined;
   type?: string | undefined;
   status?: string | undefined;
   correlationId?: string | undefined;
@@ -30,10 +27,7 @@ export const UnverifiedBusinessCustomer$zodSchema: z.ZodType<
   businessName: z.string().optional(),
   correlationId: z.string().optional(),
   created: z.string().datetime({ offset: true }).optional(),
-  email: z.string().optional(),
-  firstName: z.string().optional(),
   id: z.string().optional(),
-  lastName: z.string().optional(),
   status: z.string().optional(),
   type: z.string().optional(),
 }).describe("Shared models between all Customer types");
