@@ -45,8 +45,8 @@ import { tool$fundingSourcesGet } from "./tools/fundingSourcesGet.js";
 import { tool$fundingSourcesGetVanRouting } from "./tools/fundingSourcesGetVanRouting.js";
 import { tool$fundingSourcesMicroDepositsGetMicroDeposits } from "./tools/fundingSourcesMicroDepositsGetMicroDeposits.js";
 import { tool$kbaGetQuestions } from "./tools/kbaGetQuestions.js";
-import { tool$labelLedgerEntriesGet } from "./tools/labelLedgerEntriesGet.js";
 import { tool$labelsGet } from "./tools/labelsGet.js";
+import { tool$labelsLedgerEntriesGet } from "./tools/labelsLedgerEntriesGet.js";
 import { tool$labelsLedgerEntriesList } from "./tools/labelsLedgerEntriesList.js";
 import { tool$labelsReallocationsGet } from "./tools/labelsReallocationsGet.js";
 import { tool$massPaymentsGet } from "./tools/massPaymentsGet.js";
@@ -73,7 +73,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "DwollaMcp",
-    version: "0.0.1-beta.3",
+    version: "0.0.1-beta.4",
   });
 
   const getClient = deps.getSDK || (() =>
@@ -149,7 +149,7 @@ export function createMCPServer(deps: {
   tool(tool$labelsGet);
   tool(tool$customersLabelsList);
   tool(tool$labelsLedgerEntriesList);
-  tool(tool$labelLedgerEntriesGet);
+  tool(tool$labelsLedgerEntriesGet);
   tool(tool$labelsReallocationsGet);
   tool(tool$eventsList);
   tool(tool$eventsGet);
