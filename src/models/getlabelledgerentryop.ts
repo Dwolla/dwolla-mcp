@@ -10,14 +10,14 @@ import {
 } from "./labelledgerentry.js";
 import { NotFoundError, NotFoundError$zodSchema } from "./notfounderror.js";
 
-export type GetLabelLedgerEntryRequest = { id: string };
+export type GetLabelLedgerEntryRequest = { ledgerEntryId: string };
 
 export const GetLabelLedgerEntryRequest$zodSchema: z.ZodType<
   GetLabelLedgerEntryRequest,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().describe("A label ledger entry unique identifier"),
+  ledgerEntryId: z.string().describe("A label ledger entry unique identifier"),
 });
 
 export type GetLabelLedgerEntryResponse = {

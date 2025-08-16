@@ -34,7 +34,7 @@ import { Result } from "../types/fp.js";
  * @remarks
  * Returns detailed information for a specific ledger entry on a Label, including its amount, currency, and creation timestamp.
  */
-export function labelLedgerEntriesGet(
+export function labelsLedgerEntriesGet(
   client$: DwollaMcpCore,
   request: GetLabelLedgerEntryRequest,
   options?: RequestOptions,
@@ -88,12 +88,12 @@ async function $do(
   const body$ = null;
 
   const pathParams$ = {
-    id: encodeSimple("id", payload$.id, {
+    ledgerEntryId: encodeSimple("ledgerEntryId", payload$.ledgerEntryId, {
       explode: false,
       charEncoding: "percent",
     }),
   };
-  const path$ = pathToFunc("/ledger-entries/{id}")(
+  const path$ = pathToFunc("/ledger-entries/{ledgerEntryId}")(
     pathParams$,
   );
 

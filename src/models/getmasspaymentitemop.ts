@@ -8,14 +8,14 @@ import {
   MassPaymentItem$zodSchema,
 } from "./masspaymentitem.js";
 
-export type GetMassPaymentItemRequest = { id: string };
+export type GetMassPaymentItemRequest = { itemId: string };
 
 export const GetMassPaymentItemRequest$zodSchema: z.ZodType<
   GetMassPaymentItemRequest,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().describe("ID of item to be retrieved in mass payment"),
+  itemId: z.string().describe("ID of item to be retrieved in mass payment"),
 });
 
 /**

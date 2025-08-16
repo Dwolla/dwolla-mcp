@@ -6,14 +6,14 @@ import * as z from "zod";
 import { ForbiddenError, ForbiddenError$zodSchema } from "./forbiddenerror.js";
 import { NotFoundError, NotFoundError$zodSchema } from "./notfounderror.js";
 
-export type RetrieveLabelReallocationRequest = { id: string };
+export type RetrieveLabelReallocationRequest = { reallocationId: string };
 
 export const RetrieveLabelReallocationRequest$zodSchema: z.ZodType<
   RetrieveLabelReallocationRequest,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().describe("Label reallocation unique identifier"),
+  reallocationId: z.string().describe("Label reallocation unique identifier"),
 });
 
 export type RetrieveLabelReallocationSelf = {
