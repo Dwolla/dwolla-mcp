@@ -24,15 +24,12 @@ export const Subscription$zodSchema: z.ZodType<
   href: z.string().optional(),
 });
 
-export type WebhookRetry = { href?: string | undefined };
+export type Retry = { href?: string | undefined };
 
-export const WebhookRetry$zodSchema: z.ZodType<
-  WebhookRetry,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  href: z.string().optional(),
-});
+export const Retry$zodSchema: z.ZodType<Retry, z.ZodTypeDef, unknown> = z
+  .object({
+    href: z.string().optional(),
+  });
 
 export type WebhookEvent = { href?: string | undefined };
 
@@ -47,7 +44,7 @@ export const WebhookEvent$zodSchema: z.ZodType<
 export type WebhookLinks = {
   self?: WebhookSelf | undefined;
   subscription?: Subscription | undefined;
-  retry?: WebhookRetry | undefined;
+  retry?: Retry | undefined;
   event?: WebhookEvent | undefined;
 };
 
@@ -57,7 +54,7 @@ export const WebhookLinks$zodSchema: z.ZodType<
   unknown
 > = z.object({
   event: z.lazy(() => WebhookEvent$zodSchema).optional(),
-  retry: z.lazy(() => WebhookRetry$zodSchema).optional(),
+  retry: z.lazy(() => Retry$zodSchema).optional(),
   self: z.lazy(() => WebhookSelf$zodSchema).optional(),
   subscription: z.lazy(() => Subscription$zodSchema).optional(),
 });
