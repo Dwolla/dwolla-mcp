@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: dbccbcaa-cdde-434b-b972-38fb6d1127e5
 management:
-  docChecksum: d12d5605efed29f55b7d4aeedccf4ea0
+  docChecksum: c11e7402ca7bc0bb053a196c57fc2394
   docVersion: "2.0"
-  speakeasyVersion: 1.603.2
-  generationVersion: 2.681.8
-  releaseVersion: 0.0.1-beta.3
-  configChecksum: a3a0afb200bf6bb2d43c7e4e9f14bb92
+  speakeasyVersion: 1.605.1
+  generationVersion: 2.684.0
+  releaseVersion: 0.0.1-beta.4
+  configChecksum: 8817c4c71ef4ae6172faaa92e88edcdd
   repoURL: https://github.com/Dwolla/dwolla-mcp.git
   published: true
 features:
@@ -64,8 +64,8 @@ generatedFiles:
   - src/funcs/fundingSourcesGetVanRouting.ts
   - src/funcs/fundingSourcesMicroDepositsGetMicroDeposits.ts
   - src/funcs/kbaGetQuestions.ts
-  - src/funcs/labelLedgerEntriesGet.ts
   - src/funcs/labelsGet.ts
+  - src/funcs/labelsLedgerEntriesGet.ts
   - src/funcs/labelsLedgerEntriesList.ts
   - src/funcs/labelsReallocationsGet.ts
   - src/funcs/massPaymentsGet.ts
@@ -143,8 +143,8 @@ generatedFiles:
   - src/mcp-server/tools/fundingSourcesGetVanRouting.ts
   - src/mcp-server/tools/fundingSourcesMicroDepositsGetMicroDeposits.ts
   - src/mcp-server/tools/kbaGetQuestions.ts
-  - src/mcp-server/tools/labelLedgerEntriesGet.ts
   - src/mcp-server/tools/labelsGet.ts
+  - src/mcp-server/tools/labelsLedgerEntriesGet.ts
   - src/mcp-server/tools/labelsLedgerEntriesList.ts
   - src/mcp-server/tools/labelsReallocationsGet.ts
   - src/mcp-server/tools/massPaymentsGet.ts
@@ -264,3 +264,38 @@ generatedFiles:
   - tsconfig.json
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: |
+  ## SDK Changes Detected:
+  * `DwollaMcp.accounts.fundingSources.list()`:  `response._embedded.funding-sources.[].channels.[]` **Changed** **Breaking** :warning:
+  * `DwollaMcp.exchangePartners.list()`:  `response._embedded.exchange-partners.[]` **Changed** **Breaking** :warning:
+  * `DwollaMcp.customers.transfers.list()`:  `response._embedded.transfers.[]` **Changed** **Breaking** :warning:
+  * `DwollaMcp.transfers.get()`:  `response` **Changed** **Breaking** :warning:
+  * `DwollaMcp.fundingSources.get()`:  `response.channels.[]` **Changed** **Breaking** :warning:
+  * `DwollaMcp.customers.fundingSources.list()`:  `response.[]._embedded.funding-sources.[].channels.[]` **Changed** **Breaking** :warning:
+  * `DwollaMcp.accounts.transfers.list()`:  `response._embedded.transfers.[]` **Changed** **Breaking** :warning:
+  * `DwollaMcp.transfers.listFees()`: **Deleted** **Breaking** :warning:
+  * `DwollaMcp.labels.listForCustomer()`: **Deleted** **Breaking** :warning:
+  * `DwollaMcp.labels.ledgerEntries.get()`: **Added**
+  * `DwollaMcp.labels.reallocations.get()`: **Added**
+  * `DwollaMcp.webhookSubscriptions.webhooks.list()`: **Added**
+  * `DwollaMcp.webhooks.retries.list()`: **Added**
+  * `DwollaMcp.beneficialOwners.getOwnershipStatus()`: **Deleted** **Breaking** :warning:
+  * `DwollaMcp.fundingSources.getMicroDeposits()`: **Deleted** **Breaking** :warning:
+  * `DwollaMcp.fundingSources.getBalance()`: **Deleted** **Breaking** :warning:
+  * `DwollaMcp.customers.beneficialOwnership.get()`: **Added**
+  * `DwollaMcp.transfers.getFailureReason()`: **Deleted** **Breaking** :warning:
+  * `DwollaMcp.massPayments.listItems()`: **Deleted** **Breaking** :warning:
+  * `DwollaMcp.massPayments.getItem()`: **Deleted** **Breaking** :warning:
+  * `DwollaMcp.labels.ledgerEntries.list()`: **Added**
+  * `DwollaMcp.labels.listLedgerEntries()`: **Deleted** **Breaking** :warning:
+  * `DwollaMcp.labels.getLedgerEntry()`: **Deleted** **Breaking** :warning:
+  * `DwollaMcp.labels.getReallocation()`: **Deleted** **Breaking** :warning:
+  * `DwollaMcp.webhookSubscriptions.listWebhooks()`: **Deleted** **Breaking** :warning:
+  * `DwollaMcp.webhooks.listRetries()`: **Deleted** **Breaking** :warning:
+  * `DwollaMcp.customers.labels.list()`: **Added**
+  * `DwollaMcp.massPayments.items.get()`: **Added**
+  * `DwollaMcp.massPayments.items.list()`: **Added**
+  * `DwollaMcp.transfers.failure.get()`: **Added**
+  * `DwollaMcp.transfers.fees.list()`: **Added**
+  * `DwollaMcp.fundingSources.balance.get()`: **Added**
+  * `DwollaMcp.fundingSources.microDeposits.getMicroDeposits()`: **Added**

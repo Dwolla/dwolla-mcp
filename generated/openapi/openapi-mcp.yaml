@@ -2088,6 +2088,7 @@ paths:
       x-speakeasy-mcp:
         scopes:
           - read
+  /on-demand-authorizations: {}
   /transfers: {}
   /transfers/{id}:
     get:
@@ -2489,7 +2490,6 @@ paths:
       x-speakeasy-mcp:
         scopes:
           - read
-  /on-demand-authorizations: {}
   /mass-payments: {}
   /mass-payments/{id}:
     get:
@@ -2730,14 +2730,14 @@ paths:
       x-speakeasy-mcp:
         scopes:
           - read
-  /mass-payment-items/{id}:
+  /mass-payment-items/{itemId}:
     get:
       tags:
         - mass payments
       summary: Retrieve mass payment item
       description: Retrieve detailed information for a specific mass payment item by its unique identifier. Returns item status, amount, metadata, and links to the parent mass payment, associated transfer, and destination funding source. Use this endpoint to check the processing status and details of an individual item within a mass payment batch.
       operationId: getMassPaymentItem
-      x-speakeasy-group: massPaymentsItems
+      x-speakeasy-group: massPayments.items
       x-speakeasy-name-override: get
       x-codeSamples:
         - lang: bash
@@ -2778,7 +2778,7 @@ paths:
             mass_payment_item = app_token.get mass_payment_item_url
             mass_payment_item.status # => "success"
       parameters:
-        - name: id
+        - name: itemId
           in: path
           description: ID of item to be retrieved in mass payment
           required: true
@@ -3224,14 +3224,14 @@ paths:
       x-speakeasy-mcp:
         scopes:
           - read
-  /ledger-entries/{id}:
+  /ledger-entries/{ledgerEntryId}:
     get:
       tags:
         - labels
       summary: Retrieve a label ledger entry
       description: Returns detailed information for a specific ledger entry on a Label, including its amount, currency, and creation timestamp.
       operationId: getLabelLedgerEntry
-      x-speakeasy-group: labelLedgerEntries
+      x-speakeasy-group: labels.ledgerEntries
       x-speakeasy-name-override: get
       x-codeSamples:
         - lang: bash
@@ -3272,7 +3272,7 @@ paths:
             ledger_entry = app_token.get ledger_entry_url
             ledger_entry.id # => "32d68709-62dd-43d6-a6df-562f4baec526"
       parameters:
-        - name: id
+        - name: ledgerEntryId
           in: path
           description: A label ledger entry unique identifier
           required: true
@@ -3305,14 +3305,14 @@ paths:
         scopes:
           - read
   /label-reallocations: {}
-  /label-reallocations/{id}:
+  /label-reallocations/{reallocationId}:
     get:
       tags:
         - labels
       summary: Retrieve a label reallocation
       description: Retrieve details for a specific label reallocation that transfers funds between Labels. Returns reallocation information including source and destination Labels, amount transferred, status, and creation timestamp. Use this to track and audit fund movements between different Labels.
       operationId: retrieveLabelReallocation
-      x-speakeasy-group: labelsReallocations
+      x-speakeasy-group: labels.reallocations
       x-speakeasy-name-override: get
       x-codeSamples:
         - lang: bash
@@ -3353,7 +3353,7 @@ paths:
             label_reallocation = app_token.get label_reallocation_url
             label_reallocation.created # => "2019-05-16T13:41:31.036Z"
       parameters:
-        - name: id
+        - name: reallocationId
           in: path
           description: Label reallocation unique identifier
           required: true
@@ -6975,6 +6975,25 @@ components:
             currency:
               type: string
               example: USD
+    OnDemandAuthorization:
+      title: OnDemandAuthorization
+      type: object
+      properties:
+        _links:
+          type: object
+          properties:
+            self:
+              type: object
+              properties:
+                href:
+                  type: string
+                  example: https://api.dwolla.com/on-demand-authorizations/30e7c028-0bdf-e511-80de-0aa34a9b2388
+        bodyText:
+          type: string
+          example: I agree that future payments to Company ABC inc. will be processed by the Dwolla payment system from the selected account above. In order to cancel this authorization, I will change my payment settings within my Company ABC inc. account.
+        buttonText:
+          type: string
+          example: Agree & Continue
     SourceNotFoundError:
       title: SourceNotFoundError
       type: object
@@ -9251,25 +9270,6 @@ components:
                   _links:
                     type: object
                     example: {}
-    OnDemandAuthorization:
-      title: OnDemandAuthorization
-      type: object
-      properties:
-        _links:
-          type: object
-          properties:
-            self:
-              type: object
-              properties:
-                href:
-                  type: string
-                  example: https://api.dwolla.com/on-demand-authorizations/30e7c028-0bdf-e511-80de-0aa34a9b2388
-        bodyText:
-          type: string
-          example: I agree that future payments to Company ABC inc. will be processed by the Dwolla payment system from the selected account above. In order to cancel this authorization, I will change my payment settings within my Company ABC inc. account.
-        buttonText:
-          type: string
-          example: Agree & Continue
     MassPaymentItem:
       title: MassPaymentItem
       type: object

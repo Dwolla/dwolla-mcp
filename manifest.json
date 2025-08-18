@@ -1,7 +1,7 @@
 {
   "dxt_version": "0.1",
   "name": "@dwolla/mcp-server",
-  "version": "0.0.1-beta.3",
+  "version": "0.0.1-beta.4",
   "description": "",
   "long_description": "Dwolla API: Dwolla API Documentation",
   "author": {
@@ -155,7 +155,7 @@
       "description": "List label ledger entries\n\nReturns all ledger entries for a specific Label, sorted by creation date (newest first). Supports pagination with limit and offset parameters. Each ledger entry includes its amount, currency, and creation timestamp."
     },
     {
-      "name": "label-ledger-entries-get",
+      "name": "labels-ledger-entries-get",
       "description": "Retrieve a label ledger entry\n\nReturns detailed information for a specific ledger entry on a Label, including its amount, currency, and creation timestamp."
     },
     {

@@ -88,12 +88,12 @@ async function $do(
   const body$ = null;
 
   const pathParams$ = {
-    id: encodeSimple("id", payload$.id, {
+    itemId: encodeSimple("itemId", payload$.itemId, {
       explode: false,
       charEncoding: "percent",
     }),
   };
-  const path$ = pathToFunc("/mass-payment-items/{id}")(
+  const path$ = pathToFunc("/mass-payment-items/{itemId}")(
     pathParams$,
   );
 

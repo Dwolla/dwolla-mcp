@@ -88,12 +88,12 @@ async function $do(
   const body$ = null;
 
   const pathParams$ = {
-    id: encodeSimple("id", payload$.id, {
+    reallocationId: encodeSimple("reallocationId", payload$.reallocationId, {
       explode: false,
       charEncoding: "percent",
     }),
   };
-  const path$ = pathToFunc("/label-reallocations/{id}")(
+  const path$ = pathToFunc("/label-reallocations/{reallocationId}")(
     pathParams$,
   );
 
