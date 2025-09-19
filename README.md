@@ -78,7 +78,7 @@ The DXT package includes the MCP server and all necessary configuration. Once in
 <details>
 <summary>Cursor</summary>
 
-[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=DwollaMcp&config=eyJtY3BTZXJ2ZXJzIjp7IkR3b2xsYU1jcCI6eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyJAZHdvbGxhL21jcC1zZXJ2ZXIiLCJzdGFydCIsIi0tYmVhcmVyLWF1dGgiLCIuLi4iXX19fQ==)
+[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=DwollaMcp&config=eyJtY3BTZXJ2ZXJzIjp7IkR3b2xsYU1jcCI6eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyJAZHdvbGxhL21jcC1zZXJ2ZXIiLCJzdGFydCIsIi0tc2VydmVyLWluZGV4IiwiLi4uIiwiLS1iZWFyZXItYXV0aCIsIi4uLiJdfX19)
 
 Or manually:
 
@@ -95,6 +95,8 @@ Or manually:
       "args": [
         "@dwolla/mcp-server",
         "start",
+        "--server-index",
+        "...",
         "--bearer-auth",
         "..."
       ]
@@ -109,7 +111,7 @@ Or manually:
 <summary>Claude Code CLI</summary>
 
 ```bash
-claude mcp add @dwolla/mcp-server npx @dwolla/mcp-server start -- --bearer-auth ...
+claude mcp add @dwolla/mcp-server npx @dwolla/mcp-server start -- --server-index ... --bearer-auth ...
 ```
 
 </details>
@@ -131,6 +133,8 @@ Refer to [Official Windsurf documentation](https://docs.windsurf.com/windsurf/ca
       "args": [
         "@dwolla/mcp-server",
         "start",
+        "--server-index",
+        "...",
         "--bearer-auth",
         "..."
       ]
@@ -155,6 +159,8 @@ Refer to [Official VS Code documentation](https://code.visualstudio.com/api/exte
       "args": [
         "@dwolla/mcp-server",
         "start",
+        "--server-index",
+        "...",
         "--bearer-auth",
         "..."
       ]
@@ -184,6 +190,8 @@ Paste the following config in the configuration
       "args": [
         "@dwolla/mcp-server",
         "start",
+        "--server-index",
+        "...",
         "--bearer-auth",
         "..."
       ]
@@ -200,7 +208,7 @@ Paste the following config in the configuration
 To start the MCP server, run:
 
 ```bash
-npx @dwolla/mcp-server start --bearer-auth ...
+npx @dwolla/mcp-server start --server-index ... --bearer-auth ...
 ```
 
 For a full list of server arguments, run:

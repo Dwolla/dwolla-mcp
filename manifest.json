@@ -1,7 +1,7 @@
 {
   "dxt_version": "0.1",
   "name": "@dwolla/mcp-server",
-  "version": "0.0.1-beta.4",
+  "version": "0.0.1-beta.5",
   "description": "",
   "long_description": "Dwolla API: Dwolla API Documentation",
   "author": {
@@ -15,6 +15,8 @@
       "args": [
         "${__dirname}/bin/mcp-server.js",
         "start",
+        "--server-index",
+        "${user_config.server_index}",
         "--bearer-auth",
         "${user_config.bearer_auth}"
       ]
@@ -140,6 +142,14 @@
       "documentation"
     ],
   "user_config": {
+      "server_index": {
+        "type": "number",
+        "title": "Server Index",
+        "description": "Available servers: [https://api.dwolla.com, https://api-sandbox.dwolla.com]",
+        "required": false,
+        "default": "0",
+        "max": 1
+      },
       "bearer_auth": {
         "type": "string",
         "title": "bearerAuth",
