@@ -38,6 +38,10 @@ export type SDKOptions = {
    */
   serverURL?: string | undefined;
   /**
+   * Allows overriding the default user agent used by the SDK
+   */
+  userAgent?: string | undefined;
+  /**
    * Allows overriding the default retry config used by the SDK
    */
   retryConfig?: RetryConfig;
@@ -65,8 +69,8 @@ export function serverURLFromOptions(options: SDKOptions): URL | null {
 export const SDK_METADATA = {
   language: "typescript",
   openapiDocVersion: "2.0",
-  sdkVersion: "0.0.1-beta.4",
-  genVersion: "2.683.1",
+  sdkVersion: "0.0.1-beta.5",
+  genVersion: "2.707.0",
   userAgent:
-    "speakeasy-sdk/mcp-typescript 0.0.1-beta.4 2.683.1 2.0 @dwolla/mcp-server",
+    "speakeasy-sdk/mcp-typescript 0.0.1-beta.5 2.707.0 2.0 @dwolla/mcp-server",
 } as const;

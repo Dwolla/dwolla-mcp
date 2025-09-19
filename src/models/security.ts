@@ -8,5 +8,5 @@ export type Security = { bearerAuth: string };
 
 export const Security$zodSchema: z.ZodType<Security, z.ZodTypeDef, unknown> = z
   .object({
-    bearerAuth: z.string(),
+    bearerAuth: z.string().describe("HTTP Bearer"),
   });
