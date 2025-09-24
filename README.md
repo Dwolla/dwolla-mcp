@@ -20,6 +20,7 @@ Model Context Protocol (MCP) Server for the _Dwolla_ API.
 Dwolla API: Dwolla API Documentation
 <!-- End Summary [summary] -->
 
+<!-- Start custom addition -->
 ## 🏦 About Dwolla & This MCP Server
 
 This MCP server enables AI agents to **retrieve and analyze** data from Dwolla's payment platform using natural language. It provides read-only access to Dwolla's comprehensive payment infrastructure, allowing you to inspect accounts, analyze transfer history, monitor customer data, and generate insights from your payment operations.
@@ -41,6 +42,7 @@ This MCP server enables AI agents to **retrieve and analyze** data from Dwolla's
 
 - **Sandbox Environment** (`https://api-sandbox.dwolla.com`) - Perfect for development and testing
 - **Production Environment** (`https://api.dwolla.com`) - Live payment data access
+<!-- End custom addition -->
 
 <!-- Start Table of Contents [toc] -->
 ## Table of Contents
@@ -57,6 +59,65 @@ This MCP server enables AI agents to **retrieve and analyze** data from Dwolla's
   * [Contributions](#contributions)
 
 <!-- End Table of Contents [toc] -->
+
+
+<!-- Start custom addition -->
+## 🔑 Environment Setup & Authentication
+
+### Prerequisites
+
+Before using the Dwolla MCP server, you'll need:
+
+- **Node.js** 18+ and npm
+- **Dwolla Account** ([Sandbox Account Sign-up](https://accounts-sandbox.dwolla.com/sign-up))
+- **Bearer Token** generated using your API client credential sfrom your Dwolla application
+
+### Getting Your Bearer Token
+
+1. **Log in to your Dwolla Dashboard**
+   - Sandbox: [https://dashboard-sandbox.dwolla.com](https://dashboard-sandbox.dwolla.com) 
+   - Production: [https://dashboard.dwolla.com](https://dashboard.dwolla.com)
+
+2. **Create or select your application**
+3. **Generate a bearer token** 
+4. **Copy your bearer token**
+
+### Environment Configuration
+
+You will need to specify which environment you want to run the tools against:
+
+**Sandbox Environment** (Recommended for testing):
+```bash
+--server-index 1
+```
+
+**Production Environment** (Live data):
+```bash
+--server-index 0
+```
+
+<details>
+<summary><strong>Local Development</strong></summary>
+
+For local development and testing:
+
+```bash
+# Clone the repository
+git clone https://github.com/dwolla/dwolla-mcp.git
+cd dwolla-mcp
+
+# Install dependencies
+npm install
+
+# Build the project
+npm run build
+
+# Run with your bearer token
+node bin/mcp-server.js start --bearer-auth "your_token_here" --server-index 1
+```
+</details>
+
+<!-- End custom addition -->
 
 <!-- Start Installation [installation] -->
 ## Installation
@@ -220,161 +281,7 @@ npx @dwolla/mcp-server --help
 </details>
 <!-- End Installation [installation] -->
 
-## 🔑 Environment Setup & Authentication
-
-### Prerequisites
-
-Before using the Dwolla MCP server, you'll need:
-
-- **Node.js** 18+ and npm
-- **Dwolla Account** ([Sandbox Account Sign-up](https://accounts-sandbox.dwolla.com/sign-up))
-- **Bearer Token** generated using your API client credential sfrom your Dwolla application
-
-### Getting Your Bearer Token
-
-1. **Log in to your Dwolla Dashboard**
-   - Sandbox: [https://dashboard-sandbox.dwolla.com](https://dashboard-sandbox.dwolla.com) 
-   - Production: [https://dashboard.dwolla.com](https://dashboard.dwolla.com)
-
-2. **Create or select your application**
-3. **Generate a bearer token** 
-4. **Copy your bearer token**
-
-### Environment Configuration
-
-You will need to specify which environment you want to run the tools against:
-
-**Sandbox Environment** (Recommended for testing):
-```bash
---server-url https://api-sandbox.dwolla.com
-```
-
-**Production Environment** (Live data):
-```bash
---server-url https://api.dwolla.com
-```
-
-### Multi-Client Setup
-
-Choose your preferred MCP client for detailed setup instructions:
-
-<details>
-<summary><strong>Claude Desktop</strong></summary>
-
-1. Open Claude Desktop
-2. Go to `Settings → Developer → Edit Config`
-3. Add to your `claude_desktop_config.json`:
-
-```json
-{
-  "mcpServers": {
-    "DwollaMcp": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "--package",
-        "@dwolla/mcp-server",
-        "--",
-        "mcp",
-        "start",
-        "--bearer-auth",
-        "your_token_here",
-        "--server-url",
-        "https://api-sandbox.dwolla.com"
-      ]
-    }
-  }
-}
-```
-
-4. Save and restart Claude Desktop
-</details>
-
-<details>
-<summary><strong>Cursor</strong></summary>
-
-1. Open Cursor Settings
-2. Go to `Settings → Cursor Settings → MCP`
-3. Click `+ Add New Global MCP Server`
-4. Add this configuration:
-
-```json
-{
-  "DwollaMcp": {
-    "command": "npx",
-    "args": [
-      "-y",
-      "--package",
-      "@dwolla/mcp-server",
-      "--",
-      "mcp",
-      "start",
-      "--bearer-auth",
-      "your_token_here",
-      "--server-url",
-      "https://api-sandbox.dwolla.com"
-    ]
-  }
-}
-```
-
-5. Save the configuration
-</details>
-
-<details>
-<summary><strong>VS Code</strong></summary>
-
-1. Open VS Code Settings
-2. Search for "mcp" to enable MCP support
-3. Add to your settings.json or workspace settings:
-
-```json
-{
-  "mcp": {
-    "servers": {
-      "dwolla": {
-        "type": "stdio",
-        "command": "npx",
-        "args": [
-          "-y",
-          "--package", 
-          "@dwolla/mcp-server",
-          "--",
-          "mcp",
-          "start",
-          "--bearer-auth",
-          "your_token_here"
-        ]
-      }
-    }
-  }
-}
-```
-
-4. Restart VS Code
-</details>
-
-<details>
-<summary><strong>Local Development</strong></summary>
-
-For local development and testing:
-
-```bash
-# Clone the repository
-git clone https://github.com/dwolla/dwolla-mcp.git
-cd dwolla-mcp
-
-# Install dependencies
-npm install
-
-# Build the project
-npm run build
-
-# Run with your bearer token
-node bin/mcp-server.js start --bearer-auth "your_token_here" --server-url https://api-sandbox.dwolla.com
-```
-</details>
-
+<!-- Start custom addition -->
 ## 💬 Usage Examples & Business Applications
 
 ### 🎧 Customer Support & Operations
@@ -625,6 +532,8 @@ curl -H "Authorization: Bearer your_token_here" \
 - **Always start with Sandbox** for development and testing
 - Use separate tokens for sandbox and production environments
 - Never use production tokens in development/testing
+
+<!-- End custom addition -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
 
