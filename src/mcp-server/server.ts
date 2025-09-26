@@ -48,7 +48,7 @@ export function createMCPServer(deps: {
   getSDK?: () => DwollaMcpCore;
   serverURL?: string | undefined;
   security?: SDKOptions["security"] | undefined;
-  serverIdx?: SDKOptions["serverIdx"] | undefined;
+  server?: SDKOptions["server"] | undefined;
 }) {
   const server = new McpServer({
     name: "DwollaMcp",
@@ -59,7 +59,7 @@ export function createMCPServer(deps: {
     new DwollaMcpCore({
       security: deps.security,
       serverURL: deps.serverURL,
-      serverIdx: deps.serverIdx,
+      server: deps.server,
       debugLogger: deps.logger.level === "debug"
         ? {
           log: (...args) => console.log(...args),

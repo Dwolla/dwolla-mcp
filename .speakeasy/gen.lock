@@ -1,10 +1,10 @@
 lockVersion: 2.0.0
 id: dbccbcaa-cdde-434b-b972-38fb6d1127e5
 management:
-  docChecksum: e2a0c1692b6a76159a9bfe0aba3958df
+  docChecksum: e48a22408d6be109cde5707874b5fa1c
   docVersion: "2.0"
-  speakeasyVersion: 1.621.0
-  generationVersion: 2.707.0
+  speakeasyVersion: 1.630.0
+  generationVersion: 2.716.10
   releaseVersion: 0.0.1-beta.5
   configChecksum: 0f93c684b175f5a065fc169c8dd773f4
   repoURL: https://github.com/Dwolla/dwolla-mcp.git
@@ -13,7 +13,7 @@ features:
   mcp-typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.0
-    core: 0.4.0
+    core: 0.4.2
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     globalSecurity: 0.1.1
@@ -23,7 +23,8 @@ features:
     responseFormat: 0.1.0
     retries: 0.1.0
     sdkHooks: 0.2.0
-    unions: 0.1.0
+    serverIDs: 0.1.0
+    unions: 0.1.2
 generatedFiles:
   - .dxtignore
   - .gitattributes

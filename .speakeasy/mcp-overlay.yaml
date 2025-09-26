@@ -4,6 +4,13 @@ info:
   version: 0.0.1
 extends: https://raw.githubusercontent.com/Dwolla/dwolla-openapi/refs/heads/main/openapi.yml
 actions:
+  # Override Speakeasy server-id for each server
+  - target: $.servers[0]
+    update:
+      x-speakeasy-server-id: prod
+  - target: $.servers[1]
+    update:
+      x-speakeasy-server-id: sandbox
   # Remove all non-GET methods from all paths
   - target: $.paths.*.post
     remove: true
