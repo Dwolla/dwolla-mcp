@@ -1,10 +1,10 @@
 lockVersion: 2.0.0
 id: dbccbcaa-cdde-434b-b972-38fb6d1127e5
 management:
-  docChecksum: e48a22408d6be109cde5707874b5fa1c
+  docChecksum: b8add11d2762277381e7fce7491fbeac
   docVersion: "2.0"
-  speakeasyVersion: 1.630.0
-  generationVersion: 2.716.10
+  speakeasyVersion: 1.631.4
+  generationVersion: 2.716.16
   releaseVersion: 0.0.1-beta.5
   configChecksum: 0f93c684b175f5a065fc169c8dd773f4
   repoURL: https://github.com/Dwolla/dwolla-mcp.git

@@ -88,12 +88,12 @@ You will need to specify which environment you want to run the tools against:
 
 **Sandbox Environment** (Recommended for testing):
 ```bash
---server-index 1
+--server sandbox
 ```
 
 **Production Environment** (Live data):
 ```bash
---server-index 0
+--server prod
 ```
 
 <details>
@@ -113,7 +113,7 @@ npm install
 npm run build
 
 # Run with your bearer token
-node bin/mcp-server.js start --bearer-auth "your_token_here" --server-index 1
+node bin/mcp-server.js start --bearer-auth "your_token_here" --server "sandbox"
 ```
 </details>
 
@@ -501,7 +501,7 @@ curl -H "Authorization: Bearer your_token_here" \
 **Test with MCP Inspector**
 - Use the [MCP Inspector](https://modelcontextprotocol.io/docs/tools/inspector) to test your server:
   ```bash
-  npx @modelcontextprotocol/inspector npx -y --package @dwolla/mcp-server -- mcp start --bearer-auth "your_token" --server-url https://api-sandbox.dwolla.com
+  npx @modelcontextprotocol/inspector npx -y --package @dwolla/mcp-server -- mcp start --bearer-auth "your_token" --server "sandbox"
   ```
 
 ### 💡 Performance Optimization

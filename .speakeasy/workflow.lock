@@ -1,9 +1,9 @@
-speakeasyVersion: 1.630.0
+speakeasyVersion: 1.631.4
 sources:
     Dwolla API:
         sourceNamespace: dwolla-api
-        sourceRevisionDigest: sha256:59ff5b356bd633fe635a440cfdd849ea705e74bb0c57b787cab41eba2b0df2ab
-        sourceBlobDigest: sha256:a55d98ab04a929cfd38f04e6f1319345703df15e207718ec823ad5d040558758
+        sourceRevisionDigest: sha256:91511b0760684eca5344c9ed17a5fb27fbd34e082b57ff215e12c55b860dfb98
+        sourceBlobDigest: sha256:49193c92ec6d4bc8725d9d4e2e2d3d53a59237ae7add8e38b43ba07eca2186b3
         tags:
             - latest
             - "2.0"
@@ -11,8 +11,8 @@ targets:
     dwolla-mcp:
         source: Dwolla API
         sourceNamespace: dwolla-api
-        sourceRevisionDigest: sha256:59ff5b356bd633fe635a440cfdd849ea705e74bb0c57b787cab41eba2b0df2ab
-        sourceBlobDigest: sha256:a55d98ab04a929cfd38f04e6f1319345703df15e207718ec823ad5d040558758
+        sourceRevisionDigest: sha256:91511b0760684eca5344c9ed17a5fb27fbd34e082b57ff215e12c55b860dfb98
+        sourceBlobDigest: sha256:49193c92ec6d4bc8725d9d4e2e2d3d53a59237ae7add8e38b43ba07eca2186b3
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
