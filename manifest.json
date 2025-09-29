@@ -15,8 +15,8 @@
       "args": [
         "${__dirname}/bin/mcp-server.js",
         "start",
-        "--server-index",
-        "${user_config.server_index}",
+        "--server",
+        "${user_config.server}",
         "--bearer-auth",
         "${user_config.bearer_auth}"
       ]
@@ -142,13 +142,12 @@
       "documentation"
     ],
   "user_config": {
-      "server_index": {
-        "type": "number",
-        "title": "Server Index",
-        "description": "Available servers: [https://api.dwolla.com, https://api-sandbox.dwolla.com]",
+      "server": {
+        "type": "string",
+        "title": "Server",
+        "description": "Available servers: [prod: https://api.dwolla.com, sandbox: https://api-sandbox.dwolla.com]",
         "required": false,
-        "default": "0",
-        "max": 1
+        "default": "prod"
       },
       "bearer_auth": {
         "type": "string",

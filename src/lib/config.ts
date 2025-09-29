@@ -9,18 +9,20 @@ import { RetryConfig } from "./retries.js";
 import { Params, pathToFunc } from "./url.js";
 
 /**
+ * Production server
+ */
+export const ServerProd = "prod";
+/**
+ * Sandbox server
+ */
+export const ServerSandbox = "sandbox";
+/**
  * Contains the list of servers available to the SDK
  */
-export const ServerList = [
-  /**
-   * Production server
-   */
-  "https://api.dwolla.com",
-  /**
-   * Sandbox server
-   */
-  "https://api-sandbox.dwolla.com",
-] as const;
+export const ServerList = {
+  [ServerProd]: "https://api.dwolla.com",
+  [ServerSandbox]: "https://api-sandbox.dwolla.com",
+} as const;
 
 export type SDKOptions = {
   /**
@@ -32,7 +34,7 @@ export type SDKOptions = {
   /**
    * Allows overriding the default server used by the SDK
    */
-  serverIdx?: number | undefined;
+  server?: keyof typeof ServerList | undefined;
   /**
    * Allows overriding the default server URL used by the SDK
    */
@@ -55,11 +57,8 @@ export function serverURLFromOptions(options: SDKOptions): URL | null {
   const params: Params = {};
 
   if (!serverURL) {
-    const serverIdx = options.serverIdx ?? 0;
-    if (serverIdx < 0 || serverIdx >= ServerList.length) {
-      throw new Error(`Invalid server index ${serverIdx}`);
-    }
-    serverURL = ServerList[serverIdx] || "";
+    const server = options.server ?? ServerProd;
+    serverURL = ServerList[server] || "";
   }
 
   const u = pathToFunc(serverURL)(params);
@@ -70,7 +69,7 @@ export const SDK_METADATA = {
   language: "typescript",
   openapiDocVersion: "2.0",
   sdkVersion: "0.0.1-beta.5",
-  genVersion: "2.707.0",
+  genVersion: "2.716.16",
   userAgent:
-    "speakeasy-sdk/mcp-typescript 0.0.1-beta.5 2.707.0 2.0 @dwolla/mcp-server",
+    "speakeasy-sdk/mcp-typescript 0.0.1-beta.5 2.716.16 2.0 @dwolla/mcp-server",
 } as const;

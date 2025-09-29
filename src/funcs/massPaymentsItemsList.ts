@@ -170,15 +170,15 @@ async function $do(
   >(
     M.json(200, ListMassPaymentItemsResponse$zodSchema, {
       ctype: "application/vnd.dwolla.v1.hal+json",
-      key: "200_application/vnd.dwolla.v1.hal+json_object",
+      key: "twoHundredApplicationVndDwollaV1HalPlusJsonObject",
     }),
     M.json(403, ListMassPaymentItemsResponse$zodSchema, {
       ctype: "application/vnd.dwolla.v1.hal+json",
-      key: "403_application/vnd.dwolla.v1.hal+json_object",
+      key: "fourHundredAndThreeApplicationVndDwollaV1HalPlusJsonObject",
     }),
     M.json(404, ListMassPaymentItemsResponse$zodSchema, {
       ctype: "application/vnd.dwolla.v1.hal+json",
-      key: "404_application/vnd.dwolla.v1.hal+json_object",
+      key: "fourHundredAndFourApplicationVndDwollaV1HalPlusJsonObject",
     }),
   )(response, req$, { extraFields: responseFields$ });
 
