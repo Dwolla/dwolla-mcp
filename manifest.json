@@ -1,7 +1,7 @@
 {
   "dxt_version": "0.1",
   "name": "@dwolla/mcp-server",
-  "version": "0.0.1-beta.5",
+  "version": "0.0.1-beta.6",
   "description": "",
   "long_description": "Dwolla API: Dwolla API Documentation",
   "author": {
