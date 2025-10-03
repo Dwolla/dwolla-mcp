@@ -10,6 +10,7 @@ export type Address = {
   city: string;
   postalCode: string;
   state: string;
+  country: string;
 };
 
 export const Address$zodSchema: z.ZodType<Address, z.ZodTypeDef, unknown> = z
@@ -17,6 +18,7 @@ export const Address$zodSchema: z.ZodType<Address, z.ZodTypeDef, unknown> = z
     address1: z.string(),
     address2: z.string().optional(),
     city: z.string(),
+    country: z.string(),
     postalCode: z.string(),
     state: z.string(),
   });

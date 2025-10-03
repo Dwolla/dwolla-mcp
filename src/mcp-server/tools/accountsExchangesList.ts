@@ -11,6 +11,12 @@ export const tool$accountsExchangesList: ToolDefinition = {
 
 Returns all exchanges for your Dwolla account. Exchanges represent connections between external bank accounts and your account through open banking partners. Includes exchange status, creation date, and associated partner information.`,
   scopes: ["read"],
+  annotations: {
+    "destructiveHint": false,
+    "idempotentHint": false,
+    "openWorldHint": false,
+    "readOnlyHint": false,
+  },
   tool: async (client, ctx) => {
     const [result, apiCall] = await accountsExchangesList(
       client,

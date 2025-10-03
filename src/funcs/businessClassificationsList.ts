@@ -137,7 +137,7 @@ async function $do(
   >(
     M.json(200, ListBusinessClassificationsResponse$zodSchema, {
       ctype: "application/vnd.dwolla.v1.hal+json",
-      key: "object",
+      key: "BusinessClassifications",
     }),
     M.json(403, ListBusinessClassificationsResponse$zodSchema, {
       ctype: "application/vnd.dwolla.v1.hal+json",
