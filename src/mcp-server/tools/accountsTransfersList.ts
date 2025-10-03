@@ -16,6 +16,12 @@ export const tool$accountsTransfersList: ToolDefinition<typeof args> = {
 
 Returns a paginated, searchable list of transfers associated with the specified Main Dwolla account. Supports advanced filtering by amount range, date range, transfer status, and correlation ID. Results are limited to 10,000 transfers per query; use date range filters for historical data beyond this limit.`,
   scopes: ["read"],
+  annotations: {
+    "destructiveHint": false,
+    "idempotentHint": false,
+    "openWorldHint": false,
+    "readOnlyHint": false,
+  },
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await accountsTransfersList(

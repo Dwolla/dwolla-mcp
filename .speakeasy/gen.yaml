@@ -23,7 +23,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 mcp-typescript:
-  version: 0.0.1-beta.6
+  version: 0.0.1-beta.7
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
@@ -35,5 +35,6 @@ mcp-typescript:
   cloudflareEnabled: false
   defaultErrorName: DwollaMcpDefaultError
   inputModelSuffix: input
+  maxMethodParams: 0
   outputModelSuffix: output
   packageName: '@dwolla/mcp-server'

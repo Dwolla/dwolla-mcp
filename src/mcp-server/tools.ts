@@ -21,6 +21,12 @@ export type ToolDefinition<Args extends undefined | ZodRawShape = undefined> =
       description: string;
       scopes?: MCPScope[];
       args: Args;
+      annotations: {
+        destructiveHint: boolean;
+        idempotentHint: boolean;
+        openWorldHint: boolean;
+        readOnlyHint: boolean;
+      };
       tool: (
         client: DwollaMcpCore,
         args: objectOutputType<Args, ZodTypeAny>,
@@ -32,6 +38,12 @@ export type ToolDefinition<Args extends undefined | ZodRawShape = undefined> =
       description: string;
       scopes?: MCPScope[];
       args?: undefined;
+      annotations: {
+        destructiveHint: boolean;
+        idempotentHint: boolean;
+        openWorldHint: boolean;
+        readOnlyHint: boolean;
+      };
       tool: (
         client: DwollaMcpCore,
         extra: RequestHandlerExtra<ServerRequest, ServerNotification>,
@@ -119,13 +131,24 @@ export function createRegisterTool(
     }
 
     if (tool.args) {
-      server.tool(tool.name, tool.description, tool.args, async (args, ctx) => {
-        return tool.tool(getSDK(), args, ctx);
-      });
+      server.tool(
+        tool.name,
+        tool.description,
+        tool.args,
+        tool.annotations,
+        async (args, ctx) => {
+          return tool.tool(getSDK(), args, ctx);
+        },
+      );
     } else {
-      server.tool(tool.name, tool.description, async (ctx) => {
-        return tool.tool(getSDK(), ctx);
-      });
+      server.tool(
+        tool.name,
+        tool.description,
+        tool.annotations,
+        async (_, ctx) => {
+          return tool.tool(getSDK(), ctx);
+        },
+      );
     }
 
     logger.debug("Registered tool", { name: tool.name });

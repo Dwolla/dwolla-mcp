@@ -10,7 +10,7 @@ import {
 import { HalLink, HalLink$zodSchema } from "./hallink.js";
 
 export type BusinessClassificationsEmbedded = {
-  massPayments?: Array<BusinessClassification> | undefined;
+  businessClassifications?: Array<BusinessClassification> | undefined;
 };
 
 export const BusinessClassificationsEmbedded$zodSchema: z.ZodType<
@@ -18,12 +18,13 @@ export const BusinessClassificationsEmbedded$zodSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  massPayments: z.array(BusinessClassification$zodSchema).optional(),
+  businessClassifications: z.array(BusinessClassification$zodSchema).optional(),
 });
 
 export type BusinessClassifications = {
   _links?: { [k: string]: HalLink } | undefined;
   _embedded?: BusinessClassificationsEmbedded | undefined;
+  total?: number | undefined;
 };
 
 export const BusinessClassifications$zodSchema: z.ZodType<
@@ -33,4 +34,5 @@ export const BusinessClassifications$zodSchema: z.ZodType<
 > = z.object({
   _embedded: z.lazy(() => BusinessClassificationsEmbedded$zodSchema).optional(),
   _links: z.record(HalLink$zodSchema).optional(),
+  total: z.number().int().optional(),
 });

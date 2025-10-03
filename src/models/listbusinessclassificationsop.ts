@@ -10,50 +10,11 @@ import {
 import { ForbiddenError, ForbiddenError$zodSchema } from "./forbiddenerror.js";
 import { NotFoundError, NotFoundError$zodSchema } from "./notfounderror.js";
 
-export type ListBusinessClassificationsLinks = {};
-
-export const ListBusinessClassificationsLinks$zodSchema: z.ZodType<
-  ListBusinessClassificationsLinks,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
-
-export type ListBusinessClassificationsEmbedded = {
-  businessClassifications?: Array<BusinessClassifications> | undefined;
-};
-
-export const ListBusinessClassificationsEmbedded$zodSchema: z.ZodType<
-  ListBusinessClassificationsEmbedded,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  businessClassifications: z.array(BusinessClassifications$zodSchema)
-    .optional(),
-});
-
-/**
- * successful operation
- */
-export type ListBusinessClassificationsResponseBody = {
-  _links?: ListBusinessClassificationsLinks | undefined;
-  _embedded?: ListBusinessClassificationsEmbedded | undefined;
-};
-
-export const ListBusinessClassificationsResponseBody$zodSchema: z.ZodType<
-  ListBusinessClassificationsResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _embedded: z.lazy(() => ListBusinessClassificationsEmbedded$zodSchema)
-    .optional(),
-  _links: z.lazy(() => ListBusinessClassificationsLinks$zodSchema).optional(),
-}).describe("successful operation");
-
 export type ListBusinessClassificationsResponse = {
   ContentType: string;
   StatusCode: number;
   RawResponse: Response;
-  object?: ListBusinessClassificationsResponseBody | undefined;
+  BusinessClassifications?: BusinessClassifications | undefined;
   ForbiddenError?: ForbiddenError | undefined;
   NotFoundError?: NotFoundError | undefined;
 };
@@ -63,11 +24,10 @@ export const ListBusinessClassificationsResponse$zodSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  BusinessClassifications: BusinessClassifications$zodSchema.optional(),
   ContentType: z.string(),
   ForbiddenError: ForbiddenError$zodSchema.optional(),
   NotFoundError: NotFoundError$zodSchema.optional(),
   RawResponse: z.instanceof(Response),
   StatusCode: z.number().int(),
-  object: z.lazy(() => ListBusinessClassificationsResponseBody$zodSchema)
-    .optional(),
 });

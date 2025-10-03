@@ -55,9 +55,7 @@ export type ListCustomerFundingSourcesResponse = {
   ContentType: string;
   StatusCode: number;
   RawResponse: Response;
-  twoHundredApplicationVndDwollaV1HalPlusJsonFundingSources?:
-    | Array<FundingSources>
-    | undefined;
+  FundingSources?: FundingSources | undefined;
   fourHundredAndThreeApplicationVndDwollaV1HalPlusJsonObject?:
     | ListCustomerFundingSourcesForbiddenResponseBody
     | undefined;
@@ -72,6 +70,7 @@ export const ListCustomerFundingSourcesResponse$zodSchema: z.ZodType<
   unknown
 > = z.object({
   ContentType: z.string(),
+  FundingSources: FundingSources$zodSchema.optional(),
   RawResponse: z.instanceof(Response),
   StatusCode: z.number().int(),
   fourHundredAndFourApplicationVndDwollaV1HalPlusJsonObject: z.lazy(() =>
@@ -80,7 +79,4 @@ export const ListCustomerFundingSourcesResponse$zodSchema: z.ZodType<
   fourHundredAndThreeApplicationVndDwollaV1HalPlusJsonObject: z.lazy(() =>
     ListCustomerFundingSourcesForbiddenResponseBody$zodSchema
   ).optional(),
-  twoHundredApplicationVndDwollaV1HalPlusJsonFundingSources: z.array(
-    FundingSources$zodSchema,
-  ).describe("successful operation").optional(),
 });

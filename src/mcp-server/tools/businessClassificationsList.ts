@@ -11,6 +11,12 @@ export const tool$businessClassificationsList: ToolDefinition = {
 
 Returns a directory of business and industry classifications required for creating business verified customers. Each business classification contains multiple industry classifications. The industry classification ID must be provided in the businessClassification parameter during business customer creation for verification.`,
   scopes: ["read"],
+  annotations: {
+    "destructiveHint": false,
+    "idempotentHint": false,
+    "openWorldHint": false,
+    "readOnlyHint": false,
+  },
   tool: async (client, ctx) => {
     const [result, apiCall] = await businessClassificationsList(
       client,

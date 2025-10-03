@@ -16,6 +16,12 @@ export const tool$eventsList: ToolDefinition<typeof args> = {
 
 Returns a paginated list of events representing state changes to resources in your Dwolla application. Events track actions on customers, transfers, funding sources, and other resources, sorted by creation date (newest first). Events are retained for 30 days and are essential for webhook notifications and system activity monitoring.`,
   scopes: ["read"],
+  annotations: {
+    "destructiveHint": false,
+    "idempotentHint": false,
+    "openWorldHint": false,
+    "readOnlyHint": false,
+  },
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await eventsList(

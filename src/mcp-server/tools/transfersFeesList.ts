@@ -16,6 +16,12 @@ export const tool$transfersFeesList: ToolDefinition<typeof args> = {
 
 Retrieve detailed fee information for a specific transfer by its unique identifier. Returns the total number of fees and individual fee transaction details including amounts, status, and links to source and destination accounts.`,
   scopes: ["read"],
+  annotations: {
+    "destructiveHint": false,
+    "idempotentHint": false,
+    "openWorldHint": false,
+    "readOnlyHint": false,
+  },
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await transfersFeesList(

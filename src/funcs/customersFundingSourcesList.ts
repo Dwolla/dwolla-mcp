@@ -164,7 +164,7 @@ async function $do(
   >(
     M.json(200, ListCustomerFundingSourcesResponse$zodSchema, {
       ctype: "application/vnd.dwolla.v1.hal+json",
-      key: "twoHundredApplicationVndDwollaV1HalPlusJsonFundingSources",
+      key: "FundingSources",
     }),
     M.json(403, ListCustomerFundingSourcesResponse$zodSchema, {
       ctype: "application/vnd.dwolla.v1.hal+json",
