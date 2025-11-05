@@ -18,6 +18,7 @@ export const tool$customersBeneficialOwnershipGet: ToolDefinition<typeof args> =
 Returns the certification status of beneficial ownership for a business verified customer. Status indicates whether beneficial owner information has been certified and affects the customer's ability to send funds. Possible values include uncertified, certified, and recertify.`,
     scopes: ["read"],
     annotations: {
+      "title": "",
       "destructiveHint": false,
       "idempotentHint": false,
       "openWorldHint": false,
