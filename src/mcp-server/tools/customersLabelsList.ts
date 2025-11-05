@@ -17,6 +17,7 @@ export const tool$customersLabelsList: ToolDefinition<typeof args> = {
 Returns all labels for a specified Verified Customer, sorted by creation date (most recent first). Supports pagination with limit and offset parameters. Each label includes its current amount and creation timestamp.`,
   scopes: ["read"],
   annotations: {
+    "title": "",
     "destructiveHint": false,
     "idempotentHint": false,
     "openWorldHint": false,

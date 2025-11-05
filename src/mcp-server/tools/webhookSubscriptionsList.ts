@@ -12,6 +12,7 @@ export const tool$webhookSubscriptionsList: ToolDefinition = {
 Retrieve all webhook subscriptions that belong to an application including their configuration details and status. Returns subscription details including webhook endpoints, status, creation dates, and links to associated webhooks with total count. Essential for webhook management and monitoring subscription health.`,
   scopes: ["read"],
   annotations: {
+    "title": "",
     "destructiveHint": false,
     "idempotentHint": false,
     "openWorldHint": false,

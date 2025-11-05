@@ -18,6 +18,7 @@ Get a list of all funding sources associated with a specific Main Dwolla Account
 `,
   scopes: ["read"],
   annotations: {
+    "title": "",
     "destructiveHint": false,
     "idempotentHint": false,
     "openWorldHint": false,

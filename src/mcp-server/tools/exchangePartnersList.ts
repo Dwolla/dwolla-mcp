@@ -12,6 +12,7 @@ export const tool$exchangePartnersList: ToolDefinition = {
 Returns a list of all supported exchange partners. Each partner includes a unique ID, name, and status indicating whether they are active or inactive.`,
   scopes: ["read"],
   annotations: {
+    "title": "",
     "destructiveHint": false,
     "idempotentHint": false,
     "openWorldHint": false,

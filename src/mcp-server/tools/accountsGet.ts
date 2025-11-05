@@ -17,6 +17,7 @@ export const tool$accountsGet: ToolDefinition<typeof args> = {
 Returns basic account information for your authorized Main Dwolla Account, including account ID, name, and links to related resources such as funding sources, transfers, and customers.`,
   scopes: ["read"],
   annotations: {
+    "title": "",
     "destructiveHint": false,
     "idempotentHint": false,
     "openWorldHint": false,

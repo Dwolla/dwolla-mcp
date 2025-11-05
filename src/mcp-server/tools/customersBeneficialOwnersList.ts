@@ -17,6 +17,7 @@ export const tool$customersBeneficialOwnersList: ToolDefinition<typeof args> = {
 Returns all beneficial owners associated with a business verified customer. Beneficial owners are individuals who directly or indirectly own 25% or more of the company's equity. Includes personal information, verification status, and address details for each owner.`,
   scopes: ["read"],
   annotations: {
+    "title": "",
     "destructiveHint": false,
     "idempotentHint": false,
     "openWorldHint": false,
