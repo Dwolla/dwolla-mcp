@@ -1,3 +1,5 @@
+*.mcpb
+bun.lock
 .env
 .env.local
 **/.speakeasy/logs/

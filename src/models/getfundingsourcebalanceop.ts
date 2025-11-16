@@ -105,10 +105,10 @@ export const Closing$zodSchema: z.ZodType<Closing, z.ZodTypeDef, unknown> = z
  * Response for retrieving balance of a bank account verified through Open Banking
  */
 export type BankBalanceResponse = {
-  _links?: GetFundingSourceBalanceLinks | undefined;
-  available?: Available | undefined;
-  closing?: Closing | undefined;
-  lastUpdated?: string | undefined;
+  _links: GetFundingSourceBalanceLinks;
+  available: Available;
+  closing: Closing;
+  lastUpdated: string;
 };
 
 export const BankBalanceResponse$zodSchema: z.ZodType<
@@ -116,10 +116,10 @@ export const BankBalanceResponse$zodSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _links: z.lazy(() => GetFundingSourceBalanceLinks$zodSchema).optional(),
-  available: z.lazy(() => Available$zodSchema).optional(),
-  closing: z.lazy(() => Closing$zodSchema).optional(),
-  lastUpdated: z.string().optional(),
+  _links: z.lazy(() => GetFundingSourceBalanceLinks$zodSchema),
+  available: z.lazy(() => Available$zodSchema),
+  closing: z.lazy(() => Closing$zodSchema),
+  lastUpdated: z.string(),
 }).describe(
   "Response for retrieving balance of a bank account verified through Open Banking",
 );
@@ -150,10 +150,10 @@ export const Total$zodSchema: z.ZodType<Total, z.ZodTypeDef, unknown> = z
  * Response for retrieving balance of a Dwolla Balance funding source
  */
 export type DwollaBalanceResponse = {
-  _links?: { [k: string]: HalLink } | undefined;
-  balance?: Balance | undefined;
-  total?: Total | undefined;
-  lastUpdated?: string | undefined;
+  _links: { [k: string]: HalLink };
+  balance: Balance;
+  total: Total;
+  lastUpdated: string;
 };
 
 export const DwollaBalanceResponse$zodSchema: z.ZodType<
@@ -161,10 +161,10 @@ export const DwollaBalanceResponse$zodSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _links: z.record(HalLink$zodSchema).optional(),
-  balance: z.lazy(() => Balance$zodSchema).optional(),
-  lastUpdated: z.string().optional(),
-  total: z.lazy(() => Total$zodSchema).optional(),
+  _links: z.record(HalLink$zodSchema),
+  balance: z.lazy(() => Balance$zodSchema),
+  lastUpdated: z.string(),
+  total: z.lazy(() => Total$zodSchema),
 }).describe(
   "Response for retrieving balance of a Dwolla Balance funding source",
 );
