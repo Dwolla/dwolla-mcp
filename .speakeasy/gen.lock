@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: dbccbcaa-cdde-434b-b972-38fb6d1127e5
 management:
-  docChecksum: 3a6f815f2fc53cbc2c0801440da4d689
+  docChecksum: aea4114136ff0def2c7e05b2af515f98
   docVersion: "2.0"
-  speakeasyVersion: 1.648.1
-  generationVersion: 2.739.1
-  releaseVersion: 0.0.1-beta.8
-  configChecksum: 348854b9159402b7787db21b10f7e1ec
+  speakeasyVersion: 1.658.2
+  generationVersion: 2.755.9
+  releaseVersion: 0.0.1-beta.9
+  configChecksum: 823eab846b92d81041bf2e245f93dfd6
   repoURL: https://github.com/Dwolla/dwolla-mcp.git
   published: true
 features:
   mcp-typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.0
-    core: 0.7.1
+    core: 0.8.2
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     globalSecurity: 0.1.1
@@ -195,3 +195,6 @@ generatedFiles:
   - tsconfig.json
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: |
+  ## Mcp-typescript SDK Changes Detected:
+  * `DwollaMcp.fundingSources.balance.get()`:  `response` **Changed**
