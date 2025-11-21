@@ -5,14 +5,22 @@
 import * as z from "zod";
 import { HalLink, HalLink$zodSchema } from "./hallink.js";
 
+export const VerificationStatus$zodSchema = z.enum([
+  "verified",
+  "document",
+  "incomplete",
+]);
+
+export type VerificationStatus = z.infer<typeof VerificationStatus$zodSchema>;
+
 /**
  * Request body model for a Beneficial Owner
  */
 export type BeneficialOwner = {
-  _links?: { [k: string]: HalLink } | undefined;
-  id?: string | undefined;
-  verificationStatus?: string | undefined;
-  created?: string | undefined;
+  _links: { [k: string]: HalLink };
+  id: string;
+  verificationStatus: VerificationStatus;
+  created: string;
 };
 
 export const BeneficialOwner$zodSchema: z.ZodType<
@@ -20,8 +28,8 @@ export const BeneficialOwner$zodSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _links: z.record(HalLink$zodSchema).optional(),
-  created: z.string().datetime({ offset: true }).optional(),
-  id: z.string().optional(),
-  verificationStatus: z.string().optional(),
+  _links: z.record(HalLink$zodSchema),
+  created: z.string().datetime({ offset: true }),
+  id: z.string(),
+  verificationStatus: VerificationStatus$zodSchema,
 }).describe("Request body model for a Beneficial Owner");

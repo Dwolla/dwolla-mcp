@@ -6,25 +6,25 @@ import * as z from "zod";
 import { Exchange, Exchange$zodSchema } from "./exchange.js";
 import { HalLink, HalLink$zodSchema } from "./hallink.js";
 
-export type ExchangesEmbedded = { exchanges?: Array<Exchange> | undefined };
+export type ExchangesEmbedded = { exchanges: Array<Exchange> };
 
 export const ExchangesEmbedded$zodSchema: z.ZodType<
   ExchangesEmbedded,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  exchanges: z.array(Exchange$zodSchema).optional(),
+  exchanges: z.array(Exchange$zodSchema),
 });
 
 export type Exchanges = {
-  _links?: { [k: string]: HalLink } | undefined;
-  _embedded?: ExchangesEmbedded | undefined;
-  total?: number | undefined;
+  _links: { [k: string]: HalLink };
+  _embedded: ExchangesEmbedded;
+  total: number;
 };
 
 export const Exchanges$zodSchema: z.ZodType<Exchanges, z.ZodTypeDef, unknown> =
   z.object({
-    _embedded: z.lazy(() => ExchangesEmbedded$zodSchema).optional(),
-    _links: z.record(HalLink$zodSchema).optional(),
-    total: z.number().int().optional(),
+    _embedded: z.lazy(() => ExchangesEmbedded$zodSchema),
+    _links: z.record(HalLink$zodSchema),
+    total: z.number().int(),
   });
