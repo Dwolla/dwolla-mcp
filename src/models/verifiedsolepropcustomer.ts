@@ -5,24 +5,55 @@
 import * as z from "zod";
 import { HalLink, HalLink$zodSchema } from "./hallink.js";
 
+export const VerifiedSolePropCustomerType$zodSchema = z.enum([
+  "business",
+]);
+
+export type VerifiedSolePropCustomerType = z.infer<
+  typeof VerifiedSolePropCustomerType$zodSchema
+>;
+
+export const VerifiedSolePropCustomerStatus$zodSchema = z.enum([
+  "verified",
+  "suspended",
+  "deactivated",
+  "document",
+  "retry",
+]);
+
+export type VerifiedSolePropCustomerStatus = z.infer<
+  typeof VerifiedSolePropCustomerStatus$zodSchema
+>;
+
+export const VerifiedSolePropCustomerBusinessType$zodSchema = z.enum([
+  "soleProprietorship",
+]);
+
+export type VerifiedSolePropCustomerBusinessType = z.infer<
+  typeof VerifiedSolePropCustomerBusinessType$zodSchema
+>;
+
 /**
- * Shared models between all Customer types
+ * Verified sole proprietorship customer - distinguished from VerifiedBusinessCustomer by businessType=soleProprietorship
  */
 export type VerifiedSolePropCustomer = {
-  _links?: { [k: string]: HalLink } | undefined;
-  id?: string | undefined;
-  type?: string | undefined;
-  status?: string | undefined;
+  _links: { [k: string]: HalLink };
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
   correlationId?: string | undefined;
-  created?: string | undefined;
-  address1?: string | undefined;
+  created: string;
+  type: VerifiedSolePropCustomerType;
+  status: VerifiedSolePropCustomerStatus;
+  address1: string;
   address2?: string | undefined;
-  city?: string | undefined;
-  state?: string | undefined;
-  postalCode?: string | undefined;
-  businessName?: string | undefined;
-  businessType?: string | undefined;
-  businessClassification?: string | undefined;
+  city: string;
+  state: string;
+  postalCode: string;
+  businessName: string;
+  businessType: VerifiedSolePropCustomerBusinessType;
+  businessClassification: string;
 };
 
 export const VerifiedSolePropCustomer$zodSchema: z.ZodType<
@@ -30,18 +61,23 @@ export const VerifiedSolePropCustomer$zodSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _links: z.record(HalLink$zodSchema).optional(),
-  address1: z.string().optional(),
+  _links: z.record(HalLink$zodSchema),
+  address1: z.string(),
   address2: z.string().optional(),
-  businessClassification: z.string().optional(),
-  businessName: z.string().optional(),
-  businessType: z.string().optional(),
-  city: z.string().optional(),
+  businessClassification: z.string(),
+  businessName: z.string(),
+  businessType: VerifiedSolePropCustomerBusinessType$zodSchema,
+  city: z.string(),
   correlationId: z.string().optional(),
-  created: z.string().datetime({ offset: true }).optional(),
-  id: z.string().optional(),
-  postalCode: z.string().optional(),
-  state: z.string().optional(),
-  status: z.string().optional(),
-  type: z.string().optional(),
-}).describe("Shared models between all Customer types");
+  created: z.string().datetime({ offset: true }),
+  email: z.string(),
+  firstName: z.string(),
+  id: z.string(),
+  lastName: z.string(),
+  postalCode: z.string(),
+  state: z.string(),
+  status: VerifiedSolePropCustomerStatus$zodSchema,
+  type: VerifiedSolePropCustomerType$zodSchema,
+}).describe(
+  "Verified sole proprietorship customer - distinguished from VerifiedBusinessCustomer by businessType=soleProprietorship",
+);

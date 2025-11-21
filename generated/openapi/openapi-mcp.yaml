@@ -3445,10 +3445,17 @@ components:
         total:
           type: integer
           example: 100
-    UnverifiedCustomer:
-      title: UnverifiedCustomer
-      description: Shared models between all Customer types
+    BaseCustomer:
+      title: BaseCustomer
+      description: Base schema containing common fields for all customer types
       type: object
+      required:
+        - _links
+        - id
+        - firstName
+        - lastName
+        - email
+        - created
       properties:
         _links:
           additionalProperties:
@@ -3456,12 +3463,15 @@ components:
         id:
           type: string
           example: c41125c5-99c4-4303-a9f6-d066d28a61e3
-        type:
+        firstName:
           type: string
-          example: unverified
-        status:
+          example: Jane
+        lastName:
           type: string
-          example: unverified
+          example: Doe
+        email:
+          type: string
+          example: janedoe@mail.com
         correlationId:
           type: string
           example: CID-abe2bb3d-d2ff-433b-95a3-0debd960ed25
@@ -3469,32 +3479,84 @@ components:
           type: string
           format: date-time
           example: '2022-10-07T16:46:13.023Z'
-    UnverifiedBusinessCustomer:
-      title: UnverifiedBusinessCustomer
+    UnverifiedCustomer:
+      title: UnverifiedCustomer
+      description: Unverified customer - basic customer type with no KYC verification
       allOf:
-        - $ref: '#/components/schemas/UnverifiedCustomer'
+        - $ref: '#/components/schemas/BaseCustomer'
         - type: object
+          required:
+            - type
+            - status
           properties:
             type:
               type: string
+              enum:
+                - unverified
+              example: unverified
+            status:
+              type: string
+              enum:
+                - unverified
+                - suspended
+                - deactivated
+              example: unverified
+            businessName:
+              type: string
+              example: Jane Corp llc
+    ReceiveOnlyCustomer:
+      title: ReceiveOnlyCustomer
+      description: Receive-only user - can only receive funds, not send
+      allOf:
+        - $ref: '#/components/schemas/BaseCustomer'
+        - type: object
+          required:
+            - type
+            - status
+          properties:
+            type:
+              type: string
+              enum:
+                - receive-only
               example: receive-only
             status:
               type: string
+              enum:
+                - unverified
+                - suspended
+                - deactivated
               example: unverified
             businessName:
               type: string
               example: Jane Corp llc
     VerifiedPersonalCustomer:
       title: VerifiedPersonalCustomer
+      description: Verified personal customer - fully KYC verified individual with send and receive capabilities
       allOf:
-        - $ref: '#/components/schemas/UnverifiedCustomer'
+        - $ref: '#/components/schemas/BaseCustomer'
         - type: object
+          required:
+            - type
+            - status
+            - address1
+            - city
+            - state
+            - postalCode
           properties:
             type:
               type: string
+              enum:
+                - personal
               example: personal
             status:
               type: string
+              enum:
+                - verified
+                - suspended
+                - deactivated
+                - document
+                - retry
+                - kba
               example: verified
             address1:
               type: string
@@ -3513,15 +3575,34 @@ components:
               example: '50309'
     VerifiedSolePropCustomer:
       title: VerifiedSolePropCustomer
+      description: Verified sole proprietorship customer - distinguished from VerifiedBusinessCustomer by businessType=soleProprietorship
       allOf:
-        - $ref: '#/components/schemas/UnverifiedCustomer'
+        - $ref: '#/components/schemas/BaseCustomer'
         - type: object
+          required:
+            - type
+            - status
+            - address1
+            - city
+            - state
+            - postalCode
+            - businessName
+            - businessType
+            - businessClassification
           properties:
             type:
               type: string
+              enum:
+                - business
               example: business
             status:
               type: string
+              enum:
+                - verified
+                - suspended
+                - deactivated
+                - document
+                - retry
               example: verified
             address1:
               type: string
@@ -3543,21 +3624,43 @@ components:
               example: Jane Corp
             businessType:
               type: string
+              enum:
+                - soleProprietorship
               example: soleProprietorship
             businessClassification:
               type: string
               example: 9ed3f670-7d6f-11e3-b1ce-5404a6144203
     VerifiedBusinessCustomer:
       title: VerifiedBusinessCustomer
+      description: Verified business customer (LLC, Corporation, Partnership) - distinguished from VerifiedSolePropCustomer by presence of a controller object
       allOf:
-        - $ref: '#/components/schemas/UnverifiedCustomer'
+        - $ref: '#/components/schemas/BaseCustomer'
         - type: object
+          required:
+            - type
+            - status
+            - address1
+            - city
+            - state
+            - postalCode
+            - businessName
+            - businessType
+            - businessClassification
+            - controller
           properties:
             type:
               type: string
+              enum:
+                - business
               example: business
             status:
               type: string
+              enum:
+                - verified
+                - suspended
+                - deactivated
+                - document
+                - retry
               example: verified
             address1:
               type: string
@@ -3588,12 +3691,21 @@ components:
               example: Jane's Coffee and Sweets
             businessType:
               type: string
+              enum:
+                - llc
+                - corporation
+                - partnership
               example: llc
             businessClassification:
               type: string
               example: 9ed3f670-7d6f-11e3-b1ce-5404a6144203
             controller:
               type: object
+              required:
+                - firstName
+                - lastName
+                - title
+                - address
               properties:
                 firstName:
                   type: string
@@ -3643,7 +3755,7 @@ components:
               items:
                 oneOf:
                   - $ref: '#/components/schemas/UnverifiedCustomer'
-                  - $ref: '#/components/schemas/UnverifiedBusinessCustomer'
+                  - $ref: '#/components/schemas/ReceiveOnlyCustomer'
                   - $ref: '#/components/schemas/VerifiedPersonalCustomer'
                   - $ref: '#/components/schemas/VerifiedSolePropCustomer'
                   - $ref: '#/components/schemas/VerifiedBusinessCustomer'
@@ -3688,7 +3800,7 @@ components:
           example: 143.156.7.8
         phone:
           type: string
-          example: 5555555555
+          example: '5555555555'
         correlationId:
           type: string
           example: fc451a7a-ae30-4404-aB95-e3553fcd733
@@ -3703,6 +3815,7 @@ components:
         - firstName
         - lastName
         - email
+        - type
       properties:
         firstName:
           type: string
@@ -3713,12 +3826,15 @@ components:
         email:
           type: string
           example: accountAdmin@email.com
+        type:
+          type: string
+          const: unverified
         ipAddress:
           type: string
           example: 143.156.7.8
         phone:
           type: string
-          example: 5555555555
+          example: '5555555555'
         correlationId:
           type: string
           example: fc451a7a-ae30-4404-aB95-e3553fcd733
@@ -3755,7 +3871,7 @@ components:
           example: 143.156.7.8
         phone:
           type: string
-          example: 5555555555
+          example: '5555555555'
         correlationId:
           type: string
           example: fc451a7a-ae30-4404-aB95-e3553fcd733
@@ -3776,10 +3892,10 @@ components:
           example: NY
         postalCode:
           type: string
-          example: 11101
+          example: '11101'
         ssn:
           type: string
-          example: 1234
+          example: '1234'
         dateOfBirth:
           type: string
           example: '1980-09-12'
@@ -3816,7 +3932,7 @@ components:
           example: 143.156.7.8
         phone:
           type: string
-          example: 5555555555
+          example: '5555555555'
         correlationId:
           type: string
           example: fc451a7a-ae30-4404-aB95-e3553fcd733
@@ -3837,10 +3953,10 @@ components:
           example: NY
         postalCode:
           type: string
-          example: 11101
+          example: '11101'
         ssn:
           type: string
-          example: 1234
+          example: '1234'
         dateOfBirth:
           type: string
           example: '1980-09-12'
@@ -3925,7 +4041,7 @@ components:
           example: 143.156.7.8
         phone:
           type: string
-          example: 5555555555
+          example: '5555555555'
         correlationId:
           type: string
           example: fc451a7a-ae30-4404-aB95-e3553fcd733
@@ -3946,7 +4062,7 @@ components:
           example: NY
         postalCode:
           type: string
-          example: 11101
+          example: '11101'
         businessClassification:
           type: string
           example: 9ed3f670-7d6f-11e3-b1ce-5404a6144203
@@ -4040,7 +4156,7 @@ components:
           example: 143.156.7.8
         phone:
           type: string
-          example: 5555555555
+          example: '5555555555'
         correlationId:
           type: string
           example: fc451a7a-ae30-4404-aB95-e3553fcd733
@@ -4061,7 +4177,7 @@ components:
           example: NY
         postalCode:
           type: string
-          example: 11101
+          example: '11101'
         businessClassification:
           type: string
           example: 9ed3f670-7d6f-11e3-b1ce-5404a6144203
@@ -4199,7 +4315,7 @@ components:
           example: '50309'
         phone:
           type: string
-          example: 5555555555
+          example: '5555555555'
     UpdateVerifiedBusiness:
       title: UpdateVerifiedBusiness
       description: Update Verified Business Customer Information (both Sole Proprietorship and Non-Sole Proprietorship)
@@ -4213,6 +4329,16 @@ components:
             website:
               type: string
               example: https://www.domain.com
+    UpgradeToUnverified:
+      title: UpgradeToUnverified
+      description: Upgrade Receive Only User to Unverified Customer
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          example: unverified
     UpgradeToVerifiedPersonal:
       title: UpgradeToVerifiedPersonal
       description: Upgrade Unverified Customer to Verified Personal Customer
@@ -4255,13 +4381,13 @@ components:
           example: NY
         postalCode:
           type: string
-          example: 11101
+          example: '11101'
         dateOfBirth:
           type: string
           example: '1970-01-01'
         ssn:
           type: string
-          example: 1234
+          example: '1234'
     UpgradeToVerifiedBusiness:
       title: UpgradeToVerifiedBusiness
       description: Upgrade Unverified Customer to Verified Business Customer
@@ -4307,7 +4433,7 @@ components:
           example: NY
         postalCode:
           type: string
-          example: 11101
+          example: '11101'
         controller:
           type: object
           required:
@@ -4328,7 +4454,7 @@ components:
               example: CEO
             ssn:
               type: string
-              example: 6789
+              example: '6789'
             dateOfBirth:
               type: string
               example: '1980-01-31'
@@ -4355,7 +4481,7 @@ components:
                   example: IA
                 postalCode:
                   type: string
-                  example: 50266
+                  example: '50266'
                 country:
                   type: string
                   example: US
@@ -4411,7 +4537,7 @@ components:
           example: '1980-01-31'
         ssn:
           type: string
-          example: 6789
+          example: '6789'
         address1:
           type: string
           example: 99-99 33rd St
@@ -4423,7 +4549,7 @@ components:
           example: NY
         postalCode:
           type: string
-          example: 11101
+          example: '11101'
         businessClassification:
           type: string
           example: 9ed3f670-7d6f-11e3-b1ce-5404a6144203
@@ -4478,13 +4604,13 @@ components:
           example: NY
         postalCode:
           type: string
-          example: 11101
+          example: '11101'
         dateOfBirth:
           type: string
           example: '1970-01-01'
         ssn:
           type: string
-          example: 1234
+          example: '1234'
     RetryVerifiedBusinessNoController:
       title: RetryVerifiedBusinessNoController
       description: Retry Verification for Verified Business Customer where only Business Details need to be retried
@@ -4529,7 +4655,7 @@ components:
           example: NY
         postalCode:
           type: string
-          example: 11101
+          example: '11101'
         businessClassification:
           type: string
           example: 9ed3f670-7d6f-11e3-b1ce-5404a6144203
@@ -4587,7 +4713,7 @@ components:
           example: NY
         postalCode:
           type: string
-          example: 11101
+          example: '11101'
         controller:
           type: object
           required:
@@ -4609,7 +4735,7 @@ components:
               example: CEO
             ssn:
               type: string
-              example: 123456789
+              example: '123456789'
             dateOfBirth:
               type: string
               example: '1980-01-31'
@@ -4636,7 +4762,7 @@ components:
                   example: IA
                 postalCode:
                   type: string
-                  example: 50266
+                  example: '50266'
                 country:
                   type: string
                   example: US
@@ -4697,7 +4823,7 @@ components:
           example: NY
         postalCode:
           type: string
-          example: 11101
+          example: '11101'
         controller:
           type: object
           required:
@@ -4811,7 +4937,7 @@ components:
           example: '1980-01-31'
         ssn:
           type: string
-          example: 6789
+          example: '6789'
         address1:
           type: string
           example: 99-99 33rd St
@@ -4823,7 +4949,7 @@ components:
           example: NY
         postalCode:
           type: string
-          example: 11101
+          example: '11101'
         businessClassification:
           type: string
           example: 9ed3f670-7d6f-11e3-b1ce-5404a6144203
@@ -4887,6 +5013,14 @@ components:
       title: BeneficialOwner
       description: Request body model for a Beneficial Owner
       type: object
+      required:
+        - _links
+        - id
+        - firstName
+        - lastName
+        - address
+        - verificationStatus
+        - created
       properties:
         _links:
           additionalProperties:
@@ -4896,6 +5030,10 @@ components:
           example: d3d6b41e-5567-4bc6-9c6e-0efd0a3e647e
         verificationStatus:
           type: string
+          enum:
+            - verified
+            - document
+            - incomplete
           example: verified
         created:
           type: string
@@ -4919,7 +5057,7 @@ components:
                 $ref: '#/components/schemas/BeneficialOwner'
     CreateUSBeneficialOwner:
       title: CreateUSBeneficialOwner
-      description: Create a US Beneficial Owner (identified by SSN)
+      description: Create a US Beneficial Owner (identified by SSN). For US-based beneficial owners only. Use SSN for identity verification instead of passport.
       required:
         - firstName
         - lastName
@@ -4930,17 +5068,21 @@ components:
       properties:
         firstName:
           type: string
+          example: John
         lastName:
           type: string
+          example: Doe
         dateOfBirth:
           type: string
+          example: '1980-01-31'
         address:
           $ref: '#/components/schemas/InternationalAddress'
         ssn:
           type: string
+          example: '123456789'
     CreateInternationalBeneficialOwner:
       title: CreateInternationalBeneficialOwner
-      description: Create an International Beneficial Owner (identified by Passport)
+      description: Create an International Beneficial Owner (identified by Passport). For non-US beneficial owners who don't have a US SSN. Requires passport information for identity verification.
       required:
         - firstName
         - lastName
@@ -4951,10 +5093,13 @@ components:
       properties:
         firstName:
           type: string
+          example: Jane
         lastName:
           type: string
+          example: Smith
         dateOfBirth:
           type: string
+          example: '1985-03-15'
         address:
           $ref: '#/components/schemas/InternationalAddress'
         passport:
@@ -4984,6 +5129,9 @@ components:
     BeneficialOwnership:
       title: BeneficialOwnership
       type: object
+      required:
+        - _links
+        - status
       properties:
         _links:
           type: object
@@ -4992,10 +5140,22 @@ components:
               $ref: '#/components/schemas/HalLink'
         status:
           type: string
+          enum:
+            - uncertified
+            - certified
+            - recertify
           example: uncertified
     Document:
       title: Document
+      description: Identity verification document for a customer or beneficial owner
       type: object
+      required:
+        - _links
+        - id
+        - status
+        - documentVerificationStatus
+        - type
+        - created
       properties:
         _links:
           type: object
@@ -5004,37 +5164,65 @@ components:
               $ref: '#/components/schemas/HalLink'
         id:
           type: string
+          description: Unique identifier for the document
           example: 56502f7a-fa59-4a2f-8579-0f8bc9d7b9cc
         status:
           type: string
+          description: Current status of the document upload
+          enum:
+            - pending
+            - reviewed
           example: reviewed
         type:
           type: string
+          description: Type of identity document uploaded
+          enum:
+            - passport
+            - license
+            - idCard
+            - other
           example: passport
         created:
           type: string
           format: date-time
+          description: ISO-8601 timestamp when the document was uploaded
           example: '2015-09-29T21:42:16.000Z'
         documentVerificationStatus:
           type: string
+          description: Verification status of the document after review
+          enum:
+            - pending
+            - accepted
+            - rejected
           example: rejected
         failureReason:
           type: string
+          description: Primary reason why document verification failed (if rejected)
           example: ScanDobMismatch
         allFailureReasons:
           type: array
+          description: Complete list of all failure reasons if document verification was rejected
           items:
             type: object
+            required:
+              - reason
+              - description
             properties:
               reason:
                 type: string
+                description: Failure reason code
                 example: ScanDobMismatch
               description:
                 type: string
+                description: Human-readable explanation of the failure reason
                 example: Scan DOB does not match DOB on account
     Documents:
       title: Documents
       type: object
+      required:
+        - _links
+        - _embedded
+        - total
       properties:
         _links:
           type: object
@@ -5042,6 +5230,8 @@ components:
             $ref: '#/components/schemas/HalLink'
         _embedded:
           type: object
+          required:
+            - documents
           properties:
             documents:
               type: array
@@ -5049,7 +5239,7 @@ components:
                 $ref: '#/components/schemas/Document'
         total:
           type: integer
-          example: 100
+          example: 2
     MaximumNumberOfResourcesSchema:
       title: MaximumNumberOfResourcesSchema
       type: object
@@ -5355,10 +5545,10 @@ components:
       properties:
         routingNumber:
           type: string
-          example: 222222226
+          example: '222222226'
         accountNumber:
           type: string
-          example: 123456789
+          example: '123456789'
         bankAccountType:
           type: string
           example: checking
@@ -5401,7 +5591,7 @@ components:
           properties:
             value:
               type: string
-              example: 0.02
+              example: '0.02'
             currency:
               type: string
               example: USD
@@ -5413,7 +5603,7 @@ components:
           properties:
             value:
               type: string
-              example: 0.03
+              example: '0.03'
             currency:
               type: string
               example: USD
@@ -7754,7 +7944,7 @@ components:
           properties:
             value:
               type: string
-              example: 1
+              example: '1.00'
             currency:
               type: string
               example: USD
@@ -7789,7 +7979,7 @@ components:
           properties:
             value:
               type: string
-              example: 10
+              example: '10.00'
             currency:
               type: string
               example: USD
@@ -7825,7 +8015,7 @@ components:
           properties:
             value:
               type: string
-              example: -5
+              example: '-5.00'
             currency:
               type: string
               example: USD
@@ -8156,6 +8346,12 @@ components:
     ExchangePartner:
       title: ExchangePartner
       type: object
+      required:
+        - _links
+        - id
+        - name
+        - status
+        - created
       properties:
         _links:
           additionalProperties:
@@ -8165,10 +8361,17 @@ components:
           example: d3d6b41e-5567-4bc6-9c6e-0efd0a3e647e
         name:
           type: string
-          example: MX
+          enum:
+            - MX
+            - Plaid
+            - Flinks
+            - Finicity
+          example: Plaid
         status:
           type: string
-          example: unverified
+          enum:
+            - active
+          example: active
         created:
           type: string
           format: date-time
@@ -8194,6 +8397,11 @@ components:
     Exchange:
       title: Exchange
       type: object
+      required:
+        - _links
+        - id
+        - status
+        - created
       properties:
         _links:
           additionalProperties:
@@ -8203,7 +8411,11 @@ components:
           example: d3d6b41e-5567-4bc6-9c6e-0efd0a3e647e
         status:
           type: string
-          example: unverified
+          enum:
+            - active
+            - deactivated
+            - removed
+          example: active
         created:
           type: string
           format: date-time
@@ -8211,12 +8423,18 @@ components:
     Exchanges:
       title: Exchanges
       type: object
+      required:
+        - _links
+        - _embedded
+        - total
       properties:
         _links:
           additionalProperties:
             $ref: '#/components/schemas/HalLink'
         _embedded:
           type: object
+          required:
+            - exchanges
           properties:
             exchanges:
               type: array
@@ -8229,6 +8447,9 @@ components:
     CreateFinicitySecureExchange:
       title: CreateFinicitySecureExchange
       type: object
+      required:
+        - _links
+        - finicity
       properties:
         _links:
           type: object
@@ -8248,16 +8469,16 @@ components:
               example: 3
             version:
               type: string
-              example: 1
+              example: '1'
             receiptId:
               type: string
               example: cr_4N47ou7SlppuIxq0ZUtACh10vYcloY
             receiptVersion:
               type: string
-              example: 1
+              example: '1'
             customerId:
               type: string
-              example: 5454874858510164000
+              example: '5454874858510164117'
             partnerId:
               type: integer
               format: int64
@@ -8272,7 +8493,7 @@ components:
                     example: moneyTransferDetails
                   accountId:
                     type: string
-                    example: 1015199035827334900
+                    example: '1015199035827334916'
                   accessPeriod:
                     type: object
                     properties:
@@ -8291,24 +8512,9 @@ components:
               type: string
               format: date-time
               example: '2022-07-11T06:06:23Z'
-    CreateMXSecureExchange:
-      title: CreateMXSecureExchange
-      type: object
-      properties:
-        _links:
-          type: object
-          properties:
-            exchange-partner:
-              type: object
-              properties:
-                href:
-                  type: string
-                  example: https://api.dwolla.com/exchange-partners/292317ec-e252-47d8-93c3-2d128e037aa4
-        token:
-          type: string
-          example: someMXProcessorToken
-    CreateFlinksSecureExchange:
-      title: CreateFlinksSecureExchange
+    CreateTokenBasedExchange:
+      title: CreateTokenBasedExchange
+      description: Create an exchange using a token. Supports MX, Plaid, and Flinks secure exchange flows.
       type: object
       required:
         - _links
@@ -8321,34 +8527,16 @@ components:
           properties:
             exchange-partner:
               type: object
-              required:
-                - href
               properties:
                 href:
                   type: string
-                  format: uri
-                  example: https://api.dwolla.com/exchange-partners/a0b22a57-68df-4450-b507-47c937e64e89
+                  example: https://api.dwolla.com/exchange-partners/292317ec-e252-47d8-93c3-2d128e037aa4
         token:
           type: string
-          description: The Flinks connection token
-          example: MTExYTFhMWEtMTExMS0xYWExLTExMTEtMTFhMTExYTExMTFhOjIyMmIyYjFiLTIyMjItMmJiMi0yMjIyLTIyYjIyMmIyMjIyYg==
-    CreatePlaidSecureExchange:
-      title: CreatePlaidSecureExchange
-      type: object
-      properties:
-        _links:
-          type: object
-          properties:
-            exchange-partner:
-              type: object
-              properties:
-                href:
-                  type: string
-                  example: https://api.dwolla.com/exchange-partners/f53ffb32-c84f-496a-9d9d-acd100d396ef
-        token:
-          type: string
-          example: somePlaidProcessorToken
+          description: Connection or processor token from the exchange partner
+          example: sandbox-token-abc123
     InvalidExchangeToken:
+      title: InvalidExchangeToken
       type: object
       required:
         - code
@@ -8361,6 +8549,7 @@ components:
           type: string
           example: Exchange token is expired.
     InvalidExchange:
+      title: InvalidExchange
       type: object
       required:
         - code
@@ -8462,12 +8651,11 @@ components:
                 href:
                   type: string
                   format: uri
-                  description: Required for Plaid mobile sessions
-                  examples:
-                    - description: Plaid Android example
-                      value: com.example.app123
-                    - description: Plaid iOS example
-                      value: https://example.com/app123
+                  description: |
+                    Required for Plaid mobile sessions.
+                    For Android: use app URI scheme (e.g., com.example.app123)
+                    For iOS: use HTTPS URL (e.g., https://example.com/app123)
+                  example: https://example.com/app123
     CreateCustomerExchangeSessionForWeb:
       title: CreateCustomerExchangeSessionForWeb
       description: Create exchange session for web (MX and Plaid web sessions where redirect-url is not required)
@@ -8552,9 +8740,7 @@ components:
                   description: |
                     Present for MX exchange sessions.
                     Contains the URL to redirect the user to complete the authorization process.
-                  examples:
-                    - description: MX example
-                      value: https://www.mx.com/connect/lAfkc7m897s3t1ks9mmwyj4ry7Zq0xql4grzAg1kz77x7c9jrwls1t22w6xt8d2lsxx9zpqv30js3wswfdwcrpAsqgbAfkqwpksp7c2chsx167xy90Asfc67dkj9y48y8p142xw3yp4x5l9t9gkk6m3yk5vwsvyq2qq7w9trszxwdl14lmkg7l6949bn5n41chdkbnxycy40n9b6fkbdwl6qt5wl107k1x8srvlkpz325p412x9tkyA5clf39109lsfrgz2lkgsvntqf7l0zzwb5hl658gdjbxwhb52krwybnbdAqfq69cdy54l05jkvfwyf01q89x48jtgtx290lzjdfcty1lwb8d648wns/eyJ1aV9tZXNzYWdlX3ZlcnNpb24iOjQsInVpX21lc3NhZ2Vfd2Vidmlld191cmxfc2NoZW1lIjoibXgiLCJtb2RlIjoidmVyaWZpY2F0aW9uIn0%3D
+                  example: https://www.mx.com/connect/lAfkc7m897s3t1ks9mmwyj4ry7Zq0xql4grzAg1kz77x7c9jrwls1t22w6xt8d2lsxx9zpqv30js3wswfdwcrpAsqgbAfkqwpksp7c2chsx167xy90Asfc67dkj9y48y8p142xw3yp4x5l9t9gkk6m3yk5vwsvyq2qq7w9trszxwdl14lmkg7l6949bn5n41chdkbnxycy40n9b6fkbdwl6qt5wl107k1x8srvlkpz325p412x9tkyA5clf39109lsfrgz2lkgsvntqf7l0zzwb5hl658gdjbxwhb52krwybnbdAqfq69cdy54l05jkvfwyf01q89x48jtgtx290lzjdfcty1lwb8d648wns/eyJ1aV9tZXNzYWdlX3ZlcnNpb24iOjQsInVpX21lc3NhZ2Vfd2Vidmlld191cmxfc2NoZW1lIjoibXgiLCJtb2RlIjoidmVyaWZpY2F0aW9uIn0%3D
                 type:
                   type: string
                   example: application/vnd.dwolla.v1.hal+json
@@ -8592,12 +8778,11 @@ components:
                 href:
                   type: string
                   format: uri
-                  description: Required for Plaid mobile sessions
-                  examples:
-                    - description: Plaid Android example
-                      value: com.example.app123
-                    - description: Plaid iOS example
-                      value: https://example.com/app123
+                  description: |
+                    Required for Plaid mobile sessions.
+                    For Android: use app URI scheme (e.g., com.example.app123)
+                    For iOS: use HTTPS URL (e.g., https://example.com/app123)
+                  example: https://example.com/app123
     AvailableExchangeConnections:
       type: object
       required:

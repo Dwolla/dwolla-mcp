@@ -5,6 +5,36 @@
 import * as z from "zod";
 import { HalLink, HalLink$zodSchema } from "./hallink.js";
 
+export const VerifiedBusinessCustomerType$zodSchema = z.enum([
+  "business",
+]);
+
+export type VerifiedBusinessCustomerType = z.infer<
+  typeof VerifiedBusinessCustomerType$zodSchema
+>;
+
+export const VerifiedBusinessCustomerStatus$zodSchema = z.enum([
+  "verified",
+  "suspended",
+  "deactivated",
+  "document",
+  "retry",
+]);
+
+export type VerifiedBusinessCustomerStatus = z.infer<
+  typeof VerifiedBusinessCustomerStatus$zodSchema
+>;
+
+export const VerifiedBusinessCustomerBusinessType$zodSchema = z.enum([
+  "llc",
+  "corporation",
+  "partnership",
+]);
+
+export type VerifiedBusinessCustomerBusinessType = z.infer<
+  typeof VerifiedBusinessCustomerBusinessType$zodSchema
+>;
+
 export type VerifiedBusinessCustomerAddress = {
   address1?: string | undefined;
   address2?: string | undefined;
@@ -30,10 +60,10 @@ export const VerifiedBusinessCustomerAddress$zodSchema: z.ZodType<
 });
 
 export type Controller = {
-  firstName?: string | undefined;
-  lastName?: string | undefined;
-  title?: string | undefined;
-  address?: VerifiedBusinessCustomerAddress | undefined;
+  firstName: string;
+  lastName: string;
+  title: string;
+  address: VerifiedBusinessCustomerAddress;
 };
 
 export const Controller$zodSchema: z.ZodType<
@@ -41,34 +71,37 @@ export const Controller$zodSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  address: z.lazy(() => VerifiedBusinessCustomerAddress$zodSchema).optional(),
-  firstName: z.string().optional(),
-  lastName: z.string().optional(),
-  title: z.string().optional(),
+  address: z.lazy(() => VerifiedBusinessCustomerAddress$zodSchema),
+  firstName: z.string(),
+  lastName: z.string(),
+  title: z.string(),
 });
 
 /**
- * Shared models between all Customer types
+ * Verified business customer (LLC, Corporation, Partnership) - distinguished from VerifiedSolePropCustomer by presence of a controller object
  */
 export type VerifiedBusinessCustomer = {
-  _links?: { [k: string]: HalLink } | undefined;
-  id?: string | undefined;
-  type?: string | undefined;
-  status?: string | undefined;
+  _links: { [k: string]: HalLink };
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
   correlationId?: string | undefined;
-  created?: string | undefined;
-  address1?: string | undefined;
+  created: string;
+  type: VerifiedBusinessCustomerType;
+  status: VerifiedBusinessCustomerStatus;
+  address1: string;
   address2?: string | undefined;
-  city?: string | undefined;
-  state?: string | undefined;
-  postalCode?: string | undefined;
+  city: string;
+  state: string;
+  postalCode: string;
   phone?: string | undefined;
   website?: string | undefined;
-  businessName?: string | undefined;
+  businessName: string;
   doingBusinessAs?: string | undefined;
-  businessType?: string | undefined;
-  businessClassification?: string | undefined;
-  controller?: Controller | undefined;
+  businessType: VerifiedBusinessCustomerBusinessType;
+  businessClassification: string;
+  controller: Controller;
 };
 
 export const VerifiedBusinessCustomer$zodSchema: z.ZodType<
@@ -76,22 +109,27 @@ export const VerifiedBusinessCustomer$zodSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _links: z.record(HalLink$zodSchema).optional(),
-  address1: z.string().optional(),
+  _links: z.record(HalLink$zodSchema),
+  address1: z.string(),
   address2: z.string().optional(),
-  businessClassification: z.string().optional(),
-  businessName: z.string().optional(),
-  businessType: z.string().optional(),
-  city: z.string().optional(),
-  controller: z.lazy(() => Controller$zodSchema).optional(),
+  businessClassification: z.string(),
+  businessName: z.string(),
+  businessType: VerifiedBusinessCustomerBusinessType$zodSchema,
+  city: z.string(),
+  controller: z.lazy(() => Controller$zodSchema),
   correlationId: z.string().optional(),
-  created: z.string().datetime({ offset: true }).optional(),
+  created: z.string().datetime({ offset: true }),
   doingBusinessAs: z.string().optional(),
-  id: z.string().optional(),
+  email: z.string(),
+  firstName: z.string(),
+  id: z.string(),
+  lastName: z.string(),
   phone: z.string().optional(),
-  postalCode: z.string().optional(),
-  state: z.string().optional(),
-  status: z.string().optional(),
-  type: z.string().optional(),
+  postalCode: z.string(),
+  state: z.string(),
+  status: VerifiedBusinessCustomerStatus$zodSchema,
+  type: VerifiedBusinessCustomerType$zodSchema,
   website: z.string().optional(),
-}).describe("Shared models between all Customer types");
+}).describe(
+  "Verified business customer (LLC, Corporation, Partnership) - distinguished from VerifiedSolePropCustomer by presence of a controller object",
+);

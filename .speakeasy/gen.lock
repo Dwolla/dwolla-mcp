@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: dbccbcaa-cdde-434b-b972-38fb6d1127e5
 management:
-  docChecksum: aea4114136ff0def2c7e05b2af515f98
+  docChecksum: ce9de8671299d8015eec4d8dbef85e1b
   docVersion: "2.0"
-  speakeasyVersion: 1.658.2
+  speakeasyVersion: 1.659.0
   generationVersion: 2.755.9
-  releaseVersion: 0.0.1-beta.9
-  configChecksum: 823eab846b92d81041bf2e245f93dfd6
+  releaseVersion: 0.0.1-beta.10
+  configChecksum: 5d15640684d2283342a7b75df9ef3c64
   repoURL: https://github.com/Dwolla/dwolla-mcp.git
   published: true
 features:
@@ -175,11 +175,11 @@ generatedFiles:
   - src/models/masspaymentitem.ts
   - src/models/masspayments.ts
   - src/models/notfounderror.ts
+  - src/models/receiveonlycustomer.ts
   - src/models/security.ts
   - src/models/transfer.ts
   - src/models/transferamount.ts
   - src/models/transfers.ts
-  - src/models/unverifiedbusinesscustomer.ts
   - src/models/unverifiedcustomer.ts
   - src/models/verifiedbusinesscustomer.ts
   - src/models/verifiedpersonalcustomer.ts
@@ -197,4 +197,11 @@ examplesVersion: 1.0.2
 generatedTests: {}
 releaseNotes: |
   ## Mcp-typescript SDK Changes Detected:
-  * `DwollaMcp.fundingSources.balance.get()`:  `response` **Changed**
+  * `DwollaMcp.customers.beneficialOwners.list()`:  `response._embedded.beneficial-owners.[]` **Changed** **Breaking** :warning:
+  * `DwollaMcp.customers.beneficialOwnership.get()`:  `response` **Changed** **Breaking** :warning:
+  * `DwollaMcp.customers.documents.list()`:  `response` **Changed** **Breaking** :warning:
+  * `DwollaMcp.beneficialOwners.documents.list()`:  `response` **Changed** **Breaking** :warning:
+  * `DwollaMcp.exchangePartners.list()`:  `response._embedded.exchange-partners.[]` **Changed** **Breaking** :warning:
+  * `DwollaMcp.accounts.exchanges.list()`:  `response` **Changed** **Breaking** :warning:
+  * `DwollaMcp.customers.exchanges.list()`:  `response` **Changed** **Breaking** :warning:
+  * `DwollaMcp.customers.list()`:  `response._embedded.customers.[]` **Changed**

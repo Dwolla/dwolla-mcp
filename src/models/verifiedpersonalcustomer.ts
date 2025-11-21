@@ -5,21 +5,45 @@
 import * as z from "zod";
 import { HalLink, HalLink$zodSchema } from "./hallink.js";
 
+export const VerifiedPersonalCustomerType$zodSchema = z.enum([
+  "personal",
+]);
+
+export type VerifiedPersonalCustomerType = z.infer<
+  typeof VerifiedPersonalCustomerType$zodSchema
+>;
+
+export const VerifiedPersonalCustomerStatus$zodSchema = z.enum([
+  "verified",
+  "suspended",
+  "deactivated",
+  "document",
+  "retry",
+  "kba",
+]);
+
+export type VerifiedPersonalCustomerStatus = z.infer<
+  typeof VerifiedPersonalCustomerStatus$zodSchema
+>;
+
 /**
- * Shared models between all Customer types
+ * Verified personal customer - fully KYC verified individual with send and receive capabilities
  */
 export type VerifiedPersonalCustomer = {
-  _links?: { [k: string]: HalLink } | undefined;
-  id?: string | undefined;
-  type?: string | undefined;
-  status?: string | undefined;
+  _links: { [k: string]: HalLink };
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
   correlationId?: string | undefined;
-  created?: string | undefined;
-  address1?: string | undefined;
+  created: string;
+  type: VerifiedPersonalCustomerType;
+  status: VerifiedPersonalCustomerStatus;
+  address1: string;
   address2?: string | undefined;
-  city?: string | undefined;
-  state?: string | undefined;
-  postalCode?: string | undefined;
+  city: string;
+  state: string;
+  postalCode: string;
 };
 
 export const VerifiedPersonalCustomer$zodSchema: z.ZodType<
@@ -27,15 +51,20 @@ export const VerifiedPersonalCustomer$zodSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _links: z.record(HalLink$zodSchema).optional(),
-  address1: z.string().optional(),
+  _links: z.record(HalLink$zodSchema),
+  address1: z.string(),
   address2: z.string().optional(),
-  city: z.string().optional(),
+  city: z.string(),
   correlationId: z.string().optional(),
-  created: z.string().datetime({ offset: true }).optional(),
-  id: z.string().optional(),
-  postalCode: z.string().optional(),
-  state: z.string().optional(),
-  status: z.string().optional(),
-  type: z.string().optional(),
-}).describe("Shared models between all Customer types");
+  created: z.string().datetime({ offset: true }),
+  email: z.string(),
+  firstName: z.string(),
+  id: z.string(),
+  lastName: z.string(),
+  postalCode: z.string(),
+  state: z.string(),
+  status: VerifiedPersonalCustomerStatus$zodSchema,
+  type: VerifiedPersonalCustomerType$zodSchema,
+}).describe(
+  "Verified personal customer - fully KYC verified individual with send and receive capabilities",
+);

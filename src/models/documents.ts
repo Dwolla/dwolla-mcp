@@ -6,25 +6,25 @@ import * as z from "zod";
 import { Document, Document$zodSchema } from "./document.js";
 import { HalLink, HalLink$zodSchema } from "./hallink.js";
 
-export type DocumentsEmbedded = { documents?: Array<Document> | undefined };
+export type DocumentsEmbedded = { documents: Array<Document> };
 
 export const DocumentsEmbedded$zodSchema: z.ZodType<
   DocumentsEmbedded,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  documents: z.array(Document$zodSchema).optional(),
+  documents: z.array(Document$zodSchema),
 });
 
 export type Documents = {
-  _links?: { [k: string]: HalLink } | undefined;
-  _embedded?: DocumentsEmbedded | undefined;
-  total?: number | undefined;
+  _links: { [k: string]: HalLink };
+  _embedded: DocumentsEmbedded;
+  total: number;
 };
 
 export const Documents$zodSchema: z.ZodType<Documents, z.ZodTypeDef, unknown> =
   z.object({
-    _embedded: z.lazy(() => DocumentsEmbedded$zodSchema).optional(),
-    _links: z.record(HalLink$zodSchema).optional(),
-    total: z.number().int().optional(),
+    _embedded: z.lazy(() => DocumentsEmbedded$zodSchema),
+    _links: z.record(HalLink$zodSchema),
+    total: z.number().int(),
   });

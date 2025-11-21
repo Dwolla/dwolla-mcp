@@ -5,9 +5,9 @@
 import * as z from "zod";
 import { HalLink, HalLink$zodSchema } from "./hallink.js";
 import {
-  UnverifiedBusinessCustomer,
-  UnverifiedBusinessCustomer$zodSchema,
-} from "./unverifiedbusinesscustomer.js";
+  ReceiveOnlyCustomer,
+  ReceiveOnlyCustomer$zodSchema,
+} from "./receiveonlycustomer.js";
 import {
   UnverifiedCustomer,
   UnverifiedCustomer$zodSchema,
@@ -26,29 +26,29 @@ import {
 } from "./verifiedsolepropcustomer.js";
 
 export type Customer =
-  | UnverifiedCustomer
-  | UnverifiedBusinessCustomer
-  | VerifiedPersonalCustomer
+  | VerifiedBusinessCustomer
   | VerifiedSolePropCustomer
-  | VerifiedBusinessCustomer;
+  | VerifiedPersonalCustomer
+  | UnverifiedCustomer
+  | ReceiveOnlyCustomer;
 
 export const Customer$zodSchema: z.ZodType<Customer, z.ZodTypeDef, unknown> = z
   .union([
-    UnverifiedCustomer$zodSchema,
-    UnverifiedBusinessCustomer$zodSchema,
-    VerifiedPersonalCustomer$zodSchema,
-    VerifiedSolePropCustomer$zodSchema,
     VerifiedBusinessCustomer$zodSchema,
+    VerifiedSolePropCustomer$zodSchema,
+    VerifiedPersonalCustomer$zodSchema,
+    UnverifiedCustomer$zodSchema,
+    ReceiveOnlyCustomer$zodSchema,
   ]);
 
 export type CustomersEmbedded = {
   customers?:
     | Array<
-      | UnverifiedCustomer
-      | UnverifiedBusinessCustomer
-      | VerifiedPersonalCustomer
-      | VerifiedSolePropCustomer
       | VerifiedBusinessCustomer
+      | VerifiedSolePropCustomer
+      | VerifiedPersonalCustomer
+      | UnverifiedCustomer
+      | ReceiveOnlyCustomer
     >
     | undefined;
 };
@@ -59,11 +59,11 @@ export const CustomersEmbedded$zodSchema: z.ZodType<
   unknown
 > = z.object({
   customers: z.array(z.union([
-    UnverifiedCustomer$zodSchema,
-    UnverifiedBusinessCustomer$zodSchema,
-    VerifiedPersonalCustomer$zodSchema,
-    VerifiedSolePropCustomer$zodSchema,
     VerifiedBusinessCustomer$zodSchema,
+    VerifiedSolePropCustomer$zodSchema,
+    VerifiedPersonalCustomer$zodSchema,
+    UnverifiedCustomer$zodSchema,
+    ReceiveOnlyCustomer$zodSchema,
   ])).optional(),
 });
 

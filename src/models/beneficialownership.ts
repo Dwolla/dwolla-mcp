@@ -15,9 +15,19 @@ export const BeneficialOwnershipLinks$zodSchema: z.ZodType<
   self: HalLink$zodSchema.optional(),
 });
 
+export const BeneficialOwnershipStatus$zodSchema = z.enum([
+  "uncertified",
+  "certified",
+  "recertify",
+]);
+
+export type BeneficialOwnershipStatus = z.infer<
+  typeof BeneficialOwnershipStatus$zodSchema
+>;
+
 export type BeneficialOwnership = {
-  _links?: BeneficialOwnershipLinks | undefined;
-  status?: string | undefined;
+  _links: BeneficialOwnershipLinks;
+  status: BeneficialOwnershipStatus;
 };
 
 export const BeneficialOwnership$zodSchema: z.ZodType<
@@ -25,6 +35,6 @@ export const BeneficialOwnership$zodSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _links: z.lazy(() => BeneficialOwnershipLinks$zodSchema).optional(),
-  status: z.string().optional(),
+  _links: z.lazy(() => BeneficialOwnershipLinks$zodSchema),
+  status: BeneficialOwnershipStatus$zodSchema,
 });

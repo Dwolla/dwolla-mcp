@@ -52,7 +52,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "DwollaMcp",
-    version: "0.0.1-beta.9",
+    version: "0.0.1-beta.10",
   });
 
   const getClient = deps.getSDK || (() =>

@@ -5,17 +5,25 @@
 import * as z from "zod";
 import { HalLink, HalLink$zodSchema } from "./hallink.js";
 
+export const ExchangeStatus$zodSchema = z.enum([
+  "active",
+  "deactivated",
+  "removed",
+]);
+
+export type ExchangeStatus = z.infer<typeof ExchangeStatus$zodSchema>;
+
 export type Exchange = {
-  _links?: { [k: string]: HalLink } | undefined;
-  id?: string | undefined;
-  status?: string | undefined;
-  created?: string | undefined;
+  _links: { [k: string]: HalLink };
+  id: string;
+  status: ExchangeStatus;
+  created: string;
 };
 
 export const Exchange$zodSchema: z.ZodType<Exchange, z.ZodTypeDef, unknown> = z
   .object({
-    _links: z.record(HalLink$zodSchema).optional(),
-    created: z.string().datetime({ offset: true }).optional(),
-    id: z.string().optional(),
-    status: z.string().optional(),
+    _links: z.record(HalLink$zodSchema),
+    created: z.string().datetime({ offset: true }),
+    id: z.string(),
+    status: ExchangeStatus$zodSchema,
   });

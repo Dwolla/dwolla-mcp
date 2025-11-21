@@ -5,28 +5,28 @@
 import * as z from "zod";
 import { HalLink, HalLink$zodSchema } from "./hallink.js";
 
-export const UnverifiedCustomerType$zodSchema = z.enum([
-  "unverified",
+export const ReceiveOnlyCustomerType$zodSchema = z.enum([
+  "receive-only",
 ]);
 
-export type UnverifiedCustomerType = z.infer<
-  typeof UnverifiedCustomerType$zodSchema
+export type ReceiveOnlyCustomerType = z.infer<
+  typeof ReceiveOnlyCustomerType$zodSchema
 >;
 
-export const UnverifiedCustomerStatus$zodSchema = z.enum([
+export const ReceiveOnlyCustomerStatus$zodSchema = z.enum([
   "unverified",
   "suspended",
   "deactivated",
 ]);
 
-export type UnverifiedCustomerStatus = z.infer<
-  typeof UnverifiedCustomerStatus$zodSchema
+export type ReceiveOnlyCustomerStatus = z.infer<
+  typeof ReceiveOnlyCustomerStatus$zodSchema
 >;
 
 /**
- * Unverified customer - basic customer type with no KYC verification
+ * Receive-only user - can only receive funds, not send
  */
-export type UnverifiedCustomer = {
+export type ReceiveOnlyCustomer = {
   _links: { [k: string]: HalLink };
   id: string;
   firstName: string;
@@ -34,13 +34,13 @@ export type UnverifiedCustomer = {
   email: string;
   correlationId?: string | undefined;
   created: string;
-  type: UnverifiedCustomerType;
-  status: UnverifiedCustomerStatus;
+  type: ReceiveOnlyCustomerType;
+  status: ReceiveOnlyCustomerStatus;
   businessName?: string | undefined;
 };
 
-export const UnverifiedCustomer$zodSchema: z.ZodType<
-  UnverifiedCustomer,
+export const ReceiveOnlyCustomer$zodSchema: z.ZodType<
+  ReceiveOnlyCustomer,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -52,8 +52,6 @@ export const UnverifiedCustomer$zodSchema: z.ZodType<
   firstName: z.string(),
   id: z.string(),
   lastName: z.string(),
-  status: UnverifiedCustomerStatus$zodSchema,
-  type: UnverifiedCustomerType$zodSchema,
-}).describe(
-  "Unverified customer - basic customer type with no KYC verification",
-);
+  status: ReceiveOnlyCustomerStatus$zodSchema,
+  type: ReceiveOnlyCustomerType$zodSchema,
+}).describe("Receive-only user - can only receive funds, not send");

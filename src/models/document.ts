@@ -15,40 +15,77 @@ export const DocumentLinks$zodSchema: z.ZodType<
   self: HalLink$zodSchema.optional(),
 });
 
-export type AllFailureReason = {
-  reason?: string | undefined;
-  description?: string | undefined;
-};
+/**
+ * Current status of the document upload
+ */
+export const DocumentStatus$zodSchema = z.enum([
+  "pending",
+  "reviewed",
+]).describe("Current status of the document upload");
+
+export type DocumentStatus = z.infer<typeof DocumentStatus$zodSchema>;
+
+/**
+ * Type of identity document uploaded
+ */
+export const DocumentType$zodSchema = z.enum([
+  "passport",
+  "license",
+  "idCard",
+  "other",
+]).describe("Type of identity document uploaded");
+
+export type DocumentType = z.infer<typeof DocumentType$zodSchema>;
+
+/**
+ * Verification status of the document after review
+ */
+export const DocumentVerificationStatus$zodSchema = z.enum([
+  "pending",
+  "accepted",
+  "rejected",
+]).describe("Verification status of the document after review");
+
+export type DocumentVerificationStatus = z.infer<
+  typeof DocumentVerificationStatus$zodSchema
+>;
+
+export type AllFailureReason = { reason: string; description: string };
 
 export const AllFailureReason$zodSchema: z.ZodType<
   AllFailureReason,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  description: z.string().optional(),
-  reason: z.string().optional(),
+  description: z.string(),
+  reason: z.string(),
 });
 
+/**
+ * Identity verification document for a customer or beneficial owner
+ */
 export type Document = {
-  _links?: DocumentLinks | undefined;
-  id?: string | undefined;
-  status?: string | undefined;
-  type?: string | undefined;
-  created?: string | undefined;
-  documentVerificationStatus?: string | undefined;
+  _links: DocumentLinks;
+  id: string;
+  status: DocumentStatus;
+  type: DocumentType;
+  created: string;
+  documentVerificationStatus: DocumentVerificationStatus;
   failureReason?: string | undefined;
   allFailureReasons?: Array<AllFailureReason> | undefined;
 };
 
 export const Document$zodSchema: z.ZodType<Document, z.ZodTypeDef, unknown> = z
   .object({
-    _links: z.lazy(() => DocumentLinks$zodSchema).optional(),
+    _links: z.lazy(() => DocumentLinks$zodSchema),
     allFailureReasons: z.array(z.lazy(() => AllFailureReason$zodSchema))
       .optional(),
-    created: z.string().datetime({ offset: true }).optional(),
-    documentVerificationStatus: z.string().optional(),
+    created: z.string().datetime({ offset: true }),
+    documentVerificationStatus: DocumentVerificationStatus$zodSchema,
     failureReason: z.string().optional(),
-    id: z.string().optional(),
-    status: z.string().optional(),
-    type: z.string().optional(),
-  });
+    id: z.string(),
+    status: DocumentStatus$zodSchema,
+    type: DocumentType$zodSchema,
+  }).describe(
+    "Identity verification document for a customer or beneficial owner",
+  );
