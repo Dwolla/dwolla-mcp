@@ -55,7 +55,7 @@ export const Transaction$zodSchema: z.ZodType<
  */
 export type ListTransferFeesResponseBody = {
   transactions?: Array<Transaction> | undefined;
-  total?: string | undefined;
+  total?: number | undefined;
 };
 
 export const ListTransferFeesResponseBody$zodSchema: z.ZodType<
@@ -63,7 +63,7 @@ export const ListTransferFeesResponseBody$zodSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  total: z.string().optional(),
+  total: z.number().int().optional(),
   transactions: z.array(z.lazy(() => Transaction$zodSchema)).optional(),
 }).describe("successful operation");
 

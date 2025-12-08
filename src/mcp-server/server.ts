@@ -52,7 +52,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "DwollaMcp",
-    version: "0.0.1-beta.10",
+    version: "0.0.1-beta.11",
   });
 
   const getClient = deps.getSDK || (() =>
@@ -72,7 +72,7 @@ export function createMCPServer(deps: {
   const scopes = new Set(deps.scopes);
 
   const allowedTools = deps.allowedTools && new Set(deps.allowedTools);
-  const tool = createRegisterTool(
+  const [tool, tools] = createRegisterTool(
     deps.logger,
     server,
     getClient,
@@ -123,5 +123,5 @@ export function createMCPServer(deps: {
   tool(tool$accountsExchangesList);
   tool(tool$customersExchangesList);
 
-  return server;
+  return { server, tools };
 }

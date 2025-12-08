@@ -1704,8 +1704,9 @@ paths:
                           format: date-time
                           example: '2016-02-22T20:46:38.777Z'
                   total:
-                    type: string
-                    example: '1'
+                    type: integer
+                    format: int32
+                    example: 1
         '404':
           description: 404 Not Found
           headers: {}
@@ -3129,6 +3130,7 @@ components:
               - ach
               - real-time-payments
               - wire
+              - external
             example: ach
         bankName:
           type: string
@@ -3759,6 +3761,9 @@ components:
                   - $ref: '#/components/schemas/VerifiedPersonalCustomer'
                   - $ref: '#/components/schemas/VerifiedSolePropCustomer'
                   - $ref: '#/components/schemas/VerifiedBusinessCustomer'
+        total:
+          type: integer
+          example: 2
     ForbiddenError:
       title: ForbiddenError
       description: Error response schema for 403 Forbidden

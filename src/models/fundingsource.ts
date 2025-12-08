@@ -9,6 +9,7 @@ export const Channel$zodSchema = z.enum([
   "ach",
   "real-time-payments",
   "wire",
+  "external",
 ]);
 
 export type Channel = z.infer<typeof Channel$zodSchema>;

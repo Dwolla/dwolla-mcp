@@ -114,8 +114,14 @@ export function createRegisterTool(
   getSDK: () => DwollaMcpCore,
   allowedScopes: Set<MCPScope>,
   allowedTools?: Set<string>,
-): <A extends ZodRawShape | undefined>(tool: ToolDefinition<A>) => void {
-  return <A extends ZodRawShape | undefined>(tool: ToolDefinition<A>): void => {
+): [
+  <A extends ZodRawShape | undefined>(tool: ToolDefinition<A>) => void,
+  Array<{ name: string; description: string }>,
+] {
+  const tools: Array<{ name: string; description: string }> = [];
+  const registerTool = <A extends ZodRawShape | undefined>(
+    tool: ToolDefinition<A>,
+  ): void => {
     if (allowedTools && !allowedTools.has(tool.name)) {
       return;
     }
@@ -154,5 +160,8 @@ export function createRegisterTool(
     }
 
     logger.debug("Registered tool", { name: tool.name });
+    tools.push({ name: tool.name, description: tool.description });
   };
+
+  return [registerTool, tools];
 }

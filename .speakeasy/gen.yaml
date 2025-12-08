@@ -21,12 +21,13 @@ generation:
   schemas:
     allOfMergeStrategy: shallowMerge
   requestBodyFieldName: ""
+  persistentEdits: {}
   tests:
     generateTests: true
     generateNewTests: false
     skipResponseBodyAssertions: false
 mcp-typescript:
-  version: 0.0.1-beta.10
+  version: 0.0.1-beta.11
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
@@ -37,7 +38,11 @@ mcp-typescript:
   baseErrorName: DwollaMcpError
   cloudflareEnabled: false
   defaultErrorName: DwollaMcpDefaultError
+  formStringArrayEncodeMode: encoded-string
+  inferUnionDiscriminators: false
   inputModelSuffix: input
   maxMethodParams: 0
+  multipartArrayFormat: legacy
   outputModelSuffix: output
   packageName: '@dwolla/mcp-server'
+  responseFormat: envelope
