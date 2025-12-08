@@ -1,6 +1,6 @@
 {
   "name": "@dwolla/mcp-server",
-  "version": "0.0.1-beta.10",
+  "version": "0.0.1-beta.11",
   "author": "Speakeasy",
   "type": "module",
   "sideEffects": false,
@@ -30,7 +30,7 @@
     "@eslint/js": "^9.26.0",
     "@types/bun": "^1.2.13",
     "@types/express": "^5.0.1",
-    "@types/node": "^22.15.20",
+    "@types/node": "^18.19.3",
     "eslint": "^9.26.0",
     "globals": "^16.0.0",
     "typescript": "~5.8.3",

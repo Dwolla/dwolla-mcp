@@ -125,9 +125,9 @@ node bin/mcp-server.js start --bearer-auth "your_token_here" --server "sandbox"
 <details>
 <summary>MCP Bundle (Desktop Extension)</summary>
 
-Install the MCP server as a Desktop Extension using the pre-built [`mcp-server.mcpb`](./mcp-server.mcpb) file:
+Install the MCP server as a Desktop Extension using the pre-built [`mcp-server.mcpb`](./static/mcp-server.mcpb) file:
 
-Simply drag and drop the [`mcp-server.mcpb`](./mcp-server.mcpb) file onto Claude Desktop to install the extension.
+Simply drag and drop the [`mcp-server.mcpb`](./static/mcp-server.mcpb) file onto Claude Desktop to install the extension.
 
 The MCP bundle package includes the MCP server and all necessary configuration. Once installed, the server will be available without additional setup.
 
@@ -139,7 +139,7 @@ The MCP bundle package includes the MCP server and all necessary configuration. 
 <details>
 <summary>Cursor</summary>
 
-[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=DwollaMcp&config=eyJtY3BTZXJ2ZXJzIjp7IkR3b2xsYU1jcCI6eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyJAZHdvbGxhL21jcC1zZXJ2ZXIiLCJzdGFydCIsIi0tc2VydmVyIiwiLi4uIiwiLS1iZWFyZXItYXV0aCIsIi4uLiJdfX19)
+[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=DwollaMcp&config=eyJtY3BTZXJ2ZXJzIjp7IkR3b2xsYU1jcCI6eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyJAZHdvbGxhL21jcC1zZXJ2ZXIiLCJzdGFydCIsIi0tc2VydmVyIiwiLi4uIiwiLS1iZWFyZXItYXV0aCIsIi4uLiJdfX19)
 
 Or manually:
 

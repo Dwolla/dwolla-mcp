@@ -1,7 +1,7 @@
 {
   "manifest_version": "0.3",
   "name": "@dwolla/mcp-server",
-  "version": "0.0.1-beta.10",
+  "version": "0.0.1-beta.11",
   "description": "",
   "long_description": "Dwolla API: Dwolla API Documentation",
   "author": {
@@ -23,6 +23,30 @@
     }
   },
   "display_name": "@dwolla/mcp Server",
+  "prompts": [],
+  "keywords": [
+    "@dwolla/mcp",
+    "server",
+    "dwolla",
+    "api",
+    "documentation"
+  ],
+  "user_config": {
+    "server": {
+      "type": "string",
+      "title": "Server",
+      "description": "Available servers: [prod: https://api.dwolla.com, sandbox: https://api-sandbox.dwolla.com]",
+      "required": false,
+      "default": "prod"
+    },
+    "bearer_auth": {
+      "type": "string",
+      "title": "bearerAuth",
+      "description": "The bearerAuth to use for the request",
+      "required": true,
+      "sensitive": true
+    }
+  },
   "tools": [
     {
       "name": "accounts-get",
@@ -132,29 +156,5 @@
       "name": "customers-exchanges-list",
       "description": "List exchanges for a customer\n\nReturns all exchanges for a specific customer. Exchanges represent connections between the customer's external bank accounts and open banking partners. Includes exchange status, creation date, and links to associated funding sources and partners."
     }
-  ],
-  "prompts": [],
-  "keywords": [
-      "@dwolla/mcp",
-      "server",
-      "dwolla",
-      "api",
-      "documentation"
-    ],
-  "user_config": {
-      "server": {
-        "type": "string",
-        "title": "Server",
-        "description": "Available servers: [prod: https://api.dwolla.com, sandbox: https://api-sandbox.dwolla.com]",
-        "required": false,
-        "default": "prod"
-      },
-      "bearer_auth": {
-        "type": "string",
-        "title": "bearerAuth",
-        "description": "The bearerAuth to use for the request",
-        "required": true,
-        "sensitive": true
-      }
-    }
+  ]
 }

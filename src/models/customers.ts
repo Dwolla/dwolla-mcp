@@ -70,10 +70,12 @@ export const CustomersEmbedded$zodSchema: z.ZodType<
 export type Customers = {
   _links?: { [k: string]: HalLink } | undefined;
   _embedded?: CustomersEmbedded | undefined;
+  total?: number | undefined;
 };
 
 export const Customers$zodSchema: z.ZodType<Customers, z.ZodTypeDef, unknown> =
   z.object({
     _embedded: z.lazy(() => CustomersEmbedded$zodSchema).optional(),
     _links: z.record(HalLink$zodSchema).optional(),
+    total: z.number().int().optional(),
   });
