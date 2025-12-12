@@ -35,7 +35,7 @@ export type VerifiedBusinessCustomerBusinessType = z.infer<
   typeof VerifiedBusinessCustomerBusinessType$zodSchema
 >;
 
-export type VerifiedBusinessCustomerAddress = {
+export type Address = {
   address1?: string | undefined;
   address2?: string | undefined;
   address3?: string | undefined;
@@ -45,25 +45,22 @@ export type VerifiedBusinessCustomerAddress = {
   stateProvinceRegion?: string | undefined;
 };
 
-export const VerifiedBusinessCustomerAddress$zodSchema: z.ZodType<
-  VerifiedBusinessCustomerAddress,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  address1: z.string().optional(),
-  address2: z.string().optional(),
-  address3: z.string().optional(),
-  city: z.string().optional(),
-  country: z.string().optional(),
-  postalCode: z.string().optional(),
-  stateProvinceRegion: z.string().optional(),
-});
+export const Address$zodSchema: z.ZodType<Address, z.ZodTypeDef, unknown> = z
+  .object({
+    address1: z.string().optional(),
+    address2: z.string().optional(),
+    address3: z.string().optional(),
+    city: z.string().optional(),
+    country: z.string().optional(),
+    postalCode: z.string().optional(),
+    stateProvinceRegion: z.string().optional(),
+  });
 
 export type Controller = {
   firstName: string;
   lastName: string;
   title: string;
-  address: VerifiedBusinessCustomerAddress;
+  address: Address;
 };
 
 export const Controller$zodSchema: z.ZodType<
@@ -71,7 +68,7 @@ export const Controller$zodSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  address: z.lazy(() => VerifiedBusinessCustomerAddress$zodSchema),
+  address: z.lazy(() => Address$zodSchema),
   firstName: z.string(),
   lastName: z.string(),
   title: z.string(),
