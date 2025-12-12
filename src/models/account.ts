@@ -3,38 +3,21 @@
  */
 
 import * as z from "zod";
-import { Address, Address$zodSchema } from "./address.js";
 import { HalLink, HalLink$zodSchema } from "./hallink.js";
 
 export type Account = {
   _links?: { [k: string]: HalLink } | undefined;
   id?: string | undefined;
   name?: string | undefined;
-  authorizedRep?: string | undefined;
   timezoneOffset?: number | undefined;
-  email?: string | undefined;
-  phone?: string | undefined;
-  address?: Address | undefined;
-  verificationStatus?: string | undefined;
-  ownershipStatus?: string | undefined;
-  ownershipCertificationStatus?: string | undefined;
   type?: string | undefined;
-  created?: string | undefined;
 };
 
 export const Account$zodSchema: z.ZodType<Account, z.ZodTypeDef, unknown> = z
   .object({
     _links: z.record(HalLink$zodSchema).optional(),
-    address: Address$zodSchema.optional(),
-    authorizedRep: z.string().optional(),
-    created: z.string().datetime({ offset: true }).optional(),
-    email: z.string().optional(),
     id: z.string().optional(),
     name: z.string().optional(),
-    ownershipCertificationStatus: z.string().optional(),
-    ownershipStatus: z.string().optional(),
-    phone: z.string().optional(),
-    timezoneOffset: z.number().int().optional(),
+    timezoneOffset: z.number().optional(),
     type: z.string().optional(),
-    verificationStatus: z.string().optional(),
   });
