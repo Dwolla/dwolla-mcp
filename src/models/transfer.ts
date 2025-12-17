@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
 import { HalLink, HalLink$zodSchema } from "./hallink.js";
 
 export type TransferAmount1 = {
@@ -10,11 +11,7 @@ export type TransferAmount1 = {
   currency?: string | undefined;
 };
 
-export const TransferAmount1$zodSchema: z.ZodType<
-  TransferAmount1,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const TransferAmount1$zodSchema: z.ZodType<TransferAmount1> = z.object({
   currency: z.string().optional(),
   value: z.string().optional(),
 });
@@ -24,42 +21,53 @@ export type Clearing = {
   destination?: string | undefined;
 };
 
-export const Clearing$zodSchema: z.ZodType<Clearing, z.ZodTypeDef, unknown> = z
-  .object({
-    destination: z.string().optional(),
-    source: z.string().optional(),
-  });
+export const Clearing$zodSchema: z.ZodType<Clearing> = z.object({
+  destination: z.string().optional(),
+  source: z.string().optional(),
+});
 
 export type TransferMetadata = {
   paymentId?: string | undefined;
   note?: string | undefined;
 };
 
-export const TransferMetadata$zodSchema: z.ZodType<
-  TransferMetadata,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  note: z.string().optional(),
-  paymentId: z.string().optional(),
-});
+export const TransferMetadata$zodSchema: z.ZodType<TransferMetadata> = z.object(
+  {
+    note: z.string().optional(),
+    paymentId: z.string().optional(),
+  },
+);
 
 /**
  * Contains addenda information for the transfer
  */
 export type SourceAddenda = { values?: Array<string> | undefined };
 
-export const SourceAddenda$zodSchema: z.ZodType<
-  SourceAddenda,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const SourceAddenda$zodSchema: z.ZodType<SourceAddenda> = z.object({
   values: z.array(z.string()).optional(),
 }).describe("Contains addenda information for the transfer");
 
 /**
  * Describes the purpose of the transaction
  */
+export const SourceCompanyEntryDescription = {
+  Reversal: "REVERSAL",
+  Reclaim: "RECLAIM",
+  NoCheck: "NO CHECK",
+  Autoenroll: "AUTOENROLL",
+  Redepcheck: "REDEPCHECK",
+  ReturnFee: "RETURN FEE",
+  RetryPmnt: "RETRY PMNT",
+  Healthcare: "HEALTHCARE",
+  Payment: "PAYMENT",
+} as const;
+/**
+ * Describes the purpose of the transaction
+ */
+export type SourceCompanyEntryDescription = ClosedEnum<
+  typeof SourceCompanyEntryDescription
+>;
+
 export const SourceCompanyEntryDescription$zodSchema = z.enum([
   "REVERSAL",
   "RECLAIM",
@@ -71,10 +79,6 @@ export const SourceCompanyEntryDescription$zodSchema = z.enum([
   "HEALTHCARE",
   "PAYMENT",
 ]).describe("Describes the purpose of the transaction");
-
-export type SourceCompanyEntryDescription = z.infer<
-  typeof SourceCompanyEntryDescription$zodSchema
->;
 
 /**
  * Information sent to the source/originating bank account along with the transfer
@@ -91,37 +95,51 @@ export type Source = {
   traceId?: string | undefined;
 };
 
-export const Source$zodSchema: z.ZodType<Source, z.ZodTypeDef, unknown> = z
-  .object({
-    addenda: z.lazy(() => SourceAddenda$zodSchema).optional(),
-    beneficiaryName: z.string().optional(),
-    companyEntryDescription: SourceCompanyEntryDescription$zodSchema.optional(),
-    companyId: z.string().optional(),
-    companyName: z.string().optional(),
-    effectiveDate: z.string().date().optional(),
-    postingData: z.string().optional(),
-    routingNumber: z.string().optional(),
-    traceId: z.string().optional(),
-  }).describe(
-    "Information sent to the source/originating bank account along with the transfer",
-  );
+export const Source$zodSchema: z.ZodType<Source> = z.object({
+  addenda: z.lazy(() => SourceAddenda$zodSchema).optional(),
+  beneficiaryName: z.string().optional(),
+  companyEntryDescription: SourceCompanyEntryDescription$zodSchema.optional(),
+  companyId: z.string().optional(),
+  companyName: z.string().optional(),
+  effectiveDate: z.string().date().optional(),
+  postingData: z.string().optional(),
+  routingNumber: z.string().optional(),
+  traceId: z.string().optional(),
+}).describe(
+  "Information sent to the source/originating bank account along with the transfer",
+);
 
 /**
  * Contains addenda information for the transfer
  */
 export type DestinationAddenda = { values?: Array<string> | undefined };
 
-export const DestinationAddenda$zodSchema: z.ZodType<
-  DestinationAddenda,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  values: z.array(z.string()).optional(),
-}).describe("Contains addenda information for the transfer");
+export const DestinationAddenda$zodSchema: z.ZodType<DestinationAddenda> = z
+  .object({
+    values: z.array(z.string()).optional(),
+  }).describe("Contains addenda information for the transfer");
 
 /**
  * Describes the purpose of the transaction
  */
+export const DestinationCompanyEntryDescription = {
+  Reversal: "REVERSAL",
+  Reclaim: "RECLAIM",
+  NoCheck: "NO CHECK",
+  Autoenroll: "AUTOENROLL",
+  Redepcheck: "REDEPCHECK",
+  ReturnFee: "RETURN FEE",
+  RetryPmnt: "RETRY PMNT",
+  Healthcare: "HEALTHCARE",
+  Payment: "PAYMENT",
+} as const;
+/**
+ * Describes the purpose of the transaction
+ */
+export type DestinationCompanyEntryDescription = ClosedEnum<
+  typeof DestinationCompanyEntryDescription
+>;
+
 export const DestinationCompanyEntryDescription$zodSchema = z.enum([
   "REVERSAL",
   "RECLAIM",
@@ -133,10 +151,6 @@ export const DestinationCompanyEntryDescription$zodSchema = z.enum([
   "HEALTHCARE",
   "PAYMENT",
 ]).describe("Describes the purpose of the transaction");
-
-export type DestinationCompanyEntryDescription = z.infer<
-  typeof DestinationCompanyEntryDescription$zodSchema
->;
 
 /**
  * Information sent to the destination/receiving bank account along with the transfer
@@ -153,24 +167,21 @@ export type AchDetailsDestination = {
   traceId?: string | undefined;
 };
 
-export const AchDetailsDestination$zodSchema: z.ZodType<
-  AchDetailsDestination,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  addenda: z.lazy(() => DestinationAddenda$zodSchema).optional(),
-  beneficiaryName: z.string().optional(),
-  companyEntryDescription: DestinationCompanyEntryDescription$zodSchema
-    .optional(),
-  companyId: z.string().optional(),
-  companyName: z.string().optional(),
-  effectiveDate: z.string().date().optional(),
-  postingData: z.string().optional(),
-  routingNumber: z.string().optional(),
-  traceId: z.string().optional(),
-}).describe(
-  "Information sent to the destination/receiving bank account along with the transfer",
-);
+export const AchDetailsDestination$zodSchema: z.ZodType<AchDetailsDestination> =
+  z.object({
+    addenda: z.lazy(() => DestinationAddenda$zodSchema).optional(),
+    beneficiaryName: z.string().optional(),
+    companyEntryDescription: DestinationCompanyEntryDescription$zodSchema
+      .optional(),
+    companyId: z.string().optional(),
+    companyName: z.string().optional(),
+    effectiveDate: z.string().date().optional(),
+    postingData: z.string().optional(),
+    routingNumber: z.string().optional(),
+    traceId: z.string().optional(),
+  }).describe(
+    "Information sent to the destination/receiving bank account along with the transfer",
+  );
 
 /**
  * ACH-specific details for the transfer. Present when transfer was processed via ACH network.
@@ -180,11 +191,7 @@ export type AchDetails = {
   destination?: AchDetailsDestination | undefined;
 };
 
-export const AchDetails$zodSchema: z.ZodType<
-  AchDetails,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const AchDetails$zodSchema: z.ZodType<AchDetails> = z.object({
   destination: z.lazy(() => AchDetailsDestination$zodSchema).optional(),
   source: z.lazy(() => Source$zodSchema).optional(),
 }).describe(
@@ -200,26 +207,19 @@ export type RtpDetailsDestination = {
   endToEndReferenceId?: string | undefined;
 };
 
-export const RtpDetailsDestination$zodSchema: z.ZodType<
-  RtpDetailsDestination,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  endToEndReferenceId: z.string().optional(),
-  networkId: z.string().optional(),
-  remittanceData: z.string().optional(),
-}).describe("RTP destination details with network identifiers");
+export const RtpDetailsDestination$zodSchema: z.ZodType<RtpDetailsDestination> =
+  z.object({
+    endToEndReferenceId: z.string().optional(),
+    networkId: z.string().optional(),
+    remittanceData: z.string().optional(),
+  }).describe("RTP destination details with network identifiers");
 
 /**
  * Real-Time Payments (RTP) network specific details. Present when transfer was processed via RTP network.
  */
 export type RtpDetails = { destination?: RtpDetailsDestination | undefined };
 
-export const RtpDetails$zodSchema: z.ZodType<
-  RtpDetails,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const RtpDetails$zodSchema: z.ZodType<RtpDetails> = z.object({
   destination: z.lazy(() => RtpDetailsDestination$zodSchema).optional(),
 }).describe(
   "Real-Time Payments (RTP) network specific details. Present when transfer was processed via RTP network.",
@@ -235,9 +235,7 @@ export type FedNowDetailsDestination = {
 };
 
 export const FedNowDetailsDestination$zodSchema: z.ZodType<
-  FedNowDetailsDestination,
-  z.ZodTypeDef,
-  unknown
+  FedNowDetailsDestination
 > = z.object({
   endToEndReferenceId: z.string().optional(),
   networkId: z.string().optional(),
@@ -251,11 +249,7 @@ export type FedNowDetails = {
   destination?: FedNowDetailsDestination | undefined;
 };
 
-export const FedNowDetails$zodSchema: z.ZodType<
-  FedNowDetails,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const FedNowDetails$zodSchema: z.ZodType<FedNowDetails> = z.object({
   destination: z.lazy(() => FedNowDetailsDestination$zodSchema).optional(),
 }).describe(
   "FedNow Service network specific details. Present when transfer was processed via FedNow network.",
@@ -264,21 +258,26 @@ export const FedNowDetails$zodSchema: z.ZodType<
 /**
  * The payment network used to process the transfer
  */
+export const DestinationEnum = {
+  RealTimePayments: "real-time-payments",
+  FedNow: "fed-now",
+} as const;
+/**
+ * The payment network used to process the transfer
+ */
+export type DestinationEnum = ClosedEnum<typeof DestinationEnum>;
+
 export const DestinationEnum$zodSchema = z.enum([
   "real-time-payments",
   "fed-now",
 ]).describe("The payment network used to process the transfer");
-
-export type DestinationEnum = z.infer<typeof DestinationEnum$zodSchema>;
 
 export type TransferProcessingChannel = {
   destination?: DestinationEnum | undefined;
 };
 
 export const TransferProcessingChannel$zodSchema: z.ZodType<
-  TransferProcessingChannel,
-  z.ZodTypeDef,
-  unknown
+  TransferProcessingChannel
 > = z.object({
   destination: DestinationEnum$zodSchema.optional(),
 });
@@ -298,19 +297,18 @@ export type Transfer = {
   processingChannel?: TransferProcessingChannel | undefined;
 };
 
-export const Transfer$zodSchema: z.ZodType<Transfer, z.ZodTypeDef, unknown> = z
-  .object({
-    _links: z.record(HalLink$zodSchema).optional(),
-    achDetails: z.lazy(() => AchDetails$zodSchema).optional(),
-    amount: z.lazy(() => TransferAmount1$zodSchema).optional(),
-    clearing: z.lazy(() => Clearing$zodSchema).optional(),
-    correlationId: z.string().optional(),
-    created: z.string().datetime({ offset: true }).optional(),
-    fedNowDetails: z.lazy(() => FedNowDetails$zodSchema).optional(),
-    id: z.string().optional(),
-    metadata: z.lazy(() => TransferMetadata$zodSchema).optional(),
-    processingChannel: z.lazy(() => TransferProcessingChannel$zodSchema)
-      .optional(),
-    rtpDetails: z.lazy(() => RtpDetails$zodSchema).optional(),
-    status: z.string().optional(),
-  });
+export const Transfer$zodSchema: z.ZodType<Transfer> = z.object({
+  _links: z.record(z.string(), HalLink$zodSchema).optional(),
+  achDetails: z.lazy(() => AchDetails$zodSchema).optional(),
+  amount: z.lazy(() => TransferAmount1$zodSchema).optional(),
+  clearing: z.lazy(() => Clearing$zodSchema).optional(),
+  correlationId: z.string().optional(),
+  created: z.iso.datetime({ offset: true }).optional(),
+  fedNowDetails: z.lazy(() => FedNowDetails$zodSchema).optional(),
+  id: z.string().optional(),
+  metadata: z.lazy(() => TransferMetadata$zodSchema).optional(),
+  processingChannel: z.lazy(() => TransferProcessingChannel$zodSchema)
+    .optional(),
+  rtpDetails: z.lazy(() => RtpDetails$zodSchema).optional(),
+  status: z.string().optional(),
+});

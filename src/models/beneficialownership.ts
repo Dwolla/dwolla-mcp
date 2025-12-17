@@ -3,17 +3,25 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
 import { HalLink, HalLink$zodSchema } from "./hallink.js";
 
 export type BeneficialOwnershipLinks = { self?: HalLink | undefined };
 
 export const BeneficialOwnershipLinks$zodSchema: z.ZodType<
-  BeneficialOwnershipLinks,
-  z.ZodTypeDef,
-  unknown
+  BeneficialOwnershipLinks
 > = z.object({
   self: HalLink$zodSchema.optional(),
 });
+
+export const BeneficialOwnershipStatus = {
+  Uncertified: "uncertified",
+  Certified: "certified",
+  Recertify: "recertify",
+} as const;
+export type BeneficialOwnershipStatus = ClosedEnum<
+  typeof BeneficialOwnershipStatus
+>;
 
 export const BeneficialOwnershipStatus$zodSchema = z.enum([
   "uncertified",
@@ -21,20 +29,13 @@ export const BeneficialOwnershipStatus$zodSchema = z.enum([
   "recertify",
 ]);
 
-export type BeneficialOwnershipStatus = z.infer<
-  typeof BeneficialOwnershipStatus$zodSchema
->;
-
 export type BeneficialOwnership = {
   _links: BeneficialOwnershipLinks;
   status: BeneficialOwnershipStatus;
 };
 
-export const BeneficialOwnership$zodSchema: z.ZodType<
-  BeneficialOwnership,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _links: z.lazy(() => BeneficialOwnershipLinks$zodSchema),
-  status: BeneficialOwnershipStatus$zodSchema,
-});
+export const BeneficialOwnership$zodSchema: z.ZodType<BeneficialOwnership> = z
+  .object({
+    _links: z.lazy(() => BeneficialOwnershipLinks$zodSchema),
+    status: BeneficialOwnershipStatus$zodSchema,
+  });

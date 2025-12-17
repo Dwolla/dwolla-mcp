@@ -11,9 +11,7 @@ import {
 export type ListAvailableExchangeConnectionsRequest = { id: string };
 
 export const ListAvailableExchangeConnectionsRequest$zodSchema: z.ZodType<
-  ListAvailableExchangeConnectionsRequest,
-  z.ZodTypeDef,
-  unknown
+  ListAvailableExchangeConnectionsRequest
 > = z.object({
   id: z.string().describe("Customer's unique identifier"),
 });
@@ -27,9 +25,7 @@ export type ListAvailableExchangeConnectionsResponseBody = {
 };
 
 export const ListAvailableExchangeConnectionsResponseBody$zodSchema: z.ZodType<
-  ListAvailableExchangeConnectionsResponseBody,
-  z.ZodTypeDef,
-  unknown
+  ListAvailableExchangeConnectionsResponseBody
 > = z.object({
   code: z.string().optional(),
   message: z.string().optional(),
@@ -44,15 +40,13 @@ export type ListAvailableExchangeConnectionsResponse = {
 };
 
 export const ListAvailableExchangeConnectionsResponse$zodSchema: z.ZodType<
-  ListAvailableExchangeConnectionsResponse,
-  z.ZodTypeDef,
-  unknown
+  ListAvailableExchangeConnectionsResponse
 > = z.object({
   AvailableExchangeConnections: AvailableExchangeConnections$zodSchema
     .optional(),
   ContentType: z.string(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
+  RawResponse: z.custom<Response>(x => x instanceof Response),
+  StatusCode: z.int(),
   object: z.lazy(() => ListAvailableExchangeConnectionsResponseBody$zodSchema)
     .optional(),
 });

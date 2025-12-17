@@ -14,9 +14,7 @@ export type ExchangePartnersEmbedded = {
 };
 
 export const ExchangePartnersEmbedded$zodSchema: z.ZodType<
-  ExchangePartnersEmbedded,
-  z.ZodTypeDef,
-  unknown
+  ExchangePartnersEmbedded
 > = z.object({
   exchangePartners: z.array(ExchangePartner$zodSchema).optional(),
 });
@@ -27,12 +25,10 @@ export type ExchangePartners = {
   total?: number | undefined;
 };
 
-export const ExchangePartners$zodSchema: z.ZodType<
-  ExchangePartners,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _embedded: z.lazy(() => ExchangePartnersEmbedded$zodSchema).optional(),
-  _links: z.record(HalLink$zodSchema).optional(),
-  total: z.number().int().optional(),
-});
+export const ExchangePartners$zodSchema: z.ZodType<ExchangePartners> = z.object(
+  {
+    _embedded: z.lazy(() => ExchangePartnersEmbedded$zodSchema).optional(),
+    _links: z.record(z.string(), HalLink$zodSchema).optional(),
+    total: z.int().optional(),
+  },
+);

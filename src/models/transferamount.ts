@@ -6,11 +6,7 @@ import * as z from "zod";
 
 export type TransferAmount = { value: string; currency: string };
 
-export const TransferAmount$zodSchema: z.ZodType<
-  TransferAmount,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const TransferAmount$zodSchema: z.ZodType<TransferAmount> = z.object({
   currency: z.string(),
   value: z.string(),
 });

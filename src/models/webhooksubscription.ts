@@ -7,19 +7,16 @@ import * as z from "zod";
 export type WebhookSubscriptionSelf = { href?: string | undefined };
 
 export const WebhookSubscriptionSelf$zodSchema: z.ZodType<
-  WebhookSubscriptionSelf,
-  z.ZodTypeDef,
-  unknown
+  WebhookSubscriptionSelf
 > = z.object({
   href: z.string().optional(),
 });
 
 export type Webhooks = { href?: string | undefined };
 
-export const Webhooks$zodSchema: z.ZodType<Webhooks, z.ZodTypeDef, unknown> = z
-  .object({
-    href: z.string().optional(),
-  });
+export const Webhooks$zodSchema: z.ZodType<Webhooks> = z.object({
+  href: z.string().optional(),
+});
 
 export type WebhookSubscriptionLinks = {
   self?: WebhookSubscriptionSelf | undefined;
@@ -27,9 +24,7 @@ export type WebhookSubscriptionLinks = {
 };
 
 export const WebhookSubscriptionLinks$zodSchema: z.ZodType<
-  WebhookSubscriptionLinks,
-  z.ZodTypeDef,
-  unknown
+  WebhookSubscriptionLinks
 > = z.object({
   self: z.lazy(() => WebhookSubscriptionSelf$zodSchema).optional(),
   webhooks: z.lazy(() => Webhooks$zodSchema).optional(),
@@ -43,14 +38,11 @@ export type WebhookSubscription = {
   created?: string | undefined;
 };
 
-export const WebhookSubscription$zodSchema: z.ZodType<
-  WebhookSubscription,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _links: z.lazy(() => WebhookSubscriptionLinks$zodSchema).optional(),
-  created: z.string().datetime({ offset: true }).optional(),
-  id: z.string().optional(),
-  paused: z.boolean().optional(),
-  url: z.string().optional(),
-});
+export const WebhookSubscription$zodSchema: z.ZodType<WebhookSubscription> = z
+  .object({
+    _links: z.lazy(() => WebhookSubscriptionLinks$zodSchema).optional(),
+    created: z.iso.datetime({ offset: true }).optional(),
+    id: z.string().optional(),
+    paused: z.boolean().optional(),
+    url: z.string().optional(),
+  });

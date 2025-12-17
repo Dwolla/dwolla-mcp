@@ -14,12 +14,10 @@ export type ListAndSearchCustomersRequest = {
 };
 
 export const ListAndSearchCustomersRequest$zodSchema: z.ZodType<
-  ListAndSearchCustomersRequest,
-  z.ZodTypeDef,
-  unknown
+  ListAndSearchCustomersRequest
 > = z.object({
-  limit: z.number().int().describe("How many results to return").optional(),
-  offset: z.number().int().describe("How many results to skip").optional(),
+  limit: z.int().describe("How many results to return").optional(),
+  offset: z.int().describe("How many results to skip").optional(),
   search: z.string().describe("Searches on certain fields").optional(),
   status: z.string().describe("Filter by customer status").optional(),
 });
@@ -33,13 +31,11 @@ export type ListAndSearchCustomersResponse = {
 };
 
 export const ListAndSearchCustomersResponse$zodSchema: z.ZodType<
-  ListAndSearchCustomersResponse,
-  z.ZodTypeDef,
-  unknown
+  ListAndSearchCustomersResponse
 > = z.object({
   ContentType: z.string(),
   Customers: Customers$zodSchema.optional(),
   ForbiddenError: ForbiddenError$zodSchema.optional(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
+  RawResponse: z.custom<Response>(x => x instanceof Response),
+  StatusCode: z.int(),
 });

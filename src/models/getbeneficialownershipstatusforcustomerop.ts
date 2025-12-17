@@ -11,11 +11,7 @@ import {
 export type GetBeneficialOwnershipStatusForCustomerRequest = { id: string };
 
 export const GetBeneficialOwnershipStatusForCustomerRequest$zodSchema:
-  z.ZodType<
-    GetBeneficialOwnershipStatusForCustomerRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
+  z.ZodType<GetBeneficialOwnershipStatusForCustomerRequest> = z.object({
     id: z.string().describe("Customer unique identifier"),
   });
 
@@ -28,14 +24,11 @@ export type GetBeneficialOwnershipStatusForCustomerNotFoundResponseBody = {
 };
 
 export const GetBeneficialOwnershipStatusForCustomerNotFoundResponseBody$zodSchema:
-  z.ZodType<
-    GetBeneficialOwnershipStatusForCustomerNotFoundResponseBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    code: z.string().optional(),
-    message: z.string().optional(),
-  }).describe("not found");
+  z.ZodType<GetBeneficialOwnershipStatusForCustomerNotFoundResponseBody> = z
+    .object({
+      code: z.string().optional(),
+      message: z.string().optional(),
+    }).describe("not found");
 
 /**
  * forbidden
@@ -46,14 +39,11 @@ export type GetBeneficialOwnershipStatusForCustomerForbiddenResponseBody = {
 };
 
 export const GetBeneficialOwnershipStatusForCustomerForbiddenResponseBody$zodSchema:
-  z.ZodType<
-    GetBeneficialOwnershipStatusForCustomerForbiddenResponseBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    code: z.string().optional(),
-    message: z.string().optional(),
-  }).describe("forbidden");
+  z.ZodType<GetBeneficialOwnershipStatusForCustomerForbiddenResponseBody> = z
+    .object({
+      code: z.string().optional(),
+      message: z.string().optional(),
+    }).describe("forbidden");
 
 export type GetBeneficialOwnershipStatusForCustomerResponse = {
   ContentType: string;
@@ -69,15 +59,11 @@ export type GetBeneficialOwnershipStatusForCustomerResponse = {
 };
 
 export const GetBeneficialOwnershipStatusForCustomerResponse$zodSchema:
-  z.ZodType<
-    GetBeneficialOwnershipStatusForCustomerResponse,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
+  z.ZodType<GetBeneficialOwnershipStatusForCustomerResponse> = z.object({
     BeneficialOwnership: BeneficialOwnership$zodSchema.optional(),
     ContentType: z.string(),
-    RawResponse: z.instanceof(Response),
-    StatusCode: z.number().int(),
+    RawResponse: z.custom<Response>(x => x instanceof Response),
+    StatusCode: z.int(),
     fourHundredAndFourApplicationVndDwollaV1HalPlusJsonObject: z.lazy(() =>
       GetBeneficialOwnershipStatusForCustomerNotFoundResponseBody$zodSchema
     ).optional(),

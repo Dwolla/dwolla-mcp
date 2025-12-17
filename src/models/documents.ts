@@ -8,13 +8,10 @@ import { HalLink, HalLink$zodSchema } from "./hallink.js";
 
 export type DocumentsEmbedded = { documents: Array<Document> };
 
-export const DocumentsEmbedded$zodSchema: z.ZodType<
-  DocumentsEmbedded,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  documents: z.array(Document$zodSchema),
-});
+export const DocumentsEmbedded$zodSchema: z.ZodType<DocumentsEmbedded> = z
+  .object({
+    documents: z.array(Document$zodSchema),
+  });
 
 export type Documents = {
   _links: { [k: string]: HalLink };
@@ -22,9 +19,8 @@ export type Documents = {
   total: number;
 };
 
-export const Documents$zodSchema: z.ZodType<Documents, z.ZodTypeDef, unknown> =
-  z.object({
-    _embedded: z.lazy(() => DocumentsEmbedded$zodSchema),
-    _links: z.record(HalLink$zodSchema),
-    total: z.number().int(),
-  });
+export const Documents$zodSchema: z.ZodType<Documents> = z.object({
+  _embedded: z.lazy(() => DocumentsEmbedded$zodSchema),
+  _links: z.record(z.string(), HalLink$zodSchema),
+  total: z.int(),
+});

@@ -14,9 +14,7 @@ export type BeneficialOwnersEmbedded = {
 };
 
 export const BeneficialOwnersEmbedded$zodSchema: z.ZodType<
-  BeneficialOwnersEmbedded,
-  z.ZodTypeDef,
-  unknown
+  BeneficialOwnersEmbedded
 > = z.object({
   beneficialOwners: z.array(BeneficialOwner$zodSchema).optional(),
 });
@@ -29,11 +27,9 @@ export type BeneficialOwners = {
   _embedded?: BeneficialOwnersEmbedded | undefined;
 };
 
-export const BeneficialOwners$zodSchema: z.ZodType<
-  BeneficialOwners,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _embedded: z.lazy(() => BeneficialOwnersEmbedded$zodSchema).optional(),
-  _links: z.record(HalLink$zodSchema).optional(),
-}).describe("Request model for list beneficial owners");
+export const BeneficialOwners$zodSchema: z.ZodType<BeneficialOwners> = z.object(
+  {
+    _embedded: z.lazy(() => BeneficialOwnersEmbedded$zodSchema).optional(),
+    _links: z.record(z.string(), HalLink$zodSchema).optional(),
+  },
+).describe("Request model for list beneficial owners");

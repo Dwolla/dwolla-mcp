@@ -3,14 +3,27 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
 import { HalLink, HalLink$zodSchema } from "./hallink.js";
+
+export const ReceiveOnlyCustomerType = {
+  ReceiveOnly: "receive-only",
+} as const;
+export type ReceiveOnlyCustomerType = ClosedEnum<
+  typeof ReceiveOnlyCustomerType
+>;
 
 export const ReceiveOnlyCustomerType$zodSchema = z.enum([
   "receive-only",
 ]);
 
-export type ReceiveOnlyCustomerType = z.infer<
-  typeof ReceiveOnlyCustomerType$zodSchema
+export const ReceiveOnlyCustomerStatus = {
+  Unverified: "unverified",
+  Suspended: "suspended",
+  Deactivated: "deactivated",
+} as const;
+export type ReceiveOnlyCustomerStatus = ClosedEnum<
+  typeof ReceiveOnlyCustomerStatus
 >;
 
 export const ReceiveOnlyCustomerStatus$zodSchema = z.enum([
@@ -18,10 +31,6 @@ export const ReceiveOnlyCustomerStatus$zodSchema = z.enum([
   "suspended",
   "deactivated",
 ]);
-
-export type ReceiveOnlyCustomerStatus = z.infer<
-  typeof ReceiveOnlyCustomerStatus$zodSchema
->;
 
 /**
  * Receive-only user - can only receive funds, not send
@@ -39,19 +48,16 @@ export type ReceiveOnlyCustomer = {
   businessName?: string | undefined;
 };
 
-export const ReceiveOnlyCustomer$zodSchema: z.ZodType<
-  ReceiveOnlyCustomer,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _links: z.record(HalLink$zodSchema),
-  businessName: z.string().optional(),
-  correlationId: z.string().optional(),
-  created: z.string().datetime({ offset: true }),
-  email: z.string(),
-  firstName: z.string(),
-  id: z.string(),
-  lastName: z.string(),
-  status: ReceiveOnlyCustomerStatus$zodSchema,
-  type: ReceiveOnlyCustomerType$zodSchema,
-}).describe("Receive-only user - can only receive funds, not send");
+export const ReceiveOnlyCustomer$zodSchema: z.ZodType<ReceiveOnlyCustomer> = z
+  .object({
+    _links: z.record(z.string(), HalLink$zodSchema),
+    businessName: z.string().optional(),
+    correlationId: z.string().optional(),
+    created: z.iso.datetime({ offset: true }),
+    email: z.string(),
+    firstName: z.string(),
+    id: z.string(),
+    lastName: z.string(),
+    status: ReceiveOnlyCustomerStatus$zodSchema,
+    type: ReceiveOnlyCustomerType$zodSchema,
+  }).describe("Receive-only user - can only receive funds, not send");

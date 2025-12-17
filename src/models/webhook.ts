@@ -6,38 +6,25 @@ import * as z from "zod";
 
 export type WebhookSelf = { href?: string | undefined };
 
-export const WebhookSelf$zodSchema: z.ZodType<
-  WebhookSelf,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const WebhookSelf$zodSchema: z.ZodType<WebhookSelf> = z.object({
   href: z.string().optional(),
 });
 
 export type Subscription = { href?: string | undefined };
 
-export const Subscription$zodSchema: z.ZodType<
-  Subscription,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const Subscription$zodSchema: z.ZodType<Subscription> = z.object({
   href: z.string().optional(),
 });
 
 export type Retry = { href?: string | undefined };
 
-export const Retry$zodSchema: z.ZodType<Retry, z.ZodTypeDef, unknown> = z
-  .object({
-    href: z.string().optional(),
-  });
+export const Retry$zodSchema: z.ZodType<Retry> = z.object({
+  href: z.string().optional(),
+});
 
 export type WebhookEvent = { href?: string | undefined };
 
-export const WebhookEvent$zodSchema: z.ZodType<
-  WebhookEvent,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const WebhookEvent$zodSchema: z.ZodType<WebhookEvent> = z.object({
   href: z.string().optional(),
 });
 
@@ -48,11 +35,7 @@ export type WebhookLinks = {
   event?: WebhookEvent | undefined;
 };
 
-export const WebhookLinks$zodSchema: z.ZodType<
-  WebhookLinks,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const WebhookLinks$zodSchema: z.ZodType<WebhookLinks> = z.object({
   event: z.lazy(() => WebhookEvent$zodSchema).optional(),
   retry: z.lazy(() => Retry$zodSchema).optional(),
   self: z.lazy(() => WebhookSelf$zodSchema).optional(),
@@ -64,11 +47,7 @@ export type RequestHeader = {
   value?: string | undefined;
 };
 
-export const RequestHeader$zodSchema: z.ZodType<
-  RequestHeader,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const RequestHeader$zodSchema: z.ZodType<RequestHeader> = z.object({
   name: z.string().optional(),
   value: z.string().optional(),
 });
@@ -80,24 +59,19 @@ export type RequestT = {
   body?: string | undefined;
 };
 
-export const RequestT$zodSchema: z.ZodType<RequestT, z.ZodTypeDef, unknown> = z
-  .object({
-    body: z.string().optional(),
-    headers: z.array(z.lazy(() => RequestHeader$zodSchema)).optional(),
-    timestamp: z.string().datetime({ offset: true }).optional(),
-    url: z.string().optional(),
-  });
+export const RequestT$zodSchema: z.ZodType<RequestT> = z.object({
+  body: z.string().optional(),
+  headers: z.array(z.lazy(() => RequestHeader$zodSchema)).optional(),
+  timestamp: z.iso.datetime({ offset: true }).optional(),
+  url: z.string().optional(),
+});
 
 export type ResponseHeader = {
   name?: string | undefined;
   value?: string | undefined;
 };
 
-export const ResponseHeader$zodSchema: z.ZodType<
-  ResponseHeader,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const ResponseHeader$zodSchema: z.ZodType<ResponseHeader> = z.object({
   name: z.string().optional(),
   value: z.string().optional(),
 });
@@ -109,13 +83,12 @@ export type ResponseT = {
   body?: string | undefined;
 };
 
-export const ResponseT$zodSchema: z.ZodType<ResponseT, z.ZodTypeDef, unknown> =
-  z.object({
-    body: z.string().optional(),
-    headers: z.array(z.lazy(() => ResponseHeader$zodSchema)).optional(),
-    statusCode: z.number().int().optional(),
-    timestamp: z.string().datetime({ offset: true }).optional(),
-  });
+export const ResponseT$zodSchema: z.ZodType<ResponseT> = z.object({
+  body: z.string().optional(),
+  headers: z.array(z.lazy(() => ResponseHeader$zodSchema)).optional(),
+  statusCode: z.int().optional(),
+  timestamp: z.iso.datetime({ offset: true }).optional(),
+});
 
 export type Attempt = {
   id?: string | undefined;
@@ -123,12 +96,11 @@ export type Attempt = {
   response?: ResponseT | undefined;
 };
 
-export const Attempt$zodSchema: z.ZodType<Attempt, z.ZodTypeDef, unknown> = z
-  .object({
-    id: z.string().optional(),
-    request: z.lazy(() => RequestT$zodSchema).optional(),
-    response: z.lazy(() => ResponseT$zodSchema).optional(),
-  });
+export const Attempt$zodSchema: z.ZodType<Attempt> = z.object({
+  id: z.string().optional(),
+  request: z.lazy(() => RequestT$zodSchema).optional(),
+  response: z.lazy(() => ResponseT$zodSchema).optional(),
+});
 
 export type Webhook = {
   _links?: WebhookLinks | undefined;
@@ -140,13 +112,12 @@ export type Webhook = {
   attempts?: Array<Attempt> | undefined;
 };
 
-export const Webhook$zodSchema: z.ZodType<Webhook, z.ZodTypeDef, unknown> = z
-  .object({
-    _links: z.lazy(() => WebhookLinks$zodSchema).optional(),
-    accountId: z.string().optional(),
-    attempts: z.array(z.lazy(() => Attempt$zodSchema)).optional(),
-    eventId: z.string().optional(),
-    id: z.string().optional(),
-    subscriptionId: z.string().optional(),
-    topic: z.string().optional(),
-  });
+export const Webhook$zodSchema: z.ZodType<Webhook> = z.object({
+  _links: z.lazy(() => WebhookLinks$zodSchema).optional(),
+  accountId: z.string().optional(),
+  attempts: z.array(z.lazy(() => Attempt$zodSchema)).optional(),
+  eventId: z.string().optional(),
+  id: z.string().optional(),
+  subscriptionId: z.string().optional(),
+  topic: z.string().optional(),
+});

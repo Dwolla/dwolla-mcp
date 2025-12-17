@@ -19,9 +19,7 @@ export type ListAndSearchTransfersRequest = {
 };
 
 export const ListAndSearchTransfersRequest$zodSchema: z.ZodType<
-  ListAndSearchTransfersRequest,
-  z.ZodTypeDef,
-  unknown
+  ListAndSearchTransfersRequest
 > = z.object({
   correlationId: z.string().describe(
     "A string value to search on if `correlationId` was specified for a transaction",
@@ -62,9 +60,7 @@ export type ListAndSearchTransfersResponseBody = {
 };
 
 export const ListAndSearchTransfersResponseBody$zodSchema: z.ZodType<
-  ListAndSearchTransfersResponseBody,
-  z.ZodTypeDef,
-  unknown
+  ListAndSearchTransfersResponseBody
 > = z.object({
   code: z.string().optional(),
   message: z.string().optional(),
@@ -79,13 +75,11 @@ export type ListAndSearchTransfersResponse = {
 };
 
 export const ListAndSearchTransfersResponse$zodSchema: z.ZodType<
-  ListAndSearchTransfersResponse,
-  z.ZodTypeDef,
-  unknown
+  ListAndSearchTransfersResponse
 > = z.object({
   ContentType: z.string(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
+  RawResponse: z.custom<Response>(x => x instanceof Response),
+  StatusCode: z.int(),
   Transfers: Transfers$zodSchema.optional(),
   object: z.lazy(() => ListAndSearchTransfersResponseBody$zodSchema).optional(),
 });

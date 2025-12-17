@@ -1,6 +1,6 @@
 {
   "name": "@dwolla/mcp-server",
-  "version": "0.0.1-beta.12",
+  "version": "1.0.0",
   "author": "Speakeasy",
   "type": "module",
   "sideEffects": false,
@@ -14,16 +14,17 @@
   },
   "scripts": {
     "build": "bun i && bun src/mcp-server/build.mts && tsc",
+    "mcpb:build": "bun i && bun src/mcp-server/build.mts --pack && tsc",
     "check": "npm run lint",
     "lint": "eslint --cache --max-warnings=0 src",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.17.0",
+    "@modelcontextprotocol/sdk": "^1.23.0",
     "@stricli/core": "^1.1.2",
     "bun": "^1.2.12",
     "express": "^5.1.0",
-    "zod": "^3.25.7"
+    "zod": "^4.0.0"
   },
   "devDependencies": {
     "@anthropic-ai/mcpb": "^1.2.0",

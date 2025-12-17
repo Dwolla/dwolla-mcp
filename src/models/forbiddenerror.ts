@@ -9,11 +9,7 @@ import * as z from "zod";
  */
 export type ForbiddenError = { code: string; message: string };
 
-export const ForbiddenError$zodSchema: z.ZodType<
-  ForbiddenError,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const ForbiddenError$zodSchema: z.ZodType<ForbiddenError> = z.object({
   code: z.string(),
   message: z.string(),
 }).describe("Error response schema for 403 Forbidden");

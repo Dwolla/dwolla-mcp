@@ -13,11 +13,10 @@ export type Account = {
   type?: string | undefined;
 };
 
-export const Account$zodSchema: z.ZodType<Account, z.ZodTypeDef, unknown> = z
-  .object({
-    _links: z.record(HalLink$zodSchema).optional(),
-    id: z.string().optional(),
-    name: z.string().optional(),
-    timezoneOffset: z.number().optional(),
-    type: z.string().optional(),
-  });
+export const Account$zodSchema: z.ZodType<Account> = z.object({
+  _links: z.record(z.string(), HalLink$zodSchema).optional(),
+  id: z.string().optional(),
+  name: z.string().optional(),
+  timezoneOffset: z.number().optional(),
+  type: z.string().optional(),
+});

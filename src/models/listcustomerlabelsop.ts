@@ -12,9 +12,7 @@ export type ListCustomerLabelsRequest = {
 };
 
 export const ListCustomerLabelsRequest$zodSchema: z.ZodType<
-  ListCustomerLabelsRequest,
-  z.ZodTypeDef,
-  unknown
+  ListCustomerLabelsRequest
 > = z.object({
   id: z.string().describe("ID of customer"),
   limit: z.string().describe("How many results to return").optional(),
@@ -30,9 +28,7 @@ export type ListCustomerLabelsNotFoundResponseBody = {
 };
 
 export const ListCustomerLabelsNotFoundResponseBody$zodSchema: z.ZodType<
-  ListCustomerLabelsNotFoundResponseBody,
-  z.ZodTypeDef,
-  unknown
+  ListCustomerLabelsNotFoundResponseBody
 > = z.object({
   code: z.string().optional(),
   message: z.string().optional(),
@@ -47,9 +43,7 @@ export type ListCustomerLabelsForbiddenResponseBody = {
 };
 
 export const ListCustomerLabelsForbiddenResponseBody$zodSchema: z.ZodType<
-  ListCustomerLabelsForbiddenResponseBody,
-  z.ZodTypeDef,
-  unknown
+  ListCustomerLabelsForbiddenResponseBody
 > = z.object({
   code: z.string().optional(),
   message: z.string().optional(),
@@ -69,14 +63,12 @@ export type ListCustomerLabelsResponse = {
 };
 
 export const ListCustomerLabelsResponse$zodSchema: z.ZodType<
-  ListCustomerLabelsResponse,
-  z.ZodTypeDef,
-  unknown
+  ListCustomerLabelsResponse
 > = z.object({
   ContentType: z.string(),
   Labels: Labels$zodSchema.optional(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
+  RawResponse: z.custom<Response>(x => x instanceof Response),
+  StatusCode: z.int(),
   fourHundredAndFourApplicationVndDwollaV1HalPlusJsonObject: z.lazy(() =>
     ListCustomerLabelsNotFoundResponseBody$zodSchema
   ).optional(),

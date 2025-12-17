@@ -8,9 +8,7 @@ import { FundingSources, FundingSources$zodSchema } from "./fundingsources.js";
 export type ListCustomerFundingSourcesRequest = { id: string };
 
 export const ListCustomerFundingSourcesRequest$zodSchema: z.ZodType<
-  ListCustomerFundingSourcesRequest,
-  z.ZodTypeDef,
-  unknown
+  ListCustomerFundingSourcesRequest
 > = z.object({
   id: z.string().describe("Customer's unique identifier"),
 });
@@ -24,11 +22,7 @@ export type ListCustomerFundingSourcesNotFoundResponseBody = {
 };
 
 export const ListCustomerFundingSourcesNotFoundResponseBody$zodSchema:
-  z.ZodType<
-    ListCustomerFundingSourcesNotFoundResponseBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
+  z.ZodType<ListCustomerFundingSourcesNotFoundResponseBody> = z.object({
     code: z.string().optional(),
     message: z.string().optional(),
   }).describe("not found");
@@ -42,11 +36,7 @@ export type ListCustomerFundingSourcesForbiddenResponseBody = {
 };
 
 export const ListCustomerFundingSourcesForbiddenResponseBody$zodSchema:
-  z.ZodType<
-    ListCustomerFundingSourcesForbiddenResponseBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
+  z.ZodType<ListCustomerFundingSourcesForbiddenResponseBody> = z.object({
     code: z.string().optional(),
     message: z.string().optional(),
   }).describe("forbidden");
@@ -65,14 +55,12 @@ export type ListCustomerFundingSourcesResponse = {
 };
 
 export const ListCustomerFundingSourcesResponse$zodSchema: z.ZodType<
-  ListCustomerFundingSourcesResponse,
-  z.ZodTypeDef,
-  unknown
+  ListCustomerFundingSourcesResponse
 > = z.object({
   ContentType: z.string(),
   FundingSources: FundingSources$zodSchema.optional(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
+  RawResponse: z.custom<Response>(x => x instanceof Response),
+  StatusCode: z.int(),
   fourHundredAndFourApplicationVndDwollaV1HalPlusJsonObject: z.lazy(() =>
     ListCustomerFundingSourcesNotFoundResponseBody$zodSchema
   ).optional(),

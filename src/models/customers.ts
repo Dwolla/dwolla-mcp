@@ -32,14 +32,13 @@ export type Customer =
   | UnverifiedCustomer
   | ReceiveOnlyCustomer;
 
-export const Customer$zodSchema: z.ZodType<Customer, z.ZodTypeDef, unknown> = z
-  .union([
-    VerifiedBusinessCustomer$zodSchema,
-    VerifiedSolePropCustomer$zodSchema,
-    VerifiedPersonalCustomer$zodSchema,
-    UnverifiedCustomer$zodSchema,
-    ReceiveOnlyCustomer$zodSchema,
-  ]);
+export const Customer$zodSchema: z.ZodType<Customer> = z.union([
+  VerifiedBusinessCustomer$zodSchema,
+  VerifiedSolePropCustomer$zodSchema,
+  VerifiedPersonalCustomer$zodSchema,
+  UnverifiedCustomer$zodSchema,
+  ReceiveOnlyCustomer$zodSchema,
+]);
 
 export type CustomersEmbedded = {
   customers?:
@@ -53,19 +52,16 @@ export type CustomersEmbedded = {
     | undefined;
 };
 
-export const CustomersEmbedded$zodSchema: z.ZodType<
-  CustomersEmbedded,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  customers: z.array(z.union([
-    VerifiedBusinessCustomer$zodSchema,
-    VerifiedSolePropCustomer$zodSchema,
-    VerifiedPersonalCustomer$zodSchema,
-    UnverifiedCustomer$zodSchema,
-    ReceiveOnlyCustomer$zodSchema,
-  ])).optional(),
-});
+export const CustomersEmbedded$zodSchema: z.ZodType<CustomersEmbedded> = z
+  .object({
+    customers: z.array(z.union([
+      VerifiedBusinessCustomer$zodSchema,
+      VerifiedSolePropCustomer$zodSchema,
+      VerifiedPersonalCustomer$zodSchema,
+      UnverifiedCustomer$zodSchema,
+      ReceiveOnlyCustomer$zodSchema,
+    ])).optional(),
+  });
 
 export type Customers = {
   _links?: { [k: string]: HalLink } | undefined;
@@ -73,9 +69,8 @@ export type Customers = {
   total?: number | undefined;
 };
 
-export const Customers$zodSchema: z.ZodType<Customers, z.ZodTypeDef, unknown> =
-  z.object({
-    _embedded: z.lazy(() => CustomersEmbedded$zodSchema).optional(),
-    _links: z.record(HalLink$zodSchema).optional(),
-    total: z.number().int().optional(),
-  });
+export const Customers$zodSchema: z.ZodType<Customers> = z.object({
+  _embedded: z.lazy(() => CustomersEmbedded$zodSchema).optional(),
+  _links: z.record(z.string(), HalLink$zodSchema).optional(),
+  total: z.int().optional(),
+});

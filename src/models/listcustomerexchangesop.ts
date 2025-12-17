@@ -8,9 +8,7 @@ import { Exchanges, Exchanges$zodSchema } from "./exchanges.js";
 export type ListCustomerExchangesRequest = { id: string };
 
 export const ListCustomerExchangesRequest$zodSchema: z.ZodType<
-  ListCustomerExchangesRequest,
-  z.ZodTypeDef,
-  unknown
+  ListCustomerExchangesRequest
 > = z.object({
   id: z.string().describe("The ID of the Customer to list exchanges for"),
 });
@@ -24,9 +22,7 @@ export type ListCustomerExchangesResponseBody = {
 };
 
 export const ListCustomerExchangesResponseBody$zodSchema: z.ZodType<
-  ListCustomerExchangesResponseBody,
-  z.ZodTypeDef,
-  unknown
+  ListCustomerExchangesResponseBody
 > = z.object({
   code: z.string().optional(),
   message: z.string().optional(),
@@ -41,13 +37,11 @@ export type ListCustomerExchangesResponse = {
 };
 
 export const ListCustomerExchangesResponse$zodSchema: z.ZodType<
-  ListCustomerExchangesResponse,
-  z.ZodTypeDef,
-  unknown
+  ListCustomerExchangesResponse
 > = z.object({
   ContentType: z.string(),
   Exchanges: Exchanges$zodSchema.optional(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
+  RawResponse: z.custom<Response>(x => x instanceof Response),
+  StatusCode: z.int(),
   object: z.lazy(() => ListCustomerExchangesResponseBody$zodSchema).optional(),
 });

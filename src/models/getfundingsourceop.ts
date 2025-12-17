@@ -8,9 +8,7 @@ import { FundingSource, FundingSource$zodSchema } from "./fundingsource.js";
 export type GetFundingSourceRequest = { id: string };
 
 export const GetFundingSourceRequest$zodSchema: z.ZodType<
-  GetFundingSourceRequest,
-  z.ZodTypeDef,
-  unknown
+  GetFundingSourceRequest
 > = z.object({
   id: z.string().describe("Funding source unique identifier"),
 });
@@ -24,9 +22,7 @@ export type GetFundingSourceResponseBody = {
 };
 
 export const GetFundingSourceResponseBody$zodSchema: z.ZodType<
-  GetFundingSourceResponseBody,
-  z.ZodTypeDef,
-  unknown
+  GetFundingSourceResponseBody
 > = z.object({
   code: z.string().optional(),
   message: z.string().optional(),
@@ -41,13 +37,11 @@ export type GetFundingSourceResponse = {
 };
 
 export const GetFundingSourceResponse$zodSchema: z.ZodType<
-  GetFundingSourceResponse,
-  z.ZodTypeDef,
-  unknown
+  GetFundingSourceResponse
 > = z.object({
   ContentType: z.string(),
   FundingSource: FundingSource$zodSchema.optional(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
+  RawResponse: z.custom<Response>(x => x instanceof Response),
+  StatusCode: z.int(),
   object: z.lazy(() => GetFundingSourceResponseBody$zodSchema).optional(),
 });

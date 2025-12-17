@@ -11,9 +11,7 @@ import {
 export type ListBeneficialOwnersForCustomerRequest = { id: string };
 
 export const ListBeneficialOwnersForCustomerRequest$zodSchema: z.ZodType<
-  ListBeneficialOwnersForCustomerRequest,
-  z.ZodTypeDef,
-  unknown
+  ListBeneficialOwnersForCustomerRequest
 > = z.object({
   id: z.string().describe("Customer unique identifier"),
 });
@@ -27,9 +25,7 @@ export type ListBeneficialOwnersForCustomerResponseBody = {
 };
 
 export const ListBeneficialOwnersForCustomerResponseBody$zodSchema: z.ZodType<
-  ListBeneficialOwnersForCustomerResponseBody,
-  z.ZodTypeDef,
-  unknown
+  ListBeneficialOwnersForCustomerResponseBody
 > = z.object({
   code: z.string().optional(),
   message: z.string().optional(),
@@ -44,14 +40,12 @@ export type ListBeneficialOwnersForCustomerResponse = {
 };
 
 export const ListBeneficialOwnersForCustomerResponse$zodSchema: z.ZodType<
-  ListBeneficialOwnersForCustomerResponse,
-  z.ZodTypeDef,
-  unknown
+  ListBeneficialOwnersForCustomerResponse
 > = z.object({
   BeneficialOwners: BeneficialOwners$zodSchema.optional(),
   ContentType: z.string(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
+  RawResponse: z.custom<Response>(x => x instanceof Response),
+  StatusCode: z.int(),
   object: z.lazy(() => ListBeneficialOwnersForCustomerResponseBody$zodSchema)
     .optional(),
 });

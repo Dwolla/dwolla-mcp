@@ -3,14 +3,29 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
 import { HalLink, HalLink$zodSchema } from "./hallink.js";
+
+export const VerifiedBusinessCustomerType = {
+  Business: "business",
+} as const;
+export type VerifiedBusinessCustomerType = ClosedEnum<
+  typeof VerifiedBusinessCustomerType
+>;
 
 export const VerifiedBusinessCustomerType$zodSchema = z.enum([
   "business",
 ]);
 
-export type VerifiedBusinessCustomerType = z.infer<
-  typeof VerifiedBusinessCustomerType$zodSchema
+export const VerifiedBusinessCustomerStatus = {
+  Verified: "verified",
+  Suspended: "suspended",
+  Deactivated: "deactivated",
+  Document: "document",
+  Retry: "retry",
+} as const;
+export type VerifiedBusinessCustomerStatus = ClosedEnum<
+  typeof VerifiedBusinessCustomerStatus
 >;
 
 export const VerifiedBusinessCustomerStatus$zodSchema = z.enum([
@@ -21,8 +36,13 @@ export const VerifiedBusinessCustomerStatus$zodSchema = z.enum([
   "retry",
 ]);
 
-export type VerifiedBusinessCustomerStatus = z.infer<
-  typeof VerifiedBusinessCustomerStatus$zodSchema
+export const VerifiedBusinessCustomerBusinessType = {
+  Llc: "llc",
+  Corporation: "corporation",
+  Partnership: "partnership",
+} as const;
+export type VerifiedBusinessCustomerBusinessType = ClosedEnum<
+  typeof VerifiedBusinessCustomerBusinessType
 >;
 
 export const VerifiedBusinessCustomerBusinessType$zodSchema = z.enum([
@@ -30,10 +50,6 @@ export const VerifiedBusinessCustomerBusinessType$zodSchema = z.enum([
   "corporation",
   "partnership",
 ]);
-
-export type VerifiedBusinessCustomerBusinessType = z.infer<
-  typeof VerifiedBusinessCustomerBusinessType$zodSchema
->;
 
 export type Address = {
   address1?: string | undefined;
@@ -45,16 +61,15 @@ export type Address = {
   stateProvinceRegion?: string | undefined;
 };
 
-export const Address$zodSchema: z.ZodType<Address, z.ZodTypeDef, unknown> = z
-  .object({
-    address1: z.string().optional(),
-    address2: z.string().optional(),
-    address3: z.string().optional(),
-    city: z.string().optional(),
-    country: z.string().optional(),
-    postalCode: z.string().optional(),
-    stateProvinceRegion: z.string().optional(),
-  });
+export const Address$zodSchema: z.ZodType<Address> = z.object({
+  address1: z.string().optional(),
+  address2: z.string().optional(),
+  address3: z.string().optional(),
+  city: z.string().optional(),
+  country: z.string().optional(),
+  postalCode: z.string().optional(),
+  stateProvinceRegion: z.string().optional(),
+});
 
 export type Controller = {
   firstName: string;
@@ -63,11 +78,7 @@ export type Controller = {
   address: Address;
 };
 
-export const Controller$zodSchema: z.ZodType<
-  Controller,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const Controller$zodSchema: z.ZodType<Controller> = z.object({
   address: z.lazy(() => Address$zodSchema),
   firstName: z.string(),
   lastName: z.string(),
@@ -102,11 +113,9 @@ export type VerifiedBusinessCustomer = {
 };
 
 export const VerifiedBusinessCustomer$zodSchema: z.ZodType<
-  VerifiedBusinessCustomer,
-  z.ZodTypeDef,
-  unknown
+  VerifiedBusinessCustomer
 > = z.object({
-  _links: z.record(HalLink$zodSchema),
+  _links: z.record(z.string(), HalLink$zodSchema),
   address1: z.string(),
   address2: z.string().optional(),
   businessClassification: z.string(),
@@ -115,7 +124,7 @@ export const VerifiedBusinessCustomer$zodSchema: z.ZodType<
   city: z.string(),
   controller: z.lazy(() => Controller$zodSchema),
   correlationId: z.string().optional(),
-  created: z.string().datetime({ offset: true }),
+  created: z.iso.datetime({ offset: true }),
   doingBusinessAs: z.string().optional(),
   email: z.string(),
   firstName: z.string(),

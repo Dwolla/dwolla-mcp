@@ -9,9 +9,7 @@ import { NotFoundError, NotFoundError$zodSchema } from "./notfounderror.js";
 export type ListTransferFeesRequest = { id: string };
 
 export const ListTransferFeesRequest$zodSchema: z.ZodType<
-  ListTransferFeesRequest,
-  z.ZodTypeDef,
-  unknown
+  ListTransferFeesRequest
 > = z.object({
   id: z.string().describe("ID of transfer to retrieve fees for"),
 });
@@ -22,9 +20,7 @@ export type ListTransferFeesAmount = {
 };
 
 export const ListTransferFeesAmount$zodSchema: z.ZodType<
-  ListTransferFeesAmount,
-  z.ZodTypeDef,
-  unknown
+  ListTransferFeesAmount
 > = z.object({
   currency: z.string().optional(),
   value: z.string().optional(),
@@ -38,14 +34,10 @@ export type Transaction = {
   created?: string | undefined;
 };
 
-export const Transaction$zodSchema: z.ZodType<
-  Transaction,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _links: z.record(HalLink$zodSchema).optional(),
+export const Transaction$zodSchema: z.ZodType<Transaction> = z.object({
+  _links: z.record(z.string(), HalLink$zodSchema).optional(),
   amount: z.lazy(() => ListTransferFeesAmount$zodSchema).optional(),
-  created: z.string().datetime({ offset: true }).optional(),
+  created: z.iso.datetime({ offset: true }).optional(),
   id: z.string().optional(),
   status: z.string().optional(),
 });
@@ -59,11 +51,9 @@ export type ListTransferFeesResponseBody = {
 };
 
 export const ListTransferFeesResponseBody$zodSchema: z.ZodType<
-  ListTransferFeesResponseBody,
-  z.ZodTypeDef,
-  unknown
+  ListTransferFeesResponseBody
 > = z.object({
-  total: z.number().int().optional(),
+  total: z.int().optional(),
   transactions: z.array(z.lazy(() => Transaction$zodSchema)).optional(),
 }).describe("successful operation");
 
@@ -76,13 +66,11 @@ export type ListTransferFeesResponse = {
 };
 
 export const ListTransferFeesResponse$zodSchema: z.ZodType<
-  ListTransferFeesResponse,
-  z.ZodTypeDef,
-  unknown
+  ListTransferFeesResponse
 > = z.object({
   ContentType: z.string(),
   NotFoundError: NotFoundError$zodSchema.optional(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
+  RawResponse: z.custom<Response>(x => x instanceof Response),
+  StatusCode: z.int(),
   object: z.lazy(() => ListTransferFeesResponseBody$zodSchema).optional(),
 });

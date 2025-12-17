@@ -3,14 +3,25 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
 import { HalLink, HalLink$zodSchema } from "./hallink.js";
+
+export const UnverifiedCustomerType = {
+  Unverified: "unverified",
+} as const;
+export type UnverifiedCustomerType = ClosedEnum<typeof UnverifiedCustomerType>;
 
 export const UnverifiedCustomerType$zodSchema = z.enum([
   "unverified",
 ]);
 
-export type UnverifiedCustomerType = z.infer<
-  typeof UnverifiedCustomerType$zodSchema
+export const UnverifiedCustomerStatus = {
+  Unverified: "unverified",
+  Suspended: "suspended",
+  Deactivated: "deactivated",
+} as const;
+export type UnverifiedCustomerStatus = ClosedEnum<
+  typeof UnverifiedCustomerStatus
 >;
 
 export const UnverifiedCustomerStatus$zodSchema = z.enum([
@@ -18,10 +29,6 @@ export const UnverifiedCustomerStatus$zodSchema = z.enum([
   "suspended",
   "deactivated",
 ]);
-
-export type UnverifiedCustomerStatus = z.infer<
-  typeof UnverifiedCustomerStatus$zodSchema
->;
 
 /**
  * Unverified customer - basic customer type with no KYC verification
@@ -39,21 +46,18 @@ export type UnverifiedCustomer = {
   businessName?: string | undefined;
 };
 
-export const UnverifiedCustomer$zodSchema: z.ZodType<
-  UnverifiedCustomer,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _links: z.record(HalLink$zodSchema),
-  businessName: z.string().optional(),
-  correlationId: z.string().optional(),
-  created: z.string().datetime({ offset: true }),
-  email: z.string(),
-  firstName: z.string(),
-  id: z.string(),
-  lastName: z.string(),
-  status: UnverifiedCustomerStatus$zodSchema,
-  type: UnverifiedCustomerType$zodSchema,
-}).describe(
-  "Unverified customer - basic customer type with no KYC verification",
-);
+export const UnverifiedCustomer$zodSchema: z.ZodType<UnverifiedCustomer> = z
+  .object({
+    _links: z.record(z.string(), HalLink$zodSchema),
+    businessName: z.string().optional(),
+    correlationId: z.string().optional(),
+    created: z.iso.datetime({ offset: true }),
+    email: z.string(),
+    firstName: z.string(),
+    id: z.string(),
+    lastName: z.string(),
+    status: UnverifiedCustomerStatus$zodSchema,
+    type: UnverifiedCustomerType$zodSchema,
+  }).describe(
+    "Unverified customer - basic customer type with no KYC verification",
+  );
