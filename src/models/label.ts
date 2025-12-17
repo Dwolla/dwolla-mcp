@@ -10,11 +10,7 @@ export type LabelAmount = {
   currency?: string | undefined;
 };
 
-export const LabelAmount$zodSchema: z.ZodType<
-  LabelAmount,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const LabelAmount$zodSchema: z.ZodType<LabelAmount> = z.object({
   currency: z.string().optional(),
   value: z.string().optional(),
 });
@@ -26,10 +22,9 @@ export type Label = {
   amount?: LabelAmount | undefined;
 };
 
-export const Label$zodSchema: z.ZodType<Label, z.ZodTypeDef, unknown> = z
-  .object({
-    _links: z.record(HalLink$zodSchema).optional(),
-    amount: z.lazy(() => LabelAmount$zodSchema).optional(),
-    created: z.string().datetime({ offset: true }).optional(),
-    id: z.string().optional(),
-  });
+export const Label$zodSchema: z.ZodType<Label> = z.object({
+  _links: z.record(z.string(), HalLink$zodSchema).optional(),
+  amount: z.lazy(() => LabelAmount$zodSchema).optional(),
+  created: z.iso.datetime({ offset: true }).optional(),
+  id: z.string().optional(),
+});

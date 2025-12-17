@@ -10,9 +10,7 @@ import { NotFoundError, NotFoundError$zodSchema } from "./notfounderror.js";
 export type ListCustomerDocumentsRequest = { id: string };
 
 export const ListCustomerDocumentsRequest$zodSchema: z.ZodType<
-  ListCustomerDocumentsRequest,
-  z.ZodTypeDef,
-  unknown
+  ListCustomerDocumentsRequest
 > = z.object({
   id: z.string().describe("customer unique identifier"),
 });
@@ -27,14 +25,12 @@ export type ListCustomerDocumentsResponse = {
 };
 
 export const ListCustomerDocumentsResponse$zodSchema: z.ZodType<
-  ListCustomerDocumentsResponse,
-  z.ZodTypeDef,
-  unknown
+  ListCustomerDocumentsResponse
 > = z.object({
   ContentType: z.string(),
   Documents: Documents$zodSchema.optional(),
   ForbiddenError: ForbiddenError$zodSchema.optional(),
   NotFoundError: NotFoundError$zodSchema.optional(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
+  RawResponse: z.custom<Response>(x => x instanceof Response),
+  StatusCode: z.int(),
 });

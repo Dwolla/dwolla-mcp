@@ -8,13 +8,10 @@ import { HalLink, HalLink$zodSchema } from "./hallink.js";
 
 export type ExchangesEmbedded = { exchanges: Array<Exchange> };
 
-export const ExchangesEmbedded$zodSchema: z.ZodType<
-  ExchangesEmbedded,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  exchanges: z.array(Exchange$zodSchema),
-});
+export const ExchangesEmbedded$zodSchema: z.ZodType<ExchangesEmbedded> = z
+  .object({
+    exchanges: z.array(Exchange$zodSchema),
+  });
 
 export type Exchanges = {
   _links: { [k: string]: HalLink };
@@ -22,9 +19,8 @@ export type Exchanges = {
   total: number;
 };
 
-export const Exchanges$zodSchema: z.ZodType<Exchanges, z.ZodTypeDef, unknown> =
-  z.object({
-    _embedded: z.lazy(() => ExchangesEmbedded$zodSchema),
-    _links: z.record(HalLink$zodSchema),
-    total: z.number().int(),
-  });
+export const Exchanges$zodSchema: z.ZodType<Exchanges> = z.object({
+  _embedded: z.lazy(() => ExchangesEmbedded$zodSchema),
+  _links: z.record(z.string(), HalLink$zodSchema),
+  total: z.int(),
+});

@@ -8,9 +8,7 @@ import { HalLink, HalLink$zodSchema } from "./hallink.js";
 export type BusinessClassificationLinks = { self?: HalLink | undefined };
 
 export const BusinessClassificationLinks$zodSchema: z.ZodType<
-  BusinessClassificationLinks,
-  z.ZodTypeDef,
-  unknown
+  BusinessClassificationLinks
 > = z.object({
   self: HalLink$zodSchema.optional(),
 });
@@ -21,9 +19,7 @@ export type IndustryClassification = {
 };
 
 export const IndustryClassification$zodSchema: z.ZodType<
-  IndustryClassification,
-  z.ZodTypeDef,
-  unknown
+  IndustryClassification
 > = z.object({
   id: z.string().optional(),
   name: z.string().optional(),
@@ -34,9 +30,7 @@ export type BusinessClassificationEmbedded = {
 };
 
 export const BusinessClassificationEmbedded$zodSchema: z.ZodType<
-  BusinessClassificationEmbedded,
-  z.ZodTypeDef,
-  unknown
+  BusinessClassificationEmbedded
 > = z.object({
   industryClassifications: z.array(
     z.lazy(() => IndustryClassification$zodSchema),
@@ -51,9 +45,7 @@ export type BusinessClassification = {
 };
 
 export const BusinessClassification$zodSchema: z.ZodType<
-  BusinessClassification,
-  z.ZodTypeDef,
-  unknown
+  BusinessClassification
 > = z.object({
   _embedded: z.lazy(() => BusinessClassificationEmbedded$zodSchema).optional(),
   _links: z.lazy(() => BusinessClassificationLinks$zodSchema).optional(),

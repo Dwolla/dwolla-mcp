@@ -8,11 +8,8 @@ import { TransferAmount, TransferAmount$zodSchema } from "./transferamount.js";
 
 export type MassPaymentMetaData = {};
 
-export const MassPaymentMetaData$zodSchema: z.ZodType<
-  MassPaymentMetaData,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
+export const MassPaymentMetaData$zodSchema: z.ZodType<MassPaymentMetaData> = z
+  .object({});
 
 export type MassPayment = {
   _links?: { [k: string]: HalLink } | undefined;
@@ -25,14 +22,10 @@ export type MassPayment = {
   correlationId?: string | undefined;
 };
 
-export const MassPayment$zodSchema: z.ZodType<
-  MassPayment,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _links: z.record(HalLink$zodSchema).optional(),
+export const MassPayment$zodSchema: z.ZodType<MassPayment> = z.object({
+  _links: z.record(z.string(), HalLink$zodSchema).optional(),
   correlationId: z.string().optional(),
-  created: z.string().datetime({ offset: true }).optional(),
+  created: z.iso.datetime({ offset: true }).optional(),
   id: z.string().optional(),
   metaData: z.lazy(() => MassPaymentMetaData$zodSchema).optional(),
   status: z.string().optional(),

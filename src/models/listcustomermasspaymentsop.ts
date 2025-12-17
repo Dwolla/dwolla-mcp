@@ -13,18 +13,15 @@ export type ListCustomerMassPaymentsRequest = {
 };
 
 export const ListCustomerMassPaymentsRequest$zodSchema: z.ZodType<
-  ListCustomerMassPaymentsRequest,
-  z.ZodTypeDef,
-  unknown
+  ListCustomerMassPaymentsRequest
 > = z.object({
   correlationId: z.string().describe(
     "A string value to search on if `correlationId` was specified for a transaction",
   ).optional(),
   id: z.string().describe("Customer ID to get mass payments for"),
-  limit: z.number().int().describe(
-    "Number of search results to return. Defaults to 25",
-  ).optional(),
-  offset: z.number().int().describe(
+  limit: z.int().describe("Number of search results to return. Defaults to 25")
+    .optional(),
+  offset: z.int().describe(
     "Number of search results to skip. Use for pagination",
   ).optional(),
 });
@@ -38,9 +35,7 @@ export type ListCustomerMassPaymentsNotFoundResponseBody = {
 };
 
 export const ListCustomerMassPaymentsNotFoundResponseBody$zodSchema: z.ZodType<
-  ListCustomerMassPaymentsNotFoundResponseBody,
-  z.ZodTypeDef,
-  unknown
+  ListCustomerMassPaymentsNotFoundResponseBody
 > = z.object({
   code: z.string().optional(),
   message: z.string().optional(),
@@ -55,9 +50,7 @@ export type ListCustomerMassPaymentsForbiddenResponseBody = {
 };
 
 export const ListCustomerMassPaymentsForbiddenResponseBody$zodSchema: z.ZodType<
-  ListCustomerMassPaymentsForbiddenResponseBody,
-  z.ZodTypeDef,
-  unknown
+  ListCustomerMassPaymentsForbiddenResponseBody
 > = z.object({
   code: z.string().optional(),
   message: z.string().optional(),
@@ -77,14 +70,12 @@ export type ListCustomerMassPaymentsResponse = {
 };
 
 export const ListCustomerMassPaymentsResponse$zodSchema: z.ZodType<
-  ListCustomerMassPaymentsResponse,
-  z.ZodTypeDef,
-  unknown
+  ListCustomerMassPaymentsResponse
 > = z.object({
   ContentType: z.string(),
   MassPayments: MassPayments$zodSchema.optional(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
+  RawResponse: z.custom<Response>(x => x instanceof Response),
+  StatusCode: z.int(),
   fourHundredAndFourApplicationVndDwollaV1HalPlusJsonObject: z.lazy(() =>
     ListCustomerMassPaymentsNotFoundResponseBody$zodSchema
   ).optional(),

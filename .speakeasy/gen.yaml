@@ -27,13 +27,14 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 mcp-typescript:
-  version: 0.0.1-beta.12
+  version: 1.0.0
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
     peerDependencies: {}
   additionalPackageJSON:
     description: Dwolla MCP (Beta). Breaking changes may occur between beta versions.
+  advancedFlags: []
   author: Speakeasy
   baseErrorName: DwollaMcpError
   cloudflareEnabled: false

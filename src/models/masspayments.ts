@@ -10,13 +10,10 @@ export type MassPaymentsEmbedded = {
   massPayments?: Array<MassPayment> | undefined;
 };
 
-export const MassPaymentsEmbedded$zodSchema: z.ZodType<
-  MassPaymentsEmbedded,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  massPayments: z.array(MassPayment$zodSchema).optional(),
-});
+export const MassPaymentsEmbedded$zodSchema: z.ZodType<MassPaymentsEmbedded> = z
+  .object({
+    massPayments: z.array(MassPayment$zodSchema).optional(),
+  });
 
 export type MassPayments = {
   _links?: { [k: string]: HalLink } | undefined;
@@ -24,12 +21,8 @@ export type MassPayments = {
   total?: number | undefined;
 };
 
-export const MassPayments$zodSchema: z.ZodType<
-  MassPayments,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const MassPayments$zodSchema: z.ZodType<MassPayments> = z.object({
   _embedded: z.lazy(() => MassPaymentsEmbedded$zodSchema).optional(),
-  _links: z.record(HalLink$zodSchema).optional(),
-  total: z.number().int().optional(),
+  _links: z.record(z.string(), HalLink$zodSchema).optional(),
+  total: z.int().optional(),
 });

@@ -11,9 +11,7 @@ export type FundingSourcesEmbedded = {
 };
 
 export const FundingSourcesEmbedded$zodSchema: z.ZodType<
-  FundingSourcesEmbedded,
-  z.ZodTypeDef,
-  unknown
+  FundingSourcesEmbedded
 > = z.object({
   fundingSources: z.array(FundingSource$zodSchema).optional(),
 });
@@ -24,12 +22,8 @@ export type FundingSources = {
   total?: number | undefined;
 };
 
-export const FundingSources$zodSchema: z.ZodType<
-  FundingSources,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const FundingSources$zodSchema: z.ZodType<FundingSources> = z.object({
   _embedded: z.lazy(() => FundingSourcesEmbedded$zodSchema).optional(),
-  _links: z.record(HalLink$zodSchema).optional(),
-  total: z.number().int().optional(),
+  _links: z.record(z.string(), HalLink$zodSchema).optional(),
+  total: z.int().optional(),
 });

@@ -3,15 +3,21 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
 import { HalLink, HalLink$zodSchema } from "./hallink.js";
+
+export const ExchangeStatus = {
+  Active: "active",
+  Deactivated: "deactivated",
+  Removed: "removed",
+} as const;
+export type ExchangeStatus = ClosedEnum<typeof ExchangeStatus>;
 
 export const ExchangeStatus$zodSchema = z.enum([
   "active",
   "deactivated",
   "removed",
 ]);
-
-export type ExchangeStatus = z.infer<typeof ExchangeStatus$zodSchema>;
 
 export type Exchange = {
   _links: { [k: string]: HalLink };
@@ -20,10 +26,9 @@ export type Exchange = {
   created: string;
 };
 
-export const Exchange$zodSchema: z.ZodType<Exchange, z.ZodTypeDef, unknown> = z
-  .object({
-    _links: z.record(HalLink$zodSchema),
-    created: z.string().datetime({ offset: true }),
-    id: z.string(),
-    status: ExchangeStatus$zodSchema,
-  });
+export const Exchange$zodSchema: z.ZodType<Exchange> = z.object({
+  _links: z.record(z.string(), HalLink$zodSchema),
+  created: z.iso.datetime({ offset: true }),
+  id: z.string(),
+  status: ExchangeStatus$zodSchema,
+});

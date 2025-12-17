@@ -6,20 +6,15 @@ import * as z from "zod";
 
 export type MassPaymentItemSelf = { href?: string | undefined };
 
-export const MassPaymentItemSelf$zodSchema: z.ZodType<
-  MassPaymentItemSelf,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  href: z.string().optional(),
-});
+export const MassPaymentItemSelf$zodSchema: z.ZodType<MassPaymentItemSelf> = z
+  .object({
+    href: z.string().optional(),
+  });
 
 export type MassPaymentItemMassPayment = { href?: string | undefined };
 
 export const MassPaymentItemMassPayment$zodSchema: z.ZodType<
-  MassPaymentItemMassPayment,
-  z.ZodTypeDef,
-  unknown
+  MassPaymentItemMassPayment
 > = z.object({
   href: z.string().optional(),
 });
@@ -27,9 +22,7 @@ export const MassPaymentItemMassPayment$zodSchema: z.ZodType<
 export type MassPaymentItemDestination = { href?: string | undefined };
 
 export const MassPaymentItemDestination$zodSchema: z.ZodType<
-  MassPaymentItemDestination,
-  z.ZodTypeDef,
-  unknown
+  MassPaymentItemDestination
 > = z.object({
   href: z.string().optional(),
 });
@@ -37,9 +30,7 @@ export const MassPaymentItemDestination$zodSchema: z.ZodType<
 export type MassPaymentItemTransfer = { href?: string | undefined };
 
 export const MassPaymentItemTransfer$zodSchema: z.ZodType<
-  MassPaymentItemTransfer,
-  z.ZodTypeDef,
-  unknown
+  MassPaymentItemTransfer
 > = z.object({
   href: z.string().optional(),
 });
@@ -51,37 +42,29 @@ export type MassPaymentItemLinks = {
   transfer?: MassPaymentItemTransfer | undefined;
 };
 
-export const MassPaymentItemLinks$zodSchema: z.ZodType<
-  MassPaymentItemLinks,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  destination: z.lazy(() => MassPaymentItemDestination$zodSchema).optional(),
-  massPayment: z.lazy(() => MassPaymentItemMassPayment$zodSchema).optional(),
-  self: z.lazy(() => MassPaymentItemSelf$zodSchema).optional(),
-  transfer: z.lazy(() => MassPaymentItemTransfer$zodSchema).optional(),
-});
+export const MassPaymentItemLinks$zodSchema: z.ZodType<MassPaymentItemLinks> = z
+  .object({
+    destination: z.lazy(() => MassPaymentItemDestination$zodSchema).optional(),
+    massPayment: z.lazy(() => MassPaymentItemMassPayment$zodSchema).optional(),
+    self: z.lazy(() => MassPaymentItemSelf$zodSchema).optional(),
+    transfer: z.lazy(() => MassPaymentItemTransfer$zodSchema).optional(),
+  });
 
 export type MassPaymentItemAmount = {
   value?: string | undefined;
   currency?: string | undefined;
 };
 
-export const MassPaymentItemAmount$zodSchema: z.ZodType<
-  MassPaymentItemAmount,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  currency: z.string().optional(),
-  value: z.string().optional(),
-});
+export const MassPaymentItemAmount$zodSchema: z.ZodType<MassPaymentItemAmount> =
+  z.object({
+    currency: z.string().optional(),
+    value: z.string().optional(),
+  });
 
 export type MassPaymentItemMetadata = { item1?: string | undefined };
 
 export const MassPaymentItemMetadata$zodSchema: z.ZodType<
-  MassPaymentItemMetadata,
-  z.ZodTypeDef,
-  unknown
+  MassPaymentItemMetadata
 > = z.object({
   item1: z.string().optional(),
 });
@@ -91,9 +74,7 @@ export type MassPaymentItemProcessingChannel = {
 };
 
 export const MassPaymentItemProcessingChannel$zodSchema: z.ZodType<
-  MassPaymentItemProcessingChannel,
-  z.ZodTypeDef,
-  unknown
+  MassPaymentItemProcessingChannel
 > = z.object({
   destination: z.string().optional(),
 });
@@ -107,11 +88,7 @@ export type MassPaymentItem = {
   processingChannel?: MassPaymentItemProcessingChannel | undefined;
 };
 
-export const MassPaymentItem$zodSchema: z.ZodType<
-  MassPaymentItem,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const MassPaymentItem$zodSchema: z.ZodType<MassPaymentItem> = z.object({
   _links: z.lazy(() => MassPaymentItemLinks$zodSchema).optional(),
   amount: z.lazy(() => MassPaymentItemAmount$zodSchema).optional(),
   id: z.string().optional(),

@@ -11,9 +11,7 @@ export type AvailableExchangeConnectionsSelf = {
 };
 
 export const AvailableExchangeConnectionsSelf$zodSchema: z.ZodType<
-  AvailableExchangeConnectionsSelf,
-  z.ZodTypeDef,
-  unknown
+  AvailableExchangeConnectionsSelf
 > = z.object({
   href: z.string(),
   resourceType: z.string(),
@@ -27,9 +25,7 @@ export type AvailableExchangeConnectionsCustomers = {
 };
 
 export const AvailableExchangeConnectionsCustomers$zodSchema: z.ZodType<
-  AvailableExchangeConnectionsCustomers,
-  z.ZodTypeDef,
-  unknown
+  AvailableExchangeConnectionsCustomers
 > = z.object({
   href: z.string(),
   resourceType: z.string(),
@@ -42,9 +38,7 @@ export type AvailableExchangeConnectionsLinks = {
 };
 
 export const AvailableExchangeConnectionsLinks$zodSchema: z.ZodType<
-  AvailableExchangeConnectionsLinks,
-  z.ZodTypeDef,
-  unknown
+  AvailableExchangeConnectionsLinks
 > = z.object({
   customers: z.lazy(() => AvailableExchangeConnectionsCustomers$zodSchema),
   self: z.lazy(() => AvailableExchangeConnectionsSelf$zodSchema),
@@ -56,9 +50,7 @@ export type AvailableExchangeConnection = {
 };
 
 export const AvailableExchangeConnection$zodSchema: z.ZodType<
-  AvailableExchangeConnection,
-  z.ZodTypeDef,
-  unknown
+  AvailableExchangeConnection
 > = z.object({
   availableConnectionToken: z.string(),
   name: z.string(),
@@ -69,9 +61,7 @@ export type AvailableExchangeConnectionsEmbedded = {
 };
 
 export const AvailableExchangeConnectionsEmbedded$zodSchema: z.ZodType<
-  AvailableExchangeConnectionsEmbedded,
-  z.ZodTypeDef,
-  unknown
+  AvailableExchangeConnectionsEmbedded
 > = z.object({
   availableExchangeConnections: z.array(
     z.lazy(() => AvailableExchangeConnection$zodSchema),
@@ -84,9 +74,7 @@ export type AvailableExchangeConnections = {
 };
 
 export const AvailableExchangeConnections$zodSchema: z.ZodType<
-  AvailableExchangeConnections,
-  z.ZodTypeDef,
-  unknown
+  AvailableExchangeConnections
 > = z.object({
   _embedded: z.lazy(() => AvailableExchangeConnectionsEmbedded$zodSchema),
   _links: z.lazy(() => AvailableExchangeConnectionsLinks$zodSchema),

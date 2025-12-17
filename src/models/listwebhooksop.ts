@@ -15,55 +15,45 @@ export type ListWebhooksRequest = {
   endDate?: string | undefined;
 };
 
-export const ListWebhooksRequest$zodSchema: z.ZodType<
-  ListWebhooksRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  endDate: z.string().describe(
-    "Only include webhooks created before this date. ISO-8601 format `YYYY-MM-DD`",
-  ).optional(),
-  id: z.string().describe("Webhook subscription unique identifier"),
-  limit: z.string().describe("How many results to return").optional(),
-  offset: z.string().describe("How many results to skip").optional(),
-  startDate: z.string().describe(
-    "Only include webhooks created after this date. ISO-8601 format `YYYY-MM-DD`",
-  ).optional(),
-});
+export const ListWebhooksRequest$zodSchema: z.ZodType<ListWebhooksRequest> = z
+  .object({
+    endDate: z.string().describe(
+      "Only include webhooks created before this date. ISO-8601 format `YYYY-MM-DD`",
+    ).optional(),
+    id: z.string().describe("Webhook subscription unique identifier"),
+    limit: z.string().describe("How many results to return").optional(),
+    offset: z.string().describe("How many results to skip").optional(),
+    startDate: z.string().describe(
+      "Only include webhooks created after this date. ISO-8601 format `YYYY-MM-DD`",
+    ).optional(),
+  });
 
 export type ListWebhooksSelf = { href?: string | undefined };
 
-export const ListWebhooksSelf$zodSchema: z.ZodType<
-  ListWebhooksSelf,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  href: z.string().optional(),
-});
+export const ListWebhooksSelf$zodSchema: z.ZodType<ListWebhooksSelf> = z.object(
+  {
+    href: z.string().optional(),
+  },
+);
 
 export type ListWebhooksFirst = { href?: string | undefined };
 
-export const ListWebhooksFirst$zodSchema: z.ZodType<
-  ListWebhooksFirst,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  href: z.string().optional(),
-});
+export const ListWebhooksFirst$zodSchema: z.ZodType<ListWebhooksFirst> = z
+  .object({
+    href: z.string().optional(),
+  });
 
 export type ListWebhooksLast = { href?: string | undefined };
 
-export const ListWebhooksLast$zodSchema: z.ZodType<
-  ListWebhooksLast,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  href: z.string().optional(),
-});
+export const ListWebhooksLast$zodSchema: z.ZodType<ListWebhooksLast> = z.object(
+  {
+    href: z.string().optional(),
+  },
+);
 
 export type Next = { href?: string | undefined };
 
-export const Next$zodSchema: z.ZodType<Next, z.ZodTypeDef, unknown> = z.object({
+export const Next$zodSchema: z.ZodType<Next> = z.object({
   href: z.string().optional(),
 });
 
@@ -74,26 +64,20 @@ export type ListWebhooksLinks = {
   next?: Next | undefined;
 };
 
-export const ListWebhooksLinks$zodSchema: z.ZodType<
-  ListWebhooksLinks,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  first: z.lazy(() => ListWebhooksFirst$zodSchema).optional(),
-  last: z.lazy(() => ListWebhooksLast$zodSchema).optional(),
-  next: z.lazy(() => Next$zodSchema).optional(),
-  self: z.lazy(() => ListWebhooksSelf$zodSchema).optional(),
-});
+export const ListWebhooksLinks$zodSchema: z.ZodType<ListWebhooksLinks> = z
+  .object({
+    first: z.lazy(() => ListWebhooksFirst$zodSchema).optional(),
+    last: z.lazy(() => ListWebhooksLast$zodSchema).optional(),
+    next: z.lazy(() => Next$zodSchema).optional(),
+    self: z.lazy(() => ListWebhooksSelf$zodSchema).optional(),
+  });
 
 export type ListWebhooksEmbedded = { webhooks?: Array<Webhook> | undefined };
 
-export const ListWebhooksEmbedded$zodSchema: z.ZodType<
-  ListWebhooksEmbedded,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  webhooks: z.array(Webhook$zodSchema).optional(),
-});
+export const ListWebhooksEmbedded$zodSchema: z.ZodType<ListWebhooksEmbedded> = z
+  .object({
+    webhooks: z.array(Webhook$zodSchema).optional(),
+  });
 
 /**
  * successful operation
@@ -105,13 +89,11 @@ export type ListWebhooksResponseBody = {
 };
 
 export const ListWebhooksResponseBody$zodSchema: z.ZodType<
-  ListWebhooksResponseBody,
-  z.ZodTypeDef,
-  unknown
+  ListWebhooksResponseBody
 > = z.object({
   _embedded: z.lazy(() => ListWebhooksEmbedded$zodSchema).optional(),
   _links: z.lazy(() => ListWebhooksLinks$zodSchema).optional(),
-  total: z.number().int().optional(),
+  total: z.int().optional(),
 }).describe("successful operation");
 
 export type ListWebhooksResponse = {
@@ -123,15 +105,12 @@ export type ListWebhooksResponse = {
   NotFoundError?: NotFoundError | undefined;
 };
 
-export const ListWebhooksResponse$zodSchema: z.ZodType<
-  ListWebhooksResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  ContentType: z.string(),
-  ForbiddenError: ForbiddenError$zodSchema.optional(),
-  NotFoundError: NotFoundError$zodSchema.optional(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
-  object: z.lazy(() => ListWebhooksResponseBody$zodSchema).optional(),
-});
+export const ListWebhooksResponse$zodSchema: z.ZodType<ListWebhooksResponse> = z
+  .object({
+    ContentType: z.string(),
+    ForbiddenError: ForbiddenError$zodSchema.optional(),
+    NotFoundError: NotFoundError$zodSchema.optional(),
+    RawResponse: z.custom<Response>(x => x instanceof Response),
+    StatusCode: z.int(),
+    object: z.lazy(() => ListWebhooksResponseBody$zodSchema).optional(),
+  });

@@ -10,9 +10,7 @@ import { NotFoundError, NotFoundError$zodSchema } from "./notfounderror.js";
 export type GetTransferFailureReasonRequest = { id: string };
 
 export const GetTransferFailureReasonRequest$zodSchema: z.ZodType<
-  GetTransferFailureReasonRequest,
-  z.ZodTypeDef,
-  unknown
+  GetTransferFailureReasonRequest
 > = z.object({
   id: z.string().describe("Transfer unique identifier"),
 });
@@ -28,11 +26,9 @@ export type GetTransferFailureReasonResponseBody = {
 };
 
 export const GetTransferFailureReasonResponseBody$zodSchema: z.ZodType<
-  GetTransferFailureReasonResponseBody,
-  z.ZodTypeDef,
-  unknown
+  GetTransferFailureReasonResponseBody
 > = z.object({
-  _links: z.record(HalLink$zodSchema).optional(),
+  _links: z.record(z.string(), HalLink$zodSchema).optional(),
   code: z.string().optional(),
   description: z.string().optional(),
   explanation: z.string().optional(),
@@ -48,15 +44,13 @@ export type GetTransferFailureReasonResponse = {
 };
 
 export const GetTransferFailureReasonResponse$zodSchema: z.ZodType<
-  GetTransferFailureReasonResponse,
-  z.ZodTypeDef,
-  unknown
+  GetTransferFailureReasonResponse
 > = z.object({
   ContentType: z.string(),
   ForbiddenError: ForbiddenError$zodSchema.optional(),
   NotFoundError: NotFoundError$zodSchema.optional(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
+  RawResponse: z.custom<Response>(x => x instanceof Response),
+  StatusCode: z.int(),
   object: z.lazy(() => GetTransferFailureReasonResponseBody$zodSchema)
     .optional(),
 });

@@ -14,9 +14,7 @@ export type BusinessClassificationsEmbedded = {
 };
 
 export const BusinessClassificationsEmbedded$zodSchema: z.ZodType<
-  BusinessClassificationsEmbedded,
-  z.ZodTypeDef,
-  unknown
+  BusinessClassificationsEmbedded
 > = z.object({
   businessClassifications: z.array(BusinessClassification$zodSchema).optional(),
 });
@@ -28,11 +26,9 @@ export type BusinessClassifications = {
 };
 
 export const BusinessClassifications$zodSchema: z.ZodType<
-  BusinessClassifications,
-  z.ZodTypeDef,
-  unknown
+  BusinessClassifications
 > = z.object({
   _embedded: z.lazy(() => BusinessClassificationsEmbedded$zodSchema).optional(),
-  _links: z.record(HalLink$zodSchema).optional(),
-  total: z.number().int().optional(),
+  _links: z.record(z.string(), HalLink$zodSchema).optional(),
+  total: z.int().optional(),
 });

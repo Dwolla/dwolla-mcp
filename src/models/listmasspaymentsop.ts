@@ -13,16 +13,12 @@ export type ListMassPaymentsRequest = {
 };
 
 export const ListMassPaymentsRequest$zodSchema: z.ZodType<
-  ListMassPaymentsRequest,
-  z.ZodTypeDef,
-  unknown
+  ListMassPaymentsRequest
 > = z.object({
   correlationId: z.string().describe("Correlation ID to search by.").optional(),
   id: z.string().describe("Account's unique identifier"),
-  limit: z.number().int().default(25).describe(
-    "Maximum number of results to return",
-  ),
-  offset: z.number().int().default(0).describe("How many results to skip."),
+  limit: z.int().default(25).describe("Maximum number of results to return"),
+  offset: z.int().default(0).describe("How many results to skip."),
 });
 
 /**
@@ -34,9 +30,7 @@ export type ListMassPaymentsNotFoundResponseBody = {
 };
 
 export const ListMassPaymentsNotFoundResponseBody$zodSchema: z.ZodType<
-  ListMassPaymentsNotFoundResponseBody,
-  z.ZodTypeDef,
-  unknown
+  ListMassPaymentsNotFoundResponseBody
 > = z.object({
   code: z.string().optional(),
   message: z.string().optional(),
@@ -51,9 +45,7 @@ export type ListMassPaymentsForbiddenResponseBody = {
 };
 
 export const ListMassPaymentsForbiddenResponseBody$zodSchema: z.ZodType<
-  ListMassPaymentsForbiddenResponseBody,
-  z.ZodTypeDef,
-  unknown
+  ListMassPaymentsForbiddenResponseBody
 > = z.object({
   code: z.string().optional(),
   message: z.string().optional(),
@@ -73,14 +65,12 @@ export type ListMassPaymentsResponse = {
 };
 
 export const ListMassPaymentsResponse$zodSchema: z.ZodType<
-  ListMassPaymentsResponse,
-  z.ZodTypeDef,
-  unknown
+  ListMassPaymentsResponse
 > = z.object({
   ContentType: z.string(),
   MassPayments: MassPayments$zodSchema.optional(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
+  RawResponse: z.custom<Response>(x => x instanceof Response),
+  StatusCode: z.int(),
   fourHundredAndFourApplicationVndDwollaV1HalPlusJsonObject: z.lazy(() =>
     ListMassPaymentsNotFoundResponseBody$zodSchema
   ).optional(),

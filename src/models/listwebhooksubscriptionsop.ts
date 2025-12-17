@@ -13,9 +13,7 @@ import {
 export type ListWebhookSubscriptionsSelf = { href?: string | undefined };
 
 export const ListWebhookSubscriptionsSelf$zodSchema: z.ZodType<
-  ListWebhookSubscriptionsSelf,
-  z.ZodTypeDef,
-  unknown
+  ListWebhookSubscriptionsSelf
 > = z.object({
   href: z.string().optional(),
 });
@@ -25,9 +23,7 @@ export type ListWebhookSubscriptionsLinks = {
 };
 
 export const ListWebhookSubscriptionsLinks$zodSchema: z.ZodType<
-  ListWebhookSubscriptionsLinks,
-  z.ZodTypeDef,
-  unknown
+  ListWebhookSubscriptionsLinks
 > = z.object({
   self: z.lazy(() => ListWebhookSubscriptionsSelf$zodSchema).optional(),
 });
@@ -37,9 +33,7 @@ export type ListWebhookSubscriptionsEmbedded = {
 };
 
 export const ListWebhookSubscriptionsEmbedded$zodSchema: z.ZodType<
-  ListWebhookSubscriptionsEmbedded,
-  z.ZodTypeDef,
-  unknown
+  ListWebhookSubscriptionsEmbedded
 > = z.object({
   webhookSubscriptions: z.array(WebhookSubscription$zodSchema).optional(),
 });
@@ -54,14 +48,12 @@ export type ListWebhookSubscriptionsResponseBody = {
 };
 
 export const ListWebhookSubscriptionsResponseBody$zodSchema: z.ZodType<
-  ListWebhookSubscriptionsResponseBody,
-  z.ZodTypeDef,
-  unknown
+  ListWebhookSubscriptionsResponseBody
 > = z.object({
   _embedded: z.lazy(() => ListWebhookSubscriptionsEmbedded$zodSchema)
     .optional(),
   _links: z.lazy(() => ListWebhookSubscriptionsLinks$zodSchema).optional(),
-  total: z.number().int().optional(),
+  total: z.int().optional(),
 }).describe("successful operation");
 
 export type ListWebhookSubscriptionsResponse = {
@@ -74,15 +66,13 @@ export type ListWebhookSubscriptionsResponse = {
 };
 
 export const ListWebhookSubscriptionsResponse$zodSchema: z.ZodType<
-  ListWebhookSubscriptionsResponse,
-  z.ZodTypeDef,
-  unknown
+  ListWebhookSubscriptionsResponse
 > = z.object({
   ContentType: z.string(),
   ForbiddenError: ForbiddenError$zodSchema.optional(),
   NotFoundError: NotFoundError$zodSchema.optional(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
+  RawResponse: z.custom<Response>(x => x instanceof Response),
+  StatusCode: z.int(),
   object: z.lazy(() => ListWebhookSubscriptionsResponseBody$zodSchema)
     .optional(),
 });

@@ -1,16 +1,18 @@
 /// <reference types="bun-types" />
 
 import { build } from "bun";
-import { chmod, mkdir, readFile, writeFile } from "node:fs/promises";
+import { chmod, readFile, writeFile } from "node:fs/promises";
 import { packExtension } from "@anthropic-ai/mcpb";
 import { join } from "node:path";
 import { createMCPServer } from "./server.ts";
 import { createConsoleLogger } from "./console-logger.ts";
 
+const shouldPack = process.argv.includes("--pack");
+
 async function buildMcpServer() {
-     // Explicitly create server to register tools
-   const logger = createConsoleLogger("info");
-   const { tools } = createMCPServer({ logger });
+  // Explicitly create server to register tools
+  const logger = createConsoleLogger("info");
+  const { tools } = createMCPServer({ logger });
 
   // Iterate through all registered tools and add them to the manifest
   const manifest = await readFile("manifest.json", "utf8");
@@ -42,16 +44,14 @@ async function buildMcpServer() {
   const outputFile = join(destinationDir, "mcp-server.js");
   await chmod(outputFile, 0o755);
 
-  // Output MCP bundle file to `./static` to have the CloudFlare Worker serve it
-  const staticDir = "./static";
-  await mkdir(staticDir, { recursive: true });
-
   // Build the MCP bundle file
-  await packExtension({
-    extensionPath: ".",
-    outputPath: join(staticDir, "mcp-server.mcpb"),
-    silent: false,
-  });
+  if (shouldPack) {
+    await packExtension({
+      extensionPath: ".",
+      outputPath: "./mcp-server.mcpb",
+      silent: false,
+    });
+  }
 }
 
 await buildMcpServer().catch((error) => {

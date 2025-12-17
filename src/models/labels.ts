@@ -8,11 +8,7 @@ import { Label, Label$zodSchema } from "./label.js";
 
 export type LabelsEmbedded = { labels?: Array<Label> | undefined };
 
-export const LabelsEmbedded$zodSchema: z.ZodType<
-  LabelsEmbedded,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const LabelsEmbedded$zodSchema: z.ZodType<LabelsEmbedded> = z.object({
   labels: z.array(Label$zodSchema).optional(),
 });
 
@@ -22,9 +18,8 @@ export type Labels = {
   total?: number | undefined;
 };
 
-export const Labels$zodSchema: z.ZodType<Labels, z.ZodTypeDef, unknown> = z
-  .object({
-    _embedded: z.lazy(() => LabelsEmbedded$zodSchema).optional(),
-    _links: z.record(HalLink$zodSchema).optional(),
-    total: z.number().int().optional(),
-  });
+export const Labels$zodSchema: z.ZodType<Labels> = z.object({
+  _embedded: z.lazy(() => LabelsEmbedded$zodSchema).optional(),
+  _links: z.record(z.string(), HalLink$zodSchema).optional(),
+  total: z.int().optional(),
+});

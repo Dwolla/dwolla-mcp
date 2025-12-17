@@ -16,9 +16,7 @@ export type ListMassPaymentItemsRequest = {
 };
 
 export const ListMassPaymentItemsRequest$zodSchema: z.ZodType<
-  ListMassPaymentItemsRequest,
-  z.ZodTypeDef,
-  unknown
+  ListMassPaymentItemsRequest
 > = z.object({
   id: z.string().describe("Mass payment unique identifier"),
   limit: z.string().describe("How many results to return").optional(),
@@ -35,9 +33,7 @@ export type ListMassPaymentItemsNotFoundResponseBody = {
 };
 
 export const ListMassPaymentItemsNotFoundResponseBody$zodSchema: z.ZodType<
-  ListMassPaymentItemsNotFoundResponseBody,
-  z.ZodTypeDef,
-  unknown
+  ListMassPaymentItemsNotFoundResponseBody
 > = z.object({
   code: z.string().optional(),
   message: z.string().optional(),
@@ -52,9 +48,7 @@ export type ListMassPaymentItemsForbiddenResponseBody = {
 };
 
 export const ListMassPaymentItemsForbiddenResponseBody$zodSchema: z.ZodType<
-  ListMassPaymentItemsForbiddenResponseBody,
-  z.ZodTypeDef,
-  unknown
+  ListMassPaymentItemsForbiddenResponseBody
 > = z.object({
   code: z.string().optional(),
   message: z.string().optional(),
@@ -63,9 +57,7 @@ export const ListMassPaymentItemsForbiddenResponseBody$zodSchema: z.ZodType<
 export type ListMassPaymentItemsSelf = { href?: string | undefined };
 
 export const ListMassPaymentItemsSelf$zodSchema: z.ZodType<
-  ListMassPaymentItemsSelf,
-  z.ZodTypeDef,
-  unknown
+  ListMassPaymentItemsSelf
 > = z.object({
   href: z.string().optional(),
 });
@@ -73,9 +65,7 @@ export const ListMassPaymentItemsSelf$zodSchema: z.ZodType<
 export type ListMassPaymentItemsFirst = { href?: string | undefined };
 
 export const ListMassPaymentItemsFirst$zodSchema: z.ZodType<
-  ListMassPaymentItemsFirst,
-  z.ZodTypeDef,
-  unknown
+  ListMassPaymentItemsFirst
 > = z.object({
   href: z.string().optional(),
 });
@@ -83,9 +73,7 @@ export const ListMassPaymentItemsFirst$zodSchema: z.ZodType<
 export type ListMassPaymentItemsLast = { href?: string | undefined };
 
 export const ListMassPaymentItemsLast$zodSchema: z.ZodType<
-  ListMassPaymentItemsLast,
-  z.ZodTypeDef,
-  unknown
+  ListMassPaymentItemsLast
 > = z.object({
   href: z.string().optional(),
 });
@@ -97,9 +85,7 @@ export type ListMassPaymentItemsLinks = {
 };
 
 export const ListMassPaymentItemsLinks$zodSchema: z.ZodType<
-  ListMassPaymentItemsLinks,
-  z.ZodTypeDef,
-  unknown
+  ListMassPaymentItemsLinks
 > = z.object({
   first: z.lazy(() => ListMassPaymentItemsFirst$zodSchema).optional(),
   last: z.lazy(() => ListMassPaymentItemsLast$zodSchema).optional(),
@@ -111,9 +97,7 @@ export type ListMassPaymentItemsEmbedded = {
 };
 
 export const ListMassPaymentItemsEmbedded$zodSchema: z.ZodType<
-  ListMassPaymentItemsEmbedded,
-  z.ZodTypeDef,
-  unknown
+  ListMassPaymentItemsEmbedded
 > = z.object({
   items: z.array(MassPaymentItem$zodSchema).optional(),
 });
@@ -128,13 +112,11 @@ export type ListMassPaymentItemsResponseBody = {
 };
 
 export const ListMassPaymentItemsResponseBody$zodSchema: z.ZodType<
-  ListMassPaymentItemsResponseBody,
-  z.ZodTypeDef,
-  unknown
+  ListMassPaymentItemsResponseBody
 > = z.object({
   _embedded: z.lazy(() => ListMassPaymentItemsEmbedded$zodSchema).optional(),
   _links: z.lazy(() => ListMassPaymentItemsLinks$zodSchema).optional(),
-  total: z.number().int().optional(),
+  total: z.int().optional(),
 }).describe("successful operation");
 
 export type ListMassPaymentItemsResponse = {
@@ -153,13 +135,11 @@ export type ListMassPaymentItemsResponse = {
 };
 
 export const ListMassPaymentItemsResponse$zodSchema: z.ZodType<
-  ListMassPaymentItemsResponse,
-  z.ZodTypeDef,
-  unknown
+  ListMassPaymentItemsResponse
 > = z.object({
   ContentType: z.string(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
+  RawResponse: z.custom<Response>(x => x instanceof Response),
+  StatusCode: z.int(),
   fourHundredAndFourApplicationVndDwollaV1HalPlusJsonObject: z.lazy(() =>
     ListMassPaymentItemsNotFoundResponseBody$zodSchema
   ).optional(),

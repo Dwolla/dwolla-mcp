@@ -10,9 +10,8 @@ export type HalLink = {
   resourceType?: string | undefined;
 };
 
-export const HalLink$zodSchema: z.ZodType<HalLink, z.ZodTypeDef, unknown> = z
-  .object({
-    href: z.string().optional(),
-    resourceType: z.string().optional(),
-    type: z.string().optional(),
-  });
+export const HalLink$zodSchema: z.ZodType<HalLink> = z.object({
+  href: z.string().optional(),
+  resourceType: z.string().optional(),
+  type: z.string().optional(),
+});

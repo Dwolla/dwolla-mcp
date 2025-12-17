@@ -10,9 +10,7 @@ import { NotFoundError, NotFoundError$zodSchema } from "./notfounderror.js";
 export type ListBeneficialOwnerDocumentsRequest = { id: string };
 
 export const ListBeneficialOwnerDocumentsRequest$zodSchema: z.ZodType<
-  ListBeneficialOwnerDocumentsRequest,
-  z.ZodTypeDef,
-  unknown
+  ListBeneficialOwnerDocumentsRequest
 > = z.object({
   id: z.string().describe("beneficial owner unique identifier"),
 });
@@ -27,14 +25,12 @@ export type ListBeneficialOwnerDocumentsResponse = {
 };
 
 export const ListBeneficialOwnerDocumentsResponse$zodSchema: z.ZodType<
-  ListBeneficialOwnerDocumentsResponse,
-  z.ZodTypeDef,
-  unknown
+  ListBeneficialOwnerDocumentsResponse
 > = z.object({
   ContentType: z.string(),
   Documents: Documents$zodSchema.optional(),
   ForbiddenError: ForbiddenError$zodSchema.optional(),
   NotFoundError: NotFoundError$zodSchema.optional(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
+  RawResponse: z.custom<Response>(x => x instanceof Response),
+  StatusCode: z.int(),
 });

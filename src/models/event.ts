@@ -13,11 +13,10 @@ export type Event = {
   resourceId?: string | undefined;
 };
 
-export const Event$zodSchema: z.ZodType<Event, z.ZodTypeDef, unknown> = z
-  .object({
-    _links: z.record(HalLink$zodSchema).optional(),
-    created: z.string().datetime({ offset: true }).optional(),
-    id: z.string().optional(),
-    resourceId: z.string().optional(),
-    topic: z.string().optional(),
-  });
+export const Event$zodSchema: z.ZodType<Event> = z.object({
+  _links: z.record(z.string(), HalLink$zodSchema).optional(),
+  created: z.iso.datetime({ offset: true }).optional(),
+  id: z.string().optional(),
+  resourceId: z.string().optional(),
+  topic: z.string().optional(),
+});

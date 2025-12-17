@@ -11,14 +11,11 @@ export type ListEventsRequest = {
   offset?: number | undefined;
 };
 
-export const ListEventsRequest$zodSchema: z.ZodType<
-  ListEventsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  limit: z.number().int().describe("How many results to return").optional(),
-  offset: z.number().int().describe("How many results to skip").optional(),
-});
+export const ListEventsRequest$zodSchema: z.ZodType<ListEventsRequest> = z
+  .object({
+    limit: z.int().describe("How many results to return").optional(),
+    offset: z.int().describe("How many results to skip").optional(),
+  });
 
 export type ListEventsResponse = {
   ContentType: string;
@@ -28,14 +25,11 @@ export type ListEventsResponse = {
   NotFoundError?: NotFoundError | undefined;
 };
 
-export const ListEventsResponse$zodSchema: z.ZodType<
-  ListEventsResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  ContentType: z.string(),
-  Events: Events$zodSchema.optional(),
-  NotFoundError: NotFoundError$zodSchema.optional(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
-});
+export const ListEventsResponse$zodSchema: z.ZodType<ListEventsResponse> = z
+  .object({
+    ContentType: z.string(),
+    Events: Events$zodSchema.optional(),
+    NotFoundError: NotFoundError$zodSchema.optional(),
+    RawResponse: z.custom<Response>(x => x instanceof Response),
+    StatusCode: z.int(),
+  });

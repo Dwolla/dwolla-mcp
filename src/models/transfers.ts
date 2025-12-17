@@ -8,13 +8,10 @@ import { Transfer, Transfer$zodSchema } from "./transfer.js";
 
 export type TransfersEmbedded = { transfers?: Array<Transfer> | undefined };
 
-export const TransfersEmbedded$zodSchema: z.ZodType<
-  TransfersEmbedded,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  transfers: z.array(Transfer$zodSchema).optional(),
-});
+export const TransfersEmbedded$zodSchema: z.ZodType<TransfersEmbedded> = z
+  .object({
+    transfers: z.array(Transfer$zodSchema).optional(),
+  });
 
 export type Transfers = {
   _links?: { [k: string]: HalLink } | undefined;
@@ -22,9 +19,8 @@ export type Transfers = {
   total?: number | undefined;
 };
 
-export const Transfers$zodSchema: z.ZodType<Transfers, z.ZodTypeDef, unknown> =
-  z.object({
-    _embedded: z.lazy(() => TransfersEmbedded$zodSchema).optional(),
-    _links: z.record(HalLink$zodSchema).optional(),
-    total: z.number().int().optional(),
-  });
+export const Transfers$zodSchema: z.ZodType<Transfers> = z.object({
+  _embedded: z.lazy(() => TransfersEmbedded$zodSchema).optional(),
+  _links: z.record(z.string(), HalLink$zodSchema).optional(),
+  total: z.int().optional(),
+});

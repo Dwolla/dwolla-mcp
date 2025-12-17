@@ -3,7 +3,16 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
 import { HalLink, HalLink$zodSchema } from "./hallink.js";
+
+export const Channel = {
+  Ach: "ach",
+  RealTimePayments: "real-time-payments",
+  Wire: "wire",
+  External: "external",
+} as const;
+export type Channel = ClosedEnum<typeof Channel>;
 
 export const Channel$zodSchema = z.enum([
   "ach",
@@ -11,8 +20,6 @@ export const Channel$zodSchema = z.enum([
   "wire",
   "external",
 ]);
-
-export type Channel = z.infer<typeof Channel$zodSchema>;
 
 export type FundingSource = {
   _links?: { [k: string]: HalLink } | undefined;
@@ -28,16 +35,12 @@ export type FundingSource = {
   fingerprint?: string | undefined;
 };
 
-export const FundingSource$zodSchema: z.ZodType<
-  FundingSource,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _links: z.record(HalLink$zodSchema).optional(),
+export const FundingSource$zodSchema: z.ZodType<FundingSource> = z.object({
+  _links: z.record(z.string(), HalLink$zodSchema).optional(),
   bankAccountType: z.string().optional(),
   bankName: z.string().optional(),
   channels: z.array(Channel$zodSchema).optional(),
-  created: z.string().datetime({ offset: true }).optional(),
+  created: z.iso.datetime({ offset: true }).optional(),
   fingerprint: z.string().optional(),
   id: z.string().optional(),
   name: z.string().optional(),

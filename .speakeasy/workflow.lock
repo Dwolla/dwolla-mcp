@@ -1,4 +1,4 @@
-speakeasyVersion: 1.675.4
+speakeasyVersion: 1.680.0
 sources:
     Dwolla API:
         sourceNamespace: dwolla-api
@@ -6,7 +6,7 @@ sources:
         sourceBlobDigest: sha256:d9ccd27391ffd05beecd2c95329cae3090b98bbd7c80fde8fbffda4944ca5812
         tags:
             - latest
-            - speakeasy-sdk-regen-1765499669
+            - speakeasy-sdk-regen-1765999587
             - "2.0"
 targets:
     dwolla-mcp:

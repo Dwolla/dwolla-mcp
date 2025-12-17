@@ -11,9 +11,7 @@ export type ListFundingSourcesRequest = {
 };
 
 export const ListFundingSourcesRequest$zodSchema: z.ZodType<
-  ListFundingSourcesRequest,
-  z.ZodTypeDef,
-  unknown
+  ListFundingSourcesRequest
 > = z.object({
   id: z.string().describe("Account's unique identifier"),
   removed: z.string().describe(
@@ -30,9 +28,7 @@ export type ListFundingSourcesNotFoundResponseBody = {
 };
 
 export const ListFundingSourcesNotFoundResponseBody$zodSchema: z.ZodType<
-  ListFundingSourcesNotFoundResponseBody,
-  z.ZodTypeDef,
-  unknown
+  ListFundingSourcesNotFoundResponseBody
 > = z.object({
   code: z.string().optional(),
   message: z.string().optional(),
@@ -47,9 +43,7 @@ export type ListFundingSourcesForbiddenResponseBody = {
 };
 
 export const ListFundingSourcesForbiddenResponseBody$zodSchema: z.ZodType<
-  ListFundingSourcesForbiddenResponseBody,
-  z.ZodTypeDef,
-  unknown
+  ListFundingSourcesForbiddenResponseBody
 > = z.object({
   code: z.string().optional(),
   message: z.string().optional(),
@@ -69,14 +63,12 @@ export type ListFundingSourcesResponse = {
 };
 
 export const ListFundingSourcesResponse$zodSchema: z.ZodType<
-  ListFundingSourcesResponse,
-  z.ZodTypeDef,
-  unknown
+  ListFundingSourcesResponse
 > = z.object({
   ContentType: z.string(),
   FundingSources: FundingSources$zodSchema.optional(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
+  RawResponse: z.custom<Response>(x => x instanceof Response),
+  StatusCode: z.int(),
   fourHundredAndFourApplicationVndDwollaV1HalPlusJsonObject: z.lazy(() =>
     ListFundingSourcesNotFoundResponseBody$zodSchema
   ).optional(),

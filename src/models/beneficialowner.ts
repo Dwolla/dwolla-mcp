@@ -3,15 +3,21 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
 import { HalLink, HalLink$zodSchema } from "./hallink.js";
+
+export const VerificationStatus = {
+  Verified: "verified",
+  Document: "document",
+  Incomplete: "incomplete",
+} as const;
+export type VerificationStatus = ClosedEnum<typeof VerificationStatus>;
 
 export const VerificationStatus$zodSchema = z.enum([
   "verified",
   "document",
   "incomplete",
 ]);
-
-export type VerificationStatus = z.infer<typeof VerificationStatus$zodSchema>;
 
 /**
  * Request body model for a Beneficial Owner
@@ -23,13 +29,9 @@ export type BeneficialOwner = {
   created: string;
 };
 
-export const BeneficialOwner$zodSchema: z.ZodType<
-  BeneficialOwner,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _links: z.record(HalLink$zodSchema),
-  created: z.string().datetime({ offset: true }),
+export const BeneficialOwner$zodSchema: z.ZodType<BeneficialOwner> = z.object({
+  _links: z.record(z.string(), HalLink$zodSchema),
+  created: z.iso.datetime({ offset: true }),
   id: z.string(),
   verificationStatus: VerificationStatus$zodSchema,
 }).describe("Request body model for a Beneficial Owner");

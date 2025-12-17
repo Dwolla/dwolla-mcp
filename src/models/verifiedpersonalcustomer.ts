@@ -3,14 +3,30 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
 import { HalLink, HalLink$zodSchema } from "./hallink.js";
+
+export const VerifiedPersonalCustomerType = {
+  Personal: "personal",
+} as const;
+export type VerifiedPersonalCustomerType = ClosedEnum<
+  typeof VerifiedPersonalCustomerType
+>;
 
 export const VerifiedPersonalCustomerType$zodSchema = z.enum([
   "personal",
 ]);
 
-export type VerifiedPersonalCustomerType = z.infer<
-  typeof VerifiedPersonalCustomerType$zodSchema
+export const VerifiedPersonalCustomerStatus = {
+  Verified: "verified",
+  Suspended: "suspended",
+  Deactivated: "deactivated",
+  Document: "document",
+  Retry: "retry",
+  Kba: "kba",
+} as const;
+export type VerifiedPersonalCustomerStatus = ClosedEnum<
+  typeof VerifiedPersonalCustomerStatus
 >;
 
 export const VerifiedPersonalCustomerStatus$zodSchema = z.enum([
@@ -21,10 +37,6 @@ export const VerifiedPersonalCustomerStatus$zodSchema = z.enum([
   "retry",
   "kba",
 ]);
-
-export type VerifiedPersonalCustomerStatus = z.infer<
-  typeof VerifiedPersonalCustomerStatus$zodSchema
->;
 
 /**
  * Verified personal customer - fully KYC verified individual with send and receive capabilities
@@ -47,16 +59,14 @@ export type VerifiedPersonalCustomer = {
 };
 
 export const VerifiedPersonalCustomer$zodSchema: z.ZodType<
-  VerifiedPersonalCustomer,
-  z.ZodTypeDef,
-  unknown
+  VerifiedPersonalCustomer
 > = z.object({
-  _links: z.record(HalLink$zodSchema),
+  _links: z.record(z.string(), HalLink$zodSchema),
   address1: z.string(),
   address2: z.string().optional(),
   city: z.string(),
   correlationId: z.string().optional(),
-  created: z.string().datetime({ offset: true }),
+  created: z.iso.datetime({ offset: true }),
   email: z.string(),
   firstName: z.string(),
   id: z.string(),

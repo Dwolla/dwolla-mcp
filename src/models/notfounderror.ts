@@ -9,11 +9,7 @@ import * as z from "zod";
  */
 export type NotFoundError = { code: string; message: string };
 
-export const NotFoundError$zodSchema: z.ZodType<
-  NotFoundError,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const NotFoundError$zodSchema: z.ZodType<NotFoundError> = z.object({
   code: z.string(),
   message: z.string(),
 }).describe("Error response schema for 404 NotFound");

@@ -20,14 +20,12 @@ export type ListBusinessClassificationsResponse = {
 };
 
 export const ListBusinessClassificationsResponse$zodSchema: z.ZodType<
-  ListBusinessClassificationsResponse,
-  z.ZodTypeDef,
-  unknown
+  ListBusinessClassificationsResponse
 > = z.object({
   BusinessClassifications: BusinessClassifications$zodSchema.optional(),
   ContentType: z.string(),
   ForbiddenError: ForbiddenError$zodSchema.optional(),
   NotFoundError: NotFoundError$zodSchema.optional(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
+  RawResponse: z.custom<Response>(x => x instanceof Response),
+  StatusCode: z.int(),
 });

@@ -9,9 +9,7 @@ import { NotFoundError, NotFoundError$zodSchema } from "./notfounderror.js";
 export type GetMicroDepositsRequest = { id: string };
 
 export const GetMicroDepositsRequest$zodSchema: z.ZodType<
-  GetMicroDepositsRequest,
-  z.ZodTypeDef,
-  unknown
+  GetMicroDepositsRequest
 > = z.object({
   id: z.string().describe(
     "The ID of the FS that previously had micro-deposits initiated",
@@ -23,11 +21,10 @@ export type Failure = {
   description?: string | undefined;
 };
 
-export const Failure$zodSchema: z.ZodType<Failure, z.ZodTypeDef, unknown> = z
-  .object({
-    code: z.string().optional(),
-    description: z.string().optional(),
-  });
+export const Failure$zodSchema: z.ZodType<Failure> = z.object({
+  code: z.string().optional(),
+  description: z.string().optional(),
+});
 
 /**
  * successful operation
@@ -40,12 +37,10 @@ export type GetMicroDepositsResponseBody = {
 };
 
 export const GetMicroDepositsResponseBody$zodSchema: z.ZodType<
-  GetMicroDepositsResponseBody,
-  z.ZodTypeDef,
-  unknown
+  GetMicroDepositsResponseBody
 > = z.object({
-  _links: z.record(HalLink$zodSchema).optional(),
-  created: z.string().datetime({ offset: true }).optional(),
+  _links: z.record(z.string(), HalLink$zodSchema).optional(),
+  created: z.iso.datetime({ offset: true }).optional(),
   failure: z.lazy(() => Failure$zodSchema).optional(),
   status: z.string().optional(),
 }).describe("successful operation");
@@ -59,13 +54,11 @@ export type GetMicroDepositsResponse = {
 };
 
 export const GetMicroDepositsResponse$zodSchema: z.ZodType<
-  GetMicroDepositsResponse,
-  z.ZodTypeDef,
-  unknown
+  GetMicroDepositsResponse
 > = z.object({
   ContentType: z.string(),
   NotFoundError: NotFoundError$zodSchema.optional(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
+  RawResponse: z.custom<Response>(x => x instanceof Response),
+  StatusCode: z.int(),
   object: z.lazy(() => GetMicroDepositsResponseBody$zodSchema).optional(),
 });

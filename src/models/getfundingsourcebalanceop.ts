@@ -8,9 +8,7 @@ import { HalLink, HalLink$zodSchema } from "./hallink.js";
 export type GetFundingSourceBalanceRequest = { id: string };
 
 export const GetFundingSourceBalanceRequest$zodSchema: z.ZodType<
-  GetFundingSourceBalanceRequest,
-  z.ZodTypeDef,
-  unknown
+  GetFundingSourceBalanceRequest
 > = z.object({
   id: z.string().describe("ID of funding source to retrieve the balance for"),
 });
@@ -24,9 +22,7 @@ export type GetFundingSourceBalanceNotFoundResponseBody = {
 };
 
 export const GetFundingSourceBalanceNotFoundResponseBody$zodSchema: z.ZodType<
-  GetFundingSourceBalanceNotFoundResponseBody,
-  z.ZodTypeDef,
-  unknown
+  GetFundingSourceBalanceNotFoundResponseBody
 > = z.object({
   code: z.string().optional(),
   message: z.string().optional(),
@@ -39,9 +35,7 @@ export type GetFundingSourceBalanceSelf = {
 };
 
 export const GetFundingSourceBalanceSelf$zodSchema: z.ZodType<
-  GetFundingSourceBalanceSelf,
-  z.ZodTypeDef,
-  unknown
+  GetFundingSourceBalanceSelf
 > = z.object({
   href: z.string().optional(),
   resourceType: z.string().optional(),
@@ -55,9 +49,7 @@ export type GetFundingSourceBalanceFundingSource = {
 };
 
 export const GetFundingSourceBalanceFundingSource$zodSchema: z.ZodType<
-  GetFundingSourceBalanceFundingSource,
-  z.ZodTypeDef,
-  unknown
+  GetFundingSourceBalanceFundingSource
 > = z.object({
   href: z.string().optional(),
   resourceType: z.string().optional(),
@@ -70,9 +62,7 @@ export type GetFundingSourceBalanceLinks = {
 };
 
 export const GetFundingSourceBalanceLinks$zodSchema: z.ZodType<
-  GetFundingSourceBalanceLinks,
-  z.ZodTypeDef,
-  unknown
+  GetFundingSourceBalanceLinks
 > = z.object({
   fundingSource: z.lazy(() => GetFundingSourceBalanceFundingSource$zodSchema)
     .optional(),
@@ -84,22 +74,20 @@ export type Available = {
   currency?: string | undefined;
 };
 
-export const Available$zodSchema: z.ZodType<Available, z.ZodTypeDef, unknown> =
-  z.object({
-    currency: z.string().optional(),
-    value: z.string().optional(),
-  });
+export const Available$zodSchema: z.ZodType<Available> = z.object({
+  currency: z.string().optional(),
+  value: z.string().optional(),
+});
 
 export type Closing = {
   value?: string | undefined;
   currency?: string | undefined;
 };
 
-export const Closing$zodSchema: z.ZodType<Closing, z.ZodTypeDef, unknown> = z
-  .object({
-    currency: z.string().optional(),
-    value: z.string().optional(),
-  });
+export const Closing$zodSchema: z.ZodType<Closing> = z.object({
+  currency: z.string().optional(),
+  value: z.string().optional(),
+});
 
 /**
  * Response for retrieving balance of a bank account verified through Open Banking
@@ -111,40 +99,35 @@ export type BankBalanceResponse = {
   lastUpdated: string;
 };
 
-export const BankBalanceResponse$zodSchema: z.ZodType<
-  BankBalanceResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _links: z.lazy(() => GetFundingSourceBalanceLinks$zodSchema),
-  available: z.lazy(() => Available$zodSchema),
-  closing: z.lazy(() => Closing$zodSchema),
-  lastUpdated: z.string(),
-}).describe(
-  "Response for retrieving balance of a bank account verified through Open Banking",
-);
+export const BankBalanceResponse$zodSchema: z.ZodType<BankBalanceResponse> = z
+  .object({
+    _links: z.lazy(() => GetFundingSourceBalanceLinks$zodSchema),
+    available: z.lazy(() => Available$zodSchema),
+    closing: z.lazy(() => Closing$zodSchema),
+    lastUpdated: z.string(),
+  }).describe(
+    "Response for retrieving balance of a bank account verified through Open Banking",
+  );
 
 export type Balance = {
   value?: string | undefined;
   currency?: string | undefined;
 };
 
-export const Balance$zodSchema: z.ZodType<Balance, z.ZodTypeDef, unknown> = z
-  .object({
-    currency: z.string().optional(),
-    value: z.string().optional(),
-  });
+export const Balance$zodSchema: z.ZodType<Balance> = z.object({
+  currency: z.string().optional(),
+  value: z.string().optional(),
+});
 
 export type Total = {
   value?: string | undefined;
   currency?: string | undefined;
 };
 
-export const Total$zodSchema: z.ZodType<Total, z.ZodTypeDef, unknown> = z
-  .object({
-    currency: z.string().optional(),
-    value: z.string().optional(),
-  });
+export const Total$zodSchema: z.ZodType<Total> = z.object({
+  currency: z.string().optional(),
+  value: z.string().optional(),
+});
 
 /**
  * Response for retrieving balance of a Dwolla Balance funding source
@@ -156,18 +139,15 @@ export type DwollaBalanceResponse = {
   lastUpdated: string;
 };
 
-export const DwollaBalanceResponse$zodSchema: z.ZodType<
-  DwollaBalanceResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _links: z.record(HalLink$zodSchema),
-  balance: z.lazy(() => Balance$zodSchema),
-  lastUpdated: z.string(),
-  total: z.lazy(() => Total$zodSchema),
-}).describe(
-  "Response for retrieving balance of a Dwolla Balance funding source",
-);
+export const DwollaBalanceResponse$zodSchema: z.ZodType<DwollaBalanceResponse> =
+  z.object({
+    _links: z.record(z.string(), HalLink$zodSchema),
+    balance: z.lazy(() => Balance$zodSchema),
+    lastUpdated: z.string(),
+    total: z.lazy(() => Total$zodSchema),
+  }).describe(
+    "Response for retrieving balance of a Dwolla Balance funding source",
+  );
 
 /**
  * successful operation
@@ -177,9 +157,7 @@ export type GetFundingSourceBalanceResponseBody =
   | BankBalanceResponse;
 
 export const GetFundingSourceBalanceResponseBody$zodSchema: z.ZodType<
-  GetFundingSourceBalanceResponseBody,
-  z.ZodTypeDef,
-  unknown
+  GetFundingSourceBalanceResponseBody
 > = z.union([
   z.lazy(() => DwollaBalanceResponse$zodSchema),
   z.lazy(() => BankBalanceResponse$zodSchema),
@@ -194,13 +172,11 @@ export type GetFundingSourceBalanceResponse = {
 };
 
 export const GetFundingSourceBalanceResponse$zodSchema: z.ZodType<
-  GetFundingSourceBalanceResponse,
-  z.ZodTypeDef,
-  unknown
+  GetFundingSourceBalanceResponse
 > = z.object({
   ContentType: z.string(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
+  RawResponse: z.custom<Response>(x => x instanceof Response),
+  StatusCode: z.int(),
   object: z.lazy(() => GetFundingSourceBalanceNotFoundResponseBody$zodSchema)
     .optional(),
   oneOf: z.union([

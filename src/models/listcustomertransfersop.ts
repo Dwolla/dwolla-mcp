@@ -20,9 +20,7 @@ export type ListCustomerTransfersRequest = {
 };
 
 export const ListCustomerTransfersRequest$zodSchema: z.ZodType<
-  ListCustomerTransfersRequest,
-  z.ZodTypeDef,
-  unknown
+  ListCustomerTransfersRequest
 > = z.object({
   correlationId: z.string().describe(
     "A string value to search on if `correlationId` was specified for a transaction",
@@ -63,13 +61,11 @@ export type ListCustomerTransfersResponse = {
 };
 
 export const ListCustomerTransfersResponse$zodSchema: z.ZodType<
-  ListCustomerTransfersResponse,
-  z.ZodTypeDef,
-  unknown
+  ListCustomerTransfersResponse
 > = z.object({
   ContentType: z.string(),
   NotFoundError: NotFoundError$zodSchema.optional(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
+  RawResponse: z.custom<Response>(x => x instanceof Response),
+  StatusCode: z.int(),
   Transfers: Transfers$zodSchema.optional(),
 });

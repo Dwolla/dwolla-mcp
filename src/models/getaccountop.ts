@@ -8,13 +8,10 @@ import { NotFoundError, NotFoundError$zodSchema } from "./notfounderror.js";
 
 export type GetAccountRequest = { id: string };
 
-export const GetAccountRequest$zodSchema: z.ZodType<
-  GetAccountRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string().describe("Account's unique identifier"),
-});
+export const GetAccountRequest$zodSchema: z.ZodType<GetAccountRequest> = z
+  .object({
+    id: z.string().describe("Account's unique identifier"),
+  });
 
 /**
  * forbidden
@@ -25,9 +22,7 @@ export type GetAccountResponseBody = {
 };
 
 export const GetAccountResponseBody$zodSchema: z.ZodType<
-  GetAccountResponseBody,
-  z.ZodTypeDef,
-  unknown
+  GetAccountResponseBody
 > = z.object({
   code: z.string().optional(),
   message: z.string().optional(),
@@ -42,15 +37,12 @@ export type GetAccountResponse = {
   NotFoundError?: NotFoundError | undefined;
 };
 
-export const GetAccountResponse$zodSchema: z.ZodType<
-  GetAccountResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  Account: Account$zodSchema.optional(),
-  ContentType: z.string(),
-  NotFoundError: NotFoundError$zodSchema.optional(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
-  object: z.lazy(() => GetAccountResponseBody$zodSchema).optional(),
-});
+export const GetAccountResponse$zodSchema: z.ZodType<GetAccountResponse> = z
+  .object({
+    Account: Account$zodSchema.optional(),
+    ContentType: z.string(),
+    NotFoundError: NotFoundError$zodSchema.optional(),
+    RawResponse: z.custom<Response>(x => x instanceof Response),
+    StatusCode: z.int(),
+    object: z.lazy(() => GetAccountResponseBody$zodSchema).optional(),
+  });

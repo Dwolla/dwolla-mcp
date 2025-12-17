@@ -18,13 +18,11 @@ export type ListExchangePartnersResponse = {
 };
 
 export const ListExchangePartnersResponse$zodSchema: z.ZodType<
-  ListExchangePartnersResponse,
-  z.ZodTypeDef,
-  unknown
+  ListExchangePartnersResponse
 > = z.object({
   ContentType: z.string(),
   ExchangePartners: ExchangePartners$zodSchema.optional(),
   ForbiddenError: ForbiddenError$zodSchema.optional(),
-  RawResponse: z.instanceof(Response),
-  StatusCode: z.number().int(),
+  RawResponse: z.custom<Response>(x => x instanceof Response),
+  StatusCode: z.int(),
 });

@@ -3,14 +3,29 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
 import { HalLink, HalLink$zodSchema } from "./hallink.js";
+
+export const VerifiedSolePropCustomerType = {
+  Business: "business",
+} as const;
+export type VerifiedSolePropCustomerType = ClosedEnum<
+  typeof VerifiedSolePropCustomerType
+>;
 
 export const VerifiedSolePropCustomerType$zodSchema = z.enum([
   "business",
 ]);
 
-export type VerifiedSolePropCustomerType = z.infer<
-  typeof VerifiedSolePropCustomerType$zodSchema
+export const VerifiedSolePropCustomerStatus = {
+  Verified: "verified",
+  Suspended: "suspended",
+  Deactivated: "deactivated",
+  Document: "document",
+  Retry: "retry",
+} as const;
+export type VerifiedSolePropCustomerStatus = ClosedEnum<
+  typeof VerifiedSolePropCustomerStatus
 >;
 
 export const VerifiedSolePropCustomerStatus$zodSchema = z.enum([
@@ -21,17 +36,16 @@ export const VerifiedSolePropCustomerStatus$zodSchema = z.enum([
   "retry",
 ]);
 
-export type VerifiedSolePropCustomerStatus = z.infer<
-  typeof VerifiedSolePropCustomerStatus$zodSchema
+export const VerifiedSolePropCustomerBusinessType = {
+  SoleProprietorship: "soleProprietorship",
+} as const;
+export type VerifiedSolePropCustomerBusinessType = ClosedEnum<
+  typeof VerifiedSolePropCustomerBusinessType
 >;
 
 export const VerifiedSolePropCustomerBusinessType$zodSchema = z.enum([
   "soleProprietorship",
 ]);
-
-export type VerifiedSolePropCustomerBusinessType = z.infer<
-  typeof VerifiedSolePropCustomerBusinessType$zodSchema
->;
 
 /**
  * Verified sole proprietorship customer - distinguished from VerifiedBusinessCustomer by businessType=soleProprietorship
@@ -57,11 +71,9 @@ export type VerifiedSolePropCustomer = {
 };
 
 export const VerifiedSolePropCustomer$zodSchema: z.ZodType<
-  VerifiedSolePropCustomer,
-  z.ZodTypeDef,
-  unknown
+  VerifiedSolePropCustomer
 > = z.object({
-  _links: z.record(HalLink$zodSchema),
+  _links: z.record(z.string(), HalLink$zodSchema),
   address1: z.string(),
   address2: z.string().optional(),
   businessClassification: z.string(),
@@ -69,7 +81,7 @@ export const VerifiedSolePropCustomer$zodSchema: z.ZodType<
   businessType: VerifiedSolePropCustomerBusinessType$zodSchema,
   city: z.string(),
   correlationId: z.string().optional(),
-  created: z.string().datetime({ offset: true }),
+  created: z.iso.datetime({ offset: true }),
   email: z.string(),
   firstName: z.string(),
   id: z.string(),
