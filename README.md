@@ -11,9 +11,6 @@ Model Context Protocol (MCP) Server for the _Dwolla_ API.
 
 <br /><br />
 
-> [!IMPORTANT]
-> **Beta Release** - This MCP is currently in beta. Core operations including customer creation, funding sources, transfers, and beneficial ownership have been tested and are functional. We are conducting thorough internal testing of all operations before general availability. Please note that breaking changes may occur as we continue to make improvements. While suitable for development and testing, please use with appropriate caution in production environments.
-
 <!-- Start Summary [summary] -->
 ## Summary
 

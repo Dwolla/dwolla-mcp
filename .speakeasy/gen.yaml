@@ -33,7 +33,7 @@ mcp-typescript:
     devDependencies: {}
     peerDependencies: {}
   additionalPackageJSON:
-    description: Dwolla MCP (Beta). Breaking changes may occur between beta versions.
+    description: Dwolla MCP Server
   advancedFlags: []
   author: Speakeasy
   baseErrorName: DwollaMcpError
