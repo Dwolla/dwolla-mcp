@@ -5,12 +5,18 @@
 import * as z from "zod";
 import { FundingSources, FundingSources$zodSchema } from "./fundingsources.js";
 
-export type ListCustomerFundingSourcesRequest = { id: string };
+export type ListCustomerFundingSourcesRequest = {
+  id: string;
+  removed?: string | undefined;
+};
 
 export const ListCustomerFundingSourcesRequest$zodSchema: z.ZodType<
   ListCustomerFundingSourcesRequest
 > = z.object({
   id: z.string().describe("Customer's unique identifier"),
+  removed: z.string().describe(
+    "Filter removed funding sources. Boolean value. Defaults to `true`",
+  ).optional(),
 });
 
 /**
