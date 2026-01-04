@@ -27,7 +27,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 mcp-typescript:
-  version: 1.0.0
+  version: 1.0.1
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
