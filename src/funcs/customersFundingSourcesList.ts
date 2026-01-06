@@ -32,7 +32,7 @@ import { Result } from "../types/fp.js";
  * List customer funding sources
  *
  * @remarks
- * Returns all funding sources for a customer, including bank accounts and Dwolla balance (verified customers only). Shows verification status, limited account details, and creation dates. Supports filtering to exclude removed funding sources using the removed parameter.
+ * Returns all funding sources for a customer, including bank accounts, debit card funding sources, and Dwolla balance (verified customers only). Shows verification status, limited account details, and creation dates. Card funding sources include masked card information. Supports filtering to exclude removed funding sources using the removed parameter.
  */
 export function customersFundingSourcesList(
   client$: DwollaMcpCore,

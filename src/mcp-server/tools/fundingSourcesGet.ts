@@ -14,7 +14,7 @@ export const tool$fundingSourcesGet: ToolDefinition<typeof args> = {
   name: "funding-sources-get",
   description: `Retrieve a funding source
 
-Returns detailed information for a specific funding source, including its type, status, and verification details. Supports bank accounts (via Open Banking) and Dwolla balance (verified customers only).`,
+Returns detailed information for a specific funding source, including its type, status, and verification details. Supports bank accounts (via Open Banking), debit card funding sources, and Dwolla balance (verified customers only). Debit card funding sources include masked card details such as brand, last four digits, expiration date, and cardholder name.`,
   scopes: ["read"],
   annotations: {
     "title": "",
