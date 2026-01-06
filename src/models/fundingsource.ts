@@ -21,6 +21,69 @@ export const Channel$zodSchema = z.enum([
   "external",
 ]);
 
+/**
+ * The usage type of the bank account. Indicates if this is a settlement account for card network processors.
+ */
+export const BankUsageType = {
+  CardNetwork: "card-network",
+} as const;
+/**
+ * The usage type of the bank account. Indicates if this is a settlement account for card network processors.
+ */
+export type BankUsageType = ClosedEnum<typeof BankUsageType>;
+
+export const BankUsageType$zodSchema = z.enum([
+  "card-network",
+]).describe(
+  "The usage type of the bank account. Indicates if this is a settlement account for card network processors.",
+);
+
+/**
+ * The billing address associated with the card
+ */
+export type BillingAddress = {
+  address1?: string | undefined;
+  address2?: string | undefined;
+  address3?: string | undefined;
+  city?: string | undefined;
+  stateProvinceRegion?: string | undefined;
+  country?: string | undefined;
+  postalCode?: string | undefined;
+};
+
+export const BillingAddress$zodSchema: z.ZodType<BillingAddress> = z.object({
+  address1: z.string().optional(),
+  address2: z.string().optional(),
+  address3: z.string().optional(),
+  city: z.string().optional(),
+  country: z.string().optional(),
+  postalCode: z.string().optional(),
+  stateProvinceRegion: z.string().optional(),
+}).describe("The billing address associated with the card");
+
+/**
+ * Card-specific details. Only present when type is 'card'.
+ */
+export type CardDetails = {
+  brand?: string | undefined;
+  lastFour?: string | undefined;
+  expirationMonth?: number | undefined;
+  expirationYear?: number | undefined;
+  nameOnCard?: string | undefined;
+  bin?: string | undefined;
+  billingAddress?: BillingAddress | undefined;
+};
+
+export const CardDetails$zodSchema: z.ZodType<CardDetails> = z.object({
+  billingAddress: z.lazy(() => BillingAddress$zodSchema).optional(),
+  bin: z.string().optional(),
+  brand: z.string().optional(),
+  expirationMonth: z.int().optional(),
+  expirationYear: z.int().optional(),
+  lastFour: z.string().optional(),
+  nameOnCard: z.string().optional(),
+}).describe("Card-specific details. Only present when type is 'card'.");
+
 export type FundingSource = {
   _links?: { [k: string]: HalLink } | undefined;
   id?: string | undefined;
@@ -33,12 +96,16 @@ export type FundingSource = {
   channels?: Array<Channel> | undefined;
   bankName?: string | undefined;
   fingerprint?: string | undefined;
+  bankUsageType?: BankUsageType | undefined;
+  cardDetails?: CardDetails | undefined;
 };
 
 export const FundingSource$zodSchema: z.ZodType<FundingSource> = z.object({
   _links: z.record(z.string(), HalLink$zodSchema).optional(),
   bankAccountType: z.string().optional(),
   bankName: z.string().optional(),
+  bankUsageType: BankUsageType$zodSchema.optional(),
+  cardDetails: z.lazy(() => CardDetails$zodSchema).optional(),
   channels: z.array(Channel$zodSchema).optional(),
   created: z.iso.datetime({ offset: true }).optional(),
   fingerprint: z.string().optional(),

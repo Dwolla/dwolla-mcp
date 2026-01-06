@@ -14,7 +14,7 @@ export const tool$fundingSourcesBalanceGet: ToolDefinition<typeof args> = {
   name: "funding-sources-balance-get",
   description: `Retrieve funding source balance
 
-Returns the current balance for a specific funding source. For bank accounts, includes available and closing balances; for Dwolla balance, includes balance and total amounts. All responses include currency and last updated timestamp. Supports bank accounts (via Open Banking) and Dwolla balance (verified customers only).`,
+Returns the current balance for a specific funding source. For bank accounts, includes available and closing balances; for Dwolla balance, includes balance and total amounts; for settlement accounts (bankUsageType = card-network), includes available balance only. Supports bank accounts (via Open Banking), Dwolla balance (verified customers only), and settlement accounts for card network processing.`,
   scopes: ["read"],
   annotations: {
     "title": "",

@@ -20,8 +20,8 @@ export const GetTransferFailureReasonRequest$zodSchema: z.ZodType<
  */
 export type GetTransferFailureReasonResponseBody = {
   _links?: { [k: string]: HalLink } | undefined;
-  code?: string | undefined;
-  description?: string | undefined;
+  code: string;
+  description: string;
   explanation?: string | undefined;
 };
 
@@ -29,8 +29,8 @@ export const GetTransferFailureReasonResponseBody$zodSchema: z.ZodType<
   GetTransferFailureReasonResponseBody
 > = z.object({
   _links: z.record(z.string(), HalLink$zodSchema).optional(),
-  code: z.string().optional(),
-  description: z.string().optional(),
+  code: z.string(),
+  description: z.string(),
   explanation: z.string().optional(),
 }).describe("successful operation");
 

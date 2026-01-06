@@ -1,7 +1,7 @@
 {
   "manifest_version": "0.3",
   "name": "@dwolla/mcp-server",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "long_description": "Dwolla API: Dwolla API Documentation",
   "author": {
@@ -94,11 +94,11 @@
     },
     {
       "name": "customers-funding-sources-list",
-      "description": "List customer funding sources\n\nReturns all funding sources for a customer, including bank accounts and Dwolla balance (verified customers only). Shows verification status, limited account details, and creation dates. Supports filtering to exclude removed funding sources using the removed parameter."
+      "description": "List customer funding sources\n\nReturns all funding sources for a customer, including bank accounts, debit card funding sources, and Dwolla balance (verified customers only). Shows verification status, limited account details, and creation dates. Card funding sources include masked card information. Supports filtering to exclude removed funding sources using the removed parameter."
     },
     {
       "name": "funding-sources-get",
-      "description": "Retrieve a funding source\n\nReturns detailed information for a specific funding source, including its type, status, and verification details. Supports bank accounts (via Open Banking) and Dwolla balance (verified customers only)."
+      "description": "Retrieve a funding source\n\nReturns detailed information for a specific funding source, including its type, status, and verification details. Supports bank accounts (via Open Banking), debit card funding sources, and Dwolla balance (verified customers only). Debit card funding sources include masked card details such as brand, last four digits, expiration date, and cardholder name."
     },
     {
       "name": "funding-sources-micro-deposits-get-micro-deposits",
@@ -106,7 +106,7 @@
     },
     {
       "name": "funding-sources-balance-get",
-      "description": "Retrieve funding source balance\n\nReturns the current balance for a specific funding source. For bank accounts, includes available and closing balances; for Dwolla balance, includes balance and total amounts. All responses include currency and last updated timestamp. Supports bank accounts (via Open Banking) and Dwolla balance (verified customers only)."
+      "description": "Retrieve funding source balance\n\nReturns the current balance for a specific funding source. For bank accounts, includes available and closing balances; for Dwolla balance, includes balance and total amounts; for settlement accounts (bankUsageType = card-network), includes available balance only. Supports bank accounts (via Open Banking), Dwolla balance (verified customers only), and settlement accounts for card network processing."
     },
     {
       "name": "customers-transfers-list",

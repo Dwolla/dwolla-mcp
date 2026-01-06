@@ -1,23 +1,23 @@
 lockVersion: 2.0.0
 id: dbccbcaa-cdde-434b-b972-38fb6d1127e5
 management:
-  docChecksum: fafea0641cda7b4c6d8dbf4556f7345a
+  docChecksum: 26581b1d54ee46d42fc4783a50fbadf8
   docVersion: "2.0"
-  speakeasyVersion: 1.681.0
-  generationVersion: 2.789.5
-  releaseVersion: 1.0.1
-  configChecksum: 2e6abceea91c8051efdabd8edcba00d9
+  speakeasyVersion: 1.682.0
+  generationVersion: 2.791.1
+  releaseVersion: 1.0.2
+  configChecksum: a787fba73f376e317ec5140b50c52cb4
   repoURL: https://github.com/Dwolla/dwolla-mcp.git
   published: true
 persistentEdits:
-  generation_id: f97dd993-3889-4144-a423-1f35f2b4aa5d
-  pristine_commit_hash: 7275ca0b45d4a5d6a12d500ef2dc9f6b4c7b70b1
-  pristine_tree_hash: b9759d4e08ce5a64bac3840bad06ede8e3907e60
+  generation_id: 94716337-c00c-46ed-8fec-8a5b96aee90c
+  pristine_commit_hash: 4b4654519fc9e8fbf493249a9f12616c8975549d
+  pristine_tree_hash: b123313bd71910bcb865e7e24365acbab6c684a4
 features:
   mcp-typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.0
-    core: 1.0.0
+    core: 1.0.1
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     globalSecurity: 0.1.1
@@ -48,12 +48,12 @@ trackedFiles:
     pristine_git_object: 4f9e60a9462fc4def738d60c3aaadf8232ef185f
   manifest.json:
     id: ca642a226869
-    last_write_checksum: sha1:831d1e708fd6a8af7c43b9e909b86b9cae4ea27d
-    pristine_git_object: 67095c382d90e6431dd3ac14a2593e66233abc41
+    last_write_checksum: sha1:d403d4cb70618cfbcdebcba83bda69cdbcb848a8
+    pristine_git_object: 797d0b40993a304ae3cb36f61e33426687e2ddef
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:2403010e0e70d731f29f53e3c00c2a8a5929c52c
-    pristine_git_object: 1739037104669c95157d9c3e28fe0d59f16f48f2
+    last_write_checksum: sha1:f9cd57e5817587855bcf473487236e3493492ae7
+    pristine_git_object: 581fb74daa1bcee36ef88778803a5522d2948cdb
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:7841e90d0d7c71248d224a7d1a45951df6e0f2d6
@@ -104,8 +104,8 @@ trackedFiles:
     pristine_git_object: dcad1d0d145fafe5a531754f461e1d31736529d9
   src/funcs/customersFundingSourcesList.ts:
     id: 41d0cd38b311
-    last_write_checksum: sha1:3f0068daffc2c4ff434d5db6ff82a8c86289a7db
-    pristine_git_object: 3704f2abfe9b18e3e270ea6b305863620733a62d
+    last_write_checksum: sha1:db566bcdd405f02152b3f032ae4c171b341c46ff
+    pristine_git_object: c86582e91673518310da93a8e550283e73f00d64
   src/funcs/customersLabelsList.ts:
     id: 807cb16e3515
     last_write_checksum: sha1:5a7d4d5e066991b105a6cfa5087e67c1f1940dc2
@@ -136,12 +136,12 @@ trackedFiles:
     pristine_git_object: 4e5ca982230ebb304e358cc217ba6368811e4f79
   src/funcs/fundingSourcesBalanceGet.ts:
     id: e86fd083fe15
-    last_write_checksum: sha1:57a796a0dabb8e09c08d3f527931b76a079b57d8
-    pristine_git_object: 3a051e30945f0d082fd77e869a18a32f11d4fb3b
+    last_write_checksum: sha1:371133b65c6aff8d72b945c7cc3689dfd99e4d8e
+    pristine_git_object: f1bfabc6d7f983945e3dc6f7b1051d3d0c4b0699
   src/funcs/fundingSourcesGet.ts:
     id: 81f185aae95d
-    last_write_checksum: sha1:8307fca355374bb35af5ad4e9b6b32038fc7e79d
-    pristine_git_object: d317fa319cdadf26bbc24d79bc67f5b42ca54baa
+    last_write_checksum: sha1:5e8872660f985c62e7c7e77282dd38524b4087eb
+    pristine_git_object: 08cdd3ecff9f4d47862fa60143eadd2804e0f789
   src/funcs/fundingSourcesMicroDepositsGetMicroDeposits.ts:
     id: 2111b54f25eb
     last_write_checksum: sha1:105a7df254e93073573c28ec9b9d170018aa2e5e
@@ -180,8 +180,8 @@ trackedFiles:
     pristine_git_object: d4bd8b341290e7a828a171d840bd0b0fff7c7cd7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:6afac46f6e19cefcc5af1e8fc2e311e69ef55baa
-    pristine_git_object: ed8174fe17a8a30b154709016d9097b22951225b
+    last_write_checksum: sha1:d5c98cfb090eb76f5e18921d570fd32e78a54529
+    pristine_git_object: 91a81956dba42051cb290a4dd9977bb88f9e84fc
   src/lib/dlv.ts:
     id: b1988214835a
     last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250
@@ -264,8 +264,8 @@ trackedFiles:
     pristine_git_object: 78394e413ea070824f370b829eaf1416883e6680
   src/mcp-server/mcp-server.ts:
     id: aabbc4ab07c1
-    last_write_checksum: sha1:62cd2f382bd5eec774c6c2d733bc8befe2498ac1
-    pristine_git_object: 5b8ba82919e7e0beba2fe1be10ea3ec05309c2d8
+    last_write_checksum: sha1:544fc5994eb52bdac4ca40339bfcee3a48e0f59d
+    pristine_git_object: 231cb5eff27505ce82af03208c9b3836232e80e5
   src/mcp-server/prompts.ts:
     id: 26f3d73cbf31
     last_write_checksum: sha1:55623b0f264374e411bc8bba3af73b0a83cc565a
@@ -280,8 +280,8 @@ trackedFiles:
     pristine_git_object: aed9de28d2387ec508dca4a6f8ad993ca87a2903
   src/mcp-server/server.ts:
     id: 2784dd48e82a
-    last_write_checksum: sha1:25e691c76a1ce05b194faaed2179530aa86b0975
-    pristine_git_object: 35de9e0898e0b79d44ee7d8d0cefb9ef31a45cfb
+    last_write_checksum: sha1:926365c787d85e28964f802897819d14bcc331a5
+    pristine_git_object: 7184312f927098b7446e25d771d34998c59cd4aa
   src/mcp-server/shared.ts:
     id: 074e80d4be1e
     last_write_checksum: sha1:19c9034032819a14f15c430de4350c8aba99d725
@@ -336,8 +336,8 @@ trackedFiles:
     pristine_git_object: 5d32b6e1aad21229b4acd8d842450249e78940fd
   src/mcp-server/tools/customersFundingSourcesList.ts:
     id: e1c0c8fce5ae
-    last_write_checksum: sha1:73a40d791c1e8bba3c0f9e477312ca10d1e947ab
-    pristine_git_object: 5e5d5126b10c3e5478931b9c50454088ca0f39e8
+    last_write_checksum: sha1:6ea0c4cce571f07d97fc810b344198ea62124ddb
+    pristine_git_object: 6db0d679db4448fabedf72423d9e90d680f8a1f7
   src/mcp-server/tools/customersLabelsList.ts:
     id: 62854af87c3d
     last_write_checksum: sha1:004b34c87a796b617f3c97ff7b44b8b4227669b3
@@ -368,12 +368,12 @@ trackedFiles:
     pristine_git_object: 439ffd4e1652080e920edbab8dc86b1cb58f974d
   src/mcp-server/tools/fundingSourcesBalanceGet.ts:
     id: 95f9339918d4
-    last_write_checksum: sha1:31b88eb9040e0785319ad9e089a1fe7ccde24964
-    pristine_git_object: a36a920b8904412f04c4d0eb939f330a2018f49f
+    last_write_checksum: sha1:b1c8e826901202fc7f0183ca4b29a60af88e885a
+    pristine_git_object: e34bb509bdf61398b371fe2bdc62cf8804e0212c
   src/mcp-server/tools/fundingSourcesGet.ts:
     id: 80a9eceb04ad
-    last_write_checksum: sha1:a7dcd26f951145cb7ee8f900952653151f497116
-    pristine_git_object: e35427fec2de038824b5acb55ed8dddb011ab2a7
+    last_write_checksum: sha1:cbfe176f07d702b69355dc4eac7755b3c65d3480
+    pristine_git_object: 12943d89044d8c28d7f10e8cf061ca4086d03c2d
   src/mcp-server/tools/fundingSourcesMicroDepositsGetMicroDeposits.ts:
     id: 992ac4e31e74
     last_write_checksum: sha1:cd007241d85a131b6b05409e3e2ac38c302cab1b
@@ -480,8 +480,8 @@ trackedFiles:
     pristine_git_object: ea68659630347da44fcab4985211a368b1083d0b
   src/models/fundingsource.ts:
     id: 0c3cf405a92c
-    last_write_checksum: sha1:18ce6de9461697c1c89f1374c04b8030529bd33e
-    pristine_git_object: b77d44d3eb9fab9c2d62bf5ae1af5d2587dec273
+    last_write_checksum: sha1:58fd932872c095554978ba88e0d693c42bcdbb54
+    pristine_git_object: e556f98018c66aa92136c7b56549e82a45855d6a
   src/models/fundingsources.ts:
     id: 168c87ce6b26
     last_write_checksum: sha1:3ce507da3107145eebcb79c5fcb200de85461432
@@ -496,8 +496,8 @@ trackedFiles:
     pristine_git_object: eb2b2ea58b198f0467056575a8d8d06a77bd16fc
   src/models/getfundingsourcebalanceop.ts:
     id: 1650845bd6ce
-    last_write_checksum: sha1:38d57e24e6ea8bd146162378fd27ac53a5a42b79
-    pristine_git_object: 40fe35d09b1a85d6ab149db808a3961a25144fb5
+    last_write_checksum: sha1:9edc702965ac04b9d2ebb04ce9f05a52d388b7c0
+    pristine_git_object: b5dccb59630cb45793fff99f5857ba6131cbd7cb
   src/models/getfundingsourceop.ts:
     id: 618ad8de3ae0
     last_write_checksum: sha1:e7fb2ada214957862a8515a4a86e06b0eb8717e2
@@ -508,8 +508,8 @@ trackedFiles:
     pristine_git_object: b7504ae72232a6609fe28c0d6ac125c2e382e6e4
   src/models/gettransferfailurereasonop.ts:
     id: 2b6df7db862e
-    last_write_checksum: sha1:f9a882ae1f724eafd4a46582071d5ef412a874ce
-    pristine_git_object: dd79eb859a0568e0290f75baf4a3bc6581b6eb42
+    last_write_checksum: sha1:48a10f155e019690209ff4cde9fbf7b617f9c953
+    pristine_git_object: 487674b99c44c84293775e3af874b466d27083a5
   src/models/hallink.ts:
     id: 92e61a0ca1b9
     last_write_checksum: sha1:f8483af725656f9eb76fbc574934afdf52f9ef79
@@ -700,7 +700,13 @@ trackedFiles:
     pristine_git_object: 0ca48942a1b9cd923d614985dfb81f0dc7e1d298
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Mcp-typescript SDK Changes:\n* `DwollaMcp.customers.fundingSources.list()`: \n  *  `request.removed` **Added**\n"
+releaseNotes: |
+  ## Mcp-typescript SDK Changes:
+  * `DwollaMcp.accounts.fundingSources.list()`:  `response._embedded.funding-sources.[]` **Changed**
+  * `DwollaMcp.customers.fundingSources.list()`:  `response._embedded.funding-sources.[]` **Changed**
+  * `DwollaMcp.fundingSources.get()`:  `response` **Changed**
+  * `DwollaMcp.fundingSources.balance.get()`:  `response.[Settlement Account Balance Response]` **Added**
+  * `DwollaMcp.transfers.failure.get()`:  `response` **Changed**
 generatedFiles:
   - .dxtignore
   - .gitattributes
