@@ -1,7 +1,7 @@
 {
   "manifest_version": "0.3",
   "name": "@dwolla/mcp-server",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "long_description": "Dwolla API: Dwolla API Documentation",
   "author": {
