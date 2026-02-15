@@ -120,11 +120,11 @@ node bin/mcp-server.js start --bearer-auth "your_token_here" --server "sandbox"
 ## Installation
 
 <details>
-<summary>MCP Bundle (Desktop Extension)</summary>
+<summary>Claude Desktop</summary>
 
-Install the MCP server as a Desktop Extension using the pre-built [`mcp-server.mcpb`](https://github.com/Dwolla/dwolla-mcp/releases/download/v1.0.3/mcp-server.mcpb) file:
+Install the MCP server as a Desktop Extension using the pre-built [`mcp-server.mcpb`](https://github.com/Dwolla/dwolla-mcp/releases/download/v1.1.0/mcp-server.mcpb) file:
 
-Simply drag and drop the [`mcp-server.mcpb`](https://github.com/Dwolla/dwolla-mcp/releases/download/v1.0.3/mcp-server.mcpb) file onto Claude Desktop to install the extension.
+Simply drag and drop the [`mcp-server.mcpb`](https://github.com/Dwolla/dwolla-mcp/releases/download/v1.1.0/mcp-server.mcpb) file onto Claude Desktop to install the extension.
 
 The MCP bundle package includes the MCP server and all necessary configuration. Once installed, the server will be available without additional setup.
 
@@ -136,7 +136,7 @@ The MCP bundle package includes the MCP server and all necessary configuration. 
 <details>
 <summary>Cursor</summary>
 
-[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=DwollaMcp&config=eyJtY3BTZXJ2ZXJzIjp7IkR3b2xsYU1jcCI6eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyJAZHdvbGxhL21jcC1zZXJ2ZXIiLCJzdGFydCIsIi0tc2VydmVyIiwiLi4uIiwiLS1iZWFyZXItYXV0aCIsIi4uLiJdfX19)
+[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=DwollaMcp&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyJAZHdvbGxhL21jcC1zZXJ2ZXIiLCJzdGFydCIsIi0tc2VydmVyIiwicHJvZCIsIi0tYmVhcmVyLWF1dGgiLCIiXX0=)
 
 Or manually:
 
@@ -147,19 +147,15 @@ Or manually:
 
 ```json
 {
-  "mcpServers": {
-    "DwollaMcp": {
-      "command": "npx",
-      "args": [
-        "@dwolla/mcp-server",
-        "start",
-        "--server",
-        "...",
-        "--bearer-auth",
-        "..."
-      ]
-    }
-  }
+  "command": "npx",
+  "args": [
+    "@dwolla/mcp-server",
+    "start",
+    "--server",
+    "prod",
+    "--bearer-auth",
+    ""
+  ]
 }
 ```
 
@@ -169,7 +165,15 @@ Or manually:
 <summary>Claude Code CLI</summary>
 
 ```bash
-claude mcp add @dwolla/mcp-server npx @dwolla/mcp-server start -- --server ... --bearer-auth ...
+claude mcp add DwollaMcp -- npx -y @dwolla/mcp-server start --server prod --bearer-auth 
+```
+
+</details>
+<details>
+<summary>Gemini</summary>
+
+```bash
+gemini mcp add DwollaMcp -- npx -y @dwolla/mcp-server start --server prod --bearer-auth 
 ```
 
 </details>
@@ -183,90 +187,55 @@ Refer to [Official Windsurf documentation](https://docs.windsurf.com/windsurf/ca
 3. Click on `Manage MCPs`. (To Manage MCPs you should be signed in with a Windsurf Account)
 4. Click on `View raw config` to open up the mcp configuration file.
 5. If the configuration file is empty paste the full json
-```
+
+```bash
 {
-  "mcpServers": {
-    "DwollaMcp": {
-      "command": "npx",
-      "args": [
-        "@dwolla/mcp-server",
-        "start",
-        "--server",
-        "...",
-        "--bearer-auth",
-        "..."
-      ]
-    }
-  }
+  "command": "npx",
+  "args": [
+    "@dwolla/mcp-server",
+    "start",
+    "--server",
+    "prod",
+    "--bearer-auth",
+    ""
+  ]
 }
 ```
 </details>
 <details>
 <summary>VS Code</summary>
 
+[![Install in VS Code](https://img.shields.io/badge/VS_Code-VS_Code?style=flat-square&label=Install%20DwollaMcp%20MCP&color=0098FF)](vscode://ms-vscode.vscode-mcp/install?name=DwollaMcp&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyJAZHdvbGxhL21jcC1zZXJ2ZXIiLCJzdGFydCIsIi0tc2VydmVyIiwicHJvZCIsIi0tYmVhcmVyLWF1dGgiLCIiXX0=)
+
+Or manually:
+
 Refer to [Official VS Code documentation](https://code.visualstudio.com/api/extension-guides/ai/mcp) for latest information
 
 1. Open [Command Palette](https://code.visualstudio.com/docs/getstarted/userinterface#_command-palette)
 1. Search and open `MCP: Open User Configuration`. This should open mcp.json file
 2. If the configuration file is empty paste the full json
-```
+
+```bash
 {
-  "mcpServers": {
-    "DwollaMcp": {
-      "command": "npx",
-      "args": [
-        "@dwolla/mcp-server",
-        "start",
-        "--server",
-        "...",
-        "--bearer-auth",
-        "..."
-      ]
-    }
-  }
+  "command": "npx",
+  "args": [
+    "@dwolla/mcp-server",
+    "start",
+    "--server",
+    "prod",
+    "--bearer-auth",
+    ""
+  ]
 }
 ```
 
 </details>
-<details>
-<summary>Claude Desktop</summary>
-Claude Desktop doesn't yet support SSE/remote MCP servers.
-
-You need to do the following
-1. Open claude Desktop
-2. Open left hand side pane, then click on your Username
-3. Go to `Settings`
-4. Go to `Developer` tab (on the left hand side)
-5. Click on `Edit Config`
-Paste the following config in the configuration
-
-```json
-{
-  "mcpServers": {
-    "DwollaMcp": {
-      "command": "npx",
-      "args": [
-        "@dwolla/mcp-server",
-        "start",
-        "--server",
-        "...",
-        "--bearer-auth",
-        "..."
-      ]
-    }
-  }
-}
-```
-
-</details>
-
-
 <details>
 <summary> Stdio installation via npm </summary>
 To start the MCP server, run:
 
 ```bash
-npx @dwolla/mcp-server start --server ... --bearer-auth ...
+npx @dwolla/mcp-server start --server prod --bearer-auth 
 ```
 
 For a full list of server arguments, run:
