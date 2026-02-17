@@ -12,7 +12,7 @@ import {
   createRegisterResourceTemplate,
 } from "./resources.js";
 import { MCPScope } from "./scopes.js";
-import { createRegisterTool } from "./tools.js";
+import { createRegisterTool, registerDynamicTools } from "./tools.js";
 import { tool$accountsExchangesList } from "./tools/accountsExchangesList.js";
 import { tool$accountsFundingSourcesList } from "./tools/accountsFundingSourcesList.js";
 import { tool$accountsGet } from "./tools/accountsGet.js";
@@ -44,6 +44,7 @@ import { tool$webhookSubscriptionsWebhooksList } from "./tools/webhookSubscripti
 export function createMCPServer(deps: {
   logger: ConsoleLogger;
   allowedTools?: string[] | undefined;
+  dynamic?: boolean | undefined;
   scopes?: MCPScope[] | undefined;
   getSDK?: () => DwollaMcpCore;
   serverURL?: string | undefined;
@@ -52,7 +53,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "DwollaMcp",
-    version: "1.0.3",
+    version: "1.1.0",
   });
 
   const getClient = deps.getSDK || (() =>
@@ -72,12 +73,13 @@ export function createMCPServer(deps: {
   const scopes = new Set(deps.scopes);
 
   const allowedTools = deps.allowedTools && new Set(deps.allowedTools);
-  const [tool, tools] = createRegisterTool(
+  const [tool, tools, toolMap] = createRegisterTool(
     deps.logger,
     server,
     getClient,
     scopes,
     allowedTools,
+    deps.dynamic,
   );
   const resource = createRegisterResource(
     deps.logger,
@@ -122,6 +124,10 @@ export function createMCPServer(deps: {
   tool(tool$exchangePartnersList);
   tool(tool$accountsExchangesList);
   tool(tool$customersExchangesList);
+
+  if (deps.dynamic) {
+    registerDynamicTools(deps.logger, server, getClient, toolMap, scopes);
+  }
 
   return { server, tools };
 }

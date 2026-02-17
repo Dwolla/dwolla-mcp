@@ -1,0 +1,111 @@
+// Auto-generated at build time
+export const toolNames: Array<{ name: string; description: string }>= [
+  {
+    "name": "accounts-get",
+    "description": "Retrieve account details\n\nReturns basic account information for your authorized Main Dwolla Account, including account ID, name, and links to related resources such as funding sources, transfers, and customers."
+  },
+  {
+    "name": "accounts-funding-sources-list",
+    "description": "List funding sources for an account\n\nGet a list of all funding sources associated with a specific Main Dwolla Account. This endpoint returns both bank accounts and balance funding sources, with detailed information about each funding source's status, type, and available processing channels.\n"
+  },
+  {
+    "name": "accounts-transfers-list",
+    "description": "List and search account transfers\n\nReturns a paginated, searchable list of transfers associated with the specified Main Dwolla account. Supports advanced filtering by amount range, date range, transfer status, and correlation ID. Results are limited to 10,000 transfers per query; use date range filters for historical data beyond this limit."
+  },
+  {
+    "name": "accounts-mass-payments-list",
+    "description": "List account mass payments\n\nReturns a paginated list of mass payments created by your Main Dwolla account. Results are sorted by creation date in descending order (newest first) and can be filtered by correlation ID."
+  },
+  {
+    "name": "customers-list",
+    "description": "List and search customers\n\nReturns a paginated list of customers sorted by creation date. Supports fuzzy search across customer names, business names, and email addresses, plus exact filtering by email and verification status. Default limit is 25 customers per page, maximum 200."
+  },
+  {
+    "name": "customers-list-available-connections",
+    "description": "List available exchange connections\n\nReturns available exchange connections for a customer's bank accounts authorized through MX Connect. Each connection includes an account name and availableConnectionToken required to create exchanges and funding sources for transfers."
+  },
+  {
+    "name": "business-classifications-list",
+    "description": "List business classifications\n\nReturns a directory of business and industry classifications required for creating business verified customers. Each business classification contains multiple industry classifications. The industry classification ID must be provided in the businessClassification parameter during business customer creation for verification."
+  },
+  {
+    "name": "customers-beneficial-owners-list",
+    "description": "List customer beneficial owners\n\nReturns all beneficial owners associated with a business verified customer. Beneficial owners are individuals who directly or indirectly own 25% or more of the company's equity. Includes personal information, verification status, and address details for each owner."
+  },
+  {
+    "name": "customers-beneficial-ownership-get",
+    "description": "Retrieve beneficial ownership status\n\nReturns the certification status of beneficial ownership for a business verified customer. Status indicates whether beneficial owner information has been certified and affects the customer's ability to send funds. Possible values include uncertified, certified, and recertify."
+  },
+  {
+    "name": "customers-documents-list",
+    "description": "List documents for customer\n\nReturns all identity verification documents submitted for a customer. Includes document status, verification results, document type (passport, driver's license, etc.), and failure reasons if verification was rejected. Used to track document submission and verification progress during the business verification process."
+  },
+  {
+    "name": "beneficial-owners-documents-list",
+    "description": "List documents for beneficial owner\n\nReturns all identity verification documents submitted for a beneficial owner. Includes document status, verification results, document type (passport, driver's license, etc.), and failure reasons if verification was rejected. Used to track document submission and verification progress during the business verification process."
+  },
+  {
+    "name": "customers-funding-sources-list",
+    "description": "List customer funding sources\n\nReturns all funding sources for a customer, including bank accounts, debit card funding sources, and Dwolla balance (verified customers only). Shows verification status, limited account details, and creation dates. Card funding sources include masked card information. Supports filtering to exclude removed funding sources using the removed parameter."
+  },
+  {
+    "name": "funding-sources-get",
+    "description": "Retrieve a funding source\n\nReturns detailed information for a specific funding source, including its type, status, and verification details. Supports bank accounts (via Open Banking), debit card funding sources, and Dwolla balance (verified customers only). Debit card funding sources include masked card details such as brand, last four digits, expiration date, and cardholder name."
+  },
+  {
+    "name": "funding-sources-micro-deposits-get-micro-deposits",
+    "description": "Retrieve micro-deposits details\n\nReturns the status and details of micro-deposits for a funding source to check verification eligibility. Includes deposit status (pending, processed, failed), creation timestamp, and failure details with ACH return codes if deposits failed. Use this endpoint to determine when micro-deposits are ready for verification."
+  },
+  {
+    "name": "funding-sources-balance-get",
+    "description": "Retrieve funding source balance\n\nReturns the current balance for a specific funding source. For bank accounts, includes available and closing balances; for Dwolla balance, includes balance and total amounts; for settlement accounts (bankUsageType = card-network), includes available balance only. Supports bank accounts (via Open Banking), Dwolla balance (verified customers only), and settlement accounts for card network processing."
+  },
+  {
+    "name": "customers-transfers-list",
+    "description": "List and search transfers for a customer\n\nRetrieve and search transfers for a specific Customer with comprehensive filtering and pagination support. Supports searching by customer details (name, email, business name), amount ranges, date ranges, transfer status, and correlation IDs for enhanced transaction discovery. Returns paginated transfer results including status, amounts, metadata, and links to source and destination funding sources. Use this endpoint for transaction history analysis and reconciliation purposes."
+  },
+  {
+    "name": "transfers-fees-list",
+    "description": "List fees for a transfer\n\nRetrieve detailed fee information for a specific transfer by its unique identifier. Returns the total number of fees and individual fee transaction details including amounts, status, and links to source and destination accounts."
+  },
+  {
+    "name": "transfers-failure-get",
+    "description": "Retrieve a transfer failure reason\n\nRetrieve detailed failure information for a failed bank or VAN transfer including the ACH return code, description, and explanation. Returns failure details with links to the failed funding source and associated Customer for comprehensive error analysis. Available only for transfers with failure status and accessed through the failure link from transfer retrieval. Critical for troubleshooting payment failures and understanding ACH return reasons."
+  },
+  {
+    "name": "mass-payments-items-list",
+    "description": "List items for a mass payment\n\nRetrieve individual payment items within a mass payment with optional status filtering and pagination support. Each item represents a distinct payment with status indicators (failed, pending, success) showing whether a transfer was successfully created. Returns paginated item details including amount, destination, metadata, and error information for failed items. Supports filtering by status and standard pagination."
+  },
+  {
+    "name": "customers-mass-payments-list",
+    "description": "List mass payments for customer\n\nRetrieve all previously created mass payments for a Verified Customer account with optional correlation ID filtering and pagination support. Mass payments are returned ordered by date created with most recent appearing first. Returns paginated results including mass payment status, metadata, source funding information, and item links. Supports standard pagination parameters and correlation ID search for enhanced traceability."
+  },
+  {
+    "name": "customers-labels-list",
+    "description": "List labels for a customer\n\nReturns all labels for a specified Verified Customer, sorted by creation date (most recent first). Supports pagination with limit and offset parameters. Each label includes its current amount and creation timestamp."
+  },
+  {
+    "name": "events-list",
+    "description": "List events\n\nReturns a paginated list of events representing state changes to resources in your Dwolla application. Events track actions on customers, transfers, funding sources, and other resources, sorted by creation date (newest first). Events are retained for 30 days and are essential for webhook notifications and system activity monitoring."
+  },
+  {
+    "name": "webhook-subscriptions-list",
+    "description": "List webhook subscriptions\n\nRetrieve all webhook subscriptions that belong to an application including their configuration details and status. Returns subscription details including webhook endpoints, status, creation dates, and links to associated webhooks with total count. Essential for webhook management and monitoring subscription health."
+  },
+  {
+    "name": "webhook-subscriptions-webhooks-list",
+    "description": "List webhooks for a webhook subscription\n\nRetrieve all fired webhooks for a specific webhook subscription with comprehensive filtering and pagination support. Returns webhook delivery history including topics, attempts, request/response details, and delivery status over a rolling 30-day period. Supports filtering by resource ID, date ranges, and pagination parameters for detailed webhook delivery analysis. Critical for debugging webhook delivery issues and monitoring event notification success rates."
+  },
+  {
+    "name": "exchange-partners-list",
+    "description": "List exchange partners\n\nReturns a list of all supported exchange partners. Each partner includes a unique ID, name, and status indicating whether they are active or inactive."
+  },
+  {
+    "name": "accounts-exchanges-list",
+    "description": "List exchanges for an account\n\nReturns all exchanges for your Dwolla account. Exchanges represent connections between external bank accounts and your account through open banking partners. Includes exchange status, creation date, and associated partner information."
+  },
+  {
+    "name": "customers-exchanges-list",
+    "description": "List exchanges for a customer\n\nReturns all exchanges for a specific customer. Exchanges represent connections between the customer's external bank accounts and open banking partners. Includes exchange status, creation date, and links to associated funding sources and partners."
+  }
+];

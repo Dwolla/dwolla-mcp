@@ -3,24 +3,24 @@ id: dbccbcaa-cdde-434b-b972-38fb6d1127e5
 management:
   docChecksum: 1735884658962786b27ce763c44b0f68
   docVersion: "2.0"
-  speakeasyVersion: 1.685.0
-  generationVersion: 2.794.1
-  releaseVersion: 1.0.3
-  configChecksum: e9ae8622bc8a5ba5455c3240ca23d231
+  speakeasyVersion: 1.719.0
+  generationVersion: 2.824.1
+  releaseVersion: 1.1.0
+  configChecksum: 12ba8daa7b1530e77f117d7e017e7cbd
   repoURL: https://github.com/Dwolla/dwolla-mcp.git
   published: true
 persistentEdits:
-  generation_id: de509b6f-d80a-40b1-be43-fb4f3023d536
-  pristine_commit_hash: 20afbf58c9c801eed9dd42801e0f7b149fe0bcae
-  pristine_tree_hash: 65489dbe53b925237be34361316b3fb5e83687b4
+  generation_id: 10cd49c8-025f-45c5-ae93-a5d2f1a9e325
+  pristine_commit_hash: a2d99b1daef2ac9df32cae7ea2298871c772fec6
+  pristine_tree_hash: a0d6c273c74cb7eba316ce8e25c2ec299ee6ebe7
 features:
   mcp-typescript:
     additionalDependencies: 0.1.0
-    constsAndDefaults: 0.1.0
-    core: 1.0.3
+    constsAndDefaults: 0.1.1
+    core: 1.2.7
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
-    globalSecurity: 0.1.1
+    globalSecurity: 0.1.2
     globalSecurityCallbacks: 0.0.0
     globalServerURLs: 0.1.1
     nameOverrides: 0.1.0
@@ -48,12 +48,12 @@ trackedFiles:
     pristine_git_object: 4f9e60a9462fc4def738d60c3aaadf8232ef185f
   manifest.json:
     id: ca642a226869
-    last_write_checksum: sha1:374d4c8a84e5de8db920dcb109274f6638e46812
-    pristine_git_object: 4df35dcd02d61f1652570aeee75a605a35b783cf
+    last_write_checksum: sha1:021c879aba363801c8ec53eb495ab0e059e92813
+    pristine_git_object: 9cdb88adbdd430c6256753c81f93586d29113b0c
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:16d9ded435a0fccf4df14760c07bd7e1fbb5f18f
-    pristine_git_object: 9c205d7d78e74d65da01e358c715ab47a3494417
+    last_write_checksum: sha1:e3b05071ae23708d846e6b2927e3f2257efb3ae7
+    pristine_git_object: 8d64b07768391edab8c0273fa8f3b2861c6bdf55
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:7841e90d0d7c71248d224a7d1a45951df6e0f2d6
@@ -174,14 +174,18 @@ trackedFiles:
     id: 2a02d86ec24f
     last_write_checksum: sha1:27a3444c4839bec58ae89820fd8c2483edafc3f4
     pristine_git_object: 9c36bf01332084f735909a71036c3544cc4c7e3a
+  src/landing-page.ts:
+    id: ef64a6ee46d7
+    last_write_checksum: sha1:f7eb104f78f49bec3bb9c0f6d8cca074f098cf5a
+    pristine_git_object: 1fd9ff288aa4c0cf0de2fdea6ea512fa13ff27b4
   src/lib/base64.ts:
     id: "598522066688"
     last_write_checksum: sha1:e9f04a037018040361043104960982f7c22db52d
     pristine_git_object: d4bd8b341290e7a828a171d840bd0b0fff7c7cd7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:d59e892f9089a847bb7b8874cd0cd287625b0a74
-    pristine_git_object: 7631fa80c2f6d625ea39cb1ab5dc0904184371fa
+    last_write_checksum: sha1:aa5d45dd98db80c7ed46b0f63f092acfc9c7d27f
+    pristine_git_object: e1aeebe8eb8266679857844122fd1fec22fd93af
   src/lib/dlv.ts:
     id: b1988214835a
     last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250
@@ -240,20 +244,20 @@ trackedFiles:
     pristine_git_object: 6bc6356e222c4f2c20fda5616e00be6dadfa80f8
   src/mcp-server/build.mts:
     id: f7a2ed2de4d7
-    last_write_checksum: sha1:7b8c149c24879c0c2c31995c0ab34bd84eee4433
-    pristine_git_object: 4baaf7aa90f8e67c680d13120722955fdc3b6f73
+    last_write_checksum: sha1:9f98fe2b333bd6211cfffa008a9b6ee95d523596
+    pristine_git_object: e8114fbaed6521c628b7cf58a22cdb65e61a5483
   src/mcp-server/cli.ts:
     id: 4ade0ef98b00
     last_write_checksum: sha1:7331efddde881832342fa8779d23be7445d4480c
     pristine_git_object: b878d8de9f2a0275c3cdbfdcaed48a31092e558a
   src/mcp-server/cli/start/command.ts:
     id: b3e53408ccb4
-    last_write_checksum: sha1:6dc839c67bd609b2a0089f168cb5130336303da6
-    pristine_git_object: 0f7347c57830cf0b3418ba016b5a7fae9e1d7aa6
+    last_write_checksum: sha1:a513660035cf80445f52c13c7a02659a9e2c799f
+    pristine_git_object: bcb665e4ce2029d09ff99ef3572a63576e4b945e
   src/mcp-server/cli/start/impl.ts:
     id: 37494f674015
-    last_write_checksum: sha1:0e87ae7d878a2d321879e0ead4e9c83e1efd8333
-    pristine_git_object: 10fb49b2616fd5d41f51d36e55421d0d55bd501e
+    last_write_checksum: sha1:28f4f87b4311a1afd994742430a59a09ae9b4fdf
+    pristine_git_object: 4da0513511a21ef949df6b9824f905434e365673
   src/mcp-server/console-logger.ts:
     id: 57aff4ff2e15
     last_write_checksum: sha1:0c4b9b7c79ad0a81359210cb31b9ee4d887d5de1
@@ -262,10 +266,14 @@ trackedFiles:
     id: 3d9d20ff158f
     last_write_checksum: sha1:27de1e2b8aaedc8965d1d4c4d4c500df1f28b483
     pristine_git_object: 78394e413ea070824f370b829eaf1416883e6680
+  src/mcp-server/flags.ts:
+    id: 0167e624a516
+    last_write_checksum: sha1:9120b656633dd3f6a98556d1bdf2b0589abcf310
+    pristine_git_object: 23e2b80d3d0232f02d0f0ac6455e15635157591a
   src/mcp-server/mcp-server.ts:
     id: aabbc4ab07c1
-    last_write_checksum: sha1:124131ef8dd2627e7998f853858f3c6abc0f5525
-    pristine_git_object: 829abeec72da9becfff8fc99e8ada4094e4e6fa2
+    last_write_checksum: sha1:90e1e2e876fc534db8195b4236095470bc5b4e28
+    pristine_git_object: bb175473b859cb4744463e1759390b78286b835f
   src/mcp-server/prompts.ts:
     id: 26f3d73cbf31
     last_write_checksum: sha1:55623b0f264374e411bc8bba3af73b0a83cc565a
@@ -280,16 +288,16 @@ trackedFiles:
     pristine_git_object: aed9de28d2387ec508dca4a6f8ad993ca87a2903
   src/mcp-server/server.ts:
     id: 2784dd48e82a
-    last_write_checksum: sha1:aa48aac163b30e059445dd7118434c2bb65dc596
-    pristine_git_object: d6e79a3813bfc55b073165ea13d3a3349576cfcf
+    last_write_checksum: sha1:e170f830efe373965f8b28f923ce006b691b2b6a
+    pristine_git_object: 20ee2f6e30b6bab871ac59be282a840bbc708f02
   src/mcp-server/shared.ts:
     id: 074e80d4be1e
     last_write_checksum: sha1:19c9034032819a14f15c430de4350c8aba99d725
     pristine_git_object: bb74a74788ebd7d11262f5f63b8fdd29ab817f48
   src/mcp-server/tools.ts:
     id: 654d5d1f2062
-    last_write_checksum: sha1:7f9db70ec5bc78d1023f530380115abf2a635563
-    pristine_git_object: 47591f9890ec7fa14d17c02c967a91f860a8b3f2
+    last_write_checksum: sha1:13a2e001cfd2b236768e61a10a1cf0c0a0eaa6ec
+    pristine_git_object: c317698115e9d2d2e64b8924b37b82f07c53d4c0
   src/mcp-server/tools/accountsExchangesList.ts:
     id: 87d6d0be216b
     last_write_checksum: sha1:318587a8a395420a1e57cf936306f684aab506a8
@@ -666,6 +674,10 @@ trackedFiles:
     id: 4c126a95a626
     last_write_checksum: sha1:08a1f8bab81c30fdcb3bbb003e066e411b892de2
     pristine_git_object: 5d635217a7109d0b0231253141363fb1c0096654
+  src/tool-names.ts:
+    id: a9977280f9eb
+    last_write_checksum: sha1:517cfef988c26cc7ff513c0804c0222507a94116
+    pristine_git_object: 2af094ca1079992f059b0955e9f4583f6773be23
   src/types/async.ts:
     id: fac8da972f86
     last_write_checksum: sha1:3ff07b3feaf390ec1aeb18ff938e139c6c4a9585
@@ -698,6 +710,304 @@ trackedFiles:
     id: 61ebb9fd6e8c
     last_write_checksum: sha1:2a1769fabf9e934fa0b118db46d3b66cb500a6b7
     pristine_git_object: 0ca48942a1b9cd923d614985dfb81f0dc7e1d298
+examples:
+  getAccount:
+    speakeasy-default-get-account:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/vnd.dwolla.v1.hal+json: {"_links": {"key": {"href": "https://api.dwolla.com", "type": "application/vnd.dwolla.v1.hal+json", "resource-type": "resource-type"}}, "id": "2e21f010-3023-4891-aced-ed726d7cd5e1", "name": "Jane Doe's Business", "timezoneOffset": -6, "type": "Commercial"}
+        "403":
+          application/vnd.dwolla.v1.hal+json: {"code": "forbidden", "message": "Not authorized to retrieve an Account by id."}
+        "404":
+          application/vnd.dwolla.v1.hal+json: {"code": "NotFound", "message": "The requested resource was not found."}
+  listFundingSources:
+    speakeasy-default-list-funding-sources:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/vnd.dwolla.v1.hal+json: {"_links": {"key": {"href": "https://api.dwolla.com", "type": "application/vnd.dwolla.v1.hal+json", "resource-type": "resource-type"}}, "_embedded": {"funding-sources": [{"_links": {"key": {"href": "https://api.dwolla.com", "type": "application/vnd.dwolla.v1.hal+json", "resource-type": "resource-type"}}, "id": "d3d6b41e-5567-4bc6-9c6e-0efd0a3e647e", "status": "unverified", "type": "bank", "bankAccountType": "checking", "name": "My bank", "created": "2022-07-23T00:18:21.419Z", "removed": true, "channels": ["ach"], "bankName": "SANDBOX TEST BANK", "fingerprint": "5012989b55af15400e8102f95d2ec5e7ce3aef45c01613280d80a236dd8d6c", "bankUsageType": "card-network", "cardDetails": {"brand": "Visa", "lastFour": "1234", "expirationMonth": 12, "expirationYear": 2026, "nameOnCard": "John Doe", "bin": "40247644", "billingAddress": {"address1": "552 test", "address2": "Apt 4B", "address3": "Unit 101", "city": "Des Moines", "stateProvinceRegion": "IA", "country": "US", "postalCode": "50310"}}}]}, "total": 3}
+        "403":
+          application/vnd.dwolla.v1.hal+json: {"code": "forbidden", "message": "Not authorized to list funding sources."}
+        "404":
+          application/vnd.dwolla.v1.hal+json: {"code": "notFound", "message": "Account not found."}
+  listAndSearchTransfers:
+    speakeasy-default-list-and-search-transfers:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/vnd.dwolla.v1.hal+json: {"_links": {"key": {"href": "https://api.dwolla.com", "type": "application/vnd.dwolla.v1.hal+json", "resource-type": "resource-type"}}, "_embedded": {"transfers": [{"_links": {"key": {"href": "https://api.dwolla.com", "type": "application/vnd.dwolla.v1.hal+json", "resource-type": "resource-type"}}, "id": "15c6bcce-46f7-e811-8112-e8dd3bececa8", "status": "pending", "amount": {"value": "42.00", "currency": "USD"}, "created": "2018-12-03T22:00:22.970Z", "clearing": {"source": "standard", "destination": "same-day"}, "metadata": {"paymentId": "12345678", "note": "Payment for completed work Dec. 1"}, "achDetails": {"source": {"addenda": {"values": ["ABC123_AddendaValue"]}, "beneficiaryName": "John Doe", "companyEntryDescription": "PAYMENT", "companyId": "1234567890", "companyName": "Acme Corporation", "effectiveDate": "2021-12-01", "postingData": "Acme Corporation:Payment Reference:John Doe", "routingNumber": "222222226", "traceId": "222222225926346"}, "destination": {"addenda": {"values": ["ZYX987_AddendaValue"]}, "beneficiaryName": "Jane Smith", "companyEntryDescription": "PAYMENT", "companyId": "1234567890", "companyName": "Acme Corporation", "effectiveDate": "2021-12-01", "postingData": "Acme Corporation:Payment Reference:Jane Smith", "routingNumber": "222222226", "traceId": "222222225926346"}}, "rtpDetails": {"destination": {"remittanceData": "ABC_123 Remittance Data", "networkId": "20210617021214273T1BG27487110796028", "endToEndReferenceId": "E2E-RTP-20210617-001"}}, "fedNowDetails": {"destination": {"remittanceData": "ABC_123 Remittance Data", "networkId": "20240115123456789FEDNOW123456", "endToEndReferenceId": "E2E-FEDNOW-20240115-001"}}, "correlationId": "8a2cdc8d-629d-4a24-98ac-40b735229fe2", "processingChannel": {"destination": "real-time-payments"}}]}, "total": 100}
+        "404":
+          application/vnd.dwolla.v1.hal+json: {"code": "notFound", "message": "Account not found."}
+  listMassPayments:
+    speakeasy-default-list-mass-payments:
+      parameters:
+        path:
+          id: "<id>"
+        query:
+          limit: 25
+          offset: 0
+      responses:
+        "200":
+          application/vnd.dwolla.v1.hal+json: {"_links": {"key": {"href": "https://api.dwolla.com", "type": "application/vnd.dwolla.v1.hal+json", "resource-type": "resource-type"}}, "_embedded": {"mass-payments": [{"_links": {"key": {"href": "https://api.dwolla.com", "type": "application/vnd.dwolla.v1.hal+json", "resource-type": "resource-type"}}, "id": "11ac4051-7b76-44fc-87ab-ae23012393f0", "status": "complete", "created": "2022-01-20T17:41:41.000Z", "total": {"value": "5.00", "currency": "USD"}, "totalFees": {"value": "5.00", "currency": "USD"}, "correlationId": "CID-8a2cdc8d-629d-4a24-98ac-40b735229fe2"}]}, "total": 100}
+        "403":
+          application/vnd.dwolla.v1.hal+json: {"code": "forbidden", "message": "Not authorized to list mass payments."}
+        "404":
+          application/vnd.dwolla.v1.hal+json: {"code": "notFound", "message": "Account not found."}
+  listAndSearchCustomers:
+    speakeasy-default-list-and-search-customers:
+      responses:
+        "200":
+          application/vnd.dwolla.v1.hal+json: {"_links": {"key": {"href": "https://api.dwolla.com", "type": "application/vnd.dwolla.v1.hal+json", "resource-type": "resource-type"}}, "_embedded": {"customers": [{"_links": {}, "id": "c41125c5-99c4-4303-a9f6-d066d28a61e3", "firstName": "Jane", "lastName": "Doe", "email": "janedoe@mail.com", "correlationId": "CID-abe2bb3d-d2ff-433b-95a3-0debd960ed25", "created": "2022-10-07T16:46:13.023Z", "type": "personal", "status": "verified", "address1": "123 Main Street", "address2": "Ste 123", "city": "Des Moines", "state": "IA", "postalCode": "50309"}]}, "total": 2}
+        "403":
+          application/vnd.dwolla.v1.hal+json: {"code": "Forbidden", "message": "The supplied credentials are not authorized for this resource."}
+  listAvailableExchangeConnections:
+    speakeasy-default-list-available-exchange-connections:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/vnd.dwolla.v1.hal+json: {"_links": {"self": {"href": "https://api.dwolla.com/customers/1b54c81a-261f-4779-bb57-9405e6e00694/available-exchange-connections", "type": "application/vnd.dwolla.v1.hal+json", "resource-type": "customer"}, "customers": {"href": "https://api.dwolla.com/customers/1b54c81a-261f-4779-bb57-9405e6e00694", "type": "application/vnd.dwolla.v1.hal+json", "resource-type": "customer"}}, "_embedded": {"available-exchange-connections": []}}
+        "404":
+          application/vnd.dwolla.v1.hal+json: {"code": "NotFound", "message": "The requested resource was not found. Check Customer ID."}
+  listBusinessClassifications:
+    speakeasy-default-list-business-classifications:
+      responses:
+        "200":
+          application/vnd.dwolla.v1.hal+json: {"_links": {"key": {"href": "https://api.dwolla.com", "type": "application/vnd.dwolla.v1.hal+json", "resource-type": "resource-type"}}, "_embedded": {"business-classifications": [{"_links": {"self": {"href": "https://api.dwolla.com", "type": "application/vnd.dwolla.v1.hal+json", "resource-type": "resource-type"}}, "_embedded": {"industry-classifications": [{"id": "9ed3f66b-7d6f-11e3-95ac-5404a6144203", "name": "Wineries"}]}, "id": "9ed3f669-7d6f-11e3-b545-5404a6144203", "name": "Food retail and service"}]}, "total": 3}
+        "403":
+          application/vnd.dwolla.v1.hal+json: {"code": "Forbidden", "message": "The supplied credentials are not authorized for this resource."}
+        "404":
+          application/vnd.dwolla.v1.hal+json: {"code": "NotFound", "message": "The requested resource was not found."}
+  listBeneficialOwnersForCustomer:
+    speakeasy-default-list-beneficial-owners-for-customer:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/vnd.dwolla.v1.hal+json: {"_links": {"key": {"href": "https://api.dwolla.com", "type": "application/vnd.dwolla.v1.hal+json", "resource-type": "resource-type"}}, "_embedded": {"beneficial-owners": [{"_links": {}, "id": "d3d6b41e-5567-4bc6-9c6e-0efd0a3e647e", "verificationStatus": "verified", "created": "2022-07-23T00:18:21.419Z"}]}}
+        "404":
+          application/vnd.dwolla.v1.hal+json: {"code": "not_found", "message": "not found."}
+  getBeneficialOwnershipStatusForCustomer:
+    speakeasy-default-get-beneficial-ownership-status-for-customer:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/vnd.dwolla.v1.hal+json: {"_links": {"self": {"href": "https://api.dwolla.com", "type": "application/vnd.dwolla.v1.hal+json", "resource-type": "resource-type"}}, "status": "uncertified"}
+        "403":
+          application/vnd.dwolla.v1.hal+json: {"code": "forbidden", "message": "Not authorized to get certification status."}
+        "404":
+          application/vnd.dwolla.v1.hal+json: {"code": "not_found", "message": "Ownership certification status not found."}
+  listCustomerDocuments:
+    speakeasy-default-list-customer-documents:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/vnd.dwolla.v1.hal+json: {"_links": {}, "_embedded": {"documents": []}, "total": 2}
+        "403":
+          application/vnd.dwolla.v1.hal+json: {"code": "Forbidden", "message": "The supplied credentials are not authorized for this resource."}
+        "404":
+          application/vnd.dwolla.v1.hal+json: {"code": "NotFound", "message": "The requested resource was not found."}
+  listBeneficialOwnerDocuments:
+    speakeasy-default-list-beneficial-owner-documents:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/vnd.dwolla.v1.hal+json: {"_links": {}, "_embedded": {"documents": []}, "total": 2}
+        "403":
+          application/vnd.dwolla.v1.hal+json: {"code": "Forbidden", "message": "The supplied credentials are not authorized for this resource."}
+        "404":
+          application/vnd.dwolla.v1.hal+json: {"code": "NotFound", "message": "The requested resource was not found."}
+  listCustomerFundingSources:
+    speakeasy-default-list-customer-funding-sources:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/vnd.dwolla.v1.hal+json: {"_links": {"key": {"href": "https://api.dwolla.com", "type": "application/vnd.dwolla.v1.hal+json", "resource-type": "resource-type"}}, "_embedded": {"funding-sources": [{"_links": {"key": {"href": "https://api.dwolla.com", "type": "application/vnd.dwolla.v1.hal+json", "resource-type": "resource-type"}}, "id": "d3d6b41e-5567-4bc6-9c6e-0efd0a3e647e", "status": "unverified", "type": "bank", "bankAccountType": "checking", "name": "My bank", "created": "2022-07-23T00:18:21.419Z", "removed": true, "channels": ["ach"], "bankName": "SANDBOX TEST BANK", "fingerprint": "5012989b55af15400e8102f95d2ec5e7ce3aef45c01613280d80a236dd8d6c", "bankUsageType": "card-network", "cardDetails": {"brand": "Visa", "lastFour": "1234", "expirationMonth": 12, "expirationYear": 2026, "nameOnCard": "John Doe", "bin": "40247644", "billingAddress": {"address1": "552 test", "address2": "Apt 4B", "address3": "Unit 101", "city": "Des Moines", "stateProvinceRegion": "IA", "country": "US", "postalCode": "50310"}}}]}, "total": 3}
+        "403":
+          application/vnd.dwolla.v1.hal+json: {"code": "forbidden", "message": "Not authorized to list funding sources."}
+        "404":
+          application/vnd.dwolla.v1.hal+json: {"code": "notFound", "message": "Customer not found."}
+  getFundingSource:
+    standard_bank_account:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/vnd.dwolla.v1.hal+json: {"_links": {"self": {"href": "https://api-sandbox.dwolla.com/funding-sources/49dbaa24-1580-4b1c-8b58-24e26656fa31", "type": "application/vnd.dwolla.v1.hal+json", "resource-type": "funding-source"}}, "id": "49dbaa24-1580-4b1c-8b58-24e26656fa31", "status": "verified", "type": "bank", "bankAccountType": "checking", "name": "Test checking account", "created": "2022-07-23T00:18:21.419Z", "removed": false, "channels": ["ach"], "bankName": "SANDBOX TEST BANK", "fingerprint": "5012989b55af15400e8102f95d2ec5e7ce3aef45c01613280d80a236dd8d6c"}
+    settlement_account:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/vnd.dwolla.v1.hal+json: {"_links": {"self": {"href": "https://api-sandbox.dwolla.com/funding-sources/12345678-1234-1234-1234-123456789012", "type": "application/vnd.dwolla.v1.hal+json", "resource-type": "funding-source"}}, "id": "12345678-1234-1234-1234-123456789012", "status": "unverified", "type": "bank", "bankAccountType": "checking", "name": "Checkout.com Settlement Account", "created": "2024-01-15T10:30:00.000Z", "removed": false, "channels": ["ach", "real-time-payments"], "bankName": "ABC Bank", "fingerprint": "4cf31392f678cb26c62b75096e1a09d4465a801798b3d5c3729de44a4f54c794", "bankUsageType": "card-network"}
+    card_funding_source:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/vnd.dwolla.v1.hal+json: {"_links": {"self": {"href": "https://api-sandbox.dwolla.com/funding-sources/12345678-abcd-1234-abcd-123456789012", "type": "application/vnd.dwolla.v1.hal+json", "resource-type": "funding-source"}, "transfer-to-balance": {"href": "https://api-sandbox.dwolla.com/transfers", "type": "application/vnd.dwolla.v1.hal+json", "resource-type": "transfer"}, "remove": {"href": "https://api-sandbox.dwolla.com/funding-sources/12345678-abcd-1234-abcd-123456789012", "type": "application/vnd.dwolla.v1.hal+json", "resource-type": "funding-source"}, "customer": {"href": "https://api-sandbox.dwolla.com/customers/91f059e7-fac6-4677-bee1-49057a6e528f", "type": "application/vnd.dwolla.v1.hal+json", "resource-type": "customer"}, "transfer-receive": {"href": "https://api-sandbox.dwolla.com/transfers", "type": "application/vnd.dwolla.v1.hal+json", "resource-type": "transfer"}}, "id": "12fb2f3c-39c7-40cf-99e2-b0311ba39261", "status": "verified", "type": "card", "name": "My Visa Debit Card", "created": "2025-12-10T18:02:47.985Z", "removed": false, "channels": [], "fingerprint": "a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2", "cardDetails": {"brand": "VISA", "lastFour": "1519", "expirationMonth": 10, "expirationYear": 2027, "nameOnCard": "Jane Doe", "bin": "40247644", "billingAddress": {"address1": "552 test", "city": "Des Moines", "stateProvinceRegion": "IA", "country": "US", "postalCode": "50310"}}}
+  getMicroDeposits:
+    speakeasy-default-get-micro-deposits:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/vnd.dwolla.v1.hal+json: {"_links": {"key": {"href": "https://api.dwolla.com", "type": "application/vnd.dwolla.v1.hal+json", "resource-type": "resource-type"}}, "created": "2022-12-30T20:56:53.000Z", "status": "failed", "failure": {"code": "R03", "description": "No Account/Unable to locate account"}}
+        "404":
+          application/vnd.dwolla.v1.hal+json: {"code": "NotFound", "message": "The requested resource was not found."}
+  getFundingSourceBalance:
+    speakeasy-default-get-funding-source-balance:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/vnd.dwolla.v1.hal+json: {"_links": {}, "balance": {"value": "4616.87", "currency": "USD"}, "total": {"value": "4616.87", "currency": "USD"}, "lastUpdated": "2017-04-18T15:20:25.880Z"}
+        "404":
+          application/vnd.dwolla.v1.hal+json: {"code": "notFound", "message": "Funding source not found."}
+  listCustomerTransfers:
+    speakeasy-default-list-customer-transfers:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/vnd.dwolla.v1.hal+json: {"_links": {"key": {"href": "https://api.dwolla.com", "type": "application/vnd.dwolla.v1.hal+json", "resource-type": "resource-type"}}, "_embedded": {"transfers": [{"_links": {"key": {"href": "https://api.dwolla.com", "type": "application/vnd.dwolla.v1.hal+json", "resource-type": "resource-type"}}, "id": "15c6bcce-46f7-e811-8112-e8dd3bececa8", "status": "pending", "amount": {"value": "42.00", "currency": "USD"}, "created": "2018-12-03T22:00:22.970Z", "clearing": {"source": "standard", "destination": "same-day"}, "metadata": {"paymentId": "12345678", "note": "Payment for completed work Dec. 1"}, "achDetails": {"source": {"addenda": {"values": ["ABC123_AddendaValue"]}, "beneficiaryName": "John Doe", "companyEntryDescription": "PAYMENT", "companyId": "1234567890", "companyName": "Acme Corporation", "effectiveDate": "2021-12-01", "postingData": "Acme Corporation:Payment Reference:John Doe", "routingNumber": "222222226", "traceId": "222222225926346"}, "destination": {"addenda": {"values": ["ZYX987_AddendaValue"]}, "beneficiaryName": "Jane Smith", "companyEntryDescription": "PAYMENT", "companyId": "1234567890", "companyName": "Acme Corporation", "effectiveDate": "2021-12-01", "postingData": "Acme Corporation:Payment Reference:Jane Smith", "routingNumber": "222222226", "traceId": "222222225926346"}}, "rtpDetails": {"destination": {"remittanceData": "ABC_123 Remittance Data", "networkId": "20210617021214273T1BG27487110796028", "endToEndReferenceId": "E2E-RTP-20210617-001"}}, "fedNowDetails": {"destination": {"remittanceData": "ABC_123 Remittance Data", "networkId": "20240115123456789FEDNOW123456", "endToEndReferenceId": "E2E-FEDNOW-20240115-001"}}, "correlationId": "8a2cdc8d-629d-4a24-98ac-40b735229fe2", "processingChannel": {"destination": "real-time-payments"}}]}, "total": 100}
+        "404":
+          application/vnd.dwolla.v1.hal+json: {"code": "NotFound", "message": "The requested resource was not found."}
+  listTransferFees:
+    speakeasy-default-list-transfer-fees:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/vnd.dwolla.v1.hal+json: {"transactions": [{"_links": {"key": {"href": "https://api.dwolla.com", "type": "application/vnd.dwolla.v1.hal+json", "resource-type": "resource-type"}}, "id": "416a2857-c887-4cca-bd02-8c3f75c4bb0e", "status": "pending", "amount": {"value": "2.00", "currency": "USD"}, "created": "2016-02-22T20:46:38.777Z"}], "total": 1}
+        "404":
+          application/vnd.dwolla.v1.hal+json: {"code": "NotFound", "message": "The requested resource was not found."}
+  getTransferFailureReason:
+    speakeasy-default-get-transfer-failure-reason:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/vnd.dwolla.v1.hal+json: {"_links": {"key": {"href": "https://api.dwolla.com", "type": "application/vnd.dwolla.v1.hal+json", "resource-type": "resource-type"}}, "code": "R03", "description": "No Account/Unable to Locate Account", "explanation": "The account number does not correspond to the individual identified in the entry or a valid account."}
+        "403":
+          application/vnd.dwolla.v1.hal+json: {"code": "Forbidden", "message": "The supplied credentials are not authorized for this resource."}
+        "404":
+          application/vnd.dwolla.v1.hal+json: {"code": "NotFound", "message": "The requested resource was not found."}
+  listMassPaymentItems:
+    speakeasy-default-list-mass-payment-items:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/vnd.dwolla.v1.hal+json: {"_links": {"self": {"href": "https://api.dwolla.com/mass-payments/eb467252-808c-4bc0-b86f-a5cd01454563/items"}, "first": {"href": "https://api.dwolla.com/mass-payments/eb467252-808c-4bc0-b86f-a5cd01454563/items?limit=25&offset=0"}, "last": {"href": "https://api.dwolla.com/mass-payments/eb467252-808c-4bc0-b86f-a5cd01454563/items?limit=25&offset=0"}}, "_embedded": {"items": [{"_links": {"self": {"href": "https://api.dwolla.com/mass-payment-items/c1c7d293-63ec-e511-80df-0aa34a9b2388"}, "mass-payment": {"href": "https://api.dwolla.com/mass-payments/eb467252-808c-4bc0-b86f-a5cd01454563"}, "destination": {"href": "https://api.dwolla.com/funding-sources/b442c936-1f87-465d-a4e2-a982164b26bd"}, "transfer": {"href": "https://api.dwolla.com/transfers/fa3999db-41ed-e511-80df-0aa34a9b2388"}}, "id": "2f845bc9-41ed-e511-80df-0aa34a9b2388", "status": "success", "amount": {"value": "1.00", "currency": "USD"}, "metadata": {"item1": "item1"}, "processingChannel": {"destination": "real-time-payments"}}]}, "total": 3}
+        "403":
+          application/vnd.dwolla.v1.hal+json: {"code": "Forbidden", "message": "Not authorized to list mass payment items."}
+        "404":
+          application/vnd.dwolla.v1.hal+json: {"code": "NotFound", "message": "Mass payment not found."}
+  listCustomerMassPayments:
+    speakeasy-default-list-customer-mass-payments:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/vnd.dwolla.v1.hal+json: {"_links": {"key": {"href": "https://api.dwolla.com", "type": "application/vnd.dwolla.v1.hal+json", "resource-type": "resource-type"}}, "_embedded": {"mass-payments": [{"_links": {"key": {"href": "https://api.dwolla.com", "type": "application/vnd.dwolla.v1.hal+json", "resource-type": "resource-type"}}, "id": "11ac4051-7b76-44fc-87ab-ae23012393f0", "status": "complete", "created": "2022-01-20T17:41:41.000Z", "total": {"value": "5.00", "currency": "USD"}, "totalFees": {"value": "5.00", "currency": "USD"}, "correlationId": "CID-8a2cdc8d-629d-4a24-98ac-40b735229fe2"}]}, "total": 100}
+        "403":
+          application/vnd.dwolla.v1.hal+json: {"code": "NotAuthorized", "message": "Not authorized to list mass payments."}
+        "404":
+          application/vnd.dwolla.v1.hal+json: {"code": "NotFound", "message": "Customer not found."}
+  listCustomerLabels:
+    speakeasy-default-list-customer-labels:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/vnd.dwolla.v1.hal+json: {"_links": {"key": {"href": "https://api.dwolla.com", "type": "application/vnd.dwolla.v1.hal+json", "resource-type": "resource-type"}}, "_embedded": {"labels": [{"_links": {"key": {"href": "https://api.dwolla.com", "type": "application/vnd.dwolla.v1.hal+json", "resource-type": "resource-type"}}, "id": "7e042ffe-e25e-40d2-b86e-748b98845ecc", "created": "2022-05-15T22:19:09.635Z", "amount": {"value": "10.00", "currency": "USD"}}]}, "total": 100}
+        "403":
+          application/vnd.dwolla.v1.hal+json: {"code": "Forbidden", "message": "Not authorized to list customer labels"}
+        "404":
+          application/vnd.dwolla.v1.hal+json: {"code": "NotFound", "message": "Customer not found"}
+  listEvents:
+    speakeasy-default-list-events:
+      responses:
+        "200":
+          application/vnd.dwolla.v1.hal+json: {"additionalProperties": {"href": "https://api.dwolla.com", "type": "application/vnd.dwolla.v1.hal+json", "resource-type": "resource-type"}, "_embedded": {"events": [{"_links": {"key": {"href": "https://api.dwolla.com", "type": "application/vnd.dwolla.v1.hal+json", "resource-type": "resource-type"}}, "id": "81f6e13c-557c-4449-9331-da5c65e61095", "created": "2015-10-16T15:37:02.000Z", "topic": "customer_transfer_created", "resourceId": "09A166BC-1B74-E511-80DB-0AA34A9B2388"}]}, "total": 3}
+        "404":
+          application/vnd.dwolla.v1.hal+json: {"code": "NotFound", "message": "The requested resource was not found."}
+  listWebhookSubscriptions:
+    speakeasy-default-list-webhook-subscriptions:
+      responses:
+        "200":
+          application/vnd.dwolla.v1.hal+json: {"_links": {"self": {"href": "https://api.dwolla.com/webhook-subscriptions"}}, "_embedded": {"webhook-subscriptions": [{"_links": {"self": {"href": "https://api.dwolla.com/webhook-subscriptions/077dfffb-4852-412f-96b6-0fe668066589"}, "webhooks": {"href": "https://api.dwolla.com/webhook-subscriptions/077dfffb-4852-412f-96b6-0fe668066589/webhooks"}}, "id": "077dfffb-4852-412f-96b6-0fe668066589", "url": "http://myapplication.com/webhooks", "paused": true, "created": "2022-10-28T16:20:47+00:00"}]}, "total": 1}
+        "403":
+          application/vnd.dwolla.v1.hal+json: {"code": "Forbidden", "message": "The supplied credentials are not authorized for this resource."}
+        "404":
+          application/vnd.dwolla.v1.hal+json: {"code": "NotFound", "message": "The requested resource was not found."}
+  listWebhooks:
+    speakeasy-default-list-webhooks:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/vnd.dwolla.v1.hal+json: {"_links": {"self": {"href": "https://api.dwolla.com/webhook-subscriptions/a0943041-7a5c-4e8f-92de-b55711ef3a83/webhooks"}, "first": {"href": "https://api.dwolla.com/webhook-subscriptions/a0943041-7a5c-4e8f-92de-b55711ef3a83/webhooks?limit=25&offset=0"}, "last": {"href": "https://api.dwolla.com/webhook-subscriptions/a0943041-7a5c-4e8f-92de-b55711ef3a83/webhooks?limit=25&offset=150"}, "next": {"href": "https://api.dwolla.com/webhook-subscriptions/a0943041-7a5c-4e8f-92de-b55711ef3a83/webhooks?limit=25&offset=25"}}, "_embedded": {"webhooks": [{"_links": {"self": {"href": "https://api.dwolla.com/webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8"}, "subscription": {"href": "https://api.dwolla.com/webhook-subscriptions/a0943041-7a5c-4e8f-92de-b55711ef3a83"}, "retry": {"href": "https://api.dwolla.com/webhooks/9ece9660-aa34-41eb-80d7-0125d53b45e8/retries"}, "event": {"href": "https://api.dwolla.com/events/03c7e14c-7f15-44a2-bcf7-83f2f7e95d50"}}, "id": "9ece9660-aa34-41eb-80d7-0125d53b45e8", "topic": "transfer_created", "accountId": "ca32853c-48fa-40be-ae75-77b37504581b", "eventId": "03c7e14c-7f15-44a2-bcf7-83f2f7e95d50", "subscriptionId": "a0943041-7a5c-4e8f-92de-b55711ef3a83", "attempts": [{"id": "d4d16621-c6b0-40cb-8dc3-0469fa9dc4e8", "request": {"timestamp": "2022-10-27T17:07:34.304Z", "url": "https://myapp.runscope.net", "headers": [{"name": "X-Dwolla-Topic", "value": "transfer_created"}], "body": "id:03c7e14c-7f15-44a2-bcf7-83f2f7e95d50resourceId:81BA6F36-CD7C-E511-80DB-0AA34A9B2388topic:transfer_createdtimestamp:2022-10-27T17:07:34.207Z_links:self:href:https://api.dwolla.com/events/03c7e14c-7f15-44a2-bcf7-83f2f7e95d50account:href:https://api.dwolla.com/accounts/ca32853c-48fa-40be-ae75-77b37504581bresource:href:https://api.dwolla.com/transfers/81BA6F36-CD7C-E511-80DB-0AA34A9B2388"}, "response": {"timestamp": "2022-10-27T17:07:34.308Z", "headers": [{"name": "Date", "value": "Tue 27 Oct 2022 17:07:34 GMT"}], "statusCode": 200, "body": "body:id:03c7e14c-7f15-44a2-bcf7-83f2f7e95d50resourceId:81BA6F36-CD7C-E511-80DB-0AA34A9B2388topic:transfer_createdtimestamp:2022-10-27T17:07:34.207Z_links:self:href:https://api.dwolla.com/events/03c7e14c-7f15-44a2-bcf7-83f2f7e95d50account:href:https://api.dwolla.com/accounts/ca32853c-48fa-40be-ae75-77b37504581bresource:href:https://api.dwolla.com/transfers/81BA6F36-CD7C-E511-80DB-0AA34A9B2388files:[]form:fragment:headers:Connection:[close]Content-Length:[453]Content-Type:[application/json; charset=UTF-8]Host:[myapp.runscope.net]User-Agent:[dwolla-webhooks/1.0]X-Dwolla-Topic:[transfer_created]X-Request-Signature:[bd93780bd7e1ad77ab821094aaa0f9e3dece5ee3]host:myapp.runscope.netmethod:POSTparams:path:/region:us5runscope_host:prod078.runscope.inscheme:httpssource:capturesource_ip:52.24.10.184timestamp:1.4459656543078682e+09url:https://myapp.runscope.net/"}}]}]}, "total": 1}
+        "403":
+          application/vnd.dwolla.v1.hal+json: {"code": "Forbidden", "message": "The supplied credentials are not authorized for this resource."}
+        "404":
+          application/vnd.dwolla.v1.hal+json: {"code": "NotFound", "message": "The requested resource was not found."}
+  listExchangePartners:
+    speakeasy-default-list-exchange-partners:
+      responses:
+        "200":
+          application/vnd.dwolla.v1.hal+json: {"_links": {"key": {"href": "https://api.dwolla.com", "type": "application/vnd.dwolla.v1.hal+json", "resource-type": "resource-type"}}, "_embedded": {"exchange-partners": [{"_links": {}, "id": "d3d6b41e-5567-4bc6-9c6e-0efd0a3e647e", "name": "Plaid", "status": "active", "created": "2022-07-23T00:18:21.419Z"}]}, "total": 3}
+        "403":
+          application/vnd.dwolla.v1.hal+json: {"code": "Forbidden", "message": "The supplied credentials are not authorized for this resource."}
+  listAccountExchanges:
+    speakeasy-default-list-account-exchanges:
+      responses:
+        "200":
+          application/vnd.dwolla.v1.hal+json: {"_links": {"key": {"href": "https://api.dwolla.com", "type": "application/vnd.dwolla.v1.hal+json", "resource-type": "resource-type"}}, "_embedded": {"exchanges": [{"_links": {}, "id": "d3d6b41e-5567-4bc6-9c6e-0efd0a3e647e", "status": "active", "created": "2022-07-23T00:18:21.419Z"}]}, "total": 3}
+        "403":
+          application/vnd.dwolla.v1.hal+json: {"code": "Forbidden", "message": "The supplied credentials are not authorized for this resource."}
+        "404":
+          application/vnd.dwolla.v1.hal+json: {"code": "NotFound", "message": "The requested resource was not found."}
+  listCustomerExchanges:
+    speakeasy-default-list-customer-exchanges:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/vnd.dwolla.v1.hal+json: {"_links": {}, "_embedded": {"exchanges": []}, "total": 3}
+        "404":
+          application/vnd.dwolla.v1.hal+json: {"code": "NotFound", "message": "Customer ID not found. Check Customer ID."}
 examplesVersion: 1.0.2
 generatedTests: {}
 generatedFiles:

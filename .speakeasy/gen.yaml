@@ -13,6 +13,7 @@ generation:
     requestResponseComponentNamesFeb2024: true
     securityFeb2025: true
     sharedErrorComponentsApr2025: true
+    sharedNestedComponentsJan2026: false
   auth:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: true
@@ -21,13 +22,14 @@ generation:
   schemas:
     allOfMergeStrategy: shallowMerge
   requestBodyFieldName: ""
+  versioningStrategy: automatic
   persistentEdits: {}
   tests:
     generateTests: true
     generateNewTests: false
     skipResponseBodyAssertions: false
 mcp-typescript:
-  version: 1.0.3
+  version: 1.1.0
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
@@ -40,6 +42,7 @@ mcp-typescript:
   cloudflareEnabled: false
   defaultErrorName: DwollaMcpDefaultError
   formStringArrayEncodeMode: encoded-string
+  gramEnabled: false
   inferUnionDiscriminators: false
   inputModelSuffix: input
   maxMethodParams: 0
@@ -47,3 +50,4 @@ mcp-typescript:
   outputModelSuffix: output
   packageName: '@dwolla/mcp-server'
   responseFormat: envelope
+  validateResponse: true
