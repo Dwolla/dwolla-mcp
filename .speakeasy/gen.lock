@@ -1,29 +1,29 @@
 lockVersion: 2.0.0
 id: dbccbcaa-cdde-434b-b972-38fb6d1127e5
 management:
-  docChecksum: 1735884658962786b27ce763c44b0f68
+  docChecksum: 053494d6b78cf1e060dc551c93500ccb
   docVersion: "2.0"
-  speakeasyVersion: 1.719.0
-  generationVersion: 2.824.1
-  releaseVersion: 1.1.0
-  configChecksum: 12ba8daa7b1530e77f117d7e017e7cbd
+  speakeasyVersion: 1.723.0
+  generationVersion: 2.835.2
+  releaseVersion: 1.1.1
+  configChecksum: cdfb7758ecc34b045161082bd5915d2e
   repoURL: https://github.com/Dwolla/dwolla-mcp.git
   published: true
 persistentEdits:
-  generation_id: 10cd49c8-025f-45c5-ae93-a5d2f1a9e325
-  pristine_commit_hash: a2d99b1daef2ac9df32cae7ea2298871c772fec6
-  pristine_tree_hash: a0d6c273c74cb7eba316ce8e25c2ec299ee6ebe7
+  generation_id: d4a31914-aa05-40a5-84b5-c88dea2935b8
+  pristine_commit_hash: fffbb771b47eb997f656473558f2daf2c18360cf
+  pristine_tree_hash: 605a62df9adcf0a183ca55d22c407715292b38eb
 features:
   mcp-typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.1
-    core: 1.2.7
+    core: 1.2.12
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     globalSecurity: 0.1.2
     globalSecurityCallbacks: 0.0.0
     globalServerURLs: 0.1.1
-    nameOverrides: 0.1.0
+    nameOverrides: 0.1.2
     responseFormat: 0.1.1
     retries: 0.1.0
     sdkHooks: 0.3.0
@@ -48,12 +48,12 @@ trackedFiles:
     pristine_git_object: 4f9e60a9462fc4def738d60c3aaadf8232ef185f
   manifest.json:
     id: ca642a226869
-    last_write_checksum: sha1:021c879aba363801c8ec53eb495ab0e059e92813
-    pristine_git_object: 9cdb88adbdd430c6256753c81f93586d29113b0c
+    last_write_checksum: sha1:21561a2a3e81f6b553c548221bf209ea80d32af6
+    pristine_git_object: fa9a1b354561dc77ae9be6762ef924261a773005
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:e3b05071ae23708d846e6b2927e3f2257efb3ae7
-    pristine_git_object: 8d64b07768391edab8c0273fa8f3b2861c6bdf55
+    last_write_checksum: sha1:f272e93624a857a84804e7fcd5755e0462bb3677
+    pristine_git_object: 8c25ca6b1f7d770d989b88fcce2f43741197edd2
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:7841e90d0d7c71248d224a7d1a45951df6e0f2d6
@@ -176,16 +176,16 @@ trackedFiles:
     pristine_git_object: 9c36bf01332084f735909a71036c3544cc4c7e3a
   src/landing-page.ts:
     id: ef64a6ee46d7
-    last_write_checksum: sha1:f7eb104f78f49bec3bb9c0f6d8cca074f098cf5a
-    pristine_git_object: 1fd9ff288aa4c0cf0de2fdea6ea512fa13ff27b4
+    last_write_checksum: sha1:65f7be95320f8ea4ef1114421424ab9909177b5d
+    pristine_git_object: 71064bdd75295d5f907739692473cb075904229e
   src/lib/base64.ts:
     id: "598522066688"
     last_write_checksum: sha1:e9f04a037018040361043104960982f7c22db52d
     pristine_git_object: d4bd8b341290e7a828a171d840bd0b0fff7c7cd7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:aa5d45dd98db80c7ed46b0f63f092acfc9c7d27f
-    pristine_git_object: e1aeebe8eb8266679857844122fd1fec22fd93af
+    last_write_checksum: sha1:5f20e5bbc8b6fe9e2ac8bf3647eb86eecafa6dd6
+    pristine_git_object: 57a7a1e528aab73123a778b373a826737f39a209
   src/lib/dlv.ts:
     id: b1988214835a
     last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250
@@ -272,8 +272,8 @@ trackedFiles:
     pristine_git_object: 23e2b80d3d0232f02d0f0ac6455e15635157591a
   src/mcp-server/mcp-server.ts:
     id: aabbc4ab07c1
-    last_write_checksum: sha1:90e1e2e876fc534db8195b4236095470bc5b4e28
-    pristine_git_object: bb175473b859cb4744463e1759390b78286b835f
+    last_write_checksum: sha1:9c70e0c434cf8c4cc7389d89f0e9dfd39374b814
+    pristine_git_object: f152ea753705f7c3ec861ff50a215d79b2558229
   src/mcp-server/prompts.ts:
     id: 26f3d73cbf31
     last_write_checksum: sha1:55623b0f264374e411bc8bba3af73b0a83cc565a
@@ -288,8 +288,8 @@ trackedFiles:
     pristine_git_object: aed9de28d2387ec508dca4a6f8ad993ca87a2903
   src/mcp-server/server.ts:
     id: 2784dd48e82a
-    last_write_checksum: sha1:e170f830efe373965f8b28f923ce006b691b2b6a
-    pristine_git_object: 20ee2f6e30b6bab871ac59be282a840bbc708f02
+    last_write_checksum: sha1:3f6a407a39087f7f5969bfa1c17483669f2388aa
+    pristine_git_object: e20d30efed44324d0ac2dc70381887532af369fd
   src/mcp-server/shared.ts:
     id: 074e80d4be1e
     last_write_checksum: sha1:19c9034032819a14f15c430de4350c8aba99d725
@@ -472,8 +472,8 @@ trackedFiles:
     pristine_git_object: 60fd1a2a127f094bfebca8b80bc5f7f36f1a22b6
   src/models/exchangepartner.ts:
     id: a317ea4987df
-    last_write_checksum: sha1:203a765f0043767260a268081d1ff72f42880543
-    pristine_git_object: 0a995c89d28ff08c96c8949245c7efa30927081d
+    last_write_checksum: sha1:20030f5a610151cdce039ad7c3c2cc044453a28e
+    pristine_git_object: e3249a1521366013f9a5ca27b1b56312b91b9c57
   src/models/exchangepartners.ts:
     id: d30ea28dbf35
     last_write_checksum: sha1:a52da20838b3bc03174ce8f3f6b9e5e4c03440fd
@@ -1010,6 +1010,9 @@ examples:
           application/vnd.dwolla.v1.hal+json: {"code": "NotFound", "message": "Customer ID not found. Check Customer ID."}
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: |
+  ## Mcp-typescript SDK Changes:
+  * `DwollaMcp.exchangePartners.list()`:  `response._embedded.exchange-partners[].name.enum(Checkout.com)` **Added** (Breaking ⚠️)
 generatedFiles:
   - .dxtignore
   - .gitattributes
