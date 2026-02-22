@@ -51,7 +51,6 @@ This MCP server enables AI agents to **retrieve and analyze** data from Dwolla's
   * [💬 Usage Examples & Business Applications](#usage-examples-business-applications)
   * [🛠️ Available Operations](#available-operations)
   * [❓ Troubleshooting](#troubleshooting)
-  * [🔒 Security Considerations](#security-considerations)
 * [Development](#development)
   * [Contributions](#contributions)
 
@@ -122,9 +121,9 @@ node bin/mcp-server.js start --bearer-auth "your_token_here" --server "sandbox"
 <details>
 <summary>Claude Desktop</summary>
 
-Install the MCP server as a Desktop Extension using the pre-built [`mcp-server.mcpb`](https://github.com/Dwolla/dwolla-mcp/releases/download/v1.1.0/mcp-server.mcpb) file:
+Install the MCP server as a Desktop Extension using the pre-built [`mcp-server.mcpb`](https://github.com/Dwolla/dwolla-mcp/releases/download/v1.1.1/mcp-server.mcpb) file:
 
-Simply drag and drop the [`mcp-server.mcpb`](https://github.com/Dwolla/dwolla-mcp/releases/download/v1.1.0/mcp-server.mcpb) file onto Claude Desktop to install the extension.
+Simply drag and drop the [`mcp-server.mcpb`](https://github.com/Dwolla/dwolla-mcp/releases/download/v1.1.1/mcp-server.mcpb) file onto Claude Desktop to install the extension.
 
 The MCP bundle package includes the MCP server and all necessary configuration. Once installed, the server will be available without additional setup.
 
@@ -500,6 +499,49 @@ curl -H "Authorization: Bearer your_token_here" \
 - Never use production tokens in development/testing
 
 <!-- End custom addition -->
+
+<!-- Start Progressive Discovery [dynamic-mode] -->
+## Progressive Discovery
+
+MCP servers with many tools can bloat LLM context windows, leading to increased token usage and tool confusion. Dynamic mode solves this by exposing only a small set of meta-tools that let agents progressively discover and invoke tools on demand.
+
+To enable dynamic mode, pass the `--mode dynamic` flag when starting your server:
+
+```jsonc
+{
+  "mcpServers": {
+    "DwollaMcp": {
+      "command": "npx",
+      "args": ["@dwolla/mcp-server", "start", "--mode", "dynamic"],
+      // ... other server arguments
+    }
+  }
+}
+```
+
+In dynamic mode, the server registers only the following meta-tools instead of every individual tool:
+
+- **`list_tools`**: Lists all available tools with their names and descriptions.
+- **`describe_tool`**: Returns the input schema for one or more tools by name.
+- **`execute_tool`**: Executes a tool by name with the provided input parameters.
+- **`list_scopes`**: Lists the scopes available on the server.
+
+This approach significantly reduces the number of tokens sent to the LLM on each request, which is especially useful for servers with a large number of tools.
+
+You can combine dynamic mode with scope and tool filters:
+
+```jsonc
+{
+  "mcpServers": {
+    "DwollaMcp": {
+      "command": "npx",
+      "args": ["@dwolla/mcp-server", "start", "--mode", "dynamic", "--scope", "read"],
+      // ... other server arguments
+    }
+  }
+}
+```
+<!-- End Progressive Discovery [dynamic-mode] -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
 
