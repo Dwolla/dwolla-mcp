@@ -11,6 +11,7 @@ export const Name = {
   Plaid: "Plaid",
   Flinks: "Flinks",
   Finicity: "Finicity",
+  CheckoutCom: "Checkout.com",
 } as const;
 export type Name = ClosedEnum<typeof Name>;
 
@@ -19,6 +20,7 @@ export const Name$zodSchema = z.enum([
   "Plaid",
   "Flinks",
   "Finicity",
+  "Checkout.com",
 ]);
 
 export const ExchangePartnerStatus = {
