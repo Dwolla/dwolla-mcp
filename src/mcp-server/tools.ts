@@ -16,6 +16,7 @@ import {
 import * as z from "zod";
 import { DwollaMcpCore } from "../core.js";
 import { ConsoleLogger } from "./console-logger.js";
+import { MCPServerFlags } from "./flags.js";
 import { MCPScope, mcpScopes } from "./scopes.js";
 import { isAsyncIterable, isBinaryData, valueToBase64 } from "./shared.js";
 
@@ -407,4 +408,48 @@ export function registerDynamicTools(
     });
     logger.debug("Registered dynamic meta-tool", { name: "list_scopes" });
   }
+}
+function resolveHeader<T>(
+  headers: Headers,
+  headerName: string,
+  schema: z.ZodType<T>,
+  cliFlagValue: T | undefined,
+  disableStaticAuth: boolean,
+): T | undefined {
+  const val = headers.get(headerName);
+  if (val != null) {
+    return schema.parse(val);
+  }
+  return disableStaticAuth ? undefined : schema.parse(cliFlagValue);
+}
+
+export function buildSDK(
+  headers: Headers,
+  cliFlags: MCPServerFlags,
+  disableStaticAuth: boolean,
+  logger: { level: string },
+) {
+  const flags = {
+    ...cliFlags,
+    "bearer-auth": resolveHeader(
+      headers,
+      "bearerAuth",
+      z.string(),
+      cliFlags["bearer-auth"],
+      disableStaticAuth,
+    ),
+  };
+
+  return new DwollaMcpCore({
+    security: { bearerAuth: flags["bearer-auth"] ?? "" },
+    serverURL: cliFlags["server-url"],
+    server: cliFlags.server,
+    debugLogger: logger.level === "debug"
+      ? {
+        log: (...args) => console.log(...args),
+        group: (...args) => console.group(...args),
+        groupEnd: (...args) => console.groupEnd(...args),
+      }
+      : undefined,
+  });
 }

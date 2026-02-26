@@ -5644,19 +5644,30 @@ components:
             - checking
           description: Type of bank account. Must be "checking" for Virtual Account Numbers.
           example: checking
-    CreateCustomerCardFundingSource:
-      title: CreateCustomerCardFundingSource
+    CreateCustomerCardFundingSourceWithExchange:
+      title: CreateCustomerCardFundingSourceWithExchange
       type: object
-      description: Schema for creating a debit card funding source using a tokenized card. The card token is obtained from a card tokenization service.
+      description: Schema for creating a debit card funding source using an Exchange. Used for Push to Card.
       required:
-        - cardToken
+        - _links
         - name
         - cardDetails
       properties:
-        cardToken:
-          type: string
-          description: A tokenized representation of the card obtained from a card tokenization service
-          example: src_abc123_test_token_xyz789
+        _links:
+          type: object
+          required:
+            - exchange
+          properties:
+            exchange:
+              type: object
+              required:
+                - href
+              properties:
+                href:
+                  type: string
+                  format: uri
+                  description: URL of the Exchange resource created with a card token
+                  example: https://api-sandbox.dwolla.com/exchanges/d46b028c-244b-4054-b19b-72f09cd1dc04
         name:
           type: string
           description: Arbitrary nickname for the debit card funding source. Must be 50 characters or less.
@@ -5664,8 +5675,18 @@ components:
         cardDetails:
           type: object
           required:
+            - firstName
+            - lastName
             - billingAddress
           properties:
+            firstName:
+              type: string
+              description: Cardholder first name
+              example: Jane
+            lastName:
+              type: string
+              description: Cardholder last name
+              example: Doe
             billingAddress:
               type: object
               description: The billing address associated with the card
@@ -5717,7 +5738,7 @@ components:
         - $ref: '#/components/schemas/CreateCustomerBankFundingSourceWithPlaid'
         - $ref: '#/components/schemas/CreateCustomerExchangeFundingSource'
         - $ref: '#/components/schemas/CreateCustomerVirtualAccountFundingSource'
-        - $ref: '#/components/schemas/CreateCustomerCardFundingSource'
+        - $ref: '#/components/schemas/CreateCustomerCardFundingSourceWithExchange'
     InactiveExchangeError:
       title: InactiveExchangeError
       type: object
@@ -5794,14 +5815,14 @@ components:
                     example: The card's country is not supported.
                   path:
                     type: string
-                    example: /cardToken
+                    example: /token
                   _links:
                     type: object
                     example: {}
-    InvalidCardTokenError:
-      title: InvalidCardTokenError
+    InvalidTokenError:
+      title: InvalidTokenError
       type: object
-      description: Error returned when attempting to create a debit card funding source with an invalid card token
+      description: Error returned when creating an Exchange with an invalid token, or when the card data is invalid
       required:
         - code
         - message
@@ -5835,7 +5856,7 @@ components:
                     example: The card data is invalid.
                   path:
                     type: string
-                    example: /cardToken
+                    example: /token
                   _links:
                     type: object
                     example: {}
@@ -5876,11 +5897,11 @@ components:
                     example: The maximum number of cards has been exceeded.
                   path:
                     type: string
-                    example: /cardToken
+                    example: /_links/exchange
     CardMissingRequiredFieldsError:
       title: CardMissingRequiredFieldsError
       type: object
-      description: Error returned when required fields are missing when creating a debit card funding source
+      description: Error returned when required fields are missing when creating an Exchange or a debit card funding source
       required:
         - code
         - message
@@ -5911,10 +5932,10 @@ components:
                     example: Required
                   message:
                     type: string
-                    example: Card token is required.
+                    example: Token is required.
                   path:
                     type: string
-                    example: /cardToken
+                    example: /token
     UpdateUnverifiedBank:
       title: UpdateUnverifiedBank
       description: Request body for updating information of an unverified bank funding source
@@ -8892,6 +8913,7 @@ components:
             - Plaid
             - Flinks
             - Finicity
+            - Checkout.com
           example: Plaid
         status:
           type: string
@@ -9040,7 +9062,7 @@ components:
               example: '2022-07-11T06:06:23Z'
     CreateTokenBasedExchange:
       title: CreateTokenBasedExchange
-      description: Create an exchange using a token. Supports MX, Plaid, and Flinks secure exchange flows.
+      description: Create an exchange using a token. Supports MX, Plaid, and Flinks secure exchange flows, and Checkout.com for Push to Card (debit card).
       type: object
       required:
         - _links
@@ -9059,7 +9081,7 @@ components:
                   example: https://api.dwolla.com/exchange-partners/292317ec-e252-47d8-93c3-2d128e037aa4
         token:
           type: string
-          description: Connection or processor token from the exchange partner
+          description: Connection or processor token from the exchange partner (e.g., Plaid, MX, Flinks), or payment ID (pay_xxx) from Checkout.com Flow for Push to Card
           example: sandbox-token-abc123
     InvalidExchangeToken:
       title: InvalidExchangeToken
@@ -9204,6 +9226,12 @@ components:
                   format: uri
                   example: https://api.dwolla.com/exchange-partners/292317ec-e252-47d8-93c3-2d128e037aa4
     ExchangeSession:
+      title: ExchangeSession
+      description: |
+        Details of a previously created exchange session. Response shape varies by exchange partner.
+        - **MX**: includes `_links.external-provider-session.href` (redirect URL).
+        - **Plaid**: includes `externalProviderSessionToken` (Link initialization token).
+        - **Checkout.com**: includes `externalProviderSessionData` (payment session for Flow/debit card capture).
       type: object
       required:
         - created
@@ -9279,6 +9307,24 @@ components:
             Present for Plaid exchange sessions.
             Contains the token to initialize the Plaid Link flow.
           example: link-production-b41e8ed3-0874-4c64-b07d-a77088979d5f
+        externalProviderSessionData:
+          type: object
+          description: |
+            Present for Checkout.com exchange sessions (Push to Card / debit card flow).
+            Use these fields to initialize the Checkout.com Flow component for card capture.
+          properties:
+            id:
+              type: string
+              description: Checkout.com payment session ID (e.g. ps_xxx).
+              example: ps_39vhHjFxZuJRKOw5Hexbnv39fC7
+            payment_session_secret:
+              type: string
+              description: Checkout.com payment session secret.
+              example: pss_2400dd88-171d-4a9c-bebf-e06b56d59bb6
+            payment_session_token:
+              type: string
+              description: Checkout.com payment session token (base64) for Flow initialization.
+              example: YmFzZTY0:eyJpZCI6InBzXzM5dmhIakZ4WnVKUktPdzVIZXhibnYzOWZDNyIs...
     CreateReAuthExchangeSessionForWeb:
       title: CreateReAuthExchangeSessionForWeb
       description: Create re-auth exchange session for web (Plaid web sessions where request body is optional)
