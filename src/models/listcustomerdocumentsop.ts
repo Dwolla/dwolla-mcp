@@ -27,10 +27,14 @@ export type ListCustomerDocumentsResponse = {
 export const ListCustomerDocumentsResponse$zodSchema: z.ZodType<
   ListCustomerDocumentsResponse
 > = z.object({
-  ContentType: z.string(),
-  Documents: Documents$zodSchema.optional(),
-  ForbiddenError: ForbiddenError$zodSchema.optional(),
-  NotFoundError: NotFoundError$zodSchema.optional(),
-  RawResponse: z.custom<Response>(x => x instanceof Response),
-  StatusCode: z.int(),
+  ContentType: z.string().describe(
+    "HTTP response content type for this operation",
+  ),
+  Documents: Documents$zodSchema.optional().describe("successful operation"),
+  ForbiddenError: ForbiddenError$zodSchema.optional().describe("Forbidden"),
+  NotFoundError: NotFoundError$zodSchema.optional().describe("Not Found"),
+  RawResponse: z.custom<Response>(x => x instanceof Response).describe(
+    "Raw HTTP response; suitable for custom response parsing",
+  ),
+  StatusCode: z.int().describe("HTTP response status code for this operation"),
 });

@@ -22,10 +22,15 @@ export type ListBusinessClassificationsResponse = {
 export const ListBusinessClassificationsResponse$zodSchema: z.ZodType<
   ListBusinessClassificationsResponse
 > = z.object({
-  BusinessClassifications: BusinessClassifications$zodSchema.optional(),
-  ContentType: z.string(),
-  ForbiddenError: ForbiddenError$zodSchema.optional(),
-  NotFoundError: NotFoundError$zodSchema.optional(),
-  RawResponse: z.custom<Response>(x => x instanceof Response),
-  StatusCode: z.int(),
+  BusinessClassifications: BusinessClassifications$zodSchema.optional()
+    .describe("successful operation"),
+  ContentType: z.string().describe(
+    "HTTP response content type for this operation",
+  ),
+  ForbiddenError: ForbiddenError$zodSchema.optional().describe("Forbidden"),
+  NotFoundError: NotFoundError$zodSchema.optional().describe("Not Found"),
+  RawResponse: z.custom<Response>(x => x instanceof Response).describe(
+    "Raw HTTP response; suitable for custom response parsing",
+  ),
+  StatusCode: z.int().describe("HTTP response status code for this operation"),
 });

@@ -46,11 +46,15 @@ export type GetTransferFailureReasonResponse = {
 export const GetTransferFailureReasonResponse$zodSchema: z.ZodType<
   GetTransferFailureReasonResponse
 > = z.object({
-  ContentType: z.string(),
-  ForbiddenError: ForbiddenError$zodSchema.optional(),
-  NotFoundError: NotFoundError$zodSchema.optional(),
-  RawResponse: z.custom<Response>(x => x instanceof Response),
-  StatusCode: z.int(),
+  ContentType: z.string().describe(
+    "HTTP response content type for this operation",
+  ),
+  ForbiddenError: ForbiddenError$zodSchema.optional().describe("403 Forbidden"),
+  NotFoundError: NotFoundError$zodSchema.optional().describe("404 Not Found"),
+  RawResponse: z.custom<Response>(x => x instanceof Response).describe(
+    "Raw HTTP response; suitable for custom response parsing",
+  ),
+  StatusCode: z.int().describe("HTTP response status code for this operation"),
   object: z.lazy(() => GetTransferFailureReasonResponseBody$zodSchema)
-    .optional(),
+    .optional().describe("successful operation"),
 });

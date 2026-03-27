@@ -12,7 +12,11 @@ import {
   createRegisterResourceTemplate,
 } from "./resources.js";
 import { MCPScope } from "./scopes.js";
-import { createRegisterTool, registerDynamicTools } from "./tools.js";
+import {
+  createRegisterTool,
+  MCPToolAnnotationFilter,
+  registerDynamicTools,
+} from "./tools.js";
 import { tool$accountsExchangesList } from "./tools/accountsExchangesList.js";
 import { tool$accountsFundingSourcesList } from "./tools/accountsFundingSourcesList.js";
 import { tool$accountsGet } from "./tools/accountsGet.js";
@@ -46,6 +50,7 @@ export function createMCPServer(deps: {
   allowedTools?: string[] | undefined;
   dynamic?: boolean | undefined;
   scopes?: MCPScope[] | undefined;
+  annotationFilter?: MCPToolAnnotationFilter | undefined;
   getSDK?: () => DwollaMcpCore;
   serverURL?: string | undefined;
   security?: SDKOptions["security"] | undefined;
@@ -53,7 +58,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "DwollaMcp",
-    version: "1.1.1",
+    version: "1.1.2",
   });
 
   const getClient = deps.getSDK || (() =>
@@ -80,6 +85,7 @@ export function createMCPServer(deps: {
     scopes,
     allowedTools,
     deps.dynamic,
+    deps.annotationFilter,
   );
   const resource = createRegisterResource(
     deps.logger,

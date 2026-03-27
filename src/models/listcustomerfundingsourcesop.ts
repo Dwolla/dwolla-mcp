@@ -63,14 +63,20 @@ export type ListCustomerFundingSourcesResponse = {
 export const ListCustomerFundingSourcesResponse$zodSchema: z.ZodType<
   ListCustomerFundingSourcesResponse
 > = z.object({
-  ContentType: z.string(),
-  FundingSources: FundingSources$zodSchema.optional(),
-  RawResponse: z.custom<Response>(x => x instanceof Response),
-  StatusCode: z.int(),
+  ContentType: z.string().describe(
+    "HTTP response content type for this operation",
+  ),
+  FundingSources: FundingSources$zodSchema.optional().describe(
+    "successful operation",
+  ),
+  RawResponse: z.custom<Response>(x => x instanceof Response).describe(
+    "Raw HTTP response; suitable for custom response parsing",
+  ),
+  StatusCode: z.int().describe("HTTP response status code for this operation"),
   fourHundredAndFourApplicationVndDwollaV1HalPlusJsonObject: z.lazy(() =>
     ListCustomerFundingSourcesNotFoundResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("not found"),
   fourHundredAndThreeApplicationVndDwollaV1HalPlusJsonObject: z.lazy(() =>
     ListCustomerFundingSourcesForbiddenResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("forbidden"),
 });

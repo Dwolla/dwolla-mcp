@@ -12,6 +12,7 @@ import {
 } from "../../console-logger.js";
 import { MCPServerFlags } from "../../flags.js";
 import { createMCPServer } from "../../server.js";
+import { buildAnnotationFilter } from "../../tools.js";
 
 import { landingPageExpress } from "../../../landing-page.js";
 
@@ -52,6 +53,7 @@ async function startStdio(flags: StartCommandFlags) {
     logger,
     allowedTools: flags.tool,
     dynamic: flags.mode === "dynamic",
+    annotationFilter: buildAnnotationFilter(flags["tool-annotations"]),
     scopes: flags.scope,
     security: { bearerAuth: flags["bearer-auth"] ?? "" },
     serverURL: flags["server-url"],
@@ -94,7 +96,7 @@ async function startSSE(cliFlags: StartCommandFlags) {
     const flags: StartCommandFlags = {
       ...cliFlags,
       // Security fields can be overridden via headers
-      "bearer-auth": (req.headers["bearerAuth"] as string)
+      "bearer-auth": (req.headers["bearerauth"] as string)
         ?? cliFlags["bearer-auth"],
     };
 
@@ -103,6 +105,7 @@ async function startSSE(cliFlags: StartCommandFlags) {
       logger,
       allowedTools: flags.tool,
       dynamic: flags.mode === "dynamic",
+      annotationFilter: buildAnnotationFilter(flags["tool-annotations"]),
       scopes: flags.scope,
       security: { bearerAuth: flags["bearer-auth"] ?? "" },
       serverURL: flags["server-url"],

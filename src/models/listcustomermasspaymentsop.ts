@@ -72,14 +72,20 @@ export type ListCustomerMassPaymentsResponse = {
 export const ListCustomerMassPaymentsResponse$zodSchema: z.ZodType<
   ListCustomerMassPaymentsResponse
 > = z.object({
-  ContentType: z.string(),
-  MassPayments: MassPayments$zodSchema.optional(),
-  RawResponse: z.custom<Response>(x => x instanceof Response),
-  StatusCode: z.int(),
+  ContentType: z.string().describe(
+    "HTTP response content type for this operation",
+  ),
+  MassPayments: MassPayments$zodSchema.optional().describe(
+    "successful operation",
+  ),
+  RawResponse: z.custom<Response>(x => x instanceof Response).describe(
+    "Raw HTTP response; suitable for custom response parsing",
+  ),
+  StatusCode: z.int().describe("HTTP response status code for this operation"),
   fourHundredAndFourApplicationVndDwollaV1HalPlusJsonObject: z.lazy(() =>
     ListCustomerMassPaymentsNotFoundResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Customer not found"),
   fourHundredAndThreeApplicationVndDwollaV1HalPlusJsonObject: z.lazy(() =>
     ListCustomerMassPaymentsForbiddenResponseBody$zodSchema
-  ).optional(),
+  ).optional().describe("Not authorized to list mass payments"),
 });

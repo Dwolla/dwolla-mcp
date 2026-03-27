@@ -39,9 +39,16 @@ export type GetFundingSourceResponse = {
 export const GetFundingSourceResponse$zodSchema: z.ZodType<
   GetFundingSourceResponse
 > = z.object({
-  ContentType: z.string(),
-  FundingSource: FundingSource$zodSchema.optional(),
-  RawResponse: z.custom<Response>(x => x instanceof Response),
-  StatusCode: z.int(),
-  object: z.lazy(() => GetFundingSourceResponseBody$zodSchema).optional(),
+  ContentType: z.string().describe(
+    "HTTP response content type for this operation",
+  ),
+  FundingSource: FundingSource$zodSchema.optional().describe(
+    "successful operation",
+  ),
+  RawResponse: z.custom<Response>(x => x instanceof Response).describe(
+    "Raw HTTP response; suitable for custom response parsing",
+  ),
+  StatusCode: z.int().describe("HTTP response status code for this operation"),
+  object: z.lazy(() => GetFundingSourceResponseBody$zodSchema).optional()
+    .describe("not found"),
 });

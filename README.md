@@ -121,9 +121,9 @@ node bin/mcp-server.js start --bearer-auth "your_token_here" --server "sandbox"
 <details>
 <summary>Claude Desktop</summary>
 
-Install the MCP server as a Desktop Extension using the pre-built [`mcp-server.mcpb`](https://github.com/Dwolla/dwolla-mcp/releases/download/v1.1.1/mcp-server.mcpb) file:
+Install the MCP server as a Desktop Extension using the pre-built [`mcp-server.mcpb`](https://github.com/Dwolla/dwolla-mcp/releases/download/v1.1.2/mcp-server.mcpb) file:
 
-Simply drag and drop the [`mcp-server.mcpb`](https://github.com/Dwolla/dwolla-mcp/releases/download/v1.1.1/mcp-server.mcpb) file onto Claude Desktop to install the extension.
+Simply drag and drop the [`mcp-server.mcpb`](https://github.com/Dwolla/dwolla-mcp/releases/download/v1.1.2/mcp-server.mcpb) file onto Claude Desktop to install the extension.
 
 The MCP bundle package includes the MCP server and all necessary configuration. Once installed, the server will be available without additional setup.
 

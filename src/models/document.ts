@@ -75,8 +75,10 @@ export type AllFailureReason = { reason: string; description: string };
 
 export const AllFailureReason$zodSchema: z.ZodType<AllFailureReason> = z.object(
   {
-    description: z.string(),
-    reason: z.string(),
+    description: z.string().describe(
+      "Human-readable explanation of the failure reason",
+    ),
+    reason: z.string().describe("Failure reason code"),
   },
 );
 
@@ -97,13 +99,23 @@ export type Document = {
 export const Document$zodSchema: z.ZodType<Document> = z.object({
   _links: z.lazy(() => DocumentLinks$zodSchema),
   allFailureReasons: z.array(z.lazy(() => AllFailureReason$zodSchema))
-    .optional(),
-  created: z.iso.datetime({ offset: true }),
-  documentVerificationStatus: DocumentVerificationStatus$zodSchema,
-  failureReason: z.string().optional(),
-  id: z.string(),
-  status: DocumentStatus$zodSchema,
-  type: DocumentType$zodSchema,
+    .optional().describe(
+      "Complete list of all failure reasons if document verification was rejected",
+    ),
+  created: z.iso.datetime({ offset: true }).describe(
+    "ISO-8601 timestamp when the document was uploaded",
+  ),
+  documentVerificationStatus: DocumentVerificationStatus$zodSchema.describe(
+    "Verification status of the document after review",
+  ),
+  failureReason: z.string().optional().describe(
+    "Primary reason why document verification failed (if rejected)",
+  ),
+  id: z.string().describe("Unique identifier for the document"),
+  status: DocumentStatus$zodSchema.describe(
+    "Current status of the document upload",
+  ),
+  type: DocumentType$zodSchema.describe("Type of identity document uploaded"),
 }).describe(
   "Identity verification document for a customer or beneficial owner",
 );

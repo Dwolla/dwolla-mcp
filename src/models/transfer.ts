@@ -44,7 +44,9 @@ export const TransferMetadata$zodSchema: z.ZodType<TransferMetadata> = z.object(
 export type SourceAddenda = { values?: Array<string> | undefined };
 
 export const SourceAddenda$zodSchema: z.ZodType<SourceAddenda> = z.object({
-  values: z.array(z.string()).optional(),
+  values: z.array(z.string()).optional().describe(
+    "An array containing a single string addenda value",
+  ),
 }).describe("Contains addenda information for the transfer");
 
 /**
@@ -96,15 +98,28 @@ export type Source = {
 };
 
 export const Source$zodSchema: z.ZodType<Source> = z.object({
-  addenda: z.lazy(() => SourceAddenda$zodSchema).optional(),
-  beneficiaryName: z.string().optional(),
-  companyEntryDescription: SourceCompanyEntryDescription$zodSchema.optional(),
-  companyId: z.string().optional(),
-  companyName: z.string().optional(),
-  effectiveDate: z.string().date().optional(),
-  postingData: z.string().optional(),
-  routingNumber: z.string().optional(),
-  traceId: z.string().optional(),
+  addenda: z.lazy(() => SourceAddenda$zodSchema).optional().describe(
+    "Contains addenda information for the transfer",
+  ),
+  beneficiaryName: z.string().optional().describe(
+    "Beneficiary of the transaction's name. In general, should match the user onboarded to the Platform's name",
+  ),
+  companyEntryDescription: SourceCompanyEntryDescription$zodSchema.optional()
+    .describe("Describes the purpose of the transaction"),
+  companyId: z.string().optional().describe("Numeric identifier of originator"),
+  companyName: z.string().optional().describe("Name of the originator"),
+  effectiveDate: z.string().date().optional().describe(
+    "The date when the ACH transaction becomes effective, formatted as YYYY-MM-DD. This is typically the settlement date for the transaction",
+  ),
+  postingData: z.string().optional().describe(
+    "Suggested memo line format for bank statements, structured as companyName:companyDiscretionaryData:beneficiaryName",
+  ),
+  routingNumber: z.string().optional().describe(
+    "Routing number of Originating Depository Financial Institution (ODFI). Identifies the financial institution that originated the ACH transaction",
+  ),
+  traceId: z.string().optional().describe(
+    "A unique identifier for tracing the ACH transaction through the banking network. Used for transaction tracking and reconciliation purposes",
+  ),
 }).describe(
   "Information sent to the source/originating bank account along with the transfer",
 );
@@ -116,7 +131,9 @@ export type DestinationAddenda = { values?: Array<string> | undefined };
 
 export const DestinationAddenda$zodSchema: z.ZodType<DestinationAddenda> = z
   .object({
-    values: z.array(z.string()).optional(),
+    values: z.array(z.string()).optional().describe(
+      "An array containing a single string addenda value",
+    ),
   }).describe("Contains addenda information for the transfer");
 
 /**
@@ -169,16 +186,30 @@ export type AchDetailsDestination = {
 
 export const AchDetailsDestination$zodSchema: z.ZodType<AchDetailsDestination> =
   z.object({
-    addenda: z.lazy(() => DestinationAddenda$zodSchema).optional(),
-    beneficiaryName: z.string().optional(),
+    addenda: z.lazy(() => DestinationAddenda$zodSchema).optional().describe(
+      "Contains addenda information for the transfer",
+    ),
+    beneficiaryName: z.string().optional().describe(
+      "Beneficiary of the transaction's name. In general, should match the user onboarded to the Platform's name",
+    ),
     companyEntryDescription: DestinationCompanyEntryDescription$zodSchema
-      .optional(),
-    companyId: z.string().optional(),
-    companyName: z.string().optional(),
-    effectiveDate: z.string().date().optional(),
-    postingData: z.string().optional(),
-    routingNumber: z.string().optional(),
-    traceId: z.string().optional(),
+      .optional().describe("Describes the purpose of the transaction"),
+    companyId: z.string().optional().describe(
+      "Numeric identifier of originator",
+    ),
+    companyName: z.string().optional().describe("Name of the originator"),
+    effectiveDate: z.string().date().optional().describe(
+      "The date when the ACH transaction becomes effective, formatted as YYYY-MM-DD. This is typically the settlement date for the transaction",
+    ),
+    postingData: z.string().optional().describe(
+      "Suggested memo line format for bank statements, structured as companyName:companyDiscretionaryData:beneficiaryName",
+    ),
+    routingNumber: z.string().optional().describe(
+      "Routing number of Originating Depository Financial Institution (ODFI). Identifies the financial institution that originated the ACH transaction",
+    ),
+    traceId: z.string().optional().describe(
+      "A unique identifier for tracing the ACH transaction through the banking network. Used for transaction tracking and reconciliation purposes",
+    ),
   }).describe(
     "Information sent to the destination/receiving bank account along with the transfer",
   );
@@ -192,8 +223,13 @@ export type AchDetails = {
 };
 
 export const AchDetails$zodSchema: z.ZodType<AchDetails> = z.object({
-  destination: z.lazy(() => AchDetailsDestination$zodSchema).optional(),
-  source: z.lazy(() => Source$zodSchema).optional(),
+  destination: z.lazy(() => AchDetailsDestination$zodSchema).optional()
+    .describe(
+      "Information sent to the destination/receiving bank account along with the transfer",
+    ),
+  source: z.lazy(() => Source$zodSchema).optional().describe(
+    "Information sent to the source/originating bank account along with the transfer",
+  ),
 }).describe(
   "ACH-specific details for the transfer. Present when transfer was processed via ACH network.",
 );
@@ -209,9 +245,15 @@ export type RtpDetailsDestination = {
 
 export const RtpDetailsDestination$zodSchema: z.ZodType<RtpDetailsDestination> =
   z.object({
-    endToEndReferenceId: z.string().optional(),
-    networkId: z.string().optional(),
-    remittanceData: z.string().optional(),
+    endToEndReferenceId: z.string().optional().describe(
+      "End-to-end reference identifier for the RTP transfer",
+    ),
+    networkId: z.string().optional().describe(
+      "Unique identifier for the transfer within the RTP network",
+    ),
+    remittanceData: z.string().optional().describe(
+      "Remittance information included in the transfer request",
+    ),
   }).describe("RTP destination details with network identifiers");
 
 /**
@@ -220,7 +262,8 @@ export const RtpDetailsDestination$zodSchema: z.ZodType<RtpDetailsDestination> =
 export type RtpDetails = { destination?: RtpDetailsDestination | undefined };
 
 export const RtpDetails$zodSchema: z.ZodType<RtpDetails> = z.object({
-  destination: z.lazy(() => RtpDetailsDestination$zodSchema).optional(),
+  destination: z.lazy(() => RtpDetailsDestination$zodSchema).optional()
+    .describe("RTP destination details with network identifiers"),
 }).describe(
   "Real-Time Payments (RTP) network specific details. Present when transfer was processed via RTP network.",
 );
@@ -237,9 +280,15 @@ export type FedNowDetailsDestination = {
 export const FedNowDetailsDestination$zodSchema: z.ZodType<
   FedNowDetailsDestination
 > = z.object({
-  endToEndReferenceId: z.string().optional(),
-  networkId: z.string().optional(),
-  remittanceData: z.string().optional(),
+  endToEndReferenceId: z.string().optional().describe(
+    "End-to-end reference identifier for the FedNow transfer",
+  ),
+  networkId: z.string().optional().describe(
+    "Unique identifier for the transfer within the FedNow network",
+  ),
+  remittanceData: z.string().optional().describe(
+    "Remittance information included in the transfer request",
+  ),
 }).describe("FedNow destination details with network identifiers");
 
 /**
@@ -250,7 +299,8 @@ export type FedNowDetails = {
 };
 
 export const FedNowDetails$zodSchema: z.ZodType<FedNowDetails> = z.object({
-  destination: z.lazy(() => FedNowDetailsDestination$zodSchema).optional(),
+  destination: z.lazy(() => FedNowDetailsDestination$zodSchema).optional()
+    .describe("FedNow destination details with network identifiers"),
 }).describe(
   "FedNow Service network specific details. Present when transfer was processed via FedNow network.",
 );
@@ -279,7 +329,9 @@ export type TransferProcessingChannel = {
 export const TransferProcessingChannel$zodSchema: z.ZodType<
   TransferProcessingChannel
 > = z.object({
-  destination: DestinationEnum$zodSchema.optional(),
+  destination: DestinationEnum$zodSchema.optional().describe(
+    "The payment network used to process the transfer",
+  ),
 });
 
 export type Transfer = {
@@ -299,16 +351,22 @@ export type Transfer = {
 
 export const Transfer$zodSchema: z.ZodType<Transfer> = z.object({
   _links: z.record(z.string(), HalLink$zodSchema).optional(),
-  achDetails: z.lazy(() => AchDetails$zodSchema).optional(),
+  achDetails: z.lazy(() => AchDetails$zodSchema).optional().describe(
+    "ACH-specific details for the transfer. Present when transfer was processed via ACH network.",
+  ),
   amount: z.lazy(() => TransferAmount1$zodSchema).optional(),
   clearing: z.lazy(() => Clearing$zodSchema).optional(),
   correlationId: z.string().optional(),
   created: z.iso.datetime({ offset: true }).optional(),
-  fedNowDetails: z.lazy(() => FedNowDetails$zodSchema).optional(),
+  fedNowDetails: z.lazy(() => FedNowDetails$zodSchema).optional().describe(
+    "FedNow Service network specific details. Present when transfer was processed via FedNow network.",
+  ),
   id: z.string().optional(),
   metadata: z.lazy(() => TransferMetadata$zodSchema).optional(),
   processingChannel: z.lazy(() => TransferProcessingChannel$zodSchema)
     .optional(),
-  rtpDetails: z.lazy(() => RtpDetails$zodSchema).optional(),
+  rtpDetails: z.lazy(() => RtpDetails$zodSchema).optional().describe(
+    "Real-Time Payments (RTP) network specific details. Present when transfer was processed via RTP network.",
+  ),
   status: z.string().optional(),
 });

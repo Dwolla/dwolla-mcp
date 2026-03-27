@@ -52,13 +52,21 @@ export type BillingAddress = {
 };
 
 export const BillingAddress$zodSchema: z.ZodType<BillingAddress> = z.object({
-  address1: z.string().optional(),
-  address2: z.string().optional(),
-  address3: z.string().optional(),
-  city: z.string().optional(),
-  country: z.string().optional(),
-  postalCode: z.string().optional(),
-  stateProvinceRegion: z.string().optional(),
+  address1: z.string().optional().describe("First line of the street address"),
+  address2: z.string().optional().describe(
+    "Second line of the street address (optional)",
+  ),
+  address3: z.string().optional().describe(
+    "Third line of the street address (optional)",
+  ),
+  city: z.string().optional().describe("City name"),
+  country: z.string().optional().describe(
+    "Two-letter country code (ISO 3166-1 alpha-2)",
+  ),
+  postalCode: z.string().optional().describe("Postal code or ZIP code"),
+  stateProvinceRegion: z.string().optional().describe(
+    "Two-letter state, province, or region code",
+  ),
 }).describe("The billing address associated with the card");
 
 /**
@@ -75,13 +83,27 @@ export type CardDetails = {
 };
 
 export const CardDetails$zodSchema: z.ZodType<CardDetails> = z.object({
-  billingAddress: z.lazy(() => BillingAddress$zodSchema).optional(),
-  bin: z.string().optional(),
-  brand: z.string().optional(),
-  expirationMonth: z.int().optional(),
-  expirationYear: z.int().optional(),
-  lastFour: z.string().optional(),
-  nameOnCard: z.string().optional(),
+  billingAddress: z.lazy(() => BillingAddress$zodSchema).optional().describe(
+    "The billing address associated with the card",
+  ),
+  bin: z.string().optional().describe(
+    "Bank Identification Number (BIN) - the first 6-8 digits of the card number",
+  ),
+  brand: z.string().optional().describe(
+    "The card brand/network (e.g., Visa, Mastercard, American Express)",
+  ),
+  expirationMonth: z.int().optional().describe(
+    "The card expiration month (1-12)",
+  ),
+  expirationYear: z.int().optional().describe(
+    "The card expiration year (4-digit year)",
+  ),
+  lastFour: z.string().optional().describe(
+    "The last four digits of the card number",
+  ),
+  nameOnCard: z.string().optional().describe(
+    "The cardholder name as it appears on the card",
+  ),
 }).describe("Card-specific details. Only present when type is 'card'.");
 
 export type FundingSource = {
@@ -104,9 +126,15 @@ export const FundingSource$zodSchema: z.ZodType<FundingSource> = z.object({
   _links: z.record(z.string(), HalLink$zodSchema).optional(),
   bankAccountType: z.string().optional(),
   bankName: z.string().optional(),
-  bankUsageType: BankUsageType$zodSchema.optional(),
-  cardDetails: z.lazy(() => CardDetails$zodSchema).optional(),
-  channels: z.array(Channel$zodSchema).optional(),
+  bankUsageType: BankUsageType$zodSchema.optional().describe(
+    "The usage type of the bank account. Indicates if this is a settlement account for card network processors.",
+  ),
+  cardDetails: z.lazy(() => CardDetails$zodSchema).optional().describe(
+    "Card-specific details. Only present when type is 'card'.",
+  ),
+  channels: z.array(Channel$zodSchema).optional().describe(
+    "Payment processing channels supported by this funding source",
+  ),
   created: z.iso.datetime({ offset: true }).optional(),
   fingerprint: z.string().optional(),
   id: z.string().optional(),
