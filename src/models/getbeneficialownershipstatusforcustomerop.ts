@@ -60,14 +60,22 @@ export type GetBeneficialOwnershipStatusForCustomerResponse = {
 
 export const GetBeneficialOwnershipStatusForCustomerResponse$zodSchema:
   z.ZodType<GetBeneficialOwnershipStatusForCustomerResponse> = z.object({
-    BeneficialOwnership: BeneficialOwnership$zodSchema.optional(),
-    ContentType: z.string(),
-    RawResponse: z.custom<Response>(x => x instanceof Response),
-    StatusCode: z.int(),
+    BeneficialOwnership: BeneficialOwnership$zodSchema.optional().describe(
+      "successful operation",
+    ),
+    ContentType: z.string().describe(
+      "HTTP response content type for this operation",
+    ),
+    RawResponse: z.custom<Response>(x => x instanceof Response).describe(
+      "Raw HTTP response; suitable for custom response parsing",
+    ),
+    StatusCode: z.int().describe(
+      "HTTP response status code for this operation",
+    ),
     fourHundredAndFourApplicationVndDwollaV1HalPlusJsonObject: z.lazy(() =>
       GetBeneficialOwnershipStatusForCustomerNotFoundResponseBody$zodSchema
-    ).optional(),
+    ).optional().describe("not found"),
     fourHundredAndThreeApplicationVndDwollaV1HalPlusJsonObject: z.lazy(() =>
       GetBeneficialOwnershipStatusForCustomerForbiddenResponseBody$zodSchema
-    ).optional(),
+    ).optional().describe("forbidden"),
   });

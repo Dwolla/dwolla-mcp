@@ -248,14 +248,18 @@ export type GetFundingSourceBalanceResponse = {
 export const GetFundingSourceBalanceResponse$zodSchema: z.ZodType<
   GetFundingSourceBalanceResponse
 > = z.object({
-  ContentType: z.string(),
-  RawResponse: z.custom<Response>(x => x instanceof Response),
-  StatusCode: z.int(),
+  ContentType: z.string().describe(
+    "HTTP response content type for this operation",
+  ),
+  RawResponse: z.custom<Response>(x => x instanceof Response).describe(
+    "Raw HTTP response; suitable for custom response parsing",
+  ),
+  StatusCode: z.int().describe("HTTP response status code for this operation"),
   object: z.lazy(() => GetFundingSourceBalanceNotFoundResponseBody$zodSchema)
-    .optional(),
+    .optional().describe("not found"),
   oneOf: z.union([
     z.lazy(() => DwollaBalanceResponse$zodSchema),
     z.lazy(() => BankBalanceResponse$zodSchema),
     z.lazy(() => SettlementAccountBalanceResponse$zodSchema),
-  ]).optional(),
+  ]).optional().describe("successful operation"),
 });

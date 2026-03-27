@@ -39,9 +39,14 @@ export type ListCustomerExchangesResponse = {
 export const ListCustomerExchangesResponse$zodSchema: z.ZodType<
   ListCustomerExchangesResponse
 > = z.object({
-  ContentType: z.string(),
-  Exchanges: Exchanges$zodSchema.optional(),
-  RawResponse: z.custom<Response>(x => x instanceof Response),
-  StatusCode: z.int(),
-  object: z.lazy(() => ListCustomerExchangesResponseBody$zodSchema).optional(),
+  ContentType: z.string().describe(
+    "HTTP response content type for this operation",
+  ),
+  Exchanges: Exchanges$zodSchema.optional().describe("successful operation"),
+  RawResponse: z.custom<Response>(x => x instanceof Response).describe(
+    "Raw HTTP response; suitable for custom response parsing",
+  ),
+  StatusCode: z.int().describe("HTTP response status code for this operation"),
+  object: z.lazy(() => ListCustomerExchangesResponseBody$zodSchema).optional()
+    .describe("Not Found"),
 });

@@ -56,9 +56,14 @@ export type GetMicroDepositsResponse = {
 export const GetMicroDepositsResponse$zodSchema: z.ZodType<
   GetMicroDepositsResponse
 > = z.object({
-  ContentType: z.string(),
-  NotFoundError: NotFoundError$zodSchema.optional(),
-  RawResponse: z.custom<Response>(x => x instanceof Response),
-  StatusCode: z.int(),
-  object: z.lazy(() => GetMicroDepositsResponseBody$zodSchema).optional(),
+  ContentType: z.string().describe(
+    "HTTP response content type for this operation",
+  ),
+  NotFoundError: NotFoundError$zodSchema.optional().describe("not found"),
+  RawResponse: z.custom<Response>(x => x instanceof Response).describe(
+    "Raw HTTP response; suitable for custom response parsing",
+  ),
+  StatusCode: z.int().describe("HTTP response status code for this operation"),
+  object: z.lazy(() => GetMicroDepositsResponseBody$zodSchema).optional()
+    .describe("successful operation"),
 });

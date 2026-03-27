@@ -27,9 +27,15 @@ export type ListEventsResponse = {
 
 export const ListEventsResponse$zodSchema: z.ZodType<ListEventsResponse> = z
   .object({
-    ContentType: z.string(),
-    Events: Events$zodSchema.optional(),
-    NotFoundError: NotFoundError$zodSchema.optional(),
-    RawResponse: z.custom<Response>(x => x instanceof Response),
-    StatusCode: z.int(),
+    ContentType: z.string().describe(
+      "HTTP response content type for this operation",
+    ),
+    Events: Events$zodSchema.optional().describe("successful operation"),
+    NotFoundError: NotFoundError$zodSchema.optional().describe("not found"),
+    RawResponse: z.custom<Response>(x => x instanceof Response).describe(
+      "Raw HTTP response; suitable for custom response parsing",
+    ),
+    StatusCode: z.int().describe(
+      "HTTP response status code for this operation",
+    ),
   });

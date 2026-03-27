@@ -43,10 +43,14 @@ export const ListAvailableExchangeConnectionsResponse$zodSchema: z.ZodType<
   ListAvailableExchangeConnectionsResponse
 > = z.object({
   AvailableExchangeConnections: AvailableExchangeConnections$zodSchema
-    .optional(),
-  ContentType: z.string(),
-  RawResponse: z.custom<Response>(x => x instanceof Response),
-  StatusCode: z.int(),
+    .optional().describe("successful operation"),
+  ContentType: z.string().describe(
+    "HTTP response content type for this operation",
+  ),
+  RawResponse: z.custom<Response>(x => x instanceof Response).describe(
+    "Raw HTTP response; suitable for custom response parsing",
+  ),
+  StatusCode: z.int().describe("HTTP response status code for this operation"),
   object: z.lazy(() => ListAvailableExchangeConnectionsResponseBody$zodSchema)
-    .optional(),
+    .optional().describe("not found"),
 });

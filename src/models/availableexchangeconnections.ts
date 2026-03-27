@@ -52,8 +52,10 @@ export type AvailableExchangeConnection = {
 export const AvailableExchangeConnection$zodSchema: z.ZodType<
   AvailableExchangeConnection
 > = z.object({
-  availableConnectionToken: z.string(),
-  name: z.string(),
+  availableConnectionToken: z.string().describe(
+    "Token representing the external bank account that can be used to create a funding source",
+  ),
+  name: z.string().describe("Name of the external bank account"),
 });
 
 export type AvailableExchangeConnectionsEmbedded = {

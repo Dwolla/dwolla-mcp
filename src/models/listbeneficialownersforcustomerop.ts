@@ -42,10 +42,16 @@ export type ListBeneficialOwnersForCustomerResponse = {
 export const ListBeneficialOwnersForCustomerResponse$zodSchema: z.ZodType<
   ListBeneficialOwnersForCustomerResponse
 > = z.object({
-  BeneficialOwners: BeneficialOwners$zodSchema.optional(),
-  ContentType: z.string(),
-  RawResponse: z.custom<Response>(x => x instanceof Response),
-  StatusCode: z.int(),
+  BeneficialOwners: BeneficialOwners$zodSchema.optional().describe(
+    "successful operation",
+  ),
+  ContentType: z.string().describe(
+    "HTTP response content type for this operation",
+  ),
+  RawResponse: z.custom<Response>(x => x instanceof Response).describe(
+    "Raw HTTP response; suitable for custom response parsing",
+  ),
+  StatusCode: z.int().describe("HTTP response status code for this operation"),
   object: z.lazy(() => ListBeneficialOwnersForCustomerResponseBody$zodSchema)
-    .optional(),
+    .optional().describe("not found"),
 });

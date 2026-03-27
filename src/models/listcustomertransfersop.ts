@@ -63,9 +63,13 @@ export type ListCustomerTransfersResponse = {
 export const ListCustomerTransfersResponse$zodSchema: z.ZodType<
   ListCustomerTransfersResponse
 > = z.object({
-  ContentType: z.string(),
-  NotFoundError: NotFoundError$zodSchema.optional(),
-  RawResponse: z.custom<Response>(x => x instanceof Response),
-  StatusCode: z.int(),
-  Transfers: Transfers$zodSchema.optional(),
+  ContentType: z.string().describe(
+    "HTTP response content type for this operation",
+  ),
+  NotFoundError: NotFoundError$zodSchema.optional().describe("404 Not Found"),
+  RawResponse: z.custom<Response>(x => x instanceof Response).describe(
+    "Raw HTTP response; suitable for custom response parsing",
+  ),
+  StatusCode: z.int().describe("HTTP response status code for this operation"),
+  Transfers: Transfers$zodSchema.optional().describe("successful operation"),
 });
