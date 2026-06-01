@@ -121,9 +121,9 @@ node bin/mcp-server.js start --bearer-auth "your_token_here" --server "sandbox"
 <details>
 <summary>Claude Desktop</summary>
 
-Install the MCP server as a Desktop Extension using the pre-built [`mcp-server.mcpb`](https://github.com/Dwolla/dwolla-mcp/releases/download/v1.1.2/mcp-server.mcpb) file:
+Install the MCP server as a Desktop Extension using the pre-built [`mcp-server.mcpb`](https://github.com/Dwolla/dwolla-mcp/releases/download/v1.1.3/mcp-server.mcpb) file:
 
-Simply drag and drop the [`mcp-server.mcpb`](https://github.com/Dwolla/dwolla-mcp/releases/download/v1.1.2/mcp-server.mcpb) file onto Claude Desktop to install the extension.
+Simply drag and drop the [`mcp-server.mcpb`](https://github.com/Dwolla/dwolla-mcp/releases/download/v1.1.3/mcp-server.mcpb) file onto Claude Desktop to install the extension.
 
 The MCP bundle package includes the MCP server and all necessary configuration. Once installed, the server will be available without additional setup.
 
@@ -522,8 +522,8 @@ To enable dynamic mode, pass the `--mode dynamic` flag when starting your server
 In dynamic mode, the server registers only the following meta-tools instead of every individual tool:
 
 - **`list_tools`**: Lists all available tools with their names and descriptions.
-- **`describe_tool`**: Returns the input schema for one or more tools by name.
-- **`execute_tool`**: Executes a tool by name with the provided input parameters.
+- **`describe_tool_input`**: Returns the input schema for one or more tools by name.
+- **`execute_tool`**: Executes a tool by name with its arguments.
 - **`list_scopes`**: Lists the scopes available on the server.
 
 This approach significantly reduces the number of tokens sent to the LLM on each request, which is especially useful for servers with a large number of tools.
