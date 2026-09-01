@@ -11,3 +11,4 @@ bun.lock
 /esm
 /node_modules
 .DS_Store
+.claude/settings.local.json
