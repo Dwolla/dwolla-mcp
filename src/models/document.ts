@@ -6,12 +6,6 @@ import * as z from "zod";
 import { ClosedEnum } from "../types/enums.js";
 import { HalLink, HalLink$zodSchema } from "./hallink.js";
 
-export type DocumentLinks = { self?: HalLink | undefined };
-
-export const DocumentLinks$zodSchema: z.ZodType<DocumentLinks> = z.object({
-  self: HalLink$zodSchema.optional(),
-});
-
 /**
  * Current status of the document upload
  */
@@ -70,6 +64,12 @@ export const DocumentVerificationStatus$zodSchema = z.enum([
   "accepted",
   "rejected",
 ]).describe("Verification status of the document after review");
+
+export type DocumentLinks = { self?: HalLink | undefined };
+
+export const DocumentLinks$zodSchema: z.ZodType<DocumentLinks> = z.object({
+  self: HalLink$zodSchema.optional(),
+});
 
 export type AllFailureReason = { reason: string; description: string };
 

@@ -72,7 +72,7 @@ export const BillingAddress$zodSchema: z.ZodType<BillingAddress> = z.object({
 /**
  * Card-specific details. Only present when type is 'card'.
  */
-export type CardDetails = {
+export type FundingSourceCardDetails = {
   brand?: string | undefined;
   lastFour?: string | undefined;
   expirationMonth?: number | undefined;
@@ -80,9 +80,13 @@ export type CardDetails = {
   nameOnCard?: string | undefined;
   bin?: string | undefined;
   billingAddress?: BillingAddress | undefined;
+  dateOfBirth?: string | undefined;
+  countryOfBirth?: string | undefined;
 };
 
-export const CardDetails$zodSchema: z.ZodType<CardDetails> = z.object({
+export const FundingSourceCardDetails$zodSchema: z.ZodType<
+  FundingSourceCardDetails
+> = z.object({
   billingAddress: z.lazy(() => BillingAddress$zodSchema).optional().describe(
     "The billing address associated with the card",
   ),
@@ -91,6 +95,12 @@ export const CardDetails$zodSchema: z.ZodType<CardDetails> = z.object({
   ),
   brand: z.string().optional().describe(
     "The card brand/network (e.g., Visa, Mastercard, American Express)",
+  ),
+  countryOfBirth: z.string().optional().describe(
+    "Cardholder country of birth as a two-letter country code (ISO 3166-1 alpha-2). Only present if it was supplied when the card funding source was created or updated.",
+  ),
+  dateOfBirth: z.string().optional().describe(
+    "Cardholder date of birth in `YYYY-MM-DD` format. Only present if it was supplied when the card funding source was created or updated.",
   ),
   expirationMonth: z.int().optional().describe(
     "The card expiration month (1-12)",
@@ -119,7 +129,7 @@ export type FundingSource = {
   bankName?: string | undefined;
   fingerprint?: string | undefined;
   bankUsageType?: BankUsageType | undefined;
-  cardDetails?: CardDetails | undefined;
+  cardDetails?: FundingSourceCardDetails | undefined;
 };
 
 export const FundingSource$zodSchema: z.ZodType<FundingSource> = z.object({
@@ -129,9 +139,8 @@ export const FundingSource$zodSchema: z.ZodType<FundingSource> = z.object({
   bankUsageType: BankUsageType$zodSchema.optional().describe(
     "The usage type of the bank account. Indicates if this is a settlement account for card network processors.",
   ),
-  cardDetails: z.lazy(() => CardDetails$zodSchema).optional().describe(
-    "Card-specific details. Only present when type is 'card'.",
-  ),
+  cardDetails: z.lazy(() => FundingSourceCardDetails$zodSchema).optional()
+    .describe("Card-specific details. Only present when type is 'card'."),
   channels: z.array(Channel$zodSchema).optional().describe(
     "Payment processing channels supported by this funding source",
   ),

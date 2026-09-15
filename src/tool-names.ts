@@ -50,7 +50,7 @@ export const toolNames: Array<{ name: string; description: string }>= [
   },
   {
     "name": "funding-sources-get",
-    "description": "Retrieve a funding source\n\nReturns detailed information for a specific funding source, including its type, status, and verification details. Supports bank accounts (via Open Banking), debit card funding sources, and Dwolla balance (verified customers only). Debit card funding sources include masked card details such as brand, last four digits, expiration date, and cardholder name."
+    "description": "Retrieve a funding source\n\nReturns detailed information for a specific funding source, including its type, status, and verification details. Supports bank accounts (via Open Banking), debit card funding sources, and Dwolla balance (verified customers only). Debit card funding sources include masked card details such as brand, last four digits, expiration date, and cardholder name, along with `dateOfBirth` and `countryOfBirth` when those optional identity fields were supplied."
   },
   {
     "name": "funding-sources-micro-deposits-get-micro-deposits",

@@ -6,6 +6,89 @@ import * as z from "zod";
 import { ClosedEnum } from "../types/enums.js";
 import { HalLink, HalLink$zodSchema } from "./hallink.js";
 
+/**
+ * Describes the purpose of the transaction
+ */
+export const SourceCompanyEntryDescription = {
+  Reversal: "REVERSAL",
+  Reclaim: "RECLAIM",
+  NoCheck: "NO CHECK",
+  Autoenroll: "AUTOENROLL",
+  Redepcheck: "REDEPCHECK",
+  ReturnFee: "RETURN FEE",
+  RetryPmnt: "RETRY PMNT",
+  Healthcare: "HEALTHCARE",
+  Payment: "PAYMENT",
+} as const;
+/**
+ * Describes the purpose of the transaction
+ */
+export type SourceCompanyEntryDescription = ClosedEnum<
+  typeof SourceCompanyEntryDescription
+>;
+
+export const SourceCompanyEntryDescription$zodSchema = z.enum([
+  "REVERSAL",
+  "RECLAIM",
+  "NO CHECK",
+  "AUTOENROLL",
+  "REDEPCHECK",
+  "RETURN FEE",
+  "RETRY PMNT",
+  "HEALTHCARE",
+  "PAYMENT",
+]).describe("Describes the purpose of the transaction");
+
+/**
+ * Describes the purpose of the transaction
+ */
+export const DestinationCompanyEntryDescription = {
+  Reversal: "REVERSAL",
+  Reclaim: "RECLAIM",
+  NoCheck: "NO CHECK",
+  Autoenroll: "AUTOENROLL",
+  Redepcheck: "REDEPCHECK",
+  ReturnFee: "RETURN FEE",
+  RetryPmnt: "RETRY PMNT",
+  Healthcare: "HEALTHCARE",
+  Payment: "PAYMENT",
+} as const;
+/**
+ * Describes the purpose of the transaction
+ */
+export type DestinationCompanyEntryDescription = ClosedEnum<
+  typeof DestinationCompanyEntryDescription
+>;
+
+export const DestinationCompanyEntryDescription$zodSchema = z.enum([
+  "REVERSAL",
+  "RECLAIM",
+  "NO CHECK",
+  "AUTOENROLL",
+  "REDEPCHECK",
+  "RETURN FEE",
+  "RETRY PMNT",
+  "HEALTHCARE",
+  "PAYMENT",
+]).describe("Describes the purpose of the transaction");
+
+/**
+ * The payment network used to process the transfer
+ */
+export const DestinationEnum = {
+  RealTimePayments: "real-time-payments",
+  FedNow: "fed-now",
+} as const;
+/**
+ * The payment network used to process the transfer
+ */
+export type DestinationEnum = ClosedEnum<typeof DestinationEnum>;
+
+export const DestinationEnum$zodSchema = z.enum([
+  "real-time-payments",
+  "fed-now",
+]).describe("The payment network used to process the transfer");
+
 export type TransferAmount1 = {
   value?: string | undefined;
   currency?: string | undefined;
@@ -48,39 +131,6 @@ export const SourceAddenda$zodSchema: z.ZodType<SourceAddenda> = z.object({
     "An array containing a single string addenda value",
   ),
 }).describe("Contains addenda information for the transfer");
-
-/**
- * Describes the purpose of the transaction
- */
-export const SourceCompanyEntryDescription = {
-  Reversal: "REVERSAL",
-  Reclaim: "RECLAIM",
-  NoCheck: "NO CHECK",
-  Autoenroll: "AUTOENROLL",
-  Redepcheck: "REDEPCHECK",
-  ReturnFee: "RETURN FEE",
-  RetryPmnt: "RETRY PMNT",
-  Healthcare: "HEALTHCARE",
-  Payment: "PAYMENT",
-} as const;
-/**
- * Describes the purpose of the transaction
- */
-export type SourceCompanyEntryDescription = ClosedEnum<
-  typeof SourceCompanyEntryDescription
->;
-
-export const SourceCompanyEntryDescription$zodSchema = z.enum([
-  "REVERSAL",
-  "RECLAIM",
-  "NO CHECK",
-  "AUTOENROLL",
-  "REDEPCHECK",
-  "RETURN FEE",
-  "RETRY PMNT",
-  "HEALTHCARE",
-  "PAYMENT",
-]).describe("Describes the purpose of the transaction");
 
 /**
  * Information sent to the source/originating bank account along with the transfer
@@ -135,39 +185,6 @@ export const DestinationAddenda$zodSchema: z.ZodType<DestinationAddenda> = z
       "An array containing a single string addenda value",
     ),
   }).describe("Contains addenda information for the transfer");
-
-/**
- * Describes the purpose of the transaction
- */
-export const DestinationCompanyEntryDescription = {
-  Reversal: "REVERSAL",
-  Reclaim: "RECLAIM",
-  NoCheck: "NO CHECK",
-  Autoenroll: "AUTOENROLL",
-  Redepcheck: "REDEPCHECK",
-  ReturnFee: "RETURN FEE",
-  RetryPmnt: "RETRY PMNT",
-  Healthcare: "HEALTHCARE",
-  Payment: "PAYMENT",
-} as const;
-/**
- * Describes the purpose of the transaction
- */
-export type DestinationCompanyEntryDescription = ClosedEnum<
-  typeof DestinationCompanyEntryDescription
->;
-
-export const DestinationCompanyEntryDescription$zodSchema = z.enum([
-  "REVERSAL",
-  "RECLAIM",
-  "NO CHECK",
-  "AUTOENROLL",
-  "REDEPCHECK",
-  "RETURN FEE",
-  "RETRY PMNT",
-  "HEALTHCARE",
-  "PAYMENT",
-]).describe("Describes the purpose of the transaction");
 
 /**
  * Information sent to the destination/receiving bank account along with the transfer
@@ -304,23 +321,6 @@ export const FedNowDetails$zodSchema: z.ZodType<FedNowDetails> = z.object({
 }).describe(
   "FedNow Service network specific details. Present when transfer was processed via FedNow network.",
 );
-
-/**
- * The payment network used to process the transfer
- */
-export const DestinationEnum = {
-  RealTimePayments: "real-time-payments",
-  FedNow: "fed-now",
-} as const;
-/**
- * The payment network used to process the transfer
- */
-export type DestinationEnum = ClosedEnum<typeof DestinationEnum>;
-
-export const DestinationEnum$zodSchema = z.enum([
-  "real-time-payments",
-  "fed-now",
-]).describe("The payment network used to process the transfer");
 
 export type TransferProcessingChannel = {
   destination?: DestinationEnum | undefined;
