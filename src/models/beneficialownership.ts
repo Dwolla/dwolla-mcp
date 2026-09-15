@@ -6,14 +6,6 @@ import * as z from "zod";
 import { ClosedEnum } from "../types/enums.js";
 import { HalLink, HalLink$zodSchema } from "./hallink.js";
 
-export type BeneficialOwnershipLinks = { self?: HalLink | undefined };
-
-export const BeneficialOwnershipLinks$zodSchema: z.ZodType<
-  BeneficialOwnershipLinks
-> = z.object({
-  self: HalLink$zodSchema.optional(),
-});
-
 export const BeneficialOwnershipStatus = {
   Uncertified: "uncertified",
   Certified: "certified",
@@ -28,6 +20,14 @@ export const BeneficialOwnershipStatus$zodSchema = z.enum([
   "certified",
   "recertify",
 ]);
+
+export type BeneficialOwnershipLinks = { self?: HalLink | undefined };
+
+export const BeneficialOwnershipLinks$zodSchema: z.ZodType<
+  BeneficialOwnershipLinks
+> = z.object({
+  self: HalLink$zodSchema.optional(),
+});
 
 export type BeneficialOwnership = {
   _links: BeneficialOwnershipLinks;

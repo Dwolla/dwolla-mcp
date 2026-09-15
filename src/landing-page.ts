@@ -932,7 +932,7 @@ http_headers = { "server" = "YOUR_SERVER", "bearer-auth" = "YOUR_BEARER_AUTH" }`
         <h1>Instructions</h1>
         <p>One-click installation for Claude Desktop users</p>
         <div class="instruction-item">
-          <a href="https://github.com/Dwolla/dwolla-mcp/releases/download/v1.1.3/mcp-server.mcpb" download="mcp-server.mcpb" class="action-button header-action" style="display: inline-flex; margin-bottom: 16px;">
+          <a href="https://github.com/Dwolla/dwolla-mcp/releases/download/v1.2.0/mcp-server.mcpb" download="mcp-server.mcpb" class="action-button header-action" style="display: inline-flex; margin-bottom: 16px;">
             📥 Download MCP Bundle
           </a>
         </div>
