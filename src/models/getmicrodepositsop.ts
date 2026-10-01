@@ -27,6 +27,49 @@ export const Failure$zodSchema: z.ZodType<Failure> = z.object({
 });
 
 /**
+ * ACH details for the first micro-deposit
+ */
+export type Deposit1 = { traceId: string };
+
+export const Deposit1$zodSchema: z.ZodType<Deposit1> = z.object({
+  traceId: z.string().describe(
+    "A unique identifier for tracing the ACH transaction through the banking network. Used for transaction tracking and reconciliation purposes",
+  ),
+}).describe("ACH details for the first micro-deposit");
+
+/**
+ * ACH details for the second micro-deposit
+ */
+export type Deposit2 = { traceId: string };
+
+export const Deposit2$zodSchema: z.ZodType<Deposit2> = z.object({
+  traceId: z.string().describe(
+    "A unique identifier for tracing the ACH transaction through the banking network. Used for transaction tracking and reconciliation purposes",
+  ),
+}).describe("ACH details for the second micro-deposit");
+
+/**
+ * ACH details for each micro-deposit. Optional; only returned when ACH details are available for the micro-deposits. `deposit1` or `deposit2` may be omitted if details for that deposit are unavailable.
+ */
+export type GetMicroDepositsAchDetails = {
+  deposit1?: Deposit1 | undefined;
+  deposit2?: Deposit2 | undefined;
+};
+
+export const GetMicroDepositsAchDetails$zodSchema: z.ZodType<
+  GetMicroDepositsAchDetails
+> = z.object({
+  deposit1: z.lazy(() => Deposit1$zodSchema).optional().describe(
+    "ACH details for the first micro-deposit",
+  ),
+  deposit2: z.lazy(() => Deposit2$zodSchema).optional().describe(
+    "ACH details for the second micro-deposit",
+  ),
+}).describe(
+  "ACH details for each micro-deposit. Optional; only returned when ACH details are available for the micro-deposits. `deposit1` or `deposit2` may be omitted if details for that deposit are unavailable.",
+);
+
+/**
  * successful operation
  */
 export type GetMicroDepositsResponseBody = {
@@ -34,12 +77,17 @@ export type GetMicroDepositsResponseBody = {
   created?: string | undefined;
   status?: string | undefined;
   failure?: Failure | undefined;
+  achDetails?: GetMicroDepositsAchDetails | undefined;
 };
 
 export const GetMicroDepositsResponseBody$zodSchema: z.ZodType<
   GetMicroDepositsResponseBody
 > = z.object({
   _links: z.record(z.string(), HalLink$zodSchema).optional(),
+  achDetails: z.lazy(() => GetMicroDepositsAchDetails$zodSchema).optional()
+    .describe(
+      "ACH details for each micro-deposit. Optional; only returned when ACH details are available for the micro-deposits. `deposit1` or `deposit2` may be omitted if details for that deposit are unavailable.",
+    ),
   created: z.iso.datetime({ offset: true }).optional(),
   failure: z.lazy(() => Failure$zodSchema).optional(),
   status: z.string().optional(),
