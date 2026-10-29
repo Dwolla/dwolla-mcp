@@ -37,6 +37,8 @@ mcp-typescript:
     peerDependencies: {}
   additionalPackageJSON:
     description: Dwolla MCP Server
+    engines:
+      node: ^22.23.4 || ^24.22.1 || >=26.12.1
   advancedFlags: []
   author: Speakeasy
   baseErrorName: DwollaMcpError
