@@ -28,7 +28,7 @@ Retrieve detailed fee information for a specific transfer by its unique identifi
     const [result, apiCall] = await transfersFeesList(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

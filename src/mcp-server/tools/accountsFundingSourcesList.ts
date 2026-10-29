@@ -29,7 +29,7 @@ Get a list of all funding sources associated with a specific Main Dwolla Account
     const [result, apiCall] = await accountsFundingSourcesList(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

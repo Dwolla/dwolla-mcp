@@ -21,7 +21,7 @@ Returns a list of all supported exchange partners. Each partner includes a uniqu
   tool: async (client, ctx) => {
     const [result, apiCall] = await exchangePartnersList(
       client,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

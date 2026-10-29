@@ -30,7 +30,7 @@ Retrieve all fired webhooks for a specific webhook subscription with comprehensi
     const [result, apiCall] = await webhookSubscriptionsWebhooksList(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -15,6 +15,7 @@ generation:
     sharedErrorComponentsApr2025: true
     sharedNestedComponentsJan2026: false
     nameOverrideFeb2026: false
+    openSingleValueEnumsOct2026: false
   auth:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: true
@@ -30,7 +31,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 mcp-typescript:
-  version: 1.2.1
+  version: 2.0.0
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
@@ -51,6 +52,7 @@ mcp-typescript:
   inputModelSuffix: input
   maxMethodParams: 0
   multipartArrayFormat: legacy
+  numericEnumMemberNames: legacy
   outputModelSuffix: output
   packageName: '@dwolla/mcp-server'
   responseFormat: envelope

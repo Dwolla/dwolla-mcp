@@ -28,7 +28,7 @@ Returns a paginated list of customers sorted by creation date. Supports fuzzy se
     const [result, apiCall] = await customersList(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -28,7 +28,7 @@ Retrieve detailed failure information for a failed bank or VAN transfer includin
     const [result, apiCall] = await transfersFailureGet(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

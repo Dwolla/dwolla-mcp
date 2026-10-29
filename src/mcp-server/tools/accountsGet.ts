@@ -28,7 +28,7 @@ Returns basic account information for your authorized Main Dwolla Account, inclu
     const [result, apiCall] = await accountsGet(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

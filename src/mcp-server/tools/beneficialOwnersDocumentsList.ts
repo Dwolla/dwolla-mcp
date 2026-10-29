@@ -28,7 +28,7 @@ Returns all identity verification documents submitted for a beneficial owner. In
     const [result, apiCall] = await beneficialOwnersDocumentsList(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

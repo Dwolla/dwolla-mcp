@@ -28,7 +28,7 @@ Returns all labels for a specified Verified Customer, sorted by creation date (m
     const [result, apiCall] = await customersLabelsList(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

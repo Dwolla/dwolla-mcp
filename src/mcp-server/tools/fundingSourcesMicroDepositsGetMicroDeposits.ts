@@ -30,7 +30,7 @@ Returns the status and details of micro-deposits for a funding source to check v
     const [result, apiCall] = await fundingSourcesMicroDepositsGetMicroDeposits(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

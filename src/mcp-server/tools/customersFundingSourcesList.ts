@@ -28,7 +28,7 @@ Returns all funding sources for a customer, including bank accounts, debit card 
     const [result, apiCall] = await customersFundingSourcesList(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

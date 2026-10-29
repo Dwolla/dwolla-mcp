@@ -28,7 +28,7 @@ Returns a paginated, searchable list of transfers associated with the specified 
     const [result, apiCall] = await accountsTransfersList(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -30,7 +30,7 @@ Returns available exchange connections for a customer's bank accounts authorized
     const [result, apiCall] = await customersListAvailableConnections(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

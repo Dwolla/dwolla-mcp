@@ -28,7 +28,7 @@ Returns a paginated list of mass payments created by your Main Dwolla account. R
     const [result, apiCall] = await accountsMassPaymentsList(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

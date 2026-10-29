@@ -28,7 +28,7 @@ Retrieve and search transfers for a specific Customer with comprehensive filteri
     const [result, apiCall] = await customersTransfersList(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {
