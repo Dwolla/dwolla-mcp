@@ -66,7 +66,7 @@ This MCP server enables AI agents to **retrieve and analyze** data from Dwolla's
 
 Before using the Dwolla MCP server, you'll need:
 
-- **Node.js** 18+ and npm
+- **Node.js** and npm, on a supported and patched release line: **v22.23.4+**, **v24.22.1+**, or **v26.12.1+** (see the [Node.js October 2026 security releases](https://nodejs.org/en/blog/vulnerability/october-2026-security-releases)). Node.js 18.x and 20.x are end-of-life and no longer receive security fixes.
 - **Dwolla Account** ([Sandbox Account Sign-up](https://accounts-sandbox.dwolla.com/sign-up))
 - **Bearer Token** generated using your API client credential sfrom your Dwolla application
 
@@ -413,7 +413,7 @@ The Dwolla MCP server provides the following tools for data retrieval and analys
 
 **MCP Server Not Connecting**
 - Verify your bearer token is valid
-- Check that Node.js 18+ is installed: `node --version`
+- Check that a supported Node.js version is installed (v22.23.4+, v24.22.1+, or v26.12.1+): `node --version`
 - Ensure npm/npx is available: `npm --version`
 - Try clearing npm cache: `npm cache clean --force`
 
