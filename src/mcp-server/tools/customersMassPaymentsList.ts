@@ -28,7 +28,7 @@ Retrieve all previously created mass payments for a Verified Customer account wi
     const [result, apiCall] = await customersMassPaymentsList(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

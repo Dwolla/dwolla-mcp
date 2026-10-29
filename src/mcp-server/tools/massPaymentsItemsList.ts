@@ -28,7 +28,7 @@ Retrieve individual payment items within a mass payment with optional status fil
     const [result, apiCall] = await massPaymentsItemsList(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

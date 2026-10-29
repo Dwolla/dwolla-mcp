@@ -28,7 +28,7 @@ Returns the current balance for a specific funding source. For bank accounts, in
     const [result, apiCall] = await fundingSourcesBalanceGet(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

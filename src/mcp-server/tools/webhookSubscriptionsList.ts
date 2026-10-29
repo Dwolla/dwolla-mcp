@@ -21,7 +21,7 @@ Retrieve all webhook subscriptions that belong to an application including their
   tool: async (client, ctx) => {
     const [result, apiCall] = await webhookSubscriptionsList(
       client,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

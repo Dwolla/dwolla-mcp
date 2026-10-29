@@ -28,7 +28,7 @@ Returns all beneficial owners associated with a business verified customer. Bene
     const [result, apiCall] = await customersBeneficialOwnersList(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

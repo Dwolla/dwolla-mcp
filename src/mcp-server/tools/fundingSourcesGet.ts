@@ -28,7 +28,7 @@ Returns detailed information for a specific funding source, including its type, 
     const [result, apiCall] = await fundingSourcesGet(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

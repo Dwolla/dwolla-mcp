@@ -28,7 +28,7 @@ Returns a paginated list of events representing state changes to resources in yo
     const [result, apiCall] = await eventsList(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

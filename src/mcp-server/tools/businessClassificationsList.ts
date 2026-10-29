@@ -21,7 +21,7 @@ Returns a directory of business and industry classifications required for creati
   tool: async (client, ctx) => {
     const [result, apiCall] = await businessClassificationsList(
       client,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

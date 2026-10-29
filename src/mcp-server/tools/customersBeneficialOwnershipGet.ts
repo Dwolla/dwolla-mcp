@@ -29,7 +29,7 @@ Returns the certification status of beneficial ownership for a business verified
       const [result, apiCall] = await customersBeneficialOwnershipGet(
         client,
         args.request,
-        { fetchOptions: { signal: ctx.signal } },
+        { fetchOptions: { signal: ctx.mcpReq.signal } },
       ).$inspect();
 
       if (!result.ok) {

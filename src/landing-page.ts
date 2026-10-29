@@ -11,13 +11,28 @@ import { toolNames } from "./tool-names.js";
 // Cloudflare-specific wrapper
 export function landingPage(req: Request): Response {
   const origin = new URL(req.url).origin;
-  return new Response(landingPageHTML(origin), {
+  return new Response(landingPageHTML(origin, "http", "cloudflare"), {
     headers: { "Content-Type": "text/html" },
   });
 }
 
 // express wrapper
 export function landingPageExpress(req: ExpressRequest, res: ExpressResponse) {
+  sendLandingPage(req, res, "sse");
+}
+
+export function landingPageExpressHTTP(
+  req: ExpressRequest,
+  res: ExpressResponse,
+) {
+  sendLandingPage(req, res, "http");
+}
+
+function sendLandingPage(
+  req: ExpressRequest,
+  res: ExpressResponse,
+  transport: "sse" | "http",
+) {
   const proto = req.get("x-forwarded-proto")?.split(",")[0]?.trim()
     || req.protocol;
   const host = req.get("host");
@@ -25,27 +40,58 @@ export function landingPageExpress(req: ExpressRequest, res: ExpressResponse) {
     res.status(400).send("Missing Host header");
     return;
   }
-  res.type("html").send(landingPageHTML(`${proto}://${host}`));
+  res.type("html").send(landingPageHTML(`${proto}://${host}`, transport));
 }
 
-export function landingPageHTML(origin: string): string {
+export function landingPageHTML(
+  origin: string,
+  transport: "sse" | "http" = "sse",
+  runtime: "node" | "cloudflare" = "node",
+): string {
   const o = origin;
+  const endpoint = transport === "sse" ? "sse" : "mcp";
+  const headers: Array<{ name: string; env: string }> = runtime === "cloudflare"
+    ? [{ "name": "authorization", "env": "BEARER_AUTH" }]
+    : transport === "sse"
+    ? [{ "name": "bearer-auth", "env": "BEARER_AUTH" }]
+    : [{ "name": "bearer-auth", "env": "BEARER_AUTH" }];
   const mcpConfig = {
-    "command": "npx",
-    "args": [
+    command: "npx",
+    args: [
       "-y",
       "mcp-remote@0.1.25",
-      `${o}/sse`,
-      "--header",
-      "server:${SERVER}",
-      "--header",
-      "bearer-auth:${BEARER_AUTH}",
+      `${o}/${endpoint}`,
+      ...headers.flatMap(({ name, env }) => ["--header", `${name}:\${${env}}`]),
     ],
-    "env": { "SERVER": "YOUR_VALUE_HERE", "BEARER_AUTH": "YOUR_VALUE_HERE" },
+    env: Object.fromEntries(headers.map(({ env }) => [env, "YOUR_VALUE_HERE"])),
   };
-  const codexConfig = `[mcp_servers.DwollaMcp]
-url = "${o}/sse"
-http_headers = { "server" = "YOUR_SERVER", "bearer-auth" = "YOUR_BEARER_AUTH" }`;
+  const cliHeaders = headers.map(({ name }) => `--header "${name}: ..."`).join(
+    " ",
+  );
+  const codexConfig = transport === "sse"
+    ? `[mcp_servers.DwollaMcp]
+command = ${JSON.stringify(mcpConfig.command)}
+args = ${JSON.stringify(mcpConfig.args)}
+env = { ${
+      Object.entries(mcpConfig.env).map(([name, value]) =>
+        `${JSON.stringify(name)} = ${JSON.stringify(value)}`
+      ).join(", ")
+    } }`
+    : `[mcp_servers.DwollaMcp]
+url = ${JSON.stringify(`${o}/${endpoint}`)}
+http_headers = { ${
+      headers.map(({ name, env }) =>
+        `${JSON.stringify(name)} = ${JSON.stringify(`YOUR_${env}`)}`
+      ).join(", ")
+    } }`;
+  const encodedConfig = encodeURIComponent(
+    btoa(
+      Array.from(
+        new TextEncoder().encode(JSON.stringify(mcpConfig)),
+        byte => String.fromCharCode(byte),
+      ).join(""),
+    ),
+  );
 
   return `
 <!DOCTYPE html>
@@ -683,7 +729,7 @@ http_headers = { "server" = "YOUR_SERVER", "bearer-auth" = "YOUR_BEARER_AUTH" }`
                   </svg>
                 </button>
                 <div class="popover-menu hidden" id="popover-menu">
-                  <a class="popover-button install-link" href="cursor://anysphere.cursor-deeplink/mcp/install?name=DwollaMcp&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyJAZHdvbGxhL21jcC1zZXJ2ZXIiLCJzdGFydCIsIi0tc2VydmVyIiwicHJvZCIsIi0tYmVhcmVyLWF1dGgiLCIiXX0=">
+                  <a class="popover-button install-link" href="cursor://anysphere.cursor-deeplink/mcp/install?name=DwollaMcp&config=${encodedConfig}">
                     Cursor
                   </a>
                   <button class="popover-button" onclick="showModal('claude-code')">
@@ -692,7 +738,7 @@ http_headers = { "server" = "YOUR_SERVER", "bearer-auth" = "YOUR_BEARER_AUTH" }`
                   <button class="popover-button" onclick="showModal('claude-desktop')">
                     Claude Desktop
                   </button>
-                  <a class="popover-button install-link" href="vscode://ms-vscode.vscode-mcp/install?name=DwollaMcp&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyJAZHdvbGxhL21jcC1zZXJ2ZXIiLCJzdGFydCIsIi0tc2VydmVyIiwicHJvZCIsIi0tYmVhcmVyLWF1dGgiLCIiXX0=">
+                  <a class="popover-button install-link" href="vscode://ms-vscode.vscode-mcp/install?name=DwollaMcp&config=${encodedConfig}">
                     VS Code
                   </a>
                   <button class="popover-button" onclick="showModal('gemini')">
@@ -715,7 +761,7 @@ http_headers = { "server" = "YOUR_SERVER", "bearer-auth" = "YOUR_BEARER_AUTH" }`
             </div>
           </header>
           <div class="install-targets">
-            <a tabindex="0" class="card install-target install-link" href="cursor://anysphere.cursor-deeplink/mcp/install?name=DwollaMcp&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyJAZHdvbGxhL21jcC1zZXJ2ZXIiLCJzdGFydCIsIi0tc2VydmVyIiwicHJvZCIsIi0tYmVhcmVyLWF1dGgiLCIiXX0=">
+            <a tabindex="0" class="card install-target install-link" href="cursor://anysphere.cursor-deeplink/mcp/install?name=DwollaMcp&config=${encodedConfig}">
               <div class="target">
                 <img src="https://cursor.com/assets/images/logo.svg" alt="Cursor">
                 <span>Cursor</span>
@@ -737,7 +783,7 @@ http_headers = { "server" = "YOUR_SERVER", "bearer-auth" = "YOUR_BEARER_AUTH" }`
                 <span>Claude Desktop</span>
               </div>
             </div>
-            <a tabindex="0" class="card install-target install-link" href="vscode://ms-vscode.vscode-mcp/install?name=DwollaMcp&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyJAZHdvbGxhL21jcC1zZXJ2ZXIiLCJzdGFydCIsIi0tc2VydmVyIiwicHJvZCIsIi0tYmVhcmVyLWF1dGgiLCIiXX0=">
+            <a tabindex="0" class="card install-target install-link" href="vscode://ms-vscode.vscode-mcp/install?name=DwollaMcp&config=${encodedConfig}">
               <div class="target">
                 <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100">
@@ -859,7 +905,7 @@ http_headers = { "server" = "YOUR_SERVER", "bearer-auth" = "YOUR_BEARER_AUTH" }`
                 <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
               </svg>
             </button>
-            <code class="code-snippet" id="server-url">${o}/mcp</code>
+            <code class="code-snippet" id="server-url">${o}/${endpoint}</code>
           </div>
         </section>
 
@@ -916,7 +962,7 @@ http_headers = { "server" = "YOUR_SERVER", "bearer-auth" = "YOUR_BEARER_AUTH" }`
               <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
             </svg>
           </button>
-          <code class="code-snippet language-json" id="claude-cli-cmd">claude mcp add DwollaMcp -- npx -y @dwolla/mcp-server start --server prod --bearer-auth </code>
+          <code class="code-snippet language-json" id="claude-cli-cmd">claude mcp add --transport ${transport} DwollaMcp ${o}/${endpoint} ${cliHeaders}</code>
         </div>
       </div>
     </div>
@@ -932,7 +978,7 @@ http_headers = { "server" = "YOUR_SERVER", "bearer-auth" = "YOUR_BEARER_AUTH" }`
         <h1>Instructions</h1>
         <p>One-click installation for Claude Desktop users</p>
         <div class="instruction-item">
-          <a href="https://github.com/Dwolla/dwolla-mcp/releases/download/v1.2.1/mcp-server.mcpb" download="mcp-server.mcpb" class="action-button header-action" style="display: inline-flex; margin-bottom: 16px;">
+          <a href="https://github.com/Dwolla/dwolla-mcp/releases/download/v2.0.0/mcp-server.mcpb" download="mcp-server.mcpb" class="action-button header-action" style="display: inline-flex; margin-bottom: 16px;">
             📥 Download MCP Bundle
           </a>
         </div>
@@ -967,7 +1013,7 @@ http_headers = { "server" = "YOUR_SERVER", "bearer-auth" = "YOUR_BEARER_AUTH" }`
               <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
             </svg>
           </button>
-          <code class="code-snippet language-json" id="gemini-config">gemini mcp add DwollaMcp -- npx -y @dwolla/mcp-server start --server prod --bearer-auth </code>
+          <code class="code-snippet language-json" id="gemini-config">gemini mcp add --transport ${transport} DwollaMcp ${o}/${endpoint} ${cliHeaders}</code>
         </div>
       </div>
     </div>

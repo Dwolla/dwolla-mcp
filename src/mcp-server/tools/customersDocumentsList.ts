@@ -28,7 +28,7 @@ Returns all identity verification documents submitted for a customer. Includes d
     const [result, apiCall] = await customersDocumentsList(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

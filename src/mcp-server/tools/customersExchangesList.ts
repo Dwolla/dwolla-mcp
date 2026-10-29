@@ -28,7 +28,7 @@ Returns all exchanges for a specific customer. Exchanges represent connections b
     const [result, apiCall] = await customersExchangesList(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {
