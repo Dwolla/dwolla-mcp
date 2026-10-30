@@ -16,8 +16,11 @@ An MCP (Model Context Protocol) server for the Dwolla payment API, published as 
 
 Two exceptions use different markers: `src/tool-names.ts` (`// Auto-generated at build time`, written by `build.mts`) and `src/hooks/registration.ts` (generated once, then editable). The authoritative list is `trackedFiles` / `generatedFiles` in `.speakeasy/gen.lock`.
 
-**Do not hand-edit files carrying that header** — they will be silently overwritten on the next generation run. The exception is deliberate Speakeasy *persistent edits* (`persistentEdits` in `.speakeasy/gen.yaml`, tracked in `.speakeasy/gen.lock`), which the generator merges back in on regen. Current persistent edits:
-- `src/mcp-server/cli/{serve,start}/{command,impl}.ts` — `--host` flag (default `127.0.0.1`) so the HTTP listeners don't bind to all interfaces. Re-check after each regen PR that `app.listen(..., cliFlags.host, ...)` survived. If a change needs to persist, it belongs in one of the few non-generated extension points (see Architecture below) or in `.speakeasy/mcp-overlay.yaml` (an OpenAPI overlay applied before generation — e.g. to rename/prune operations exposed as MCP tools).
+**Do not hand-edit files carrying that header** — they will be silently overwritten on the next generation run. The exception is deliberate Speakeasy *persistent edits* (`persistentEdits` in `.speakeasy/gen.yaml`, tracked in `.speakeasy/gen.lock`), which the generator merges back in on regen. Current persistent edits (re-check each regen PR that they survived):
+- `src/mcp-server/cli/{serve,start}/{command,impl}.ts` — `--host` flag (default `127.0.0.1`) so the HTTP listeners don't bind to all interfaces; look for `app.listen(..., cliFlags.host, ...)`.
+- `package.json` `engines.node` and the README "Installation" Node.js line — patched Node.js versions (`^22.23.4 || ^24.22.1 || >=26.12.1`). The generator writes its own `>=20.19.0` here, and `additionalPackageJSON.engines` in `gen.yaml` does not override it, so the hand edit is the only enforcement.
+
+Otherwise, if a change needs to persist, it belongs in one of the few non-generated extension points (see Architecture below) or in `.speakeasy/mcp-overlay.yaml` (an OpenAPI overlay applied before generation — e.g. to rename/prune operations exposed as MCP tools).
 
 ## Commands
 

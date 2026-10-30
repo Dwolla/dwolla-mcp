@@ -130,7 +130,7 @@ node bin/mcp-server.js start --bearer-auth "your_token_here" --server "sandbox"
 <!-- Start Installation [installation] -->
 ## Installation
 
-The MCP server requires Node.js 20.19.0 or later.
+The MCP server requires Node.js v22.23.4+, v24.22.1+, or v26.12.1+. See [Prerequisites](#prerequisites).
 <details>
 <summary>Claude Desktop</summary>
 
