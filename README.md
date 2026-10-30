@@ -94,6 +94,16 @@ You will need to specify which environment you want to run the tools against:
 --server prod
 ```
 
+### Network Access (HTTP Modes)
+
+The HTTP modes (`serve` and `start --transport sse`) listen on `127.0.0.1` by default, so only the local machine can connect. To accept connections from other machines or from outside a Docker container, set `--host`:
+
+```bash
+npx @dwolla/mcp-server serve --host 0.0.0.0 --server sandbox --bearer-auth "your_token_here"
+```
+
+Only do this on a trusted network. The server holds your Dwolla token.
+
 <details>
 <summary><strong>Local Development</strong></summary>
 

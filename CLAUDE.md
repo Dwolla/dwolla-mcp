@@ -16,7 +16,8 @@ An MCP (Model Context Protocol) server for the Dwolla payment API, published as 
 
 Two exceptions use different markers: `src/tool-names.ts` (`// Auto-generated at build time`, written by `build.mts`) and `src/hooks/registration.ts` (generated once, then editable). The authoritative list is `trackedFiles` / `generatedFiles` in `.speakeasy/gen.lock`.
 
-**Do not hand-edit files carrying that header** — they will be silently overwritten on the next generation run. If a change needs to persist, it belongs in one of the few non-generated extension points (see Architecture below) or in `.speakeasy/mcp-overlay.yaml` (an OpenAPI overlay applied before generation — e.g. to rename/prune operations exposed as MCP tools).
+**Do not hand-edit files carrying that header** — they will be silently overwritten on the next generation run. The exception is deliberate Speakeasy *persistent edits* (`persistentEdits` in `.speakeasy/gen.yaml`, tracked in `.speakeasy/gen.lock`), which the generator merges back in on regen. Current persistent edits:
+- `src/mcp-server/cli/{serve,start}/{command,impl}.ts` — `--host` flag (default `127.0.0.1`) so the HTTP listeners don't bind to all interfaces. Re-check after each regen PR that `app.listen(..., cliFlags.host, ...)` survived. If a change needs to persist, it belongs in one of the few non-generated extension points (see Architecture below) or in `.speakeasy/mcp-overlay.yaml` (an OpenAPI overlay applied before generation — e.g. to rename/prune operations exposed as MCP tools).
 
 ## Commands
 
