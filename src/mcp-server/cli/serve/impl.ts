@@ -19,6 +19,7 @@ import { landingPageExpressHTTP } from "../../../landing-page.js";
 
 interface ServeCommandFlags extends MCPServerFlags {
   readonly port: number;
+  readonly host: string;
   readonly "disable-static-auth": boolean;
   readonly "log-level": ConsoleLoggerLevel;
   readonly env?: [string, string][];
@@ -108,7 +109,7 @@ async function startStreamableHTTP(cliFlags: ServeCommandFlags) {
 
   app.get("/", landingPageExpressHTTP);
 
-  const httpServer = app.listen(cliFlags.port, "0.0.0.0", () => {
+  const httpServer = app.listen(cliFlags.port, cliFlags.host, () => {
     const ha = httpServer.address();
     const host = typeof ha === "string" ? ha : `${ha?.address}:${ha?.port}`;
     logger.info("MCP Streamable HTTP server started", { host });

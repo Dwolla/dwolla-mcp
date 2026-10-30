@@ -19,6 +19,7 @@ import { landingPageExpress } from "../../../landing-page.js";
 interface StartCommandFlags extends MCPServerFlags {
   readonly transport: "stdio" | "sse";
   readonly port: number;
+  readonly host: string;
   readonly "log-level": ConsoleLoggerLevel;
   readonly env?: [string, string][];
 }
@@ -178,7 +179,7 @@ async function startSSE(cliFlags: StartCommandFlags) {
 
   app.get("/", landingPageExpress);
 
-  const httpServer = app.listen(cliFlags.port, "0.0.0.0", () => {
+  const httpServer = app.listen(cliFlags.port, cliFlags.host, () => {
     const ha = httpServer.address();
     const host = typeof ha === "string" ? ha : `${ha?.address}:${ha?.port}`;
     logger.info("MCP HTTP server started", { host });
