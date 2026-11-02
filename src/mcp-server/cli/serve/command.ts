@@ -22,6 +22,13 @@ export const serveCommand = buildCommand({
         parse: (val: string) =>
           z.coerce.number().int().gte(0).lt(65536).parse(val),
       },
+      host: {
+        kind: "parsed",
+        brief:
+          "The interface to bind the HTTP listener to (use 0.0.0.0 to accept remote connections)",
+        default: "127.0.0.1",
+        parse: String,
+      },
       "disable-static-auth": {
         kind: "boolean",
         brief:
