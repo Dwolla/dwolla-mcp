@@ -1,0 +1,59 @@
+{
+  "name": "@dwolla/mcp-server",
+  "version": "2.1.0",
+  "author": "Speakeasy",
+  "type": "module",
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Dwolla/dwolla-mcp.git"
+  },
+  "bin": {
+    "@dwolla/mcp-server": "bin/mcp-server.js",
+    "mcp": "bin/mcp-server.js"
+  },
+  "scripts": {
+    "build": "bun i && bun src/mcp-server/build.mts && tsc",
+    "mcpb:build": "bun i && bun src/mcp-server/build.mts --pack && tsc",
+    "check": "npm run lint",
+    "lint": "eslint --cache --max-warnings=0 src",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/node": "2.1.1",
+    "@modelcontextprotocol/sdk": "^1.32.1",
+    "@modelcontextprotocol/server": "2.3.1",
+    "@modelcontextprotocol/server-legacy": "2.3.1",
+    "@stricli/core": "^1.1.2",
+    "express": "^5.3.0",
+    "zod": "^4.6.6"
+  },
+  "overrides": {
+    "hono": ">=4.13.11",
+    "fast-uri": ">=4.2.3 <5.0.0",
+    "js-yaml": ">=4.3.2 <5.0.0",
+    "ip-address": ">=10.7.4 <11.0.0",
+    "nanoid@^5.0.0": ">=5.1.16 <6.0.0",
+    "brace-expansion@^2.0.0": ">=2.1.7 <3.0.0",
+    "body-parser": ">=2.4.0 <3.0.0",
+    "proxy-addr": ">=2.0.8 <3.0.0",
+    "qs": ">=6.16.0 <7.0.0",
+    "@hono/node-server": ">=2.1.3 <3.0.0",
+    "minimatch@^10.0.0": ">=11.0.1 <12.0.0"
+  },
+  "devDependencies": {
+    "@anthropic-ai/mcpb": "^1.2.0",
+    "@eslint/js": "^9.26.0",
+    "@types/bun": "^1.2.13",
+    "@types/express": "^5.0.1",
+    "@types/node": "^20.19.0",
+    "bun": "^1.2.12",
+    "eslint": "^9.26.0",
+    "globals": "^16.0.0",
+    "typescript": "~5.8.3",
+    "typescript-eslint": "^8.31.1"
+  },
+  "engines": {
+    "node": ">=20.19.0"
+  }
+}
